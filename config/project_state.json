@@ -1,11 +1,11 @@
 {
-  "current_phase": 11,
+  "current_phase": 12,
   "current_gate": 11,
   "foundation_complete": true,
   "inventory_complete": false,
   "pilot_complete": false,
   "scale_allowed": false,
-  "last_validated_commit": "d0479ec6bcbdc16fd0d45ca754ee04a7b772c597",
-  "last_report_commit": "f72d56d812825d9cb8c63e5cc27c9c20d94195b5",
+  "last_validated_commit": "c62acbbe6bba9f615726c9b6c0df28b4f4a1a886",
+  "last_report_commit": "c62acbbe6bba9f615726c9b6c0df28b4f4a1a886",
   "active_agent_count": 1
 }
