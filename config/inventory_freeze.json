@@ -1,16 +1,33 @@
 {
-  "baseline_id": "RE5DX9_DEV_2017_INVENTORY_V1",
+  "baseline_id": "RE5DX9_DEV_2017_INVENTORY_V2_FUNCTION_ENTRY_AUDIT",
   "target_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
   "target_size": 19977216,
   "image_base": "0x00400000",
   "text_va_start": "0x00401000",
   "text_va_end_exclusive": "0x0137083B",
-  "function_candidate_denominator": 71993,
+  "function_candidate_denominator": 79108,
   "estimated_function_bytes": 15568343,
-  "function_confidence": {
-    "CONFIRMED": 1,
-    "HIGH": 17672,
-    "MEDIUM": 54320
+  "function_entry_audit": {
+    "compiler_padding_boundaries": 72565,
+    "additional_direct_call_targets": 1833,
+    "pe_entrypoint_only": 1,
+    "base_padding_call_entry_union": 74399,
+    "additional_function_pointer_table_entries": 4378,
+    "additional_explicit_immediate_callback_entries": 331,
+    "audited_machine_entrypoint_union": 79108,
+    "exact_msvc_rtti_type_descriptors": 433,
+    "exact_complete_object_locators": 494,
+    "exact_msvc_vtables": 494,
+    "exact_vtable_slots": 3534,
+    "exact_unique_vtable_targets": 1682,
+    "vtable_only_entries_outside_padding_call_union": 108
+  },
+  "source_symbol_exact_count_available": false,
+  "source_symbol_exact_count_reason": "The PE is stripped of COFF symbols and contains only an RSDS reference to BH5DCRelease.pdb. That PDB is not present in the available Library and no public copy was located by exact filename/GUID search. Therefore 79,108 is the audited machine-code entrypoint denominator, not a claim of exact original source-symbol function count.",
+  "pdb_reference": {
+    "name": "BH5DCRelease.pdb",
+    "guid": "b18cf408-7751-4239-b0a1-85d621aeaf94",
+    "age_decimal": 23
   },
   "globals_candidates": 21730,
   "rtti_type_descriptors": 433,
@@ -23,7 +40,6 @@
   "ascii_strings": 44096,
   "initial_relevant_strings": 5225,
   "text_regions_64k": 247,
-  "validated_inventory_commit": "a4e4a5868227acd09f2fb7bee448fb7dbd951f0b",
-  "status": "FROZEN",
-  "policy": "The function denominator is a versioned candidate baseline, not a claim of symbol-perfect boundaries. Corrections require an explicit inventory-baseline revision with evidence."
+  "status": "AUDITED_MACHINE_ENTRYPOINT_BASELINE",
+  "policy": "Use 79,108 as the decompilation dashboard denominator for machine-code function entrypoints. Do not describe it as an exact source-symbol count unless the matching original PDB/MAP becomes available. Any revision requires a new evidence-backed baseline revision."
 }

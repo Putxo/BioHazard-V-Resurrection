@@ -2,13 +2,13 @@
 
 From-scratch Resident Evil 5 PC 1.1.0 Dev decompilation/reimplementation project, organized around a canonical binary inventory and real C/C++ source recovery.
 
-> **Foundation and Inventory are validated. Inventory baseline `RE5DX9_DEV_2017_INVENTORY_V1` is frozen; PILOT is active with one coordinator.**
+> **Foundation and Inventory are validated. Function-entry audit baseline `RE5DX9_DEV_2017_INVENTORY_V2_FUNCTION_ENTRY_AUDIT` is frozen at 79,108 machine-code entrypoints; PILOT remains single-coordinator only.**
 
 ## Progress
 
 <!-- progress:start -->
 ```
-Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  3 / 71,993
+Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  3 / 79,108
 Code size   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  11 / 15,568,343
 ```
 <!-- progress:end -->
@@ -17,16 +17,16 @@ The tiers below are independent dimensions. A function can eventually be MATCHED
 
 <!-- tiers:start -->
 ```
-FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  3 / 71,993
-CONVERTED  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  3 / 71,993
-REFINED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
-VERIFIED   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
-MATCHED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
-LINKED     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
+FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  3 / 79,108
+CONVERTED  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  3 / 79,108
+REFINED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,108
+VERIFIED   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,108
+MATCHED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,108
+LINKED     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,108
 ```
 <!-- tiers:end -->
 
-The denominator is a **versioned candidate-function baseline**, not a claim that debug symbols prove exactly 71,993 source functions. Boundary corrections require evidence and an explicit baseline revision.
+The denominator is an **audited machine-code entrypoint baseline**. The original matching `BH5DCRelease.pdb` is not available, so this is not described as a symbol-perfect original-source function count.
 
 ## Progress atlas
 
@@ -51,7 +51,11 @@ The atlas is driven from canonical metadata. Inventoried-but-unimplemented code 
 ## Inventory baseline
 
 - Target SHA-256 — `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815`
-- Function candidates — **71,993**
+- Audited machine-code function entrypoints — **79,108**
+- Compiler padding-boundary starts — **72,565**
+- Additional direct-CALL entrypoints — **1,833**
+- Function-pointer-table-only additions — **4,378**
+- Explicit callback/immediate-address additions — **331**
 - Referenced `.data` global candidates — **21,730**
 - MSVC RTTI TypeDescriptors — **433**
 - Confirmed MSVC vtables — **494**
@@ -60,14 +64,15 @@ The atlas is driven from canonical metadata. Inventoried-but-unimplemented code 
 - ASCII strings — **44,096**
 - `.text` regions (64 KiB) — **247**
 
-See [`config/inventory_freeze.json`](config/inventory_freeze.json) for the frozen machine-readable baseline.
+See [`config/inventory_freeze.json`](config/inventory_freeze.json) and [`reports/function-count-audit.md`](reports/function-count-audit.md).
 
 ## Roadmap state
 
 - Foundation — ✅ PASS
 - Binary / Function / XREF / RTTI / Global Inventory — ✅ PASS
+- Function Count Audit — ✅ 79,108 machine-code entrypoints
 - Inventory Freeze — ✅ PASS
-- Pilot — 🟡 ACTIVE
+- Pilot — 🟡 ACTIVE (single coordinator)
 - Multi-agent Scale — 🔒 LOCKED
 
 ## What matching means
