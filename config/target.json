@@ -3,17 +3,25 @@
   "version": "1.1.0 Dev",
   "architecture": "x86",
   "expected_filename": null,
-  "sha256": null,
-  "file_size": null,
-  "pe_timestamp": null,
-  "machine": null,
-  "image_base": null,
-  "entry_point": null,
-  "text_va_start": null,
-  "text_va_end": null,
-  "text_rva_start": null,
-  "text_rva_end": null,
-  "compiler_clues": [],
-  "linker_clues": [],
-  "status": "UNKNOWN"
+  "sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "file_size": 19977216,
+  "pe_timestamp": 1513562232,
+  "machine": 332,
+  "image_base": 4194304,
+  "entry_point": 19230889,
+  "text_va_start": 4198400,
+  "text_va_end": 20383867,
+  "text_rva_start": 4096,
+  "text_rva_end": 16189499,
+  "compiler_clues": [
+    "PE debug directory contains RSDS CodeView information",
+    "PDB path names ReleaseWin32/BH5DCRelease.pdb",
+    "Microsoft Visual C++ Runtime Library strings are present"
+  ],
+  "linker_clues": [
+    "PE relocations are stripped",
+    "IMAGE_FILE_32BIT_MACHINE is set",
+    "No PE TLS directory is present"
+  ],
+  "status": "CONFIRMED"
 }
