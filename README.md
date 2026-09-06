@@ -2,14 +2,14 @@
 
 From-scratch Resident Evil 5 PC 1.1.0 Dev decompilation/reimplementation project, organized around a canonical binary inventory and real C/C++ source recovery.
 
-> **Foundation is validated. Binary inventory is the next unlocked phase; no decompilation percentage is claimed until the real target inventory exists.**
+> **Foundation and Inventory are validated. Inventory baseline `RE5DX9_DEV_2017_INVENTORY_V1` is frozen; PILOT is the next phase.**
 
 ## Progress
 
 <!-- progress:start -->
 ```
-Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
-Code size   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
+Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
+Code size   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 15,568,343
 ```
 <!-- progress:end -->
 
@@ -17,18 +17,20 @@ The tiers below are independent dimensions. A function can eventually be MATCHED
 
 <!-- tiers:start -->
 ```
-FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
-CONVERTED  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
-REFINED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
-VERIFIED   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
-MATCHED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
-LINKED     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
+FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
+CONVERTED  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
+REFINED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
+VERIFIED   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
+MATCHED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
+LINKED     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
 ```
 <!-- tiers:end -->
 
+The denominator is a **versioned candidate-function baseline**, not a claim that debug symbols prove exactly 71,993 source functions. Boundary corrections require evidence and an explicit baseline revision.
+
 ## Progress atlas
 
-Every inventoried function will be one rectangle, sized by its byte count and colored from canonical status/tier metadata. Until real inventory exists the atlas deliberately shows no fake green progress.
+The atlas is driven from canonical metadata. Inventoried-but-unimplemented code starts gray; recovered functions change color only when their corresponding tier/status evidence exists.
 
 ![Decompilation progress treemap](reports/progress-treemap.svg)
 
@@ -46,20 +48,31 @@ Every inventoried function will be one rectangle, sized by its byte count and co
 - red — BLOCKED
 - gray — UNSEEN
 
+## Inventory baseline
+
+- Target SHA-256 — `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815`
+- Function candidates — **71,993**
+- Referenced `.data` global candidates — **21,730**
+- MSVC RTTI TypeDescriptors — **433**
+- Confirmed MSVC vtables — **494**
+- Imports — **376 across 21 DLLs**
+- Exports — **0**
+- ASCII strings — **44,096**
+- `.text` regions (64 KiB) — **247**
+
+See [`config/inventory_freeze.json`](config/inventory_freeze.json) for the frozen machine-readable baseline.
+
 ## Roadmap state
 
 - Foundation — ✅ PASS
-- Binary Inventory — 🔓 NEXT
-- Function Inventory — 🔒 LOCKED
-- Xref / Global / RTTI / Vtable Inventory — 🔒 LOCKED
-- Pilot — 🔒 LOCKED
+- Binary / Function / XREF / RTTI / Global Inventory — ✅ PASS
+- Inventory Freeze — ✅ PASS
+- Pilot — 🔓 NEXT
 - Multi-agent Scale — 🔒 LOCKED
-
-See [`docs/gates/GATE_09.md`](docs/gates/GATE_09.md) for the remote Foundation Freeze evidence.
 
 ## What matching means
 
-The exact PC/x86 MATCHED criterion is intentionally not claimed yet. It will be defined only after the original toolchain and reproducibility constraints are investigated.
+The exact PC/x86 MATCHED criterion will be refined during Pilot from reproducible function-level evidence. No function is marked MATCHED merely because its address or pseudocode is known.
 
 ## Build
 
@@ -75,7 +88,7 @@ The target executable is supplied locally by the user and remains git-ignored. O
 
 ## Coordination
 
-One coordinator owns Foundation, Inventory and Pilot. Parallel work will require canonical claims and task branches; `main` and `integration` are not direct work branches.
+One coordinator owns Foundation, Inventory and Pilot. Parallel work remains disabled until several real functions complete the full pipeline without ownership or CI failures.
 
 ## Legal and scope
 
