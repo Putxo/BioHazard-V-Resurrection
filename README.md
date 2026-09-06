@@ -2,7 +2,7 @@
 
 From-scratch Resident Evil 5 PC 1.1.0 Dev decompilation/reimplementation project, organized around a canonical binary inventory and real C/C++ source recovery.
 
-> **Foundation in progress — inventory has not started, so no decompilation percentage is claimed.**
+> **Foundation is validated. Binary inventory is the next unlocked phase; no decompilation percentage is claimed until the real target inventory exists.**
 
 ## Progress
 
@@ -48,7 +48,14 @@ Every inventoried function will be one rectangle, sized by its byte count and co
 
 ## Roadmap state
 
-Foundation is executed by strict sequential gates. Inventory, Pilot and multi-agent Scale stay locked until every preceding Foundation gate passes.
+- Foundation — ✅ PASS
+- Binary Inventory — 🔓 NEXT
+- Function Inventory — 🔒 LOCKED
+- Xref / Global / RTTI / Vtable Inventory — 🔒 LOCKED
+- Pilot — 🔒 LOCKED
+- Multi-agent Scale — 🔒 LOCKED
+
+See [`docs/gates/GATE_09.md`](docs/gates/GATE_09.md) for the remote Foundation Freeze evidence.
 
 ## What matching means
 
