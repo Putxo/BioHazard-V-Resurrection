@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"EvidenceRecord","type":"object","required":["evidence_id","stable_id","kind","description","confidence"],"properties":{"evidence_id":{"type":"string"},"stable_id":{"type":"string"},"kind":{"type":"string"},"description":{"type":"string"},"confidence":{"enum":["CONFIRMED","HIGH","MEDIUM","LOW","SPECULATIVE"]}}}

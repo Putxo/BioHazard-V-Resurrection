@@ -1,0 +1,5 @@
+{
+  "workflow_statuses": ["UNSEEN","DISCOVERED","DISASSEMBLED","ACTIVE","BLOCKED"],
+  "tiers": ["FAST_PASS","FAST_PASS_VALIDATED","CONVERTED","REFINED","VERIFIED","MATCHED","LINKED"],
+  "note": "Tiers are independent dimensions; they are not forced into one linear status."
+}
