@@ -2,14 +2,14 @@
 
 From-scratch Resident Evil 5 PC 1.1.0 Dev decompilation/reimplementation project, organized around a canonical binary inventory and real C/C++ source recovery.
 
-> **Foundation and Inventory are validated. Inventory baseline `RE5DX9_DEV_2017_INVENTORY_V1` is frozen; PILOT is the next phase.**
+> **Foundation and Inventory are validated. Inventory baseline `RE5DX9_DEV_2017_INVENTORY_V1` is frozen; PILOT is active with one coordinator.**
 
 ## Progress
 
 <!-- progress:start -->
 ```
-Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
-Code size   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 15,568,343
+Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  3 / 71,993
+Code size   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  11 / 15,568,343
 ```
 <!-- progress:end -->
 
@@ -17,8 +17,8 @@ The tiers below are independent dimensions. A function can eventually be MATCHED
 
 <!-- tiers:start -->
 ```
-FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
-CONVERTED  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
+FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  3 / 71,993
+CONVERTED  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  3 / 71,993
 REFINED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
 VERIFIED   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
 MATCHED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 71,993
@@ -67,7 +67,7 @@ See [`config/inventory_freeze.json`](config/inventory_freeze.json) for the froze
 - Foundation — ✅ PASS
 - Binary / Function / XREF / RTTI / Global Inventory — ✅ PASS
 - Inventory Freeze — ✅ PASS
-- Pilot — 🔓 NEXT
+- Pilot — 🟡 ACTIVE
 - Multi-agent Scale — 🔒 LOCKED
 
 ## What matching means
