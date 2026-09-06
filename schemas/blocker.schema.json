@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"BlockerRecord","type":"object","required":["stable_id","reason","next_action","active"],"properties":{"stable_id":{"type":"string"},"reason":{"type":"string","minLength":10},"next_action":{"type":"string","minLength":5},"active":{"type":"boolean"}}}

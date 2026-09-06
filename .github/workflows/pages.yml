@@ -1,0 +1,27 @@
+name: pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: reports
+      - uses: actions/deploy-pages@v4

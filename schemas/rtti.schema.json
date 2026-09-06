@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"RttiRecord","type":"object","required":["stable_id","va","rva","confidence"],"properties":{"stable_id":{"type":"string","pattern":"^RTTI_[0-9A-Fa-f]{8}$"},"va":{"type":"string"},"rva":{"type":"string"},"confidence":{"enum":["CONFIRMED","HIGH","MEDIUM","LOW","SPECULATIVE"]}}}

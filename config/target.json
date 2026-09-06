@@ -1,0 +1,19 @@
+{
+  "product": "Resident Evil 5 PC",
+  "version": "1.1.0 Dev",
+  "architecture": "x86",
+  "expected_filename": null,
+  "sha256": null,
+  "file_size": null,
+  "pe_timestamp": null,
+  "machine": null,
+  "image_base": null,
+  "entry_point": null,
+  "text_va_start": null,
+  "text_va_end": null,
+  "text_rva_start": null,
+  "text_rva_end": null,
+  "compiler_clues": [],
+  "linker_clues": [],
+  "status": "UNKNOWN"
+}
