@@ -10,7 +10,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "true",
     "refined": "false",
     "verified": "false",
@@ -26,10 +26,10 @@
     "owner": "coordinator",
     "claim_id": "PILOT-BB9070",
     "pr": "",
-    "commit": "",
+    "commit": "d8468595c6ebb4735009a75ceef727dde6920960",
     "test": "tests/unit/test_pilot_bb9070.cpp",
     "evidence": "decomp/evidence/pilot_bb9070.md",
-    "notes": "105 decoded direct callers; returns DWORD at this+0x00"
+    "notes": "105 decoded direct callers; returns DWORD at this+0x00; 5/5 CI success"
   },
   {
     "stable_id": "FUN_00BB9080",
@@ -42,7 +42,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "true",
     "refined": "false",
     "verified": "false",
@@ -58,10 +58,10 @@
     "owner": "coordinator",
     "claim_id": "PILOT-BB9080",
     "pr": "",
-    "commit": "",
+    "commit": "d8468595c6ebb4735009a75ceef727dde6920960",
     "test": "tests/unit/test_pilot_bb9070.cpp",
     "evidence": "decomp/evidence/pilot_bb9070.md",
-    "notes": "20 decoded direct callers; returns DWORD at this+0x04"
+    "notes": "20 decoded direct callers; returns DWORD at this+0x04; 5/5 CI success"
   },
   {
     "stable_id": "FUN_00BB9090",
@@ -74,7 +74,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "true",
     "refined": "false",
     "verified": "false",
@@ -90,9 +90,9 @@
     "owner": "coordinator",
     "claim_id": "PILOT-BB9090",
     "pr": "",
-    "commit": "",
+    "commit": "d8468595c6ebb4735009a75ceef727dde6920960",
     "test": "tests/unit/test_pilot_bb9070.cpp",
     "evidence": "decomp/evidence/pilot_bb9070.md",
-    "notes": "7 decoded direct callers; returns DWORD at this+0x04"
+    "notes": "7 decoded direct callers; returns DWORD at this+0x04; 5/5 CI success"
   }
 ]
