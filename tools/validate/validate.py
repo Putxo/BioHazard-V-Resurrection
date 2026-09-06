@@ -7,8 +7,9 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 DB = ROOT / 'database'
-VALID_STATUSES = {'UNSEEN','DISCOVERED','DISASSEMBLED','FAST_PASS','FAST_PASS_VALIDATED','CONVERTED','REFINED','VERIFIED','MATCHED','LINKED','BLOCKED'}
+VALID_WORKFLOW = {'UNSEEN','DISCOVERED','DISASSEMBLED','ACTIVE','BLOCKED'}
 FORBIDDEN_EXTS = {'.exe','.dll','.pdb','.bin','.pak','.arc','.rom','.nds','.iso','.img'}
+TIER_FIELDS = ('fast_pass','fast_pass_validated','converted','refined','verified','matched','linked')
 
 
 def rows(name: str):
@@ -16,18 +17,28 @@ def rows(name: str):
         return list(csv.DictReader(f))
 
 
+def truth(value: str) -> bool:
+    return str(value).lower() in {'1','true','yes'}
+
+
+def valid_bool_text(value: str) -> bool:
+    return str(value).lower() in {'','0','1','true','false','yes','no'}
+
+
 def validate_functions(records):
     errors=[]; ids=set(); vas=set(); ranges=[]
     for index,r in enumerate(records,2):
-        sid=r.get('stable_id',''); va=r.get('va',''); status=r.get('status','')
+        sid=r.get('stable_id',''); va=r.get('va',''); status=r.get('workflow_status','')
         if not sid.startswith('FUN_'): errors.append(f'functions.csv:{index}: invalid stable_id {sid!r}')
         if sid in ids: errors.append(f'functions.csv:{index}: duplicate stable_id {sid}')
         ids.add(sid)
         if va in vas: errors.append(f'functions.csv:{index}: duplicate VA {va}')
         vas.add(va)
-        if status not in VALID_STATUSES: errors.append(f'functions.csv:{index}: invalid status {status}')
-        if status in {'VERIFIED','MATCHED','LINKED'} and not r.get('evidence'):
-            errors.append(f'functions.csv:{index}: {status} requires evidence')
+        if status not in VALID_WORKFLOW: errors.append(f'functions.csv:{index}: invalid workflow_status {status}')
+        for field in TIER_FIELDS:
+            if not valid_bool_text(r.get(field,'')): errors.append(f'functions.csv:{index}: invalid boolean {field}={r.get(field)!r}')
+        if (truth(r.get('verified','')) or truth(r.get('matched','')) or truth(r.get('linked',''))) and not r.get('evidence'):
+            errors.append(f'functions.csv:{index}: VERIFIED/MATCHED/LINKED tiers require evidence')
         size=r.get('size','')
         if va and size:
             try:
@@ -42,7 +53,7 @@ def validate_functions(records):
 def validate_claims(records):
     active={}; errors=[]
     for index,r in enumerate(records,2):
-        if r.get('active','').lower() not in {'true','1','yes'}: continue
+        if not truth(r.get('active','')): continue
         sid=r.get('stable_id','')
         if sid in active: errors.append(f'claims.csv:{index}: duplicate active claim for {sid}')
         active[sid]=r.get('claim_id','')
