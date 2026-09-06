@@ -1,0 +1,23 @@
+{
+  "target_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "type_descriptors": 433,
+  "complete_object_locators": 494,
+  "vtables": 494,
+  "vtable_methods_total": 3534,
+  "vtable_method_targets_unique": 1682,
+  "code_pointers": {
+    ".rdata": {
+      "count": 207370,
+      "unique_targets": 42534
+    },
+    ".data": {
+      "count": 7479,
+      "unique_targets": 1458
+    }
+  },
+  "methodology": {
+    "rtti": "MSVC x86 TypeDescriptor + CompleteObjectLocator validation",
+    "vtable": "pointer-to-COL immediately preceding one or more .text pointers",
+    "code_pointer": "aligned absolute VA inside .text"
+  }
+}
