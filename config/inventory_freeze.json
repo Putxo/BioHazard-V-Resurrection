@@ -1,0 +1,27 @@
+{
+  "baseline_id": "RE5DX9_DEV_2017_INVENTORY_V1",
+  "target_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "target_size": 19977216,
+  "image_base": "0x00400000",
+  "text_va_start": "0x00401000",
+  "text_va_end_exclusive": "0x0137083B",
+  "function_candidate_denominator": 71993,
+  "function_confidence": {
+    "CONFIRMED": 1,
+    "HIGH": 17672,
+    "MEDIUM": 54320
+  },
+  "globals_candidates": 21730,
+  "rtti_type_descriptors": 433,
+  "complete_object_locators": 494,
+  "vtables": 494,
+  "vtable_virtual_slots": 3534,
+  "imports": 376,
+  "import_dlls": 21,
+  "exports": 0,
+  "ascii_strings": 44096,
+  "initial_relevant_strings": 5225,
+  "text_regions_64k": 247,
+  "status": "PREPARED_PENDING_GATE",
+  "policy": "The function denominator is a versioned candidate baseline, not a claim of symbol-perfect boundaries. Corrections require an explicit inventory-baseline revision with evidence."
+}
