@@ -10,7 +10,8 @@ The repository is being built through strict sequential gates. Proprietary game 
 
 - Phase 0 — Bootstrap: ✅ PASS
 - Phase 1 — Repository Foundation: ✅ PASS
-- Phase 2 — Target Definition: 🔒 next
+- Phase 2 — Target Definition: ✅ PASS
+- Phase 3 — Canonical Database + Schemas: 🔒 next
 - Inventory: 🔒 locked
 - Pilot: 🔒 locked
 - Scale: 🔒 locked
@@ -21,4 +22,4 @@ Inventory pending. No function count, code-size percentage, FAST PASS, CONVERTED
 
 ![Decompilation progress treemap](reports/progress-treemap.svg)
 
-See [`docs/MASTER_PLAN.md`](docs/MASTER_PLAN.md), [`docs/gates/GATE_00.md`](docs/gates/GATE_00.md) and [`docs/gates/GATE_01.md`](docs/gates/GATE_01.md).
+Target-specific PE fields remain UNKNOWN until a local executable is supplied to the inventory tooling; the executable itself is never committed.
