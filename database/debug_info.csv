@@ -1,0 +1,2 @@
+type,timestamp,size,codeview_signature,guid,age,pdb_path
+CODEVIEW_RSDS,1513562232,151,RSDS,08f48cb151773942b0a185d621aeaf94,23,"d:\PC\BH5AE\AE_FINAL\FinalBackup\XBOX360\TU1.04\Project\capdev_bio_dc-100104\BH5DC\ProjectOutput\ReleaseWin32\BH5DCRelease.pdb"
