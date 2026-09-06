@@ -1,0 +1,25 @@
+{
+  "target_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "exports": 0,
+  "globals": {
+    "referenced_data_addresses": 21730,
+    "code_xrefs": 140106
+  },
+  "rdata_references": {
+    "referenced_addresses": 42473,
+    "code_xrefs": 135750
+  },
+  "strings": {
+    "ascii_total": 44096,
+    "relevant_keyword_matches": 5225
+  },
+  "regions": {
+    "region_size": 65536,
+    "count": 247
+  },
+  "function_candidates": 71993,
+  "rtti_type_descriptors": 433,
+  "vtables": 494,
+  "imports": 376,
+  "import_dlls": 21
+}
