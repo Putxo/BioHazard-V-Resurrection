@@ -9,6 +9,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_library(re5_recovered STATIC
     src/runtime/bootstrap.cpp
+    src/recovered/pilot_bb9070.cpp
 )
 target_include_directories(re5_recovered PUBLIC include)
 
@@ -19,7 +20,10 @@ else()
 endif()
 
 enable_testing()
-add_executable(re5_tests tests/unit/test_smoke.cpp)
+add_executable(re5_tests
+    tests/unit/test_smoke.cpp
+    tests/unit/test_pilot_bb9070.cpp
+)
 target_link_libraries(re5_tests PRIVATE re5_recovered)
 if(MSVC)
     target_compile_options(re5_tests PRIVATE /W4)
