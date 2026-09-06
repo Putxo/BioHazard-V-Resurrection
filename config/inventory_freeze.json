@@ -6,6 +6,7 @@
   "text_va_start": "0x00401000",
   "text_va_end_exclusive": "0x0137083B",
   "function_candidate_denominator": 71993,
+  "estimated_function_bytes": 15568343,
   "function_confidence": {
     "CONFIRMED": 1,
     "HIGH": 17672,
@@ -22,6 +23,7 @@
   "ascii_strings": 44096,
   "initial_relevant_strings": 5225,
   "text_regions_64k": 247,
-  "status": "PREPARED_PENDING_GATE",
+  "validated_inventory_commit": "a4e4a5868227acd09f2fb7bee448fb7dbd951f0b",
+  "status": "FROZEN",
   "policy": "The function denominator is a versioned candidate baseline, not a claim of symbol-perfect boundaries. Corrections require an explicit inventory-baseline revision with evidence."
 }
