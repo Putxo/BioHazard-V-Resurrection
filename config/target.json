@@ -10,7 +10,7 @@
   "image_base": 4194304,
   "entry_point": 19230889,
   "text_va_start": 4198400,
-  "text_va_end": 20383867,
+  "text_va_end": 20383803,
   "text_rva_start": 4096,
   "text_rva_end": 16189499,
   "compiler_clues": [

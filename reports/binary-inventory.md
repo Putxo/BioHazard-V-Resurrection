@@ -54,5 +54,5 @@ The binary also contains Microsoft Visual C++ Runtime Library strings. These fac
 ## Important boundaries for later phases
 
 - `.text` begins at VA `0x00401000` / RVA `0x00001000`.
-- `.text` virtual end is VA `0x013708BB` (exclusive when computed as start + virtual size).
+- `.text` virtual end is VA `0x0137083B` / RVA `0x00F7083B` (exclusive, start + virtual size).
 - Function count is intentionally still **UNKNOWN**. Phase 11 must discover real function boundaries before the README can display a denominator or percentage.
