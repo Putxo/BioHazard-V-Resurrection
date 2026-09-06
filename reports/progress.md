@@ -1,3 +1,15 @@
 # Progress
 
-Inventory pending. No function count or percentage is claimed yet.
+```
+Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
+Code size   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
+```
+
+```
+FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
+CONVERTED  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
+REFINED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
+VERIFIED   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
+MATCHED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
+LINKED     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
+```

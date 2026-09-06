@@ -17,12 +17,12 @@ The tiers below are independent dimensions. A function can eventually be MATCHED
 
 <!-- tiers:start -->
 ```
-FAST PASS   pending
-CONVERTED   pending
-REFINED     pending
-VERIFIED    pending
-MATCHED     pending
-LINKED      pending
+FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
+CONVERTED  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
+REFINED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
+VERIFIED   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
+MATCHED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
+LINKED     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  pending
 ```
 <!-- tiers:end -->
 
