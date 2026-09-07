@@ -1,4 +1,4 @@
-# Pilot evidence — BB9070 accessor cluster
+# Pilot evidence — BB9070 accessor and BB90C0 membership cluster
 
 Target SHA-256: `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815`
 
@@ -17,7 +17,7 @@ Target SHA-256: `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e6781
 - Boundary evidence: 13 bytes of preceding `INT3` padding.
 - Direct decoded callers: 20.
 - Exact body: `8B 41 04 C3` → `mov eax,[ecx+4] ; ret`.
-- C++ representation returns the 32-bit value at offset `+0x04`.
+- The BB90C0 caller establishes that this value is a link pointer. The portable C++ representation preserves the observed `+0x04` member offset.
 
 ## FUN_00BB9090
 
@@ -26,6 +26,16 @@ Target SHA-256: `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e6781
 - Direct decoded callers: 7.
 - Exact body: `8B 41 04 C3` → `mov eax,[ecx+4] ; ret`.
 - Kept as a distinct stable function despite having the same body as `FUN_00BB9080` because it has a distinct VA and caller set.
+
+## FUN_00BB90C0
+
+- VA `0x00BB90C0`, RVA `0x007B90C0`, `.text`, exact body size 51 bytes (`0x33`).
+- Boundary evidence: 15 bytes of preceding `INT3` padding; the body ends at `0x00BB90F2` and is followed by `INT3` padding.
+- Direct decoded callers: 5.
+- Provisional ABI: MSVC x86 `thiscall`-style. `ECX=self`; stack arguments are `bool* result` and `UnknownBB90Object* candidate`; `ret 8` pops both arguments.
+- Exact behavior: starting at `candidate`, compare each node with `self`; if unequal, follow the link returned by `FUN_00BB9080` from offset `+0x04`; write `1` when found or `0` at end-of-chain.
+- Both return paths move the first stack argument into `EAX`, write the byte result through it and return that same `bool*`.
+- No cycle detection or null check for the output pointer is added because neither exists in the machine body.
 
 ## Caller evidence
 
@@ -38,6 +48,11 @@ Target SHA-256: `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e6781
 `FUN_00BB9090` callers:
 `01271E25 01271E30 01271EB3 01271EC9 01271ED2 01271F3F 01271F4A`
 
+`FUN_00BB90C0` callers:
+`00CA6F08 00CA6F8E 00CA701A 00CA70A3 00CAE04C`
+
+All five callers pass a stack-local byte address as the first argument and immediately test `byte ptr [eax]` after the call, confirming both the output-pointer return and byte-sized Boolean result. The second argument is a candidate node pointer; `ECX` is a fixed or computed chain member to search for.
+
 ## Validation scope
 
-The unit test validates the reconstructed C++ accessor behavior for both fields. CI compilation/CTest is required before promotion to `FAST_PASS_VALIDATED`. No `REFINED`, `VERIFIED`, `MATCHED`, or semantic class-name claim is made by this evidence.
+The unit test validates the reconstructed C++ accessor behavior, link traversal, positive membership, self-membership, negative membership, null-chain behavior and returned output pointer. CI compilation/CTest is required before `FUN_00BB90C0` promotion to `FAST_PASS_VALIDATED`. No `REFINED`, `VERIFIED`, `MATCHED`, or semantic class-name claim is made by this evidence.

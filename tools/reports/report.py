@@ -37,7 +37,7 @@ def tiers_block(m):
     lines.append('```'); return '\n'.join(lines)
 def replace_marked(text,start,end,new):
     pattern=re.compile(re.escape(start)+'.*?'+re.escape(end),re.S); payload=start+'\n'+new+'\n'+end
-    return pattern.sub(payload,text) if pattern.search(text) else text+'\n\n'+payload+'\n'
+    return pattern.sub(payload,text) if pattern.search(text) else text
 def main():
     rs=rows(); m=metrics(rs); p=progress_block(m); t=tiers_block(m)
     readme=README.read_text(encoding='utf-8'); readme=replace_marked(readme,'<!-- progress:start -->','<!-- progress:end -->',p); readme=replace_marked(readme,'<!-- tiers:start -->','<!-- tiers:end -->',t); README.write_text(readme,encoding='utf-8')

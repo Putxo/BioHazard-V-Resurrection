@@ -1,1 +1,2 @@
 evidence_id,stable_id,kind,description,source,confidence,commit
+EVID-BB90C0-STATIC,FUN_00BB90C0,STATIC_DISASSEMBLY,51-byte exact body; 15-byte preceding INT3 boundary; five direct callers; traverses field+0x04 and returns bool output pointer,decomp/evidence/pilot_bb9070.md,HIGH,
