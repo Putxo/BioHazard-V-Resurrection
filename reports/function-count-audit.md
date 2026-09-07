@@ -2,88 +2,110 @@
 
 Target SHA-256: `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815`
 
-This audit supersedes both the provisional 71,993-candidate value and the earlier 79,108 single-pipeline audit.
+This V4 audit supersedes the provisional 71,993 count, the 79,108 single-pipeline count and the V3 79,391 denominator.
 
 ## Result
 
-**Reproducible high-confidence machine-code entrypoint denominator: 79,391**
+**Current high-confidence machine-code entrypoint working denominator: 79,493**
 
-This value was rebuilt from scratch using two independent x86 disassemblers:
+**Dual-decoder base set: 74,752**
 
-- GNU `objdump`
-- LLVM `llvm-objdump`
+The complete executable was re-analyzed from scratch with:
 
-Only address classes supported by both decoders and by an additional function-entry signal are accepted.
+- GNU `objdump` 2.44
+- LLVM `llvm-objdump` 17.0.0
 
-## Dual-decoder base
+Every `.text` region was processed. No sample-only region or subsystem estimate is used.
 
-The two disassemblers agree on:
+## Complete instruction agreement
 
-- **72,919** 16-byte-aligned instruction starts immediately after compiler `INT3` padding.
-- **19,061** valid direct `CALL` targets in `.text`.
-- Of those CALL targets, **1,832** are new entries outside the padding-boundary set.
-- The PE entrypoint contributes **1** additional entry.
+- GNU instruction starts: **4,836,558**
+- LLVM instruction starts: **4,836,307**
+- instruction starts agreed by both: **4,835,646**
+- GNU-only starts: **912**
+- LLVM-only starts: **661**
 
-Deduplicated base union: **74,752**.
+Common control-flow targets inside `.text`:
 
-The prior 79,108 audit used 72,565 padding starts. A clean recount showed that value was not stable across independent decoding and therefore could not remain the canonical denominator.
+- direct CALL targets: **19,061**
+- direct JMP targets: **35,878**
+- conditional-branch targets: **187,062**
 
-## Indirect entry evidence
+Compiler-padding boundaries:
 
-Additional entries are admitted only when the target is an instruction boundary in both disassemblers, is 16-byte aligned, and the instruction immediately before the target is a `RET` ending at that address in both decoders.
+- common starts after any `INT3` run: **80,494**
+- common starts after `INT3` that are 16-byte aligned: **72,919**
 
-Using that rule:
+## Base entry set
 
-- **4,336** additional targets are referenced as aligned 32-bit code pointers from `.rdata` / `.data` and are not already in the base set.
-- **250** additional targets are explicitly materialized as immediate callback/function addresses by `mov`/`push`-class instructions and are not already covered by the base/data-pointer sets.
-- **53** additional targets are reached only through direct `JMP` / tail-entry references and are not already covered by the preceding sets.
+V4 keeps a conservative independently evidenced base:
 
-After deduplication:
+- 16-byte-aligned post-`INT3` starts agreed by both decoders
+- direct CALL targets agreed by both decoders
+- PE entrypoint
 
-`74,752 + 4,336 + 250 + 53 = 79,391`
+After deduplication: **74,752**.
 
-## Independent RTTI cross-check
+## Exact MSVC RTTI/vtable cross-check
 
-The same executable contains:
+Recounted directly from the PE:
 
-- 433 MSVC TypeDescriptors
-- 494 CompleteObjectLocators
-- 494 vtables
-- 3,534 virtual slots
-- 1,682 unique virtual method targets
+- TypeDescriptors: **433**
+- CompleteObjectLocators: **494**
+- structural vtables: **494**
+- virtual slots: **3,534**
+- unique virtual targets: **1,682**
+- structural vtable targets outside the base set: **108**
 
-These structures are used as an independent cross-check that virtual methods are represented in the accepted code-entry set.
+Two virtual slots point to addresses in the tiny GNU/LLVM decoder-disagreement set. The structural RTTI/vtable evidence remains authoritative for those address-taken virtual entries; this explains why a prior decoder-filtered pass temporarily reported 493 vtables / 3,528 slots.
 
-## Why 79,108 was rejected
+## Extended high-confidence entries
 
-A full clean recount produced discrepancies with the earlier audit:
+Outside the base set, V4 accepts an address-taken/control-flow entry only when there is independent boundary evidence. The main static rule requires the target to begin immediately after a `RET` boundary in both decoders; conditional-branch labels are excluded from this extension. Exact structural RTTI vtable entries are also retained.
 
-- GNU and LLVM disagree on only a handful of individual linear-disassembly boundaries, so the audit now uses their intersection rather than trusting one decoder.
-- The previous 72,565 padding-start count did not reproduce; the common, aligned compiler-padding count is 72,919.
-- Tail-call/JMP-only entries had not been separated as their own evidence class.
-- Immediate-address parsing previously allowed operand forms that could mistake memory displacements/constants for function addresses; V3 only accepts strict immediate-address forms.
+Sequential deduplicated additions used by V4:
 
-Therefore **79,108 is not considered verified and must not be used as the canonical denominator**.
+- address-taken table entries with dual-RET boundary: **4,344**
+- immediate callback/function-address entries with dual-RET boundary: **323**
+- direct JMP/tail entries with dual-RET boundary: **68**
+- exact structural vtable targets still outside that extended union: **6**
 
-## Important limitation
+Final high-confidence working set: **79,493**.
 
-The PE is stripped of COFF function symbols and contains no embedded authoritative function-boundary table. Its debug directory contains only an RSDS reference to:
+## Why 79,391 is rejected as exact
 
-`BH5DCRelease.pdb`
+The full V4 pass does not reproduce the V3 79,391 union. V3 depended on a narrower parsing/filtering combination for pointer-table, immediate-address and tail-entry evidence. Re-running the entire executable with one consistent dual-decoder rule produces a different address-level union.
 
-GUID: `b18cf408-7751-4239-b0a1-85d621aeaf94`
-Age: `23`
+Therefore **79,391 must not be described as a verified exact total**.
 
-The matching PDB/MAP is not available in the user's Library and exact public searches for the filename/GUID produced no result.
+## What can and cannot be verified
 
-Consequently, **79,391 is the reproducible high-confidence machine-code entrypoint denominator defined by the project's V3 acceptance rule. It is not a proof that the original C/C++ source contained exactly 79,391 source-level functions.** A symbol-perfect source-function count requires the matching original PDB/MAP or equivalent linker metadata.
+The PE contains:
+
+- zero COFF symbols;
+- no authoritative all-function boundary table;
+- only an RSDS reference to `BH5DCRelease.pdb`;
+- PDB GUID `b18cf408-7751-4239-b0a1-85d621aeaf94`, age 23.
+
+The matching PDB/MAP is unavailable.
+
+Consequently:
+
+- **74,752** is the V4 dual-decoder base machine-entry set.
+- **79,493** is the current V4 high-confidence machine-code entrypoint working denominator.
+- The exact number of original C/C++ source-level functions **cannot be proven from this stripped executable alone**.
+
+A symbol-perfect source-function count requires the matching original PDB/MAP or equivalent linker metadata.
+
+## Whole-executable coverage
+
+- `.text` virtual size: **16,185,403 bytes**
+- 64-KiB regions audited: **247 / 247**
+- regions with zero common decoded instructions: **0**
+- regions with zero base entries: **0**
+
+See `reports/full-executable-reaudit-v4.md` for PE sections, instruction totals, imports, strings and regional coverage.
 
 ## Policy
 
-The dashboard denominator is **79,391**. Any future revision requires:
-
-1. a new baseline ID;
-2. a concrete address-level delta;
-3. the same dual-decoder verification;
-4. updated reports/README;
-5. CI PASS before merge.
+The dashboard uses **79,493** as the current high-confidence decompilation working denominator, but documentation must always state that it is not a symbol-perfect source-function count. Any future revision requires a complete evidence-backed audit and CI PASS before merge.
