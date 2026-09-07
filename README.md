@@ -1,9 +1,11 @@
 # BioHazard V Resurrection — Development Branch
 
-This is a non-`main` development/integration branch.
+This is the non-`main` integration/development branch.
 
-The public project dashboard, progress bars, tier counts and treemap are intentionally shown **only on `main`**.
+The public progress dashboard, function totals, tier bars and treemap are intentionally published **only on `main`**.
 
-Use this branch for implementation, inventory, validation, claims, tests and pull-request integration. Do not publish branch-local progress percentages in this README.
+Use this branch for implementation, inventory, validation, claims, tests and pull-request integration. Canonical technical state lives in `config/`, `database/`, `reports/` and `decomp/evidence/`.
 
-Canonical project state remains in the repository metadata (`config/`, `database/`, `reports/`) and is promoted to the public `main` dashboard only after validation.
+Current gated phase: **Pilot Fast Pass (Phase 14)**. Multi-agent scale remains locked until the Pilot Final Gate passes.
+
+For public progress, view `main`.
