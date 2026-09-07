@@ -1,61 +1,88 @@
 {
-  "baseline_id": "RE5DX9_DEV_2017_INVENTORY_V4_FULL_EXECUTABLE_REAUDIT",
+  "baseline_id": "RE5DX9_DEV_2017_INVENTORY_V5_FIXED_POINT_CFG_REAUDIT",
   "target_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
   "target_size": 19977216,
   "image_base": "0x00400000",
+  "entry_va": "0x012570A9",
   "text_va_start": "0x00401000",
   "text_va_end_exclusive": "0x0137083B",
-  "function_candidate_denominator": 79493,
-  "dual_decoder_base_entrypoints": 74752,
-  "base_plus_structural_rtti_vtable_entrypoints": 74860,
+  "function_candidate_denominator": 79016,
   "estimated_function_bytes": 15568343,
   "estimated_function_bytes_status": "PROVISIONAL_FROM_PREVIOUS_INVENTORY",
-  "function_entry_audit": {
+  "whole_file_accounting": {
+    "headers_raw_bytes": 1024,
+    "text_raw_bytes": 16185856,
+    "text_virtual_bytes": 16185403,
+    "rdata_raw_bytes": 2053632,
+    "data_raw_bytes": 977920,
+    "rsrc_raw_bytes": 758784,
+    "raw_file_bytes_accounted": 19977216,
+    "raw_file_unaccounted_bytes": 0
+  },
+  "dual_decoder_audit": {
     "decoder_a": "GNU objdump 2.44",
     "decoder_b": "LLVM llvm-objdump 17.0.0",
     "gnu_instruction_starts": 4836558,
     "llvm_instruction_starts": 4836307,
     "common_instruction_starts": 4835646,
     "gnu_only_instruction_starts": 912,
-    "llvm_only_instruction_starts": 661,
-    "common_aligned_int3_boundaries": 72919,
-    "common_any_int3_boundaries": 80494,
-    "common_direct_call_targets": 19061,
-    "common_direct_jmp_targets": 35878,
-    "common_conditional_branch_targets": 187062,
-    "base_padding_call_entry_union": 74752,
-    "exact_msvc_rtti_type_descriptors": 433,
-    "exact_complete_object_locators": 494,
-    "exact_msvc_vtables": 494,
-    "exact_vtable_slots": 3534,
-    "exact_unique_vtable_targets": 1682,
-    "structural_vtable_targets_outside_base": 108,
-    "additional_address_taken_table_entries_after_dual_ret_boundary": 4344,
-    "additional_immediate_callback_entries_after_dual_ret_boundary": 323,
-    "additional_tail_jmp_entries_after_dual_ret_boundary": 68,
-    "additional_exact_structural_vtable_entries_not_already_in_extended_set": 6,
-    "high_confidence_machine_entrypoint_union": 79493
+    "llvm_only_instruction_starts": 661
   },
-  "source_symbol_exact_count_available": false,
-  "source_symbol_exact_count_reason": "The complete V4 re-audit processes the entire PE and every .text region with two independent x86 disassemblers. The PE has zero COFF symbols and only an RSDS reference to BH5DCRelease.pdb; the matching PDB/MAP is unavailable. Address-taken callbacks and switch/jump-table labels cannot be mapped 1:1 to original C/C++ source functions with mathematical certainty from this stripped PE alone. Therefore 79,493 is the current high-confidence machine-code entrypoint working denominator, while 74,752 is retained as the dual-decoder base set.",
-  "pdb_reference": {
-    "name": "BH5DCRelease.pdb",
-    "guid": "b18cf408-7751-4239-b0a1-85d621aeaf94",
-    "age_decimal": 23
+  "fixed_point_cfg_audit": {
+    "post_int3_aligned_roots": 72919,
+    "reachable_direct_call_targets": 16571,
+    "direct_call_additions_outside_padding": 1669,
+    "pe_entrypoint_only_addition": 1,
+    "direct_padding_base_union": 74589,
+    "strong_rdata_data_pointer_additions": 4338,
+    "strict_reachable_immediate_callback_additions": 45,
+    "strong_reachable_tail_entry_additions": 44,
+    "high_confidence_machine_entrypoint_union": 79016,
+    "fixed_point_iterations": 2,
+    "second_iteration_new_roots": 0,
+    "reachable_common_instruction_count": 3726072,
+    "reachable_instruction_bytes": 13772419,
+    "reachable_text_percent": 85.09160383587607,
+    "unreached_text_virtual_bytes": 2412984
   },
-  "whole_text_audit": {
-    "text_virtual_bytes": 16185403,
-    "text_regions_64k": 247,
-    "regions_with_zero_common_instruction_starts": 0,
-    "regions_with_zero_base_function_entries": 0
+  "rtti_crosscheck": {
+    "type_descriptors": 433,
+    "complete_object_locators": 494,
+    "structural_vtables": 494,
+    "vtable_slots": 3534,
+    "unique_virtual_targets": 1682
+  },
+  "section_profile": {
+    "text_entropy_bits_per_byte": 6.504356,
+    "text_zero_bytes_raw": 1629433,
+    "text_cc_bytes_raw": 641002,
+    "rdata_entropy_bits_per_byte": 6.316767,
+    "rdata_zero_bytes": 435030,
+    "rdata_aligned_dwords_pointing_text": 207370,
+    "data_entropy_bits_per_byte": 3.487701,
+    "data_zero_bytes": 596083,
+    "data_aligned_dwords_pointing_text": 7479,
+    "rsrc_entropy_bits_per_byte": 7.829448
   },
   "imports": 376,
   "import_dlls": 21,
   "exports": 0,
-  "rtti_type_descriptors": 433,
-  "complete_object_locators": 494,
-  "vtables": 494,
-  "vtable_virtual_slots": 3534,
-  "status": "FULL_EXECUTABLE_DUAL_DECODER_REAUDIT_HIGH_CONFIDENCE_BASELINE",
-  "policy": "Do not describe 79,493 as a symbol-perfect source-function count. Use it as the current high-confidence decompilation working denominator and retain 74,752 as the independently evidenced dual-decoder base. Any future revision requires another complete evidence-backed audit."
+  "tls_directory_present": false,
+  "exception_directory_present": false,
+  "base_relocation_directory_present": false,
+  "pdb_reference": {
+    "name": "BH5DCRelease.pdb",
+    "guid": "b18cf408-7751-4239-b0a1-85d621aeaf94",
+    "age_decimal": 23,
+    "matching_pdb_available": false
+  },
+  "source_symbol_exact_count_available": false,
+  "source_symbol_exact_count_reason": "The V5 full-PE re-audit analyzes every raw file byte and the complete .text section with GNU and LLVM, then reaches a fixed point over real control flow and strong address-taken roots. The PE still has zero COFF function symbols and no authoritative embedded boundary table, while the matching BH5DCRelease.pdb/MAP is unavailable. Therefore 79,016 is the V5 high-confidence machine-code entrypoint denominator, not a proof of the exact original C/C++ source-function count.",
+  "supersedes": {
+    "v4_denominator": 79493,
+    "v4_removed_from_high_confidence": 477,
+    "reason": "V4 accepted some roots whose evidence originated in linearly disassembled but CFG-unreachable regions and/or looser immediate/table heuristics. V5 requires reachable source instructions and fixed-point convergence."
+  },
+  "status": "FULL_PE_FIXED_POINT_CFG_HIGH_CONFIDENCE_BASELINE",
+  "policy": "Use 79,016 as the decompilation dashboard denominator for V5. Track ambiguous/unproven possible code entries separately. Do not describe 79,016 as an exact original source-symbol function count unless the matching PDB/MAP or equivalent linker metadata is recovered."
 }
