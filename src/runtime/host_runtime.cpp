@@ -9,6 +9,7 @@
 #if defined(_WIN32)
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+extern "C" __declspec(dllimport) void __cdecl SteamAPI_RunCallbacks();
 #else
 #include <cstdio>
 #endif
@@ -46,8 +47,33 @@ void debug_output_a(const char* text) noexcept {
 #if defined(_WIN32)
     ::OutputDebugStringA(text);
 #else
-    // CI/non-Windows fallback for the target's debugger-output side effect.
     std::fputs(text, stderr);
+#endif
+}
+
+void set_window_title_for_class(const char16_t* class_name, const char16_t* title) noexcept {
+    if (class_name == nullptr || title == nullptr) {
+        return;
+    }
+#if defined(_WIN32)
+    static_assert(sizeof(wchar_t) == sizeof(char16_t));
+    const auto* class_w = reinterpret_cast<const wchar_t*>(class_name);
+    const auto* title_w = reinterpret_cast<const wchar_t*>(title);
+    if (HWND window = ::FindWindowW(class_w, nullptr); window != nullptr) {
+        ::SetWindowTextW(window, title_w);
+    }
+#else
+    (void)class_name;
+    (void)title;
+#endif
+}
+
+void steam_run_callbacks() noexcept {
+#if defined(_WIN32)
+    ::SteamAPI_RunCallbacks();
+#else
+    // The original routine is an imported Steam API tail-call. Non-Windows CI
+    // cannot load steam_api.dll, so the host adapter intentionally has no side effect.
 #endif
 }
 

@@ -42,7 +42,13 @@ The entire **19,977,216-byte** PE is accounted for by headers plus `.text`, `.rd
 
 The dashboard denominator is now **79,782 potential function starts**.
 
-During decompilation each candidate must ultimately be classified as a recovered function, thunk/runtime helper, internal basic-block/jump-table target, data misidentified as code, or an ambiguous/blocker entry pending more evidence.
+During decompilation each candidate must ultimately be classified as one of the project-supported outcomes, for example:
+
+- real recovered function entry;
+- thunk/import stub/runtime helper;
+- internal basic-block/jump-table target;
+- data misidentified as code;
+- ambiguous/blocker pending more evidence.
 
 If later classification proves that a candidate is not a real function entry, the canonical denominator may decrease, but only through a versioned, evidence-backed inventory update.
 
@@ -50,4 +56,4 @@ If later classification proves that a candidate is not a real function entry, th
 
 The PE has no COFF function-symbol table or authoritative embedded all-function boundary table. Therefore neither **79,782** nor **79,016** is presented as a mathematically exact original source-symbol count.
 
-For project accounting, **79,782 is now the canonical total candidate universe shown in `main`**.
+For project accounting, however, **79,782 is now the canonical total candidate universe shown in `main`**.
