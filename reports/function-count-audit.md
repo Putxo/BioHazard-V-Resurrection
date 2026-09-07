@@ -2,110 +2,76 @@
 
 Target SHA-256: `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815`
 
-This V4 audit supersedes the provisional 71,993 count, the 79,108 single-pipeline count and the V3 79,391 denominator.
+This V5 audit supersedes V4's 79,493 working denominator.
 
-## Result
+## Current result
 
-**Current high-confidence machine-code entrypoint working denominator: 79,493**
+**V5 high-confidence machine-code entrypoint denominator: 79,016**
 
-**Dual-decoder base set: 74,752**
+V5 differs from V4 because it no longer lets references produced by linearly disassembled but CFG-unreachable bytes create function roots.
 
-The complete executable was re-analyzed from scratch with:
+## Whole executable
+
+The entire 19,977,216-byte PE is accounted for by headers plus `.text`, `.rdata`, `.data` and `.rsrc`, with zero raw-file bytes left unclassified.
+
+The complete `.text` section was disassembled with both:
 
 - GNU `objdump` 2.44
 - LLVM `llvm-objdump` 17.0.0
 
-Every `.text` region was processed. No sample-only region or subsystem estimate is used.
+Instruction-start totals:
 
-## Complete instruction agreement
+- GNU: **4,836,558**
+- LLVM: **4,836,307**
+- common starts: **4,835,646**
+- GNU-only: 912
+- LLVM-only: 661
 
-- GNU instruction starts: **4,836,558**
-- LLVM instruction starts: **4,836,307**
-- instruction starts agreed by both: **4,835,646**
-- GNU-only starts: **912**
-- LLVM-only starts: **661**
+## Fixed-point entry derivation
 
-Common control-flow targets inside `.text`:
+V5 starts from strong roots and iterates control flow until no new root appears.
 
-- direct CALL targets: **19,061**
-- direct JMP targets: **35,878**
-- conditional-branch targets: **187,062**
+- 16-byte-aligned common starts immediately after `INT3`: **72,919**
+- reachable direct CALL targets: **16,571**
+- CALL additions beyond the padding set: **1,669**
+- PE-entry-only addition: **1**
+- direct/padding base union: **74,589**
+- strong `.rdata` / `.data` address-taken additions: **4,338**
+- strict reachable immediate callback additions: **45**
+- strong reachable tail-entry additions: **44**
 
-Compiler-padding boundaries:
+Final deduplicated union:
 
-- common starts after any `INT3` run: **80,494**
-- common starts after `INT3` that are 16-byte aligned: **72,919**
+**79,016**
 
-## Base entry set
+The graph reaches the same root set on the second iteration: **0 new roots**, so the V5 rule has converged.
 
-V4 keeps a conservative independently evidenced base:
+## Reachability
 
-- 16-byte-aligned post-`INT3` starts agreed by both decoders
-- direct CALL targets agreed by both decoders
-- PE entrypoint
+- reachable common instructions: **3,726,072**
+- reachable instruction bytes: **13,772,419**
+- `.text` virtual bytes: **16,185,403**
+- reachable-code coverage: **85.09%**
+- non-reached `.text` bytes: **2,412,984**
 
-After deduplication: **74,752**.
+Those non-reached bytes are not automatically code. They include padding, zero-filled areas, embedded tables/constants, decoder-disagreement regions and possibly some dead/unreferenced code.
 
-## Exact MSVC RTTI/vtable cross-check
-
-Recounted directly from the PE:
+## RTTI cross-check
 
 - TypeDescriptors: **433**
 - CompleteObjectLocators: **494**
 - structural vtables: **494**
 - virtual slots: **3,534**
 - unique virtual targets: **1,682**
-- structural vtable targets outside the base set: **108**
 
-Two virtual slots point to addresses in the tiny GNU/LLVM decoder-disagreement set. The structural RTTI/vtable evidence remains authoritative for those address-taken virtual entries; this explains why a prior decoder-filtered pass temporarily reported 493 vtables / 3,528 slots.
+## Why V4 was reduced by 477
 
-## Extended high-confidence entries
+V4 accepted **79,493** high-confidence entries. V5 removes **477** from that high-confidence denominator because their only supporting references came from linearly decoded areas that were not reached by the CFG and/or from looser immediate/table parsing. They may be retained in an ambiguous/unproven pool, but they no longer count as completed inventory roots.
 
-Outside the base set, V4 accepts an address-taken/control-flow entry only when there is independent boundary evidence. The main static rule requires the target to begin immediately after a `RET` boundary in both decoders; conditional-branch labels are excluded from this extension. Exact structural RTTI vtable entries are also retained.
+## Exact source-function count remains unavailable
 
-Sequential deduplicated additions used by V4:
+The PE has zero COFF function symbols and no authoritative embedded all-function boundary table. It only contains an RSDS reference to `BH5DCRelease.pdb` (GUID `b18cf408-7751-4239-b0a1-85d621aeaf94`, age 23). The matching PDB/MAP is unavailable.
 
-- address-taken table entries with dual-RET boundary: **4,344**
-- immediate callback/function-address entries with dual-RET boundary: **323**
-- direct JMP/tail entries with dual-RET boundary: **68**
-- exact structural vtable targets still outside that extended union: **6**
+Therefore **79,016 is a reproducible high-confidence machine-entry denominator, not proof that the original C/C++ source contained exactly 79,016 functions**.
 
-Final high-confidence working set: **79,493**.
-
-## Why 79,391 is rejected as exact
-
-The full V4 pass does not reproduce the V3 79,391 union. V3 depended on a narrower parsing/filtering combination for pointer-table, immediate-address and tail-entry evidence. Re-running the entire executable with one consistent dual-decoder rule produces a different address-level union.
-
-Therefore **79,391 must not be described as a verified exact total**.
-
-## What can and cannot be verified
-
-The PE contains:
-
-- zero COFF symbols;
-- no authoritative all-function boundary table;
-- only an RSDS reference to `BH5DCRelease.pdb`;
-- PDB GUID `b18cf408-7751-4239-b0a1-85d621aeaf94`, age 23.
-
-The matching PDB/MAP is unavailable.
-
-Consequently:
-
-- **74,752** is the V4 dual-decoder base machine-entry set.
-- **79,493** is the current V4 high-confidence machine-code entrypoint working denominator.
-- The exact number of original C/C++ source-level functions **cannot be proven from this stripped executable alone**.
-
-A symbol-perfect source-function count requires the matching original PDB/MAP or equivalent linker metadata.
-
-## Whole-executable coverage
-
-- `.text` virtual size: **16,185,403 bytes**
-- 64-KiB regions audited: **247 / 247**
-- regions with zero common decoded instructions: **0**
-- regions with zero base entries: **0**
-
-See `reports/full-executable-reaudit-v4.md` for PE sections, instruction totals, imports, strings and regional coverage.
-
-## Policy
-
-The dashboard uses **79,493** as the current high-confidence decompilation working denominator, but documentation must always state that it is not a symbol-perfect source-function count. Any future revision requires a complete evidence-backed audit and CI PASS before merge.
+See `reports/full-executable-reaudit-v5.md` for the full audit.
