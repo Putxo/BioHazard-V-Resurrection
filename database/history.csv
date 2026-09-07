@@ -1,2 +1,15 @@
 stable_id,date,old_status,new_status,commit,owner,reason
 FUN_00BB90C0,2026-09-07,UNSEEN,ACTIVE,,coordinator,claimed for pilot linked-chain membership recovery
+FUN_00401000,2026-09-07,UNSEEN,ACTIVE,,coordinator,recovered aligned-free wrapper in sequential pass 001
+FUN_00401010,2026-09-07,UNSEEN,DISASSEMBLED,,coordinator,full body mapped; exact formatter/window-title contract unresolved
+FUN_004010F0,2026-09-07,UNSEEN,DISASSEMBLED,,coordinator,full body mapped; four-argument object semantics unresolved
+FUN_004011B0,2026-09-07,UNSEEN,ACTIVE,,coordinator,recovered strided callback loop in sequential pass 001
+FUN_004011F0,2026-09-07,UNSEEN,ACTIVE,,coordinator,recovered constant global-address return
+FUN_00401200,2026-09-07,UNSEEN,ACTIVE,,coordinator,recovered 16-byte aligned allocation wrapper
+FUN_00401210,2026-09-07,UNSEEN,ACTIVE,,coordinator,recovered OutputDebugStringA forwarding wrapper
+FUN_00401220,2026-09-07,UNSEEN,ACTIVE,,coordinator,recovered constant false return
+FUN_00401230,2026-09-07,UNSEEN,ACTIVE,,coordinator,recovered one-argument no-op callback
+FUN_00401240,2026-09-07,UNSEEN,ACTIVE,,coordinator,recovered one-argument no-op callback
+FUN_00401250,2026-09-07,UNSEEN,DISASSEMBLED,,coordinator,SteamAPI_RunCallbacks tail thunk identified; platform binding pending
+FUN_00401260,2026-09-07,UNSEEN,DISASSEMBLED,,coordinator,SteamAPI_RunCallbacks tail thunk identified; platform binding pending
+FUN_00401270,2026-09-07,UNSEEN,DISASSEMBLED,,coordinator,full loop mapped; dependent object/global semantics pending

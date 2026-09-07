@@ -18,9 +18,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Regenerate progress
+
+      - name: Regenerate canonical progress data
         run: |
           python tools/reports/report.py
           python tools/progress/treemap.py
-      - name: Generated files must already be synchronized
-        run: git diff --exit-code -- README.md reports/
+
+      - name: Development branches must keep generated reports synchronized
+        if: github.ref != 'refs/heads/main'
+        run: git diff --exit-code -- reports/
+
+      - name: Main must keep public README dashboard synchronized
+        if: github.ref == 'refs/heads/main'
+        run: |
+          python tools/reports/report.py --publish-readme
+          git diff --exit-code -- README.md reports/

@@ -3,3 +3,16 @@ PILOT-BB9070,FUN_00BB9070,coordinator,pilot/bb9070-accessors,pilot accessor reco
 PILOT-BB9080,FUN_00BB9080,coordinator,pilot/bb9070-accessors,pilot accessor recovery,2026-09-06T17:38:00Z,,,true
 PILOT-BB9090,FUN_00BB9090,coordinator,pilot/bb9070-accessors,pilot accessor recovery,2026-09-06T17:38:00Z,,,true
 PILOT-BB90C0-CONTINUED,FUN_00BB90C0,coordinator,pilot/bb90c0-membership-continued,pilot linked-chain membership recovery,2026-09-07T19:36:02Z,,,true
+SEQ-00401000,FUN_00401000,coordinator,decomp/00401000-sequential-pass-001,sequential decomp pass 001,2026-09-07T19:50:00Z,,,true
+SEQ-00401010,FUN_00401010,coordinator,decomp/00401000-sequential-pass-001,sequential decomp pass 001,2026-09-07T19:50:00Z,,,true
+SEQ-004010F0,FUN_004010F0,coordinator,decomp/00401000-sequential-pass-001,sequential decomp pass 001,2026-09-07T19:50:00Z,,,true
+SEQ-004011B0,FUN_004011B0,coordinator,decomp/00401000-sequential-pass-001,sequential decomp pass 001,2026-09-07T19:50:00Z,,,true
+SEQ-004011F0,FUN_004011F0,coordinator,decomp/00401000-sequential-pass-001,sequential decomp pass 001,2026-09-07T19:50:00Z,,,true
+SEQ-00401200,FUN_00401200,coordinator,decomp/00401000-sequential-pass-001,sequential decomp pass 001,2026-09-07T19:50:00Z,,,true
+SEQ-00401210,FUN_00401210,coordinator,decomp/00401000-sequential-pass-001,sequential decomp pass 001,2026-09-07T19:50:00Z,,,true
+SEQ-00401220,FUN_00401220,coordinator,decomp/00401000-sequential-pass-001,sequential decomp pass 001,2026-09-07T19:50:00Z,,,true
+SEQ-00401230,FUN_00401230,coordinator,decomp/00401000-sequential-pass-001,sequential decomp pass 001,2026-09-07T19:50:00Z,,,true
+SEQ-00401240,FUN_00401240,coordinator,decomp/00401000-sequential-pass-001,sequential decomp pass 001,2026-09-07T19:50:00Z,,,true
+SEQ-00401250,FUN_00401250,coordinator,decomp/00401000-sequential-pass-001,sequential decomp pass 001,2026-09-07T19:50:00Z,,,true
+SEQ-00401260,FUN_00401260,coordinator,decomp/00401000-sequential-pass-001,sequential decomp pass 001,2026-09-07T19:50:00Z,,,true
+SEQ-00401270,FUN_00401270,coordinator,decomp/00401000-sequential-pass-001,sequential decomp pass 001,2026-09-07T19:50:00Z,,,true
