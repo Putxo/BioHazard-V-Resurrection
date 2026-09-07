@@ -2,13 +2,13 @@
 
 From-scratch Resident Evil 5 PC 1.1.0 Dev decompilation/reimplementation project, organized around a canonical binary inventory and real C/C++ source recovery.
 
-> **Foundation and Inventory are validated. Full-executable V5 fixed-point CFG re-audit baseline `RE5DX9_DEV_2017_INVENTORY_V5_FIXED_POINT_CFG_REAUDIT` uses 79,016 high-confidence machine-code entrypoints. Ordered decompilation is active in Phase 14 with one coordinator.**
+> **Foundation and Inventory are validated. The current V6 full-scan candidate baseline contains 79,782 potential function starts. V5's 79,016 fixed-point set is retained as the stricter high-confidence cross-check. Ordered decompilation is active in Phase 14 with one coordinator.**
 
 ## Progress
 
 <!-- progress:start -->
 ```
-Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  17 / 79,016
+Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  17 / 79,782
 Code size   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  684 / 15,568,343
 ```
 <!-- progress:end -->
@@ -17,16 +17,16 @@ The tiers below are independent dimensions. A function can eventually be MATCHED
 
 <!-- tiers:start -->
 ```
-FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  12 / 79,016
-CONVERTED  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  4 / 79,016
-REFINED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,016
-VERIFIED   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,016
-MATCHED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,016
-LINKED     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,016
+FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  12 / 79,782
+CONVERTED  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  4 / 79,782
+REFINED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,782
+VERIFIED   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,782
+MATCHED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,782
+LINKED     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,782
 ```
 <!-- tiers:end -->
 
-The denominator is a **high-confidence machine-code entrypoint working baseline, not a claim of the exact original C/C++ source-function count**. V5 accounts for the complete 19,977,216-byte PE, disassembles all of `.text` with GNU objdump and LLVM llvm-objdump, and then requires fixed-point CFG reachability before linear-decoder references can create new function roots. The matching `BH5DCRelease.pdb`/MAP is unavailable.
+The public denominator is now the **79,782-entry broader candidate universe** reconstructed from the exact target. It is not presented as a mathematically exact original C/C++ source-symbol count: the PE has no authoritative all-function symbol table and the matching `BH5DCRelease.pdb`/MAP is unavailable. The previous **79,016** V5 fixed-point CFG set remains recorded as a stricter high-confidence subset.
 
 ## Progress atlas
 
@@ -51,16 +51,14 @@ The atlas is driven from canonical metadata. Inventoried-but-unimplemented code 
 ## Inventory baseline
 
 - Target SHA-256 — `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815`
-- V5 fixed-point high-confidence machine-code entrypoints — **79,016**
+- V6 broader potential-function-start universe — **79,782**
+- V5 fixed-point high-confidence cross-check — **79,016**
+- Difference pool retained for classification — **766** candidates (**0.97%**)
+- Independent full `.text` linear-scan rows — **4,837,889**
+- Direct `CALL` targets — **19,195**
+- Targets in aligned sequences of ≥2 code pointers — **40,912**
+- 16-byte-aligned starts after ≥2 `INT3`/`NOP` padding bytes — **69,076**
 - Complete raw file bytes accounted — **19,977,216 / 19,977,216**
-- Common instruction starts across the complete `.text` pass — **4,835,646**
-- Reachable direct-CALL targets — **16,571**
-- Direct/padding/entry base union — **74,589**
-- Strong `.rdata` / `.data` address-taken additions — **4,338**
-- Strict reachable immediate callback additions — **45**
-- Strong reachable tail-entry additions — **44**
-- Fixed-point iterations — **2**, with **0 new roots** in the second iteration
-- Reachable instruction bytes — **13,772,419 / 16,185,403 `.text` virtual bytes (85.09%)**
 - MSVC RTTI TypeDescriptors — **433**
 - CompleteObjectLocators — **494**
 - Confirmed structural MSVC vtables — **494**
@@ -74,7 +72,7 @@ See [`config/inventory_freeze.json`](config/inventory_freeze.json), [`reports/fu
 
 - Foundation — ✅ PASS
 - Binary / Function / XREF / RTTI / Global Inventory — ✅ PASS
-- Inventory Freeze / V5 re-audit — ✅ PASS
+- Inventory V6 candidate baseline — ✅ **79,782**
 - Pilot Fast Pass / ordered decompilation — 🟡 ACTIVE
 - Multi-agent Scale — 🔒 LOCKED
 
