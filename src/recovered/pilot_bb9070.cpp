@@ -21,7 +21,7 @@ std::uint32_t FUN_00BB9070(const UnknownBB90Object* self) noexcept {
 // x86: mov eax,[ecx+4] ; ret
 // Status: FAST_PASS
 // Confidence: HIGH (INT3 function boundary + 20 decoded direct CALL targets).
-std::uint32_t FUN_00BB9080(const UnknownBB90Object* self) noexcept {
+const UnknownBB90Object* FUN_00BB9080(const UnknownBB90Object* self) noexcept {
     return self->field_04;
 }
 
@@ -32,8 +32,32 @@ std::uint32_t FUN_00BB9080(const UnknownBB90Object* self) noexcept {
 // x86: mov eax,[ecx+4] ; ret
 // Status: FAST_PASS
 // Confidence: HIGH (INT3 function boundary + 7 decoded direct CALL targets).
-std::uint32_t FUN_00BB9090(const UnknownBB90Object* self) noexcept {
+const UnknownBB90Object* FUN_00BB9090(const UnknownBB90Object* self) noexcept {
     return self->field_04;
+}
+
+// Original VA: 0x00BB90C0
+// RVA:         0x007B90C0
+// Section:     .text
+// Original size: 51 bytes
+// Original ABI evidence: ECX carries self; two stack arguments; ret 8.
+// Status: FAST_PASS
+// Confidence: HIGH (INT3 function boundary + 5 decoded direct CALL targets).
+bool* FUN_00BB90C0(
+    const UnknownBB90Object* self,
+    bool* result,
+    const UnknownBB90Object* candidate) noexcept {
+    auto* cursor = candidate;
+    while (cursor != nullptr) {
+        if (cursor == self) {
+            *result = true;
+            return result;
+        }
+        cursor = FUN_00BB9080(cursor);
+    }
+
+    *result = false;
+    return result;
 }
 
 } // namespace re5::recovered
