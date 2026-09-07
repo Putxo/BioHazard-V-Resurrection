@@ -29,16 +29,10 @@ void append_wide_literal(char16_t* out, std::size_t& pos, const char16_t* text) 
 }
 } // namespace
 
-// Original VA: 0x00401000
-// RVA:         0x00001000
 void FUN_00401000(void* ptr) noexcept {
     re5::runtime::aligned_release(ptr);
 }
 
-// Original VA: 0x00401010
-// RVA:         0x00001010
-// Recovered from the target's wide formatting call and its two decoded callers.
-// Equivalent target format: L"%S <Build:%S> [ %S ] %S %S".
 void FUN_00401010(char16_t* title_buffer, const char* product_name, bool apply_to_window) noexcept {
     if (title_buffer == nullptr) {
         return;
@@ -61,8 +55,6 @@ void FUN_00401010(char16_t* title_buffer, const char* product_name, bool apply_t
     }
 }
 
-// Original VA: 0x004011B0
-// RVA:         0x000011B0
 void FUN_004011B0(
     void* first,
     std::uint32_t stride,
@@ -102,5 +94,16 @@ bool FUN_00401220() noexcept {
 
 void FUN_00401230(std::uintptr_t /*unused*/) noexcept {}
 void FUN_00401240(std::uintptr_t /*unused*/) noexcept {}
+
+// Original VA 0x00401250: FF 25 FC 14 37 01
+// Original VA 0x00401260: FF 25 FC 14 37 01
+// Both are exact tail jumps through the same IAT slot: steam_api!SteamAPI_RunCallbacks.
+void FUN_00401250() noexcept {
+    re5::runtime::steam_run_callbacks();
+}
+
+void FUN_00401260() noexcept {
+    re5::runtime::steam_run_callbacks();
+}
 
 } // namespace re5::recovered
