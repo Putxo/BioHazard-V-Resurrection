@@ -10,6 +10,11 @@ using FUN_004011B0_Callback = void (*)(void*) noexcept;
 // 0x00401000: tail-jump wrapper around the target CRT aligned-free routine.
 void FUN_00401000(void* ptr) noexcept;
 
+// 0x00401010: formats the Dev build title into a 0x104-WCHAR destination.
+// If apply_to_window is true, the target finds the "MTFramework" Win32 window
+// class and applies the generated text with SetWindowTextW.
+void FUN_00401010(char16_t* title_buffer, const char* product_name, bool apply_to_window) noexcept;
+
 // 0x004011B0: apply an ECX-style callback to count elements separated by stride bytes.
 void FUN_004011B0(
     void* first,
