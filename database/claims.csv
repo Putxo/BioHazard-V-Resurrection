@@ -1,1 +1,4 @@
 claim_id,stable_id,owner,branch,task,claimed_at,expires_at,pr,active
+PILOT-BB9070,FUN_00BB9070,coordinator,pilot/bb9070-accessors,pilot accessor recovery,2026-09-06T17:38:00Z,,,true
+PILOT-BB9080,FUN_00BB9080,coordinator,pilot/bb9070-accessors,pilot accessor recovery,2026-09-06T17:38:00Z,,,true
+PILOT-BB9090,FUN_00BB9090,coordinator,pilot/bb9070-accessors,pilot accessor recovery,2026-09-06T17:38:00Z,,,true
