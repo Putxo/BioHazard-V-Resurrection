@@ -55,4 +55,9 @@ void test_region_00401000() {
     assert(aligned != nullptr);
     assert((reinterpret_cast<std::uintptr_t>(aligned) & 0xFU) == 0U);
     FUN_00401000(aligned);
+
+    // On the original Win32 target both are direct import thunks to the same
+    // SteamAPI_RunCallbacks IAT slot. On non-Windows CI the import adapter is inert.
+    FUN_00401250();
+    FUN_00401260();
 }
