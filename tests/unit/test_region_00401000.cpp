@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cstddef>
 #include <cstdint>
+#include <string_view>
 
 namespace {
 std::array<std::uintptr_t, 4> g_seen{};
@@ -18,6 +19,16 @@ void record_callback(void* ptr) noexcept {
 
 void test_region_00401000() {
     using namespace re5::recovered;
+
+    std::array<char16_t, 0x104> title{};
+    FUN_00401010(title.data(), "Resident Evil 5", false);
+    assert(std::u16string_view(title.data()) ==
+           u"Resident Evil 5 <Build:3170> [ RELEASE ] Thu Apr 16, 2015 06:51:32 PM (CHEATS)");
+
+    std::array<char16_t, 0x104> null_product{};
+    FUN_00401010(null_product.data(), nullptr, false);
+    assert(std::u16string_view(null_product.data()) ==
+           u" <Build:3170> [ RELEASE ] Thu Apr 16, 2015 06:51:32 PM (CHEATS)");
 
     g_seen = {};
     g_seen_count = 0;
