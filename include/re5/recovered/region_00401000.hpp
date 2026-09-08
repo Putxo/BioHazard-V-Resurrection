@@ -68,4 +68,37 @@ struct FUN_00401270_Services {
 void FUN_00401270_SetServices(const FUN_00401270_Services* services) noexcept;
 void FUN_00401270() noexcept;
 
+struct FUN_004012F0_Services {
+    void* context;
+    std::uint32_t (*get_signin_info)(
+        void* context,
+        std::uint32_t user_index,
+        std::uint32_t flags,
+        FUN_00401270_UserSigninInfo* info) noexcept;
+    std::uint32_t (*create_achievement_enumerator)(
+        void* context,
+        std::uint32_t title_id,
+        std::uint32_t user_index,
+        std::uint64_t xuid,
+        std::uint32_t detail_flags,
+        std::uint32_t starting_index,
+        std::uint32_t item_count,
+        std::uint32_t* buffer_size,
+        std::uint32_t* handle) noexcept;
+    std::uint32_t (*enumerate)(
+        void* context,
+        std::uint32_t handle,
+        void* buffer,
+        std::uint32_t buffer_size,
+        std::uint32_t* items_returned,
+        void* overlapped) noexcept;
+    void (*close_handle)(void* context, std::uint32_t handle) noexcept;
+};
+
+void FUN_004012F0_SetServices(const FUN_004012F0_Services* services) noexcept;
+[[nodiscard]] std::uint32_t FUN_004012F0(
+    void** out_buffer,
+    std::uint32_t requested_count,
+    std::uint32_t unused) noexcept;
+
 } // namespace re5::recovered
