@@ -522,7 +522,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -537,10 +537,10 @@
     "source_file": "src/recovered/region_00401000.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00401270",
-    "pr": "",
-    "commit": "",
+    "pr": "#31",
+    "commit": "20a79e5d23c2bdd18cbc3bfabc22d3d7972587de",
     "test": "tests/unit/test_region_00401000.cpp",
     "evidence": "decomp/evidence/region_00401000.md",
-    "notes": "70-entry achievement write loop recovered with exact XUSER layouts and injectable UNKNOWN global bindings; local MSVC compile and metadata validation PASS; test execution deferred to CI because Device Guard blocks new local executables"
+    "notes": "70-entry achievement write loop with exact XUSER layouts and injectable UNKNOWN global bindings; PR #31 CI 5/5 PASS"
   }
 ]
