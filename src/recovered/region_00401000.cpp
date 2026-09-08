@@ -9,6 +9,12 @@ constexpr char kBuildNumber[] = "3170";
 constexpr char kBuildConfig[] = "RELEASE";
 constexpr char kBuildTimestamp[] = "Thu Apr 16, 2015 06:51:32 PM";
 constexpr char kCheatsMarker[] = "(CHEATS)";
+constexpr std::uint32_t kAchievementCount = 0x46U;
+constexpr std::uint32_t kPrimaryUserIndex = 0U;
+constexpr std::uint32_t kSigninInfoFlags = 1U;
+constexpr std::uint32_t kSignedInToLive = 2U;
+
+const FUN_00401270_Services* g_FUN_00401270_services = nullptr;
 
 void append_ascii(char16_t* out, std::size_t& pos, const char* text) noexcept {
     if (out == nullptr || text == nullptr) {
@@ -104,6 +110,36 @@ void FUN_00401250() noexcept {
 
 void FUN_00401260() noexcept {
     re5::runtime::steam_run_callbacks();
+}
+
+void FUN_00401270_SetServices(const FUN_00401270_Services* services) noexcept {
+    g_FUN_00401270_services = services;
+}
+
+void FUN_00401270() noexcept {
+    const auto* services = g_FUN_00401270_services;
+    if (services == nullptr || services->prepare_user_state == nullptr ||
+        services->get_signin_info == nullptr || services->log_not_live == nullptr ||
+        services->write_achievements == nullptr || services->mirror_achievement == nullptr) {
+        return;
+    }
+
+    services->prepare_user_state(services->context);
+
+    FUN_00401270_UserSigninInfo signin_info{};
+    const std::uint32_t signin_result = services->get_signin_info(
+        services->context, kPrimaryUserIndex, kSigninInfoFlags, &signin_info);
+    if (signin_result == 0U && signin_info.signin_state != kSignedInToLive) {
+        services->log_not_live(services->context, signin_info.user_name);
+    }
+
+    for (std::uint32_t achievement_id = 0; achievement_id < kAchievementCount;
+         ++achievement_id) {
+        const FUN_00401270_Achievement achievement{kPrimaryUserIndex, achievement_id};
+        (void)services->write_achievements(
+            services->context, 1U, &achievement, nullptr);
+        services->mirror_achievement(services->context, achievement_id);
+    }
 }
 
 } // namespace re5::recovered

@@ -519,10 +519,10 @@
     "size": "121",
     "provisional_name": "FUN_00401270",
     "refined_name": "",
-    "workflow_status": "DISASSEMBLED",
+    "workflow_status": "ACTIVE",
     "confidence": "HIGH",
-    "fast_pass": "false",
-    "fast_pass_validated": "false",
+    "fast_pass": "true",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -534,13 +534,13 @@
     "this_type": "",
     "module": "UNKNOWN",
     "subsystem": "UNKNOWN",
-    "source_file": "",
+    "source_file": "src/recovered/region_00401000.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00401270",
-    "pr": "",
-    "commit": "",
-    "test": "",
+    "pr": "#31",
+    "commit": "20a79e5d23c2bdd18cbc3bfabc22d3d7972587de",
+    "test": "tests/unit/test_region_00401000.cpp",
     "evidence": "decomp/evidence/region_00401000.md",
-    "notes": "0x258-byte stack object and 0x46-iteration initialization loop; semantics next pass"
+    "notes": "70-entry achievement write loop with exact XUSER layouts and injectable UNKNOWN global bindings; PR #31 CI 5/5 PASS"
   }
 ]
