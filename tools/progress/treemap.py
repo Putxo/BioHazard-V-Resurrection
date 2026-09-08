@@ -25,7 +25,7 @@ def split(items,x,y,w,h,vertical=True):
         w1=w*wa; return split(a,x,y,w1,h,False)+split(b,x+w1,y,w-w1,h,False)
     h1=h*wa; return split(a,x,y,w,h1,True)+split(b,x,y+h1,w,h-h1,True)
 def main():
-    rows=read_rows(); DATA.write_text(json.dumps(rows,indent=2),encoding='utf-8')
+    rows=read_rows(); DATA.write_text(json.dumps(rows,indent=2)+'\n',encoding='utf-8')
     if not rows:
         SVG.write_text(f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="180"><rect width="100%" height="100%" fill="#e5e7eb"/><text x="50%" y="52%" text-anchor="middle" font-family="sans-serif" font-size="26" fill="#374151">Inventory pending — no function progress claimed</text></svg>\n',encoding='utf-8'); return
     ordered=sorted(rows,key=lambda r:int(r.get('va') or '0',0)); rects=split(ordered,0,0,W,H)
