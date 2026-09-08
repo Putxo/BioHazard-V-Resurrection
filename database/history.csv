@@ -13,3 +13,4 @@ FUN_00401240,2026-09-07,UNSEEN,ACTIVE,,coordinator,recovered one-argument no-op 
 FUN_00401250,2026-09-07,UNSEEN,DISASSEMBLED,,coordinator,SteamAPI_RunCallbacks tail thunk identified; platform binding pending
 FUN_00401260,2026-09-07,UNSEEN,DISASSEMBLED,,coordinator,SteamAPI_RunCallbacks tail thunk identified; platform binding pending
 FUN_00401270,2026-09-07,UNSEEN,DISASSEMBLED,,coordinator,full loop mapped; dependent object/global semantics pending
+FUN_00401270,2026-09-08,DISASSEMBLED,FAST_PASS,,coordinator,recovered exact 70-entry XUserWriteAchievements loop with testable global-service bindings
