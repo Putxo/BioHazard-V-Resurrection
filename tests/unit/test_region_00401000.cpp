@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
+#include <string>
 #include <string_view>
 #include <vector>
 
@@ -24,7 +25,7 @@ struct AchievementProbe {
     std::uint32_t signin_state{};
     std::uint32_t signin_user_index{};
     std::uint32_t signin_flags{};
-    std::string_view logged_user{};
+    std::string logged_user{};
     std::vector<re5::recovered::FUN_00401270_Achievement> writes;
     std::vector<std::uint32_t> mirrored_ids;
 };
