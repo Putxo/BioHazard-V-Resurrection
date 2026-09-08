@@ -4,7 +4,10 @@
 #include <cassert>
 #include <cstddef>
 #include <cstdint>
+#include <cstring>
+#include <string>
 #include <string_view>
+#include <vector>
 
 namespace {
 std::array<std::uintptr_t, 4> g_seen{};
@@ -14,6 +17,53 @@ void record_callback(void* ptr) noexcept {
     if (g_seen_count < g_seen.size()) {
         g_seen[g_seen_count++] = reinterpret_cast<std::uintptr_t>(ptr);
     }
+}
+
+struct AchievementProbe {
+    std::uint32_t prepare_count{};
+    std::uint32_t signin_result{};
+    std::uint32_t signin_state{};
+    std::uint32_t signin_user_index{};
+    std::uint32_t signin_flags{};
+    std::string logged_user{};
+    std::vector<re5::recovered::FUN_00401270_Achievement> writes;
+    std::vector<std::uint32_t> mirrored_ids;
+};
+
+void prepare_user_state(void* context) noexcept {
+    ++static_cast<AchievementProbe*>(context)->prepare_count;
+}
+
+std::uint32_t get_signin_info(
+    void* context,
+    std::uint32_t user_index,
+    std::uint32_t flags,
+    re5::recovered::FUN_00401270_UserSigninInfo* info) noexcept {
+    auto& probe = *static_cast<AchievementProbe*>(context);
+    probe.signin_user_index = user_index;
+    probe.signin_flags = flags;
+    info->signin_state = probe.signin_state;
+    std::memcpy(info->user_name, "TestUser", 9U);
+    return probe.signin_result;
+}
+
+void log_not_live(void* context, const char* user_name) noexcept {
+    static_cast<AchievementProbe*>(context)->logged_user = user_name;
+}
+
+std::uint32_t write_achievements(
+    void* context,
+    std::uint32_t count,
+    const re5::recovered::FUN_00401270_Achievement* achievements,
+    void* overlapped) noexcept {
+    assert(count == 1U);
+    assert(overlapped == nullptr);
+    static_cast<AchievementProbe*>(context)->writes.push_back(*achievements);
+    return 0U;
+}
+
+void mirror_achievement(void* context, std::uint32_t achievement_id) noexcept {
+    static_cast<AchievementProbe*>(context)->mirrored_ids.push_back(achievement_id);
 }
 } // namespace
 
@@ -60,4 +110,45 @@ void test_region_00401000() {
     // SteamAPI_RunCallbacks IAT slot. On non-Windows CI the import adapter is inert.
     FUN_00401250();
     FUN_00401260();
+
+    AchievementProbe achievements{};
+    achievements.signin_state = 1U;
+    const FUN_00401270_Services services{
+        &achievements,
+        &prepare_user_state,
+        &get_signin_info,
+        &log_not_live,
+        &write_achievements,
+        &mirror_achievement,
+    };
+    FUN_00401270_SetServices(&services);
+    FUN_00401270();
+    FUN_00401270_SetServices(nullptr);
+
+    assert(achievements.prepare_count == 1U);
+    assert(achievements.signin_user_index == 0U);
+    assert(achievements.signin_flags == 1U);
+    assert(achievements.logged_user == "TestUser");
+    assert(achievements.writes.size() == 0x46U);
+    assert(achievements.mirrored_ids.size() == 0x46U);
+    for (std::uint32_t id = 0; id < 0x46U; ++id) {
+        assert(achievements.writes[id].user_index == 0U);
+        assert(achievements.writes[id].achievement_id == id);
+        assert(achievements.mirrored_ids[id] == id);
+    }
+
+    AchievementProbe live_user{};
+    live_user.signin_state = 2U;
+    const FUN_00401270_Services live_services{
+        &live_user,
+        &prepare_user_state,
+        &get_signin_info,
+        &log_not_live,
+        &write_achievements,
+        &mirror_achievement,
+    };
+    FUN_00401270_SetServices(&live_services);
+    FUN_00401270();
+    FUN_00401270_SetServices(nullptr);
+    assert(live_user.logged_user.empty());
 }
