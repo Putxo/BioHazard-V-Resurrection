@@ -24,7 +24,9 @@ def metrics(rs):
     for t in TIERS: out[t]=sum(1 for r in rs if truth(r.get(t,'')))
     return out
 def progress_block(m):
-    return '```\n'+f"Functions   {bar(m['functions_discovered'],m['total'])}\n"+f"Code size   {bar(m['bytes_discovered'],m['total_bytes']) if m['total_bytes'] else '░'*30+'  pending'}\n```'
+    functions = bar(m['functions_discovered'], m['total'])
+    code_size = bar(m['bytes_discovered'], m['total_bytes']) if m['total_bytes'] else '░'*30+'  pending'
+    return f'```\nFunctions   {functions}\nCode size   {code_size}\n```'
 def tiers_block(m):
     lines=['```']
     for t in TIERS: lines.append(f"{LABELS[t]:10} {bar(m[t],m['total'])}")
