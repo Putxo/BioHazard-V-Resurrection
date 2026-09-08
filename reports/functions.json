@@ -554,7 +554,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -569,10 +569,10 @@
     "source_file": "src/recovered/region_00401000.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004012F0",
-    "pr": "",
-    "commit": "",
+    "pr": "#34",
+    "commit": "4c08d86b6bc79dd696e41005c1d8067f907ac13d",
     "test": "tests/unit/test_region_00401000.cpp",
     "evidence": "decomp/evidence/region_00401000.md",
-    "notes": "XLive achievement enumerator wrapper recovered with exact title ID/default count/handle-close rules; local validation pending"
+    "notes": "XLive achievement enumerator wrapper recovered with exact title ID/default count/handle-close rules; PR #34 CI 5/5 PASS"
   }
 ]
