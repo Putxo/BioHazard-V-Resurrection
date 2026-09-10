@@ -18,10 +18,12 @@ constexpr std::uint32_t kDefaultEnumerationCount = 0xFFU;
 constexpr std::uint32_t kInvalidEnumerationHandle = 0xFFFFFFFFU;
 constexpr std::uintptr_t kFUN_00401410Key = 0x0137A6ACU;
 constexpr std::uint32_t kFUN_00401410Threshold = 0x64U;
+constexpr std::uint32_t kFUN_00401470SuccessCode = 2U;
 
 const FUN_00401270_Services* g_FUN_00401270_services = nullptr;
 const FUN_004012F0_Services* g_FUN_004012F0_services = nullptr;
 const FUN_00401410_Services* g_FUN_00401410_services = nullptr;
+const FUN_00401470_Services* g_FUN_00401470_services = nullptr;
 
 void append_ascii(char16_t* out, std::size_t& pos, const char* text) noexcept {
     if (out == nullptr || text == nullptr) {
@@ -219,6 +221,31 @@ void FUN_00401410() noexcept {
 
     void* dispatch_object = services->get_object(services->context);
     services->dispatch(dispatch_object);
+}
+
+void FUN_00401470_SetServices(const FUN_00401470_Services* services) noexcept {
+    g_FUN_00401470_services = services;
+}
+
+std::uint32_t FUN_00401470() noexcept {
+    const auto* services = g_FUN_00401470_services;
+    if (services == nullptr || services->get_object == nullptr ||
+        services->query_value == nullptr) {
+        return 0U;
+    }
+
+    std::uint32_t value = kFUN_00401410Threshold;
+    void* object = services->get_object(services->context);
+    if (!services->query_value(object, kFUN_00401410Key, &value)) {
+        return 0U;
+    }
+    if (value >= kFUN_00401410Threshold) {
+        return 0U;
+    }
+    if (value == 0U) {
+        return kFUN_00401470SuccessCode;
+    }
+    return 0U;
 }
 
 } // namespace re5::recovered

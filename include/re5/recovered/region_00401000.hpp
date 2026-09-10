@@ -125,4 +125,16 @@ struct FUN_00401410_Services {
 void FUN_00401410_SetServices(const FUN_00401410_Services* services) noexcept;
 void FUN_00401410() noexcept;
 
+struct FUN_00401470_Services {
+    void* context;
+    void* (*get_object)(void* context) noexcept;
+    bool (*query_value)(
+        void* object,
+        std::uintptr_t key,
+        std::uint32_t* value) noexcept;
+};
+
+void FUN_00401470_SetServices(const FUN_00401470_Services* services) noexcept;
+[[nodiscard]] std::uint32_t FUN_00401470() noexcept;
+
 } // namespace re5::recovered
