@@ -54,3 +54,4 @@ FUN_00401940,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered setter for posit
 FUN_00401950,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered current-language string classifier with compact id mapping
 FUN_00401B50,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered awarded-achievement logging and Steam save summary helper
 FUN_00401D10,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered achievement enumeration wrapper and SteamUserStats refresh before summary
+FUN_00401D50,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered achievement callback object constructor and Steam stats request path

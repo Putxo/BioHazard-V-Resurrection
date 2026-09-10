@@ -38,3 +38,4 @@ SEQ-00401940,FUN_00401940,coordinator,decomp/00401940-sequential,sequential deco
 SEQ-00401950,FUN_00401950,coordinator,decomp/00401950-sequential,sequential decomp of current-language classifier,2026-09-10T18:30:00Z,,,true
 SEQ-00401B50,FUN_00401B50,coordinator,decomp/00401b50-sequential,sequential decomp of awarded-achievement Steam save summary helper,2026-09-10T18:40:00Z,,,true
 SEQ-00401D10,FUN_00401D10,coordinator,decomp/00401d10-sequential,sequential decomp of achievement enumeration wrapper,2026-09-10T18:50:00Z,,,true
+SEQ-00401D50,FUN_00401D50,coordinator,decomp/00401d50-sequential,sequential decomp of achievement callback object constructor,2026-09-10T19:02:00Z,,,true
