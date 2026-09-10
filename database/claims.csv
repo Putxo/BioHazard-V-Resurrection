@@ -24,3 +24,4 @@ SEQ-004014C0,FUN_004014C0,coordinator,decomp/004014c0-sequential,sequential deco
 SEQ-004015D0,FUN_004015D0,coordinator,decomp/004015d0-sequential,sequential decomp of SteamUtils IP-country mapping helper,2026-09-10T11:46:00Z,,,true
 SEQ-00401640,FUN_00401640,coordinator,decomp/00401640-sequential,sequential decomp of SteamAPI_Shutdown tail thunk,2026-09-10T12:00:00Z,,,true
 SEQ-00401650,FUN_00401650,coordinator,decomp/00401650-sequential,sequential decomp of SteamUserStats virtual slot +0x54 dispatch,2026-09-10T12:10:00Z,,,true
+SEQ-00401670,FUN_00401670,coordinator,decomp/00401670-sequential,sequential decomp of Steam achievement clear helper,2026-09-10T12:54:00Z,,,true
