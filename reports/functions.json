@@ -842,7 +842,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -857,10 +857,10 @@
     "source_file": "src/recovered/fun_004016c0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004016C0",
-    "pr": "",
-    "commit": "",
+    "pr": "#68",
+    "commit": "3e3bc8c0d57c1db73d2a2863e95878304e436591",
     "test": "tests/unit/test_fun_004016c0.cpp",
     "evidence": "decomp/evidence/fun_004016c0.md",
-    "notes": "Steam achievement set-and-store helper with index<71 guard and exact shared API-name table"
+    "notes": "Steam achievement set-and-store helper with index<71 guard and exact shared API-name table; PR #68 CI 5/5 PASS"
   }
 ]
