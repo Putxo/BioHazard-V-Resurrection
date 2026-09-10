@@ -13,8 +13,12 @@ constexpr std::uint32_t kAchievementCount = 0x46U;
 constexpr std::uint32_t kPrimaryUserIndex = 0U;
 constexpr std::uint32_t kSigninInfoFlags = 1U;
 constexpr std::uint32_t kSignedInToLive = 2U;
+constexpr std::uint32_t kResidentEvil5TitleId = 0x434307F7U;
+constexpr std::uint32_t kDefaultEnumerationCount = 0xFFU;
+constexpr std::uint32_t kInvalidEnumerationHandle = 0xFFFFFFFFU;
 
 const FUN_00401270_Services* g_FUN_00401270_services = nullptr;
+const FUN_004012F0_Services* g_FUN_004012F0_services = nullptr;
 
 void append_ascii(char16_t* out, std::size_t& pos, const char* text) noexcept {
     if (out == nullptr || text == nullptr) {
@@ -140,6 +144,54 @@ void FUN_00401270() noexcept {
             services->context, 1U, &achievement, nullptr);
         services->mirror_achievement(services->context, achievement_id);
     }
+}
+
+void FUN_004012F0_SetServices(const FUN_004012F0_Services* services) noexcept {
+    g_FUN_004012F0_services = services;
+}
+
+std::uint32_t FUN_004012F0(
+    void** out_buffer,
+    std::uint32_t requested_count,
+    std::uint32_t /*unused*/) noexcept {
+    const auto* services = g_FUN_004012F0_services;
+    if (out_buffer == nullptr || services == nullptr || services->get_signin_info == nullptr ||
+        services->create_achievement_enumerator == nullptr || services->enumerate == nullptr ||
+        services->close_handle == nullptr) {
+        return 0U;
+    }
+
+    if (requested_count == 0U) {
+        requested_count = kDefaultEnumerationCount;
+    }
+
+    FUN_00401270_UserSigninInfo signin_info{};
+    (void)services->get_signin_info(
+        services->context, kPrimaryUserIndex, kSigninInfoFlags, &signin_info);
+
+    std::uint32_t handle = kInvalidEnumerationHandle;
+    std::uint32_t buffer_size = 0U;
+    (void)services->create_achievement_enumerator(
+        services->context,
+        kResidentEvil5TitleId,
+        kPrimaryUserIndex,
+        0U,
+        0xFFFFFFFFU,
+        0U,
+        requested_count,
+        &buffer_size,
+        &handle);
+
+    void* buffer = re5::runtime::aligned_allocate(buffer_size, 16U);
+    (void)services->enumerate(
+        services->context, handle, buffer, buffer_size, &requested_count, nullptr);
+
+    if (handle != 0U && handle != kInvalidEnumerationHandle) {
+        services->close_handle(services->context, handle);
+    }
+
+    *out_buffer = buffer;
+    return requested_count;
 }
 
 } // namespace re5::recovered

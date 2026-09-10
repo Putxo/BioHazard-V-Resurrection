@@ -65,6 +65,80 @@ std::uint32_t write_achievements(
 void mirror_achievement(void* context, std::uint32_t achievement_id) noexcept {
     static_cast<AchievementProbe*>(context)->mirrored_ids.push_back(achievement_id);
 }
+
+struct AchievementEnumerationProbe {
+    std::uint32_t signin_user_index{};
+    std::uint32_t signin_flags{};
+    std::uint32_t title_id{};
+    std::uint32_t enum_user_index{};
+    std::uint64_t xuid{};
+    std::uint32_t detail_flags{};
+    std::uint32_t starting_index{};
+    std::uint32_t requested_count{};
+    std::uint32_t supplied_buffer_size{0x40U};
+    std::uint32_t supplied_handle{0x1234U};
+    std::uint32_t enumerated_handle{};
+    void* enumerated_buffer{};
+    std::uint32_t enumerated_buffer_size{};
+    std::uint32_t returned_count{12U};
+    std::uint32_t close_count{};
+    std::uint32_t closed_handle{};
+};
+
+std::uint32_t enumeration_get_signin_info(
+    void* context,
+    std::uint32_t user_index,
+    std::uint32_t flags,
+    re5::recovered::FUN_00401270_UserSigninInfo* /*info*/) noexcept {
+    auto& probe = *static_cast<AchievementEnumerationProbe*>(context);
+    probe.signin_user_index = user_index;
+    probe.signin_flags = flags;
+    return 0U;
+}
+
+std::uint32_t create_achievement_enumerator(
+    void* context,
+    std::uint32_t title_id,
+    std::uint32_t user_index,
+    std::uint64_t xuid,
+    std::uint32_t detail_flags,
+    std::uint32_t starting_index,
+    std::uint32_t item_count,
+    std::uint32_t* buffer_size,
+    std::uint32_t* handle) noexcept {
+    auto& probe = *static_cast<AchievementEnumerationProbe*>(context);
+    probe.title_id = title_id;
+    probe.enum_user_index = user_index;
+    probe.xuid = xuid;
+    probe.detail_flags = detail_flags;
+    probe.starting_index = starting_index;
+    probe.requested_count = item_count;
+    *buffer_size = probe.supplied_buffer_size;
+    *handle = probe.supplied_handle;
+    return 0U;
+}
+
+std::uint32_t enumerate_achievements(
+    void* context,
+    std::uint32_t handle,
+    void* buffer,
+    std::uint32_t buffer_size,
+    std::uint32_t* items_returned,
+    void* overlapped) noexcept {
+    auto& probe = *static_cast<AchievementEnumerationProbe*>(context);
+    assert(overlapped == nullptr);
+    probe.enumerated_handle = handle;
+    probe.enumerated_buffer = buffer;
+    probe.enumerated_buffer_size = buffer_size;
+    *items_returned = probe.returned_count;
+    return 0U;
+}
+
+void close_enumeration_handle(void* context, std::uint32_t handle) noexcept {
+    auto& probe = *static_cast<AchievementEnumerationProbe*>(context);
+    ++probe.close_count;
+    probe.closed_handle = handle;
+}
 } // namespace
 
 void test_region_00401000() {
@@ -151,4 +225,57 @@ void test_region_00401000() {
     FUN_00401270();
     FUN_00401270_SetServices(nullptr);
     assert(live_user.logged_user.empty());
+
+    AchievementEnumerationProbe enumeration{};
+    const FUN_004012F0_Services enumeration_services{
+        &enumeration,
+        &enumeration_get_signin_info,
+        &create_achievement_enumerator,
+        &enumerate_achievements,
+        &close_enumeration_handle,
+    };
+
+    void* achievement_details = nullptr;
+    FUN_004012F0_SetServices(&enumeration_services);
+    const auto enumerated_count = FUN_004012F0(&achievement_details, 0x46U, 0xDEADBEEFU);
+    FUN_004012F0_SetServices(nullptr);
+
+    assert(enumerated_count == 12U);
+    assert(enumeration.signin_user_index == 0U);
+    assert(enumeration.signin_flags == 1U);
+    assert(enumeration.title_id == 0x434307F7U);
+    assert(enumeration.enum_user_index == 0U);
+    assert(enumeration.xuid == 0U);
+    assert(enumeration.detail_flags == 0xFFFFFFFFU);
+    assert(enumeration.starting_index == 0U);
+    assert(enumeration.requested_count == 0x46U);
+    assert(enumeration.enumerated_handle == 0x1234U);
+    assert(enumeration.enumerated_buffer == achievement_details);
+    assert(enumeration.enumerated_buffer_size == 0x40U);
+    assert(achievement_details != nullptr);
+    assert((reinterpret_cast<std::uintptr_t>(achievement_details) & 0xFU) == 0U);
+    assert(enumeration.close_count == 1U);
+    assert(enumeration.closed_handle == 0x1234U);
+    FUN_00401000(achievement_details);
+
+    AchievementEnumerationProbe default_count{};
+    default_count.supplied_handle = 0U;
+    default_count.returned_count = 7U;
+    void* default_details = nullptr;
+    const FUN_004012F0_Services default_count_services{
+        &default_count,
+        &enumeration_get_signin_info,
+        &create_achievement_enumerator,
+        &enumerate_achievements,
+        &close_enumeration_handle,
+    };
+    FUN_004012F0_SetServices(&default_count_services);
+    const auto default_result = FUN_004012F0(&default_details, 0U, 0U);
+    FUN_004012F0_SetServices(nullptr);
+
+    assert(default_result == 7U);
+    assert(default_count.requested_count == 0xFFU);
+    assert(default_count.enumerated_handle == 0U);
+    assert(default_count.close_count == 0U);
+    FUN_00401000(default_details);
 }

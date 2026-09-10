@@ -16,3 +16,4 @@ SEQ-00401240,FUN_00401240,coordinator,decomp/00401000-sequential-pass-001,sequen
 SEQ-00401250,FUN_00401250,coordinator,decomp/00401000-sequential-pass-001,sequential decomp pass 001,2026-09-07T19:50:00Z,,,true
 SEQ-00401260,FUN_00401260,coordinator,decomp/00401000-sequential-pass-001,sequential decomp pass 001,2026-09-07T19:50:00Z,,,true
 SEQ-00401270,FUN_00401270,coordinator,decomp/00401270-sequential,sequential decomp of achievement-write loop,2026-09-07T19:50:00Z,,,true
+SEQ-004012F0,FUN_004012F0,coordinator,decomp/004012f0-sequential,sequential decomp of XLive achievement enumeration wrapper,2026-09-08T18:43:51Z,,,true
