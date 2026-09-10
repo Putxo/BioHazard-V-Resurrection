@@ -618,7 +618,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -633,10 +633,10 @@
     "source_file": "src/recovered/region_00401000.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00401410",
-    "pr": "",
-    "commit": "",
+    "pr": "#41",
+    "commit": "e59d7b938e5a89c7ac22fe67d9b3763932f1955f",
     "test": "tests/unit/test_region_00401000.cpp",
     "evidence": "decomp/evidence/region_00401000.md",
-    "notes": "conditional virtual dispatch through global provider using key 0x0137A6AC and threshold 0x64"
+    "notes": "conditional virtual dispatch helper through provider 0x013714C8; PR #41 CI 5/5 PASS"
   }
 ]
