@@ -682,7 +682,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -697,10 +697,10 @@
     "source_file": "src/recovered/fun_004014c0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004014C0",
-    "pr": "",
-    "commit": "",
+    "pr": "#47",
+    "commit": "fe7c8a1ffaf7406cf0b6308951e51fc6fe8b059c",
     "test": "tests/unit/test_fun_004014c0.cpp",
     "evidence": "decomp/evidence/fun_004014c0.md",
-    "notes": "dual polling state helper with exact five-sleep limits and UNKNOWN semantics"
+    "notes": "dual polling state helper; PR #47 CI 5/5 PASS"
   }
 ]
