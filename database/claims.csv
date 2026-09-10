@@ -21,3 +21,4 @@ SEQ-00401400,FUN_00401400,coordinator,decomp/004013b0-sequential,sequential deco
 SEQ-00401410,FUN_00401410,coordinator,decomp/00401410-sequential,sequential decomp of conditional virtual dispatch helper,2026-09-10T10:05:00Z,,,true
 SEQ-00401470,FUN_00401470,coordinator,decomp/00401470-sequential,sequential decomp of provider value query helper,2026-09-10T10:13:28Z,,,true
 SEQ-004014C0,FUN_004014C0,coordinator,decomp/004014c0-sequential,sequential decomp of dual polling state helper,2026-09-10T10:28:00Z,,,true
+SEQ-004015D0,FUN_004015D0,coordinator,decomp/004015d0-sequential,sequential decomp of SteamUtils IP-country mapping helper,2026-09-10T11:46:00Z,,,true
