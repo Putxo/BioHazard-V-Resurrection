@@ -166,6 +166,30 @@ bool threshold_query(void* object, std::uintptr_t key, std::uint32_t threshold) 
 void threshold_dispatch(void* object) noexcept {
     ++static_cast<ThresholdDispatchProbe*>(object)->dispatch_count;
 }
+
+struct QueryValueProbe {
+    std::uint32_t get_object_count{};
+    std::uint32_t query_count{};
+    std::uintptr_t key{};
+    std::uint32_t incoming_value{};
+    std::uint32_t returned_value{};
+    bool query_result{};
+};
+
+void* query_value_get_object(void* context) noexcept {
+    auto& probe = *static_cast<QueryValueProbe*>(context);
+    ++probe.get_object_count;
+    return &probe;
+}
+
+bool query_value(void* object, std::uintptr_t key, std::uint32_t* value) noexcept {
+    auto& probe = *static_cast<QueryValueProbe*>(object);
+    ++probe.query_count;
+    probe.key = key;
+    probe.incoming_value = *value;
+    *value = probe.returned_value;
+    return probe.query_result;
+}
 } // namespace
 
 void test_region_00401000() {
@@ -345,4 +369,56 @@ void test_region_00401000() {
     assert(failed_threshold.get_object_count == 1U);
     assert(failed_threshold.query_count == 1U);
     assert(failed_threshold.dispatch_count == 0U);
+
+    QueryValueProbe zero_value{};
+    zero_value.query_result = true;
+    zero_value.returned_value = 0U;
+    const FUN_00401470_Services zero_value_services{
+        &zero_value,
+        &query_value_get_object,
+        &query_value,
+    };
+    FUN_00401470_SetServices(&zero_value_services);
+    assert(FUN_00401470() == 2U);
+    FUN_00401470_SetServices(nullptr);
+    assert(zero_value.get_object_count == 1U);
+    assert(zero_value.query_count == 1U);
+    assert(zero_value.key == 0x0137A6ACU);
+    assert(zero_value.incoming_value == 0x64U);
+
+    QueryValueProbe nonzero_value{};
+    nonzero_value.query_result = true;
+    nonzero_value.returned_value = 1U;
+    const FUN_00401470_Services nonzero_value_services{
+        &nonzero_value,
+        &query_value_get_object,
+        &query_value,
+    };
+    FUN_00401470_SetServices(&nonzero_value_services);
+    assert(FUN_00401470() == 0U);
+    FUN_00401470_SetServices(nullptr);
+
+    QueryValueProbe threshold_or_greater{};
+    threshold_or_greater.query_result = true;
+    threshold_or_greater.returned_value = 0x64U;
+    const FUN_00401470_Services threshold_or_greater_services{
+        &threshold_or_greater,
+        &query_value_get_object,
+        &query_value,
+    };
+    FUN_00401470_SetServices(&threshold_or_greater_services);
+    assert(FUN_00401470() == 0U);
+    FUN_00401470_SetServices(nullptr);
+
+    QueryValueProbe failed_query{};
+    failed_query.query_result = false;
+    failed_query.returned_value = 0U;
+    const FUN_00401470_Services failed_query_services{
+        &failed_query,
+        &query_value_get_object,
+        &query_value,
+    };
+    FUN_00401470_SetServices(&failed_query_services);
+    assert(FUN_00401470() == 0U);
+    FUN_00401470_SetServices(nullptr);
 }
