@@ -586,7 +586,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -601,10 +601,10 @@
     "source_file": "src/recovered/region_00401000.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00401400",
-    "pr": "",
-    "commit": "",
+    "pr": "#37",
+    "commit": "1eee7d9d269efb688d73fe68a950adadf852ef17",
     "test": "tests/unit/test_region_00401000.cpp",
     "evidence": "decomp/evidence/region_00401000.md",
-    "notes": "compares object dwords at this+0x04 and this+0x08 and returns equality in AL"
+    "notes": "field equality helper at this+0x04/this+0x08; PR #37 CI 5/5 PASS"
   }
 ]
