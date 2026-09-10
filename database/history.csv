@@ -74,3 +74,7 @@ FUN_00402000,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,77f4ba534061cfd9a0c23536a1
 FUN_00402020,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,77f4ba534061cfd9a0c23536a1b4ee264341dcee,coordinator,PR #104 CI passed and merged into integration
 FUN_00402060,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,77f4ba534061cfd9a0c23536a1b4ee264341dcee,coordinator,PR #104 CI passed and merged into integration
 FUN_004020A0,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,77f4ba534061cfd9a0c23536a1b4ee264341dcee,coordinator,PR #104 CI passed and merged into integration
+FUN_004020E0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered global value getter at 0x016E1660
+FUN_004020F0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered global value getter at 0x016E1690 plus adjacent fixed-address thunk
+FUN_00402110,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered one-dword thiscall copy helper
+FUN_00402120,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered aligned allocation thunk through global service slot 0x14

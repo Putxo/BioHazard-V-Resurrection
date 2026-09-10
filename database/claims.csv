@@ -46,3 +46,7 @@ SEQ-00402000,FUN_00402000,coordinator,decomp/00402000-sequential,sequential deco
 SEQ-00402020,FUN_00402020,coordinator,decomp/00402020-sequential,sequential decomp of callback slot registration helper,2026-09-10T19:58:00Z,,,true
 SEQ-00402060,FUN_00402060,coordinator,decomp/00402060-sequential,sequential decomp of callback slot registration helper id 0x44E,2026-09-10T20:06:00Z,,,true
 SEQ-004020A0,FUN_004020A0,coordinator,decomp/004020a0-sequential,sequential decomp of callback slot registration helper id 0x44F,2026-09-10T20:16:00Z,,,true
+SEQ-004020E0,FUN_004020E0,coordinator,decomp/004020e0-sequential,sequential decomp of global value getter at 0x016E1660,2026-09-10T20:58:00Z,,,true
+SEQ-004020F0,FUN_004020F0,coordinator,decomp/004020f0-sequential,sequential decomp of global value getter at 0x016E1690,2026-09-10T20:59:00Z,,,true
+SEQ-00402110,FUN_00402110,coordinator,decomp/00402110-sequential,sequential decomp of one-dword copy helper,2026-09-10T21:00:00Z,,,true
+SEQ-00402120,FUN_00402120,coordinator,decomp/00402120-sequential,sequential decomp of aligned allocation thunk,2026-09-10T21:01:00Z,,,true
