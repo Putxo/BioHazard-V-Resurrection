@@ -778,7 +778,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -793,10 +793,10 @@
     "source_file": "src/recovered/fun_00401650.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00401650",
-    "pr": "",
-    "commit": "",
+    "pr": "#60",
+    "commit": "7e1e0ceb90a6b6c0ea952aa4e10b10529aea6815",
     "test": "tests/unit/test_fun_00401650.cpp",
     "evidence": "decomp/evidence/fun_00401650.md",
-    "notes": "SteamUserStats provider; exact virtual slot +0x54 one-argument dispatch and EAX passthrough"
+    "notes": "SteamUserStats virtual slot +0x54 forwarding helper; PR #60 CI 5/5 PASS"
   }
 ]

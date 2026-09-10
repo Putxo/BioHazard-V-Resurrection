@@ -29,3 +29,4 @@ FUN_004015D0,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,dd7313c1a11ac14d658391643a
 FUN_00401640,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered exact SteamAPI_Shutdown import tail thunk
 FUN_00401640,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,9083a86ea272cc47131e0585970d5af85ae26c30,coordinator,PR #56 completed 5/5 CI checks
 FUN_00401650,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered SteamUserStats provider plus exact virtual slot +0x54 one-argument dispatch
+FUN_00401650,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,7e1e0ceb90a6b6c0ea952aa4e10b10529aea6815,coordinator,PR #60 completed 5/5 CI checks
