@@ -1,0 +1,81 @@
+name: assemble-00401650-temp
+
+on:
+  push:
+    branches: [decomp/00401650-sequential]
+
+permissions:
+  contents: write
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/00401650-sequential
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Assemble metadata and reports
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+
+          cmake = Path('CMakeLists.txt')
+          s = cmake.read_text(encoding='utf-8')
+          if 'src/recovered/fun_00401650.cpp' not in s:
+              s = s.replace('    src/recovered/fun_00401640.cpp\n', '    src/recovered/fun_00401640.cpp\n    src/recovered/fun_00401650.cpp\n')
+          if 'tests/unit/test_fun_00401650.cpp' not in s:
+              s = s.replace('    tests/unit/test_fun_00401640.cpp\n', '    tests/unit/test_fun_00401640.cpp\n    tests/unit/test_fun_00401650.cpp\n')
+          cmake.write_text(s, encoding='utf-8')
+
+          smoke = Path('tests/unit/test_smoke.cpp')
+          s = smoke.read_text(encoding='utf-8')
+          if 'void test_fun_00401650();' not in s:
+              s = s.replace('void test_fun_00401640();\n', 'void test_fun_00401640();\nvoid test_fun_00401650();\n')
+          if '    test_fun_00401650();' not in s:
+              s = s.replace('    test_fun_00401640();\n', '    test_fun_00401640();\n    test_fun_00401650();\n')
+          smoke.write_text(s, encoding='utf-8')
+
+          claims = Path('database/claims.csv')
+          claim = 'SEQ-00401650,FUN_00401650,coordinator,decomp/00401650-sequential,sequential decomp of SteamUserStats virtual slot +0x54 dispatch,2026-09-10T12:10:00Z,,,true\n'
+          text = claims.read_text(encoding='utf-8')
+          if claim.strip() not in text:
+              with claims.open('a', encoding='utf-8') as f: f.write(claim)
+
+          history = Path('database/history.csv')
+          hist = 'FUN_00401650,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered SteamUserStats provider plus exact virtual slot +0x54 one-argument dispatch\n'
+          text = history.read_text(encoding='utf-8')
+          if hist.strip() not in text:
+              with history.open('a', encoding='utf-8') as f: f.write(hist)
+
+          funcs = Path('database/functions.csv')
+          with funcs.open(newline='', encoding='utf-8') as f:
+              reader = csv.DictReader(f); rows = list(reader); fields = reader.fieldnames
+          if not any(r['stable_id'] == 'FUN_00401650' for r in rows):
+              row = {k: '' for k in fields}
+              row.update({
+                  'stable_id':'FUN_00401650','va':'0x00401650','rva':'0x00001650','section':'.text','size':'21',
+                  'provisional_name':'FUN_00401650','workflow_status':'ACTIVE','confidence':'HIGH','fast_pass':'true',
+                  'fast_pass_validated':'false','converted':'false','refined':'false','verified':'false','matched':'false','linked':'false',
+                  'calling_convention':'cdecl','return_type':'uint32_t','arguments':'uint32_t argument','module':'UNKNOWN','subsystem':'UNKNOWN',
+                  'source_file':'src/recovered/fun_00401650.cpp','owner':'coordinator','claim_id':'SEQ-00401650',
+                  'test':'tests/unit/test_fun_00401650.cpp','evidence':'decomp/evidence/fun_00401650.md',
+                  'notes':'SteamUserStats provider; exact virtual slot +0x54 one-argument dispatch and EAX passthrough'
+              })
+              rows.append(row)
+              with funcs.open('w', newline='', encoding='utf-8') as f:
+                  w=csv.DictWriter(f, fieldnames=fields, lineterminator='\n'); w.writeheader(); w.writerows(rows)
+          PY
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          git diff --check
+          git rm .github/workflows/assemble-00401650-temp.yml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add CMakeLists.txt tests/unit/test_smoke.cpp database/ reports/
+          git commit -m "Assemble FUN_00401650 fast pass metadata"
+          git push origin HEAD:decomp/00401650-sequential
