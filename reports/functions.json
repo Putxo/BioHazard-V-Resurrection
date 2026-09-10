@@ -906,7 +906,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -921,10 +921,10 @@
     "source_file": "src/recovered/fun_004017b0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004017B0",
-    "pr": "",
-    "commit": "",
+    "pr": "#76",
+    "commit": "0c8605c7ed32910a7229bfd5fcc461352550f239",
     "test": "tests/unit/test_fun_004017b0.cpp",
     "evidence": "decomp/evidence/fun_004017b0.md",
-    "notes": "8-byte feedback XOR decoder; exact four-argument contract and processed-byte return recovered"
+    "notes": "8-byte feedback XOR decoder; exact four-argument contract and processed-byte return recovered; PR #76 CI 5/5 PASS"
   }
 ]
