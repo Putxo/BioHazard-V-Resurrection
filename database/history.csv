@@ -26,3 +26,5 @@ FUN_004014C0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered exact dual polli
 FUN_004014C0,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,fe7c8a1ffaf7406cf0b6308951e51fc6fe8b059c,coordinator,PR #47 completed 5/5 CI checks
 FUN_004015D0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered SteamUtils IP-country table mapping with exact aliases and fallback
 FUN_004015D0,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,dd7313c1a11ac14d658391643a018864708e83b5,coordinator,PR #52 completed 5/5 CI checks
+FUN_00401640,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered exact SteamAPI_Shutdown import tail thunk
+FUN_00401640,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,9083a86ea272cc47131e0585970d5af85ae26c30,coordinator,PR #56 completed 5/5 CI checks
