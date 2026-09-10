@@ -58,3 +58,4 @@ FUN_00401D50,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered achievement call
 FUN_00401E30,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered lazy singleton allocator for achievement callback object
 FUN_00401E60,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered platform and Steam initialization gate including relaunch/failure paths and title selection
 FUN_00401FE0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered variadic formatting wrapper with fixed 0x800-byte limit
+FUN_00402000,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered constant global-object thunk block with adjacent 0x98 value thunk
