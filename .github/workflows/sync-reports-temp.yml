@@ -1,0 +1,29 @@
+name: sync-reports-temp
+
+on:
+  push:
+    branches: [decomp/004015d0-sequential]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/004015d0-sequential
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Regenerate reports and remove temporary workflow
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          git rm .github/workflows/sync-reports-temp.yml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add reports/
+          git commit -m "Regenerate progress reports for FUN_004015D0"
+          git push origin HEAD:decomp/004015d0-sequential
