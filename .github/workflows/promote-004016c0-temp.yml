@@ -1,0 +1,48 @@
+name: promote-004016c0-temp
+on:
+  push:
+    branches: [decomp/promote-004016c0-ci]
+permissions:
+  contents: write
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/promote-004016c0-ci
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Promote metadata and regenerate reports
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          path = Path('database/functions.csv')
+          with path.open(newline='', encoding='utf-8') as f:
+              reader = csv.DictReader(f); rows = list(reader); fields = reader.fieldnames
+          for row in rows:
+              if row['stable_id'] == 'FUN_004016C0':
+                  row['fast_pass_validated'] = 'true'
+                  row['pr'] = '#68'
+                  row['commit'] = '3e3bc8c0d57c1db73d2a2863e95878304e436591'
+                  row['notes'] = 'Steam achievement set-and-store helper with index<71 guard and exact shared API-name table; PR #68 CI 5/5 PASS'
+                  break
+          else: raise SystemExit('FUN_004016C0 not found')
+          with path.open('w', newline='', encoding='utf-8') as f:
+              w = csv.DictWriter(f, fieldnames=fields, lineterminator='\n'); w.writeheader(); w.writerows(rows)
+          hist = Path('database/history.csv')
+          line = 'FUN_004016C0,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,3e3bc8c0d57c1db73d2a2863e95878304e436591,coordinator,PR #68 completed 5/5 CI checks\n'
+          text = hist.read_text(encoding='utf-8')
+          if line not in text: hist.write_text(text + line, encoding='utf-8')
+          PY
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          rm .github/workflows/promote-004016c0-temp.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add database/functions.csv database/history.csv reports/functions.json reports/progress.md reports/progress-treemap.svg .github/workflows/promote-004016c0-temp.yml
+          git commit -m 'Promote FUN_004016C0 after PR #68 CI'
+          git push origin HEAD:decomp/promote-004016c0-ci
