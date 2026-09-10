@@ -1,0 +1,68 @@
+name: assemble-004017b0-temp
+on:
+  push:
+    branches:
+      - decomp/004017b0-sequential
+permissions:
+  contents: write
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/004017b0-sequential
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Assemble metadata and reports
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+
+          fpath = Path('database/functions.csv')
+          with fpath.open(newline='', encoding='utf-8') as f:
+              rows = list(csv.DictReader(f))
+              fields = list(rows[0].keys())
+          if not any(r['stable_id'] == 'FUN_004017B0' for r in rows):
+              row = {k:'' for k in fields}
+              row.update({
+                  'stable_id':'FUN_004017B0','va':'0x004017B0','rva':'0x000017B0','section':'.text','size':'128',
+                  'provisional_name':'FUN_004017B0','workflow_status':'ACTIVE','confidence':'HIGH','fast_pass':'true',
+                  'fast_pass_validated':'false','converted':'false','refined':'false','verified':'false','matched':'false','linked':'false',
+                  'calling_convention':'cdecl','return_type':'uint32_t',
+                  'arguments':'uint8_t* destination; uint32_t destination_size; const uint8_t* source; uint32_t length',
+                  'module':'UNKNOWN','subsystem':'UNKNOWN','source_file':'src/recovered/fun_004017b0.cpp','owner':'coordinator',
+                  'claim_id':'SEQ-004017B0','test':'tests/unit/test_fun_004017b0.cpp','evidence':'decomp/evidence/fun_004017b0.md',
+                  'notes':'8-byte feedback XOR decoder; exact four-argument contract and processed-byte return recovered'
+              })
+              rows.append(row)
+              with fpath.open('w', newline='', encoding='utf-8') as f:
+                  w=csv.DictWriter(f, fieldnames=fields, lineterminator='\n'); w.writeheader(); w.writerows(rows)
+
+          cpath=Path('database/claims.csv')
+          with cpath.open(newline='', encoding='utf-8') as f:
+              claims=list(csv.reader(f))
+          if not any(r and r[0]=='SEQ-004017B0' for r in claims[1:]):
+              with cpath.open('a', newline='', encoding='utf-8') as f:
+                  csv.writer(f, lineterminator='\n').writerow(['SEQ-004017B0','FUN_004017B0','coordinator','decomp/004017b0-sequential','sequential decomp of exact 8-byte feedback XOR decode flow','2026-09-10T13:30:00Z','','','true'])
+
+          hpath=Path('database/history.csv')
+          with hpath.open(newline='', encoding='utf-8') as f:
+              hist=list(csv.reader(f))
+          if not any(r and r[0]=='FUN_004017B0' for r in hist[1:]):
+              with hpath.open('a', newline='', encoding='utf-8') as f:
+                  csv.writer(f, lineterminator='\n').writerow(['FUN_004017B0','2026-09-10','UNSEEN','FAST_PASS','','coordinator','recovered exact 8-byte feedback XOR decode flow and four-argument contract'])
+          PY
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          git diff --check
+          git rm .github/workflows/assemble-004017b0-temp.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add database/claims.csv database/functions.csv database/history.csv reports/functions.json reports/progress.md reports/progress-treemap.svg
+          git commit -m 'Assemble FUN_004017B0 fast pass metadata'
+          git push origin HEAD:decomp/004017b0-sequential
