@@ -21,6 +21,15 @@ void test_fun_004018c0();
 void test_fun_004018f0();
 void test_fun_00401910();
 void test_fun_00401940();
+void test_fun_00401950();
+void test_fun_00401b50();
+void test_fun_00401d10();
+void test_fun_00401d50();
+void test_fun_00401e30();
+void test_fun_00401e60();
+void test_fun_00401fe0();
+void test_fun_00402000();
+void test_fun_00402020();
 
 int main() {
     if (re5::recovered_runtime_abi_version() != 1U) return 1;
@@ -41,5 +50,14 @@ int main() {
     test_fun_004018f0();
     test_fun_00401910();
     test_fun_00401940();
+    test_fun_00401950();
+    test_fun_00401b50();
+    test_fun_00401d10();
+    test_fun_00401d50();
+    test_fun_00401e30();
+    test_fun_00401e60();
+    test_fun_00401fe0();
+    test_fun_00402000();
+    test_fun_00402020();
     return 0;
 }

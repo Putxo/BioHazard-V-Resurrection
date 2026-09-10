@@ -35,3 +35,14 @@ SEQ-004018C0,FUN_004018C0,coordinator,decomp/004018c0-sequential,sequential deco
 SEQ-004018F0,FUN_004018F0,coordinator,decomp/004018f0-sequential,sequential decomp of global-object branch dispatch helper,2026-09-10T17:57:55Z,,,true
 SEQ-00401910,FUN_00401910,coordinator,decomp/00401910-sequential,sequential decomp of global-object cached-state query helper,2026-09-10T18:13:00Z,,,true
 SEQ-00401940,FUN_00401940,coordinator,decomp/00401940-sequential,sequential decomp of positive-state byte setter,2026-09-10T18:22:00Z,,,true
+SEQ-00401950,FUN_00401950,coordinator,decomp/00401950-sequential,sequential decomp of current-language classifier,2026-09-10T18:30:00Z,,,true
+SEQ-00401B50,FUN_00401B50,coordinator,decomp/00401b50-sequential,sequential decomp of awarded-achievement Steam save summary helper,2026-09-10T18:40:00Z,,,true
+SEQ-00401D10,FUN_00401D10,coordinator,decomp/00401d10-sequential,sequential decomp of achievement enumeration wrapper,2026-09-10T18:50:00Z,,,true
+SEQ-00401D50,FUN_00401D50,coordinator,decomp/00401d50-sequential,sequential decomp of achievement callback object constructor,2026-09-10T19:02:00Z,,,true
+SEQ-00401E30,FUN_00401E30,coordinator,decomp/00401e30-sequential,sequential decomp of achievement singleton allocator,2026-09-10T19:12:00Z,,,true
+SEQ-00401E60,FUN_00401E60,coordinator,decomp/00401e60-sequential,sequential decomp of platform Steam initialization gate,2026-09-10T19:25:00Z,,,true
+SEQ-00401FE0,FUN_00401FE0,coordinator,decomp/00401fe0-sequential,sequential decomp of variadic formatting wrapper,2026-09-10T19:38:00Z,,,true
+SEQ-00402000,FUN_00402000,coordinator,decomp/00402000-sequential,sequential decomp of constant global-object thunk block,2026-09-10T19:48:00Z,,,true
+SEQ-00402020,FUN_00402020,coordinator,decomp/00402020-sequential,sequential decomp of callback slot registration helper,2026-09-10T19:58:00Z,,,true
+SEQ-00402060,FUN_00402060,coordinator,decomp/00402060-sequential,sequential decomp of callback slot registration helper id 0x44E,2026-09-10T20:06:00Z,,,true
+SEQ-004020A0,FUN_004020A0,coordinator,decomp/004020a0-sequential,sequential decomp of callback slot registration helper id 0x44F,2026-09-10T20:16:00Z,,,true
