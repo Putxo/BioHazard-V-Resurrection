@@ -746,7 +746,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -761,10 +761,10 @@
     "source_file": "src/recovered/fun_00401640.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00401640",
-    "pr": "",
-    "commit": "",
+    "pr": "#56",
+    "commit": "9083a86ea272cc47131e0585970d5af85ae26c30",
     "test": "tests/unit/test_fun_00401640.cpp",
     "evidence": "decomp/evidence/fun_00401640.md",
-    "notes": "exact steam_api!SteamAPI_Shutdown tail thunk through host adapter"
+    "notes": "exact steam_api!SteamAPI_Shutdown tail thunk; PR #56 CI 5/5 PASS"
   }
 ]
