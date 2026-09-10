@@ -32,3 +32,4 @@ SEQ-00401830,FUN_00401830,coordinator,decomp/00401830-sequential,sequential deco
 SEQ-00401860,FUN_00401860,coordinator,decomp/00401860-sequential,sequential decomp of SteamUser-backed virtual slot +0x04 helper,2026-09-10T14:52:00Z,,,true
 SEQ-00401880,FUN_00401880,coordinator,decomp/00401880-sequential,sequential decomp of SteamFriends slot +0x00 bounded string helper,2026-09-10T15:01:00Z,,,true
 SEQ-004018C0,FUN_004018C0,coordinator,decomp/004018c0-sequential,sequential decomp of global object probe cache helper,2026-09-10T17:21:01Z,,,true
+SEQ-004018F0,FUN_004018F0,coordinator,decomp/004018f0-sequential,sequential decomp of global-object branch dispatch helper,2026-09-10T17:57:55Z,,,true
