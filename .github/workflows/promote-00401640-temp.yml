@@ -1,0 +1,59 @@
+name: promote-00401640-temp
+
+on:
+  push:
+    branches: [decomp/promote-00401640-ci]
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/promote-00401640-ci
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Promote metadata and regenerate reports
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+
+          path = Path('database/functions.csv')
+          with path.open(newline='', encoding='utf-8') as f:
+              rows = list(csv.DictReader(f))
+              fields = list(rows[0].keys())
+          found = False
+          for row in rows:
+              if row['stable_id'] == 'FUN_00401640':
+                  row['fast_pass_validated'] = 'true'
+                  row['pr'] = '#56'
+                  row['commit'] = '9083a86ea272cc47131e0585970d5af85ae26c30'
+                  row['notes'] = 'exact steam_api!SteamAPI_Shutdown tail thunk; PR #56 CI 5/5 PASS'
+                  found = True
+                  break
+          if not found:
+              raise SystemExit('FUN_00401640 row not found')
+          with path.open('w', newline='', encoding='utf-8') as f:
+              w = csv.DictWriter(f, fieldnames=fields, lineterminator='\n')
+              w.writeheader(); w.writerows(rows)
+
+          history = Path('database/history.csv')
+          line = 'FUN_00401640,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,9083a86ea272cc47131e0585970d5af85ae26c30,coordinator,PR #56 completed 5/5 CI checks\n'
+          text = history.read_text(encoding='utf-8')
+          if line.strip() not in text:
+              with history.open('a', encoding='utf-8') as f:
+                  f.write(line)
+          PY
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          git rm .github/workflows/promote-00401640-temp.yml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add database/functions.csv database/history.csv reports/
+          git commit -m "Promote FUN_00401640 after PR #56 CI"
+          git push origin HEAD:decomp/promote-00401640-ci
