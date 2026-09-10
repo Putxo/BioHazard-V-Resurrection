@@ -278,4 +278,10 @@ void test_region_00401000() {
     assert(default_count.enumerated_handle == 0U);
     assert(default_count.close_count == 0U);
     FUN_00401000(default_details);
+
+    const FUN_00401400_Object matched{0xABCDEF01U, 0x42U, 0x42U};
+    assert(FUN_00401400(&matched));
+
+    const FUN_00401400_Object mismatched{0xABCDEF01U, 0x42U, 0x43U};
+    assert(!FUN_00401400(&mismatched));
 }
