@@ -41,4 +41,16 @@ void test_fun_00402020() {
     assert(probe.callback_id == 0x44DU);
     assert(slot.owner == &owner);
     assert(slot.callback_va == 0x00401A70U);
+
+    probe = {};
+    slot.active = false;
+    FUN_00402020_SetServices(&services);
+    FUN_00402060(slot, &owner, 0x00401230U);
+    FUN_00402020_SetServices(nullptr);
+
+    assert(probe.unregister_calls == 0);
+    assert(probe.register_calls == 1);
+    assert(probe.callback_id == 0x44EU);
+    assert(slot.owner == &owner);
+    assert(slot.callback_va == 0x00401230U);
 }

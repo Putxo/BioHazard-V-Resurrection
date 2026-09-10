@@ -60,3 +60,4 @@ FUN_00401E60,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered platform and Ste
 FUN_00401FE0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered variadic formatting wrapper with fixed 0x800-byte limit
 FUN_00402000,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered constant global-object thunk block with adjacent 0x98 value thunk
 FUN_00402020,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered callback slot registration helper with id 0x44D
+FUN_00402060,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered callback slot registration helper with id 0x44E
