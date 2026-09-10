@@ -30,7 +30,7 @@
 <g><title>FUN_004018C0 | FUN_004018C0 | VA 0x004018C0 | 35 bytes | FAST_PASS_VALIDATED</title><rect x="611.91" y="0.00" width="35.21" height="203.94" fill="#bef264" stroke="#111827" stroke-width="0.35"/></g>
 <g><title>FUN_004018F0 | FUN_004018F0 | VA 0x004018F0 | 26 bytes | FAST_PASS_VALIDATED</title><rect x="648.11" y="0.00" width="390.04" height="13.10" fill="#bef264" stroke="#111827" stroke-width="0.35"/></g>
 <g><title>FUN_00401910 | FUN_00401910 | VA 0x00401910 | 48 bytes | FAST_PASS_VALIDATED</title><rect x="648.11" y="14.10" width="52.32" height="189.85" fill="#bef264" stroke="#111827" stroke-width="0.35"/></g>
-<g><title>FUN_00401940 | FUN_00401940 | VA 0x00401940 | 16 bytes | FAST_PASS</title><rect x="701.44" y="14.10" width="336.72" height="9.04" fill="#facc15" stroke="#111827" stroke-width="0.35"/></g>
+<g><title>FUN_00401940 | FUN_00401940 | VA 0x00401940 | 16 bytes | FAST_PASS_VALIDATED</title><rect x="701.44" y="14.10" width="336.72" height="9.04" fill="#bef264" stroke="#111827" stroke-width="0.35"/></g>
 <g><title>FUN_00401950 | FUN_00401950 | VA 0x00401950 | 288 bytes | FAST_PASS</title><rect x="701.44" y="24.14" width="336.72" height="179.80" fill="#facc15" stroke="#111827" stroke-width="0.35"/></g>
 <g><title>FUN_00401B50 | FUN_00401B50 | VA 0x00401B50 | 352 bytes | FAST_PASS</title><rect x="611.91" y="204.94" width="426.25" height="173.67" fill="#facc15" stroke="#111827" stroke-width="0.35"/></g>
 <g><title>FUN_00401D10 | FUN_00401D10 | VA 0x00401D10 | 64 bytes | FAST_PASS</title><rect x="1039.15" y="0.00" width="159.85" height="83.36" fill="#facc15" stroke="#111827" stroke-width="0.35"/></g>
