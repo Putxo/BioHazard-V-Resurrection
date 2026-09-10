@@ -41,3 +41,4 @@ FUN_004017B0,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,0c8605c7ed32910a7229bfd5fc
 FUN_00401830,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered exact three-argument byte-range equality helper
 FUN_00401830,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,1b24887d112e06e4772a1e9498ced94a5fdb08f0,coordinator,PR #80 completed 5/5 CI checks
 FUN_00401860,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered null-guarded one-argument virtual slot +0x04 dispatch; direct caller passes SteamUser()
+FUN_00401860,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,599ed402289c83525ae2e5179fa561a793b87828,coordinator,PR #84 completed 5/5 CI checks
