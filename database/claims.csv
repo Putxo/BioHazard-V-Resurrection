@@ -41,3 +41,4 @@ SEQ-00401D10,FUN_00401D10,coordinator,decomp/00401d10-sequential,sequential deco
 SEQ-00401D50,FUN_00401D50,coordinator,decomp/00401d50-sequential,sequential decomp of achievement callback object constructor,2026-09-10T19:02:00Z,,,true
 SEQ-00401E30,FUN_00401E30,coordinator,decomp/00401e30-sequential,sequential decomp of achievement singleton allocator,2026-09-10T19:12:00Z,,,true
 SEQ-00401E60,FUN_00401E60,coordinator,decomp/00401e60-sequential,sequential decomp of platform Steam initialization gate,2026-09-10T19:25:00Z,,,true
+SEQ-00401FE0,FUN_00401FE0,coordinator,decomp/00401fe0-sequential,sequential decomp of variadic formatting wrapper,2026-09-10T19:38:00Z,,,true

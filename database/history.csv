@@ -57,3 +57,4 @@ FUN_00401D10,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered achievement enum
 FUN_00401D50,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered achievement callback object constructor and Steam stats request path
 FUN_00401E30,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered lazy singleton allocator for achievement callback object
 FUN_00401E60,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered platform and Steam initialization gate including relaunch/failure paths and title selection
+FUN_00401FE0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered variadic formatting wrapper with fixed 0x800-byte limit
