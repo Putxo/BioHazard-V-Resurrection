@@ -1,0 +1,50 @@
+name: promote-00401860-temp
+on:
+  push:
+    branches:
+      - decomp/promote-00401860-ci
+permissions:
+  contents: write
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/promote-00401860-ci
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Promote metadata and regenerate reports
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          fpath=Path('database/functions.csv')
+          with fpath.open(newline='',encoding='utf-8') as f:
+              rows=list(csv.DictReader(f)); fields=list(rows[0].keys())
+          for r in rows:
+              if r['stable_id']=='FUN_00401860':
+                  r['fast_pass_validated']='true'
+                  r['pr']='#84'
+                  r['commit']='599ed402289c83525ae2e5179fa561a793b87828'
+                  r['notes']='null-guarded virtual slot +0x04 forwarding helper; direct caller passes SteamUser(); PR #84 CI 5/5 PASS'
+                  break
+          else:
+              raise SystemExit('FUN_00401860 row not found')
+          with fpath.open('w',newline='',encoding='utf-8') as f:
+              w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(rows)
+          with Path('database/history.csv').open('a',newline='',encoding='utf-8') as f:
+              csv.writer(f,lineterminator='\n').writerow(['FUN_00401860','2026-09-10','FAST_PASS','FAST_PASS_VALIDATED','599ed402289c83525ae2e5179fa561a793b87828','coordinator','PR #84 completed 5/5 CI checks'])
+          PY
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          git diff --check
+          git rm .github/workflows/promote-00401860-temp.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add database/functions.csv database/history.csv reports/functions.json reports/progress.md reports/progress-treemap.svg
+          git commit -m 'Promote FUN_00401860 after PR #84 CI'
+          git push origin HEAD:decomp/promote-00401860-ci
