@@ -16,9 +16,12 @@ constexpr std::uint32_t kSignedInToLive = 2U;
 constexpr std::uint32_t kResidentEvil5TitleId = 0x434307F7U;
 constexpr std::uint32_t kDefaultEnumerationCount = 0xFFU;
 constexpr std::uint32_t kInvalidEnumerationHandle = 0xFFFFFFFFU;
+constexpr std::uintptr_t kFUN_00401410Key = 0x0137A6ACU;
+constexpr std::uint32_t kFUN_00401410Threshold = 0x64U;
 
 const FUN_00401270_Services* g_FUN_00401270_services = nullptr;
 const FUN_004012F0_Services* g_FUN_004012F0_services = nullptr;
+const FUN_00401410_Services* g_FUN_00401410_services = nullptr;
 
 void append_ascii(char16_t* out, std::size_t& pos, const char* text) noexcept {
     if (out == nullptr || text == nullptr) {
@@ -196,6 +199,26 @@ std::uint32_t FUN_004012F0(
 
 bool FUN_00401400(const FUN_00401400_Object* self) noexcept {
     return self->current == self->target;
+}
+
+void FUN_00401410_SetServices(const FUN_00401410_Services* services) noexcept {
+    g_FUN_00401410_services = services;
+}
+
+void FUN_00401410() noexcept {
+    const auto* services = g_FUN_00401410_services;
+    if (services == nullptr || services->get_object == nullptr ||
+        services->query_threshold == nullptr || services->dispatch == nullptr) {
+        return;
+    }
+
+    void* query_object = services->get_object(services->context);
+    if (!services->query_threshold(query_object, kFUN_00401410Key, kFUN_00401410Threshold)) {
+        return;
+    }
+
+    void* dispatch_object = services->get_object(services->context);
+    services->dispatch(dispatch_object);
 }
 
 } // namespace re5::recovered

@@ -139,6 +139,33 @@ void close_enumeration_handle(void* context, std::uint32_t handle) noexcept {
     ++probe.close_count;
     probe.closed_handle = handle;
 }
+
+struct ThresholdDispatchProbe {
+    std::uint32_t get_object_count{};
+    std::uint32_t query_count{};
+    std::uint32_t dispatch_count{};
+    std::uintptr_t key{};
+    std::uint32_t threshold{};
+    bool query_result{};
+};
+
+void* threshold_get_object(void* context) noexcept {
+    auto& probe = *static_cast<ThresholdDispatchProbe*>(context);
+    ++probe.get_object_count;
+    return &probe;
+}
+
+bool threshold_query(void* object, std::uintptr_t key, std::uint32_t threshold) noexcept {
+    auto& probe = *static_cast<ThresholdDispatchProbe*>(object);
+    ++probe.query_count;
+    probe.key = key;
+    probe.threshold = threshold;
+    return probe.query_result;
+}
+
+void threshold_dispatch(void* object) noexcept {
+    ++static_cast<ThresholdDispatchProbe*>(object)->dispatch_count;
+}
 } // namespace
 
 void test_region_00401000() {
@@ -284,4 +311,38 @@ void test_region_00401000() {
 
     const FUN_00401400_Object mismatched{0xABCDEF01U, 0x42U, 0x43U};
     assert(!FUN_00401400(&mismatched));
+
+    ThresholdDispatchProbe threshold_probe{};
+    threshold_probe.query_result = true;
+    const FUN_00401410_Services threshold_services{
+        &threshold_probe,
+        &threshold_get_object,
+        &threshold_query,
+        &threshold_dispatch,
+    };
+    FUN_00401410_SetServices(&threshold_services);
+    FUN_00401410();
+    FUN_00401410_SetServices(nullptr);
+
+    assert(threshold_probe.get_object_count == 2U);
+    assert(threshold_probe.query_count == 1U);
+    assert(threshold_probe.dispatch_count == 1U);
+    assert(threshold_probe.key == 0x0137A6ACU);
+    assert(threshold_probe.threshold == 0x64U);
+
+    ThresholdDispatchProbe failed_threshold{};
+    failed_threshold.query_result = false;
+    const FUN_00401410_Services failed_threshold_services{
+        &failed_threshold,
+        &threshold_get_object,
+        &threshold_query,
+        &threshold_dispatch,
+    };
+    FUN_00401410_SetServices(&failed_threshold_services);
+    FUN_00401410();
+    FUN_00401410_SetServices(nullptr);
+
+    assert(failed_threshold.get_object_count == 1U);
+    assert(failed_threshold.query_count == 1U);
+    assert(failed_threshold.dispatch_count == 0U);
 }

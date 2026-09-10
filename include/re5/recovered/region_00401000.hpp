@@ -112,4 +112,17 @@ static_assert(offsetof(FUN_00401400_Object, target) == 0x08U);
 
 [[nodiscard]] bool FUN_00401400(const FUN_00401400_Object* self) noexcept;
 
+struct FUN_00401410_Services {
+    void* context;
+    void* (*get_object)(void* context) noexcept;
+    bool (*query_threshold)(
+        void* object,
+        std::uintptr_t key,
+        std::uint32_t threshold) noexcept;
+    void (*dispatch)(void* object) noexcept;
+};
+
+void FUN_00401410_SetServices(const FUN_00401410_Services* services) noexcept;
+void FUN_00401410() noexcept;
+
 } // namespace re5::recovered
