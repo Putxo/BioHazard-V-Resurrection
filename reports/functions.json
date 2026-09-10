@@ -714,7 +714,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -729,10 +729,10 @@
     "source_file": "src/recovered/fun_004015d0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004015D0",
-    "pr": "",
-    "commit": "",
+    "pr": "#52",
+    "commit": "dd7313c1a11ac14d658391643a018864708e83b5",
     "test": "tests/unit/test_fun_004015d0.cpp",
     "evidence": "decomp/evidence/fun_004015d0.md",
-    "notes": "SteamUtils IP-country table mapper; exact country aliases and fallback recovered"
+    "notes": "SteamUtils IP-country table mapper; PR #52 CI 5/5 PASS"
   }
 ]
