@@ -1002,7 +1002,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -1017,10 +1017,10 @@
     "source_file": "src/recovered/fun_00401880.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00401880",
-    "pr": "",
-    "commit": "",
+    "pr": "#88",
+    "commit": "66be0dd9dc0f2ee3a6dbb47a57bcd83eac79dc46",
     "test": "tests/unit/test_fun_00401880.cpp",
     "evidence": "decomp/evidence/fun_00401880.md",
-    "notes": "SteamFriends virtual slot +0x00 string helper; bounded capacity-1 copy, forced NUL, destination/null return"
+    "notes": "SteamFriends virtual slot +0x00 string helper; bounded capacity-1 copy, forced NUL, destination/null return; PR #88 CI 5/5 PASS"
   }
 ]
