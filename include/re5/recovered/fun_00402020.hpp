@@ -21,5 +21,6 @@ struct FUN_00402020_Services {
 void FUN_00402020_SetServices(const FUN_00402020_Services* services) noexcept;
 void FUN_00402020(FUN_00402020_CallbackSlot& slot, void* owner, std::uintptr_t callback_va) noexcept;
 void FUN_00402060(FUN_00402020_CallbackSlot& slot, void* owner, std::uintptr_t callback_va) noexcept;
+void FUN_004020A0(FUN_00402020_CallbackSlot& slot, void* owner, std::uintptr_t callback_va) noexcept;
 
 } // namespace re5::recovered

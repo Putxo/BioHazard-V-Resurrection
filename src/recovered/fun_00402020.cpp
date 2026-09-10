@@ -39,4 +39,8 @@ void FUN_00402060(FUN_00402020_CallbackSlot& slot, void* owner, std::uintptr_t c
     register_callback_slot(slot, owner, callback_va, 0x44EU);
 }
 
+void FUN_004020A0(FUN_00402020_CallbackSlot& slot, void* owner, std::uintptr_t callback_va) noexcept {
+    register_callback_slot(slot, owner, callback_va, 0x44FU);
+}
+
 } // namespace re5::recovered

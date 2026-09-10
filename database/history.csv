@@ -61,3 +61,4 @@ FUN_00401FE0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered variadic formatt
 FUN_00402000,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered constant global-object thunk block with adjacent 0x98 value thunk
 FUN_00402020,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered callback slot registration helper with id 0x44D
 FUN_00402060,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered callback slot registration helper with id 0x44E
+FUN_004020A0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered callback slot registration helper with id 0x44F

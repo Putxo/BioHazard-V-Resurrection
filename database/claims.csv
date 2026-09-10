@@ -45,3 +45,4 @@ SEQ-00401FE0,FUN_00401FE0,coordinator,decomp/00401fe0-sequential,sequential deco
 SEQ-00402000,FUN_00402000,coordinator,decomp/00402000-sequential,sequential decomp of constant global-object thunk block,2026-09-10T19:48:00Z,,,true
 SEQ-00402020,FUN_00402020,coordinator,decomp/00402020-sequential,sequential decomp of callback slot registration helper,2026-09-10T19:58:00Z,,,true
 SEQ-00402060,FUN_00402060,coordinator,decomp/00402060-sequential,sequential decomp of callback slot registration helper id 0x44E,2026-09-10T20:06:00Z,,,true
+SEQ-004020A0,FUN_004020A0,coordinator,decomp/004020a0-sequential,sequential decomp of callback slot registration helper id 0x44F,2026-09-10T20:16:00Z,,,true
