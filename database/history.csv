@@ -44,3 +44,4 @@ FUN_00401860,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered null-guarded one
 FUN_00401860,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,599ed402289c83525ae2e5179fa561a793b87828,coordinator,PR #84 completed 5/5 CI checks
 FUN_00401880,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered SteamFriends slot +0x00 bounded string copy with forced terminator and return passthrough
 FUN_00401880,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,66be0dd9dc0f2ee3a6dbb47a57bcd83eac79dc46,coordinator,PR #88 completed 5/5 CI checks
+FUN_004018C0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered global object probe cached-state helper
