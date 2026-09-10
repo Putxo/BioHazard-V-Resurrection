@@ -16,3 +16,5 @@ FUN_00401270,2026-09-07,UNSEEN,DISASSEMBLED,,coordinator,full loop mapped; depen
 FUN_00401270,2026-09-08,DISASSEMBLED,FAST_PASS,,coordinator,recovered exact 70-entry XUserWriteAchievements loop with testable global-service bindings
 FUN_004012F0,2026-09-08,UNSEEN,FAST_PASS,,coordinator,recovered exact XLive achievement enumeration wrapper and three-argument contract
 FUN_004012F0,2026-09-08,FAST_PASS,FAST_PASS_VALIDATED,4c08d86b6bc79dd696e41005c1d8067f907ac13d,coordinator,PR #34 completed 5/5 CI checks
+FUN_00401400,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered exact thiscall object field equality helper
+FUN_00401400,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,1eee7d9d269efb688d73fe68a950adadf852ef17,coordinator,PR #37 completed 5/5 CI checks

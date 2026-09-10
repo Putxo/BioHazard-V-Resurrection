@@ -101,4 +101,15 @@ void FUN_004012F0_SetServices(const FUN_004012F0_Services* services) noexcept;
     std::uint32_t requested_count,
     std::uint32_t unused) noexcept;
 
+struct FUN_00401400_Object {
+    std::uint32_t unknown_00;
+    std::uint32_t current;
+    std::uint32_t target;
+};
+
+static_assert(offsetof(FUN_00401400_Object, current) == 0x04U);
+static_assert(offsetof(FUN_00401400_Object, target) == 0x08U);
+
+[[nodiscard]] bool FUN_00401400(const FUN_00401400_Object* self) noexcept;
+
 } // namespace re5::recovered
