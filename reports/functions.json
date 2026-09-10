@@ -650,7 +650,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -665,10 +665,10 @@
     "source_file": "src/recovered/region_00401000.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00401470",
-    "pr": "",
-    "commit": "",
+    "pr": "#44",
+    "commit": "7fe1355428d809d329d36f03efcdaa3837038fb4",
     "test": "tests/unit/test_region_00401000.cpp",
     "evidence": "decomp/evidence/region_00401000.md",
-    "notes": "queries provider value by key 0x0137A6AC with initial threshold 0x64 and returns 2 only when result value is zero"
+    "notes": "provider value query helper; PR #44 CI 5/5 PASS"
   }
 ]
