@@ -59,16 +59,15 @@ void test_fun_00401b50() {
         {4, "chapter 4", 0x00030000U},
     };
 
-    FUN_00401B50_State state{0xAAAAAAAAU, 9, 8};
-    const std::uint32_t saved = FUN_00401B50(state, records, 4, "Chris");
+    FUN_00401B50_State state{records, 9, 8};
+    const std::uint32_t saved = FUN_00401B50(state, records, 4);
     FUN_00401B50_SetServices(nullptr);
 
     assert(saved == 2);
-    assert(state.reserved_00 == 0xAAAAAAAAU);
+    assert(state.award_records == records);
     assert(state.awarded_count == 3);
     assert(state.saved_count == 2);
     assert(probe.header_calls == 1);
-    assert(probe.user_name != nullptr);
     assert(probe.summary_calls == 1);
     assert(probe.summary_saved == 2);
     assert(probe.summary_awarded == 3);

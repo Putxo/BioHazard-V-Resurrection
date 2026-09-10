@@ -26,14 +26,13 @@ void FUN_00401B50_SetServices(const FUN_00401B50_Services* services) noexcept {
 std::uint32_t FUN_00401B50(
     FUN_00401B50_State& state,
     const FUN_00401B50_AwardRecord* records,
-    std::uint32_t record_count,
-    const char* user_name) noexcept {
+    std::uint32_t record_count) noexcept {
     state.awarded_count = 0;
     state.saved_count = 0;
 
     const auto* services = g_services;
     if (services != nullptr && services->log_header != nullptr) {
-        services->log_header(services->context, user_name);
+        services->log_header(services->context, nullptr);
     }
 
     if (records != nullptr) {
