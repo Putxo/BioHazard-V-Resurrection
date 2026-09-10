@@ -38,3 +38,4 @@ FUN_00401730,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered exact 8-byte fee
 FUN_00401730,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,08374a9b5816a2c68257cca6e11ff94048900ab5,coordinator,PR #72 completed 5/5 CI checks
 FUN_004017B0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered exact 8-byte feedback XOR decode flow and four-argument contract
 FUN_004017B0,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,0c8605c7ed32910a7229bfd5fcc461352550f239,coordinator,PR #76 completed 5/5 CI checks
+FUN_00401830,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered exact three-argument byte-range equality helper
