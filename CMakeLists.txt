@@ -12,6 +12,7 @@ add_library(re5_recovered STATIC
     src/runtime/host_runtime.cpp
     src/recovered/pilot_bb9070.cpp
     src/recovered/region_00401000.cpp
+    src/recovered/fun_004014c0.cpp
 )
 target_include_directories(re5_recovered PUBLIC include)
 
@@ -26,6 +27,7 @@ add_executable(re5_tests
     tests/unit/test_smoke.cpp
     tests/unit/test_pilot_bb9070.cpp
     tests/unit/test_region_00401000.cpp
+    tests/unit/test_fun_004014c0.cpp
 )
 target_link_libraries(re5_tests PRIVATE re5_recovered)
 if(MSVC)

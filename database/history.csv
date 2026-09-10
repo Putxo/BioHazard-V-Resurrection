@@ -22,3 +22,5 @@ FUN_00401410,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered conditional virt
 FUN_00401410,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,e59d7b938e5a89c7ac22fe67d9b3763932f1955f,coordinator,PR #41 completed 5/5 CI checks
 FUN_00401470,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered provider value query helper with exact return-code split
 FUN_00401470,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,7fe1355428d809d329d36f03efcdaa3837038fb4,coordinator,PR #44 completed 5/5 CI checks
+FUN_004014C0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered exact dual polling state helper control flow with bounded waits
+FUN_004014C0,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,fe7c8a1ffaf7406cf0b6308951e51fc6fe8b059c,coordinator,PR #47 completed 5/5 CI checks
