@@ -28,3 +28,4 @@ SEQ-00401670,FUN_00401670,coordinator,decomp/00401670-sequential,sequential deco
 SEQ-004016C0,FUN_004016C0,coordinator,decomp/004016c0-sequential,sequential decomp of Steam achievement set helper,2026-09-10T13:03:00Z,,,true
 SEQ-00401730,FUN_00401730,coordinator,decomp/00401730-sequential,sequential decomp of 8-byte feedback XOR encoder,2026-09-10T13:11:00Z,,,true
 SEQ-004017B0,FUN_004017B0,coordinator,decomp/004017b0-sequential,sequential decomp of exact 8-byte feedback XOR decode flow,2026-09-10T13:30:00Z,,,true
+SEQ-00401830,FUN_00401830,coordinator,decomp/00401830-sequential,sequential decomp of exact byte-range equality flow,2026-09-10T13:45:00Z,,,true
