@@ -10,6 +10,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 extern "C" __declspec(dllimport) void __cdecl SteamAPI_RunCallbacks();
+extern "C" __declspec(dllimport) void __cdecl SteamAPI_Shutdown();
 #else
 #include <cstdio>
 #endif
@@ -71,6 +72,15 @@ void set_window_title_for_class(const char16_t* class_name, const char16_t* titl
 void steam_run_callbacks() noexcept {
 #if defined(_WIN32)
     ::SteamAPI_RunCallbacks();
+#else
+    // The original routine is an imported Steam API tail-call. Non-Windows CI
+    // cannot load steam_api.dll, so the host adapter intentionally has no side effect.
+#endif
+}
+
+void steam_shutdown() noexcept {
+#if defined(_WIN32)
+    ::SteamAPI_Shutdown();
 #else
     // The original routine is an imported Steam API tail-call. Non-Windows CI
     // cannot load steam_api.dll, so the host adapter intentionally has no side effect.
