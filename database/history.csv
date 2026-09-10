@@ -63,3 +63,14 @@ FUN_00402000,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered constant global-
 FUN_00402020,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered callback slot registration helper with id 0x44D
 FUN_00402060,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered callback slot registration helper with id 0x44E
 FUN_004020A0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered callback slot registration helper with id 0x44F
+FUN_00401950,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,77f4ba534061cfd9a0c23536a1b4ee264341dcee,coordinator,PR #104 CI passed and merged into integration
+FUN_00401B50,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,77f4ba534061cfd9a0c23536a1b4ee264341dcee,coordinator,PR #104 CI passed and merged into integration
+FUN_00401D10,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,77f4ba534061cfd9a0c23536a1b4ee264341dcee,coordinator,PR #104 CI passed and merged into integration
+FUN_00401D50,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,77f4ba534061cfd9a0c23536a1b4ee264341dcee,coordinator,PR #104 CI passed and merged into integration
+FUN_00401E30,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,77f4ba534061cfd9a0c23536a1b4ee264341dcee,coordinator,PR #104 CI passed and merged into integration
+FUN_00401E60,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,77f4ba534061cfd9a0c23536a1b4ee264341dcee,coordinator,PR #104 CI passed and merged into integration
+FUN_00401FE0,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,77f4ba534061cfd9a0c23536a1b4ee264341dcee,coordinator,PR #104 CI passed and merged into integration
+FUN_00402000,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,77f4ba534061cfd9a0c23536a1b4ee264341dcee,coordinator,PR #104 CI passed and merged into integration
+FUN_00402020,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,77f4ba534061cfd9a0c23536a1b4ee264341dcee,coordinator,PR #104 CI passed and merged into integration
+FUN_00402060,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,77f4ba534061cfd9a0c23536a1b4ee264341dcee,coordinator,PR #104 CI passed and merged into integration
+FUN_004020A0,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,77f4ba534061cfd9a0c23536a1b4ee264341dcee,coordinator,PR #104 CI passed and merged into integration
