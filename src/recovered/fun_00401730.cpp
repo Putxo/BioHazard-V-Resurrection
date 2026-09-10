@@ -22,12 +22,16 @@ std::uint32_t FUN_00401730(
         return 0U;
     }
 
-    if (destination_size < length || length == 0U) {
+    if (destination_size < length) {
         return 0U;
     }
 
     std::array<std::uint8_t, kSeedSize> feedback{};
     services->get_seed8(services->context, feedback.data());
+
+    if (length == 0U) {
+        return 0U;
+    }
 
     std::uint32_t processed = 0U;
     while (processed < length) {
