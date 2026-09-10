@@ -194,4 +194,8 @@ std::uint32_t FUN_004012F0(
     return requested_count;
 }
 
+bool FUN_00401400(const FUN_00401400_Object* self) noexcept {
+    return self->current == self->target;
+}
+
 } // namespace re5::recovered
