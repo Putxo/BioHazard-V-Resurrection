@@ -32,3 +32,5 @@ FUN_00401650,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered SteamUserStats p
 FUN_00401650,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,7e1e0ceb90a6b6c0ea952aa4e10b10529aea6815,coordinator,PR #60 completed 5/5 CI checks
 FUN_00401670,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered exact Steam achievement clear/store flow with 71-entry API-name table
 FUN_00401670,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,297c08deef41cfded262e60140983c7e4a79130e,coordinator,PR #64 completed 5/5 CI checks
+FUN_004016C0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered exact Steam achievement set/store flow with index bound and shared API-name table
+FUN_004016C0,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,3e3bc8c0d57c1db73d2a2863e95878304e436591,coordinator,PR #68 completed 5/5 CI checks
