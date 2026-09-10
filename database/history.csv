@@ -56,3 +56,4 @@ FUN_00401B50,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered awarded-achievem
 FUN_00401D10,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered achievement enumeration wrapper and SteamUserStats refresh before summary
 FUN_00401D50,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered achievement callback object constructor and Steam stats request path
 FUN_00401E30,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered lazy singleton allocator for achievement callback object
+FUN_00401E60,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered platform and Steam initialization gate including relaunch/failure paths and title selection
