@@ -50,3 +50,4 @@ FUN_004018F0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered global-object br
 FUN_004018F0,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,317a4905877a72743bc03a274bd48ae7eb618b44,coordinator,PR #95 CI passed and merged into integration
 FUN_00401910,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered global-object cached-state query helper returning secondary status byte
 FUN_00401910,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,c766b4fa8fcdba0ca4373dbb456d3394c361bba2,coordinator,PR #98 CI passed and merged into integration
+FUN_00401940,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered setter for positive-state byte consumed by FUN_00401910
