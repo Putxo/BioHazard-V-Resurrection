@@ -47,3 +47,4 @@ FUN_00401880,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,66be0dd9dc0f2ee3a6dbb47a57
 FUN_004018C0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered global object probe cached-state helper
 FUN_004018C0,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,0e9144c329c53bc0c61631ed62b39f3ae57a46b2,coordinator,PR #92 completed 5/5 CI checks
 FUN_004018F0,2026-09-10,UNSEEN,FAST_PASS,,coordinator,recovered global-object branch dispatch helper preserving cdecl caller cleanup
+FUN_004018F0,2026-09-10,FAST_PASS,FAST_PASS_VALIDATED,317a4905877a72743bc03a274bd48ae7eb618b44,coordinator,PR #95 CI passed and merged into integration
