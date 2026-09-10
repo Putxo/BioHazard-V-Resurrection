@@ -810,7 +810,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -825,10 +825,10 @@
     "source_file": "src/recovered/fun_00401670.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00401670",
-    "pr": "",
-    "commit": "",
+    "pr": "#64",
+    "commit": "297c08deef41cfded262e60140983c7e4a79130e",
     "test": "tests/unit/test_fun_00401670.cpp",
     "evidence": "decomp/evidence/fun_00401670.md",
-    "notes": "Steam achievement clear-and-store helper; exact 71-entry API-name table recovered"
+    "notes": "Steam achievement clear-and-store helper; exact 71-entry API-name table recovered; PR #64 CI 5/5 PASS"
   }
 ]
