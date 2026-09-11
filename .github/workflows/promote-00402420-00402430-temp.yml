@@ -1,0 +1,60 @@
+name: promote-00402420-00402430-temp
+on:
+  push:
+    branches:
+      - decomp/promote-00402420-00402430-ci
+permissions:
+  contents: write
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/promote-00402420-00402430-ci
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Promote metadata and regenerate reports
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          ids={'FUN_00402420','FUN_00402430'}
+          fpath=Path('database/functions.csv')
+          with fpath.open(newline='',encoding='utf-8') as f:
+              rows=list(csv.DictReader(f)); fields=list(rows[0].keys())
+          found=set()
+          for r in rows:
+              if r['stable_id'] in ids:
+                  found.add(r['stable_id'])
+                  r['fast_pass_validated']='true'
+                  r['pr']='#120'
+                  r['commit']='8bdecce74f104bf1b74a6d65093238f93e9a2b06'
+                  if 'PR #120 CI 5/5 PASS' not in r['notes']:
+                      r['notes']=r['notes']+'; PR #120 CI 5/5 PASS'
+          missing=ids-found
+          if missing:
+              raise SystemExit(f'missing rows: {sorted(missing)}')
+          with fpath.open('w',newline='',encoding='utf-8') as f:
+              w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(rows)
+          history=Path('database/history.csv')
+          existing=history.read_text(encoding='utf-8')
+          with history.open('a',newline='',encoding='utf-8') as f:
+              w=csv.writer(f,lineterminator='\n')
+              for sid in sorted(ids):
+                  marker=f'{sid},2026-09-11,FAST_PASS,FAST_PASS_VALIDATED'
+                  if marker not in existing:
+                      w.writerow([sid,'2026-09-11','FAST_PASS','FAST_PASS_VALIDATED','8bdecce74f104bf1b74a6d65093238f93e9a2b06','coordinator','PR #120 completed 5/5 CI checks'])
+          PY
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          git diff --check
+          git rm .github/workflows/promote-00402420-00402430-temp.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add database/functions.csv database/history.csv reports/functions.json reports/progress.md reports/progress-treemap.svg
+          git commit -m 'Promote FUN_00402420 and FUN_00402430 after PR #120 CI'
+          git push origin HEAD:decomp/promote-00402420-00402430-ci
