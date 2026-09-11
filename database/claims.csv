@@ -63,3 +63,9 @@ SEQ-00402360,FUN_00402360,coordinator,decomp/004022f0-004023e0-sequential,sequen
 SEQ-004023E0,FUN_004023E0,coordinator,decomp/004022f0-004023e0-sequential,sequential decomp of reference-counted string release,2026-09-11T07:43:00Z,,,true
 SEQ-00402420,FUN_00402420,coordinator,decomp/00402420-00402430-sequential,sequential decomp of refcounted string data/fallback accessor,2026-09-11T07:52:00Z,,,true
 SEQ-00402430,FUN_00402430,coordinator,decomp/00402420-00402430-sequential,sequential decomp of refcounted string replacement helper,2026-09-11T07:53:00Z,,,true
+SEQ-00402480,FUN_00402480,coordinator,decomp/00402480-00402510-sequential,sequential decomp of aligned allocation wrapper,2026-09-11T08:00:00Z,,,true
+SEQ-004024A0,FUN_004024A0,coordinator,decomp/00402480-00402510-sequential,sequential decomp of global pointer getter,2026-09-11T08:01:00Z,,,true
+SEQ-004024B0,FUN_004024B0,coordinator,decomp/00402480-00402510-sequential,sequential decomp of reverse array destruction helper,2026-09-11T08:02:00Z,,,true
+SEQ-004024F0,FUN_004024F0,coordinator,decomp/00402480-00402510-sequential,sequential decomp of exact no-op helper,2026-09-11T08:03:00Z,,,true
+SEQ-00402500,FUN_00402500,coordinator,decomp/00402480-00402510-sequential,sequential decomp of opaque virtual tail thunk,2026-09-11T08:04:00Z,,,true
+SEQ-00402510,FUN_00402510,coordinator,decomp/00402480-00402510-sequential,sequential decomp of no-op virtual method,2026-09-11T08:05:00Z,,,true

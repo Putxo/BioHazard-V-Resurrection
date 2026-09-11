@@ -108,3 +108,9 @@ FUN_00402420,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered exact refcounted
 FUN_00402430,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered refcounted string replacement flow using release plus constructor
 FUN_00402420,2026-09-11,FAST_PASS,FAST_PASS_VALIDATED,8bdecce74f104bf1b74a6d65093238f93e9a2b06,coordinator,PR #120 completed 5/5 CI checks
 FUN_00402430,2026-09-11,FAST_PASS,FAST_PASS_VALIDATED,8bdecce74f104bf1b74a6d65093238f93e9a2b06,coordinator,PR #120 completed 5/5 CI checks
+FUN_00402480,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered aligned allocator wrapper with fixed 0x10 alignment
+FUN_004024A0,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered exact global 0x016E201C getter
+FUN_004024B0,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered reverse array destructor loop and four-argument ABI
+FUN_004024F0,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered exact no-op return body
+FUN_00402500,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered exact tail thunk to 0x00D02AE0 with conservative opaque contract
+FUN_00402510,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered exact no-op virtual method body
