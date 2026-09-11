@@ -31,8 +31,8 @@ void test_fun_00402250() {
     FUN_004022A0_Bytes bytes{};
     assert(FUN_004022A0(bytes, 0x22U, 0x11U, 0x00U, 0x33U) == &bytes);
     assert(bytes.b0 == 0x00U);
-    assert(bytes.b1 == 0x22U);
-    assert(bytes.b2 == 0x11U);
+    assert(bytes.b1 == 0x11U);
+    assert(bytes.b2 == 0x22U);
     assert(bytes.b3 == 0x33U);
 
     assert(FUN_004022C0(bytes) == &bytes);
