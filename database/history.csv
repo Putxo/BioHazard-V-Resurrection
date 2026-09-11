@@ -82,3 +82,10 @@ FUN_004020E0,2026-09-11,FAST_PASS,FAST_PASS_VALIDATED,19c486e192b192f890fbd1c996
 FUN_004020F0,2026-09-11,FAST_PASS,FAST_PASS_VALIDATED,19c486e192b192f890fbd1c9964047d0f23c0fc0,coordinator,PR #107 CI passed and merged into integration
 FUN_00402110,2026-09-11,FAST_PASS,FAST_PASS_VALIDATED,19c486e192b192f890fbd1c9964047d0f23c0fc0,coordinator,PR #107 CI passed and merged into integration
 FUN_00402120,2026-09-11,FAST_PASS,FAST_PASS_VALIDATED,19c486e192b192f890fbd1c9964047d0f23c0fc0,coordinator,PR #107 CI passed and merged into integration
+FUN_00402250,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered virtual slot +0x10 value getter and adjacent fixed-address thunk
+FUN_00402270,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered external tail-jump thunk to 0x012519D0
+FUN_00402280,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered global value getter at 0x016E1D3C
+FUN_00402290,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered vtable-like setter before external tail-jump
+FUN_004022A0,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered four-byte initializer helper with observed stack argument order
+FUN_004022C0,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered zero dword initializer helper
+FUN_004022D0,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered reference-counted pointer copy helper
