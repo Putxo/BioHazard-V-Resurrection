@@ -57,3 +57,7 @@ SEQ-00402290,FUN_00402290,coordinator,decomp/00402290-sequential,sequential deco
 SEQ-004022A0,FUN_004022A0,coordinator,decomp/004022a0-sequential,sequential decomp of four-byte initializer helper,2026-09-11T06:56:00Z,,,true
 SEQ-004022C0,FUN_004022C0,coordinator,decomp/004022c0-sequential,sequential decomp of zero dword initializer helper,2026-09-11T06:57:00Z,,,true
 SEQ-004022D0,FUN_004022D0,coordinator,decomp/004022d0-sequential,sequential decomp of reference-counted pointer copy helper,2026-09-11T06:58:00Z,,,true
+SEQ-004022F0,FUN_004022F0,coordinator,decomp/004022f0-004023e0-sequential,sequential decomp of object/fallback string comparison,2026-09-11T07:40:00Z,,,true
+SEQ-00402350,FUN_00402350,coordinator,decomp/004022f0-004023e0-sequential,sequential decomp of null-safe indirect dword getter,2026-09-11T07:41:00Z,,,true
+SEQ-00402360,FUN_00402360,coordinator,decomp/004022f0-004023e0-sequential,sequential decomp of reference-counted string constructor,2026-09-11T07:42:00Z,,,true
+SEQ-004023E0,FUN_004023E0,coordinator,decomp/004022f0-004023e0-sequential,sequential decomp of reference-counted string release,2026-09-11T07:43:00Z,,,true
