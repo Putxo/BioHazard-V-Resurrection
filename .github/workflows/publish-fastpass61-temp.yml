@@ -1,0 +1,30 @@
+name: publish-fastpass61-temp
+on:
+  push:
+    branches:
+      - release/main-fastpass61-clean
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: release/main-fastpass61-clean
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Regenerate public progress and validate
+        shell: bash
+        run: |
+          python tools/reports/report.py --publish-readme
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          git diff --check
+          git rm .github/workflows/publish-fastpass61-temp.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md reports/functions.json reports/progress.md reports/progress-treemap.svg
+          git commit -m 'Publish FAST_PASS 61 progress artifacts'
+          git push origin HEAD:release/main-fastpass61-clean
