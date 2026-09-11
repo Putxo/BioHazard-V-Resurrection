@@ -57,8 +57,8 @@
 <g><title>FUN_00402350 | FUN_00402350 | VA 0x00402350 | 16 bytes | FAST_PASS_VALIDATED</title><rect x="1054.26" y="327.98" width="144.74" height="17.59" fill="#bef264" stroke="#111827" stroke-width="0.35"/></g>
 <g><title>FUN_00402360 | FUN_00402360 | VA 0x00402360 | 128 bytes | FAST_PASS_VALIDATED</title><rect x="1054.26" y="346.56" width="144.74" height="147.70" fill="#bef264" stroke="#111827" stroke-width="0.35"/></g>
 <g><title>FUN_004023E0 | FUN_004023E0 | VA 0x004023E0 | 64 bytes | FAST_PASS_VALIDATED</title><rect x="957.10" y="495.26" width="139.05" height="76.37" fill="#bef264" stroke="#111827" stroke-width="0.35"/></g>
-<g><title>FUN_00402420 | FUN_00402420 | VA 0x00402420 | 16 bytes | FAST_PASS</title><rect x="1097.15" y="495.26" width="34.01" height="76.37" fill="#facc15" stroke="#111827" stroke-width="0.35"/></g>
-<g><title>FUN_00402430 | FUN_00402430 | VA 0x00402430 | 80 bytes | FAST_PASS</title><rect x="957.10" y="572.63" width="174.06" height="76.37" fill="#facc15" stroke="#111827" stroke-width="0.35"/></g>
+<g><title>FUN_00402420 | FUN_00402420 | VA 0x00402420 | 16 bytes | FAST_PASS_VALIDATED</title><rect x="1097.15" y="495.26" width="34.01" height="76.37" fill="#bef264" stroke="#111827" stroke-width="0.35"/></g>
+<g><title>FUN_00402430 | FUN_00402430 | VA 0x00402430 | 80 bytes | FAST_PASS_VALIDATED</title><rect x="957.10" y="572.63" width="174.06" height="76.37" fill="#bef264" stroke="#111827" stroke-width="0.35"/></g>
 <g><title>FUN_00BB9070 | FUN_00BB9070 | VA 0x00BB9070 | 3 bytes | CONVERTED</title><rect x="1132.16" y="495.26" width="66.84" height="6.49" fill="#2dd4bf" stroke="#111827" stroke-width="0.35"/></g>
 <g><title>FUN_00BB9080 | FUN_00BB9080 | VA 0x00BB9080 | 4 bytes | CONVERTED</title><rect x="1132.16" y="502.75" width="3.60" height="146.25" fill="#2dd4bf" stroke="#111827" stroke-width="0.35"/></g>
 <g><title>FUN_00BB9090 | FUN_00BB9090 | VA 0x00BB9090 | 4 bytes | CONVERTED</title><rect x="1136.76" y="502.75" width="62.24" height="9.71" fill="#2dd4bf" stroke="#111827" stroke-width="0.35"/></g>
