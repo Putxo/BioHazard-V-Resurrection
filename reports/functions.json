@@ -1994,7 +1994,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2009,11 +2009,11 @@
     "source_file": "src/recovered/fun_004022f0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00402420",
-    "pr": "",
-    "commit": "",
+    "pr": "#120",
+    "commit": "8bdecce74f104bf1b74a6d65093238f93e9a2b06",
     "test": "tests/unit/test_fun_004022f0.cpp",
     "evidence": "decomp/evidence/fun_00402420.md",
-    "notes": "returns block data at +0x08 or fixed fallback string address 0x0137AA5C"
+    "notes": "returns block data at +0x08 or fixed fallback string address 0x0137AA5C; PR #120 CI 5/5 PASS"
   },
   {
     "stable_id": "FUN_00402430",
@@ -2026,7 +2026,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2041,10 +2041,10 @@
     "source_file": "src/recovered/fun_004022f0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00402430",
-    "pr": "",
-    "commit": "",
+    "pr": "#120",
+    "commit": "8bdecce74f104bf1b74a6d65093238f93e9a2b06",
     "test": "tests/unit/test_fun_004022f0.cpp",
     "evidence": "decomp/evidence/fun_00402430.md",
-    "notes": "releases current refcounted string then reconstructs from source data or fallback literal"
+    "notes": "releases current refcounted string then reconstructs from source data or fallback literal; PR #120 CI 5/5 PASS"
   }
 ]
