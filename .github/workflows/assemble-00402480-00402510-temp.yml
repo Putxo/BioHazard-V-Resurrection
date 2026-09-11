@@ -1,0 +1,85 @@
+name: assemble-00402480-00402510-temp
+on:
+  push:
+    branches:
+      - decomp/00402480-00402510-sequential
+permissions:
+  contents: write
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/00402480-00402510-sequential
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Assemble metadata and reports
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+
+          rows=[
+              dict(stable_id='FUN_00402480',va='0x00402480',rva='0x00002480',section='.text',size='32',provisional_name='FUN_00402480',refined_name='',workflow_status='ACTIVE',confidence='HIGH',fast_pass='true',fast_pass_validated='false',converted='false',refined='false',verified='false',matched='false',linked='false',calling_convention='cdecl',return_type='void*',arguments='size_t size',this_type='',module='UNKNOWN',subsystem='Memory',source_file='src/recovered/fun_00402480.cpp',owner='coordinator',claim_id='SEQ-00402480',pr='',commit='',test='tests/unit/test_fun_00402480.cpp',evidence='decomp/evidence/fun_00402480.md',notes='aligned allocation wrapper through global 0x01652F30 virtual slot +0x14 with fixed alignment 0x10'),
+              dict(stable_id='FUN_004024A0',va='0x004024A0',rva='0x000024A0',section='.text',size='16',provisional_name='FUN_004024A0',refined_name='',workflow_status='ACTIVE',confidence='HIGH',fast_pass='true',fast_pass_validated='false',converted='false',refined='false',verified='false',matched='false',linked='false',calling_convention='cdecl',return_type='void*',arguments='',this_type='',module='UNKNOWN',subsystem='Globals',source_file='src/recovered/fun_00402480.cpp',owner='coordinator',claim_id='SEQ-004024A0',pr='',commit='',test='tests/unit/test_fun_00402480.cpp',evidence='decomp/evidence/fun_00402480.md',notes='exact getter for global pointer 0x016E201C'),
+              dict(stable_id='FUN_004024B0',va='0x004024B0',rva='0x000024B0',section='.text',size='64',provisional_name='FUN_004024B0',refined_name='',workflow_status='ACTIVE',confidence='HIGH',fast_pass='true',fast_pass_validated='false',converted='false',refined='false',verified='false',matched='false',linked='false',calling_convention='stdcall',return_type='void',arguments='uint8_t* base; uint32_t element_size; int32_t count; destroy callback',this_type='',module='UNKNOWN',subsystem='Utility',source_file='src/recovered/fun_00402480.cpp',owner='coordinator',claim_id='SEQ-004024B0',pr='',commit='',test='tests/unit/test_fun_00402480.cpp',evidence='decomp/evidence/fun_00402480.md',notes='reverse array destruction helper; four arguments confirmed and callee cleanup ret 0x10'),
+              dict(stable_id='FUN_004024F0',va='0x004024F0',rva='0x000024F0',section='.text',size='16',provisional_name='FUN_004024F0',refined_name='',workflow_status='ACTIVE',confidence='HIGH',fast_pass='true',fast_pass_validated='false',converted='false',refined='false',verified='false',matched='false',linked='false',calling_convention='cdecl',return_type='void',arguments='',this_type='',module='UNKNOWN',subsystem='Utility',source_file='src/recovered/fun_00402480.cpp',owner='coordinator',claim_id='SEQ-004024F0',pr='',commit='',test='tests/unit/test_fun_00402480.cpp',evidence='decomp/evidence/fun_00402480.md',notes='exact no-op ret body followed by padding; no stronger semantic claim'),
+              dict(stable_id='FUN_00402500',va='0x00402500',rva='0x00002500',section='.text',size='16',provisional_name='FUN_00402500',refined_name='',workflow_status='ACTIVE',confidence='HIGH',fast_pass='true',fast_pass_validated='false',converted='false',refined='false',verified='false',matched='false',linked='false',calling_convention='thiscall',return_type='uintptr_t',arguments='void* this; void* argument',this_type='void*',module='UNKNOWN',subsystem='Thunk',source_file='src/recovered/fun_00402480.cpp',owner='coordinator',claim_id='SEQ-00402500',pr='',commit='',test='tests/unit/test_fun_00402480.cpp',evidence='decomp/evidence/fun_00402480.md',notes='exact tail jump thunk to 0x00D02AE0; preserves this-style object, one argument and return channel'),
+              dict(stable_id='FUN_00402510',va='0x00402510',rva='0x00002510',section='.text',size='16',provisional_name='FUN_00402510',refined_name='',workflow_status='ACTIVE',confidence='HIGH',fast_pass='true',fast_pass_validated='false',converted='false',refined='false',verified='false',matched='false',linked='false',calling_convention='thiscall',return_type='void',arguments='void* this',this_type='void*',module='UNKNOWN',subsystem='Thunk',source_file='src/recovered/fun_00402480.cpp',owner='coordinator',claim_id='SEQ-00402510',pr='',commit='',test='tests/unit/test_fun_00402480.cpp',evidence='decomp/evidence/fun_00402480.md',notes='exact no-op ret body with rdata code-pointer evidence consistent with virtual method slot'),
+          ]
+          fpath=Path('database/functions.csv')
+          with fpath.open(newline='',encoding='utf-8') as f:
+              existing=list(csv.DictReader(f)); fields=list(existing[0].keys())
+          ids={r['stable_id'] for r in existing}
+          for row in rows:
+              if row['stable_id'] not in ids:
+                  existing.append(row)
+          with fpath.open('w',newline='',encoding='utf-8') as f:
+              w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(existing)
+
+          claims=Path('database/claims.csv')
+          existing_claims=claims.read_text(encoding='utf-8')
+          tasks={
+              'SEQ-00402480':'sequential decomp of aligned allocation wrapper',
+              'SEQ-004024A0':'sequential decomp of global pointer getter',
+              'SEQ-004024B0':'sequential decomp of reverse array destruction helper',
+              'SEQ-004024F0':'sequential decomp of exact no-op helper',
+              'SEQ-00402500':'sequential decomp of opaque virtual tail thunk',
+              'SEQ-00402510':'sequential decomp of no-op virtual method',
+          }
+          sids=['FUN_00402480','FUN_004024A0','FUN_004024B0','FUN_004024F0','FUN_00402500','FUN_00402510']
+          with claims.open('a',encoding='utf-8',newline='') as f:
+              for i,(cid,sid) in enumerate(zip(tasks,sids)):
+                  if cid not in existing_claims:
+                      f.write(f'{cid},{sid},coordinator,decomp/00402480-00402510-sequential,{tasks[cid]},2026-09-11T08:{i:02d}:00Z,,,true\n')
+
+          history=Path('database/history.csv')
+          existing_history=history.read_text(encoding='utf-8')
+          reasons={
+              'FUN_00402480':'recovered aligned allocator wrapper with fixed 0x10 alignment',
+              'FUN_004024A0':'recovered exact global 0x016E201C getter',
+              'FUN_004024B0':'recovered reverse array destructor loop and four-argument ABI',
+              'FUN_004024F0':'recovered exact no-op return body',
+              'FUN_00402500':'recovered exact tail thunk to 0x00D02AE0 with conservative opaque contract',
+              'FUN_00402510':'recovered exact no-op virtual method body',
+          }
+          with history.open('a',newline='',encoding='utf-8') as f:
+              w=csv.writer(f,lineterminator='\n')
+              for sid in sids:
+                  marker=f'{sid},2026-09-11,UNSEEN,FAST_PASS'
+                  if marker not in existing_history:
+                      w.writerow([sid,'2026-09-11','UNSEEN','FAST_PASS','','coordinator',reasons[sid]])
+          PY
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          git diff --check
+          git rm .github/workflows/assemble-00402480-00402510-temp.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add database/functions.csv database/claims.csv database/history.csv reports/functions.json reports/progress.md reports/progress-treemap.svg
+          git commit -m 'Assemble FUN_00402480 through FUN_00402510 fast pass metadata'
+          git push origin HEAD:decomp/00402480-00402510-sequential
