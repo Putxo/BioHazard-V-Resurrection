@@ -25,9 +25,11 @@ int FUN_004022F0(const FUN_004022F0_Object* object, const char* input) noexcept 
     }
 
     const auto* services = g_services;
-    const unsigned char fallback = services != nullptr
-        ? static_cast<unsigned char>(services->fallback_literal_byte)
-        : 0U;
+    const unsigned char fallback = services != nullptr && services->fallback_literal != nullptr
+        ? static_cast<unsigned char>(services->fallback_literal[0])
+        : services != nullptr
+            ? static_cast<unsigned char>(services->fallback_literal_byte)
+            : 0U;
     const unsigned char observed = static_cast<unsigned char>(*input);
     return observed == fallback ? 0 : (observed < fallback ? -1 : 1);
 }
@@ -79,6 +81,23 @@ void FUN_004023E0(FUN_00402360_String& value) noexcept {
     if (services != nullptr && services->free_aligned != nullptr) {
         services->free_aligned(services->context, value.pointer);
     }
+}
+
+const char* FUN_00402420(const FUN_00402360_String& value) noexcept {
+    if (value.pointer != nullptr) {
+        const auto* block = static_cast<const FUN_00402360_Block*>(value.pointer);
+        return block->data;
+    }
+
+    const auto* services = g_services;
+    return services != nullptr ? services->fallback_literal : nullptr;
+}
+
+FUN_00402360_String* FUN_00402430(
+    FUN_00402360_String& destination,
+    const FUN_00402360_String& source) noexcept {
+    FUN_004023E0(destination);
+    return FUN_00402360(destination, FUN_00402420(source));
 }
 
 } // namespace re5::recovered

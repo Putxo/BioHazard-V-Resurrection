@@ -104,3 +104,5 @@ FUN_004022F0,2026-09-11,FAST_PASS,FAST_PASS_VALIDATED,b1399de267185fea546263fd38
 FUN_00402350,2026-09-11,FAST_PASS,FAST_PASS_VALIDATED,b1399de267185fea546263fd38f3e9d0b9d080fb,coordinator,PR #113 completed 5/5 CI checks
 FUN_00402360,2026-09-11,FAST_PASS,FAST_PASS_VALIDATED,b1399de267185fea546263fd38f3e9d0b9d080fb,coordinator,PR #113 completed 5/5 CI checks
 FUN_004023E0,2026-09-11,FAST_PASS,FAST_PASS_VALIDATED,b1399de267185fea546263fd38f3e9d0b9d080fb,coordinator,PR #113 completed 5/5 CI checks
+FUN_00402420,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered exact refcounted string data/fallback pointer accessor
+FUN_00402430,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered refcounted string replacement flow using release plus constructor

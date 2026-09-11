@@ -16,6 +16,12 @@ struct AllocatorState {
     void* freed_pointer = nullptr;
 };
 
+struct StringBlockBuffer {
+    std::uint32_t ref_count;
+    std::uint32_t length;
+    char data[32];
+};
+
 void* allocate_aligned(void* context, std::size_t size, std::size_t alignment) noexcept {
     auto& state = *static_cast<AllocatorState*>(context);
     ++state.alloc_calls;
@@ -35,7 +41,8 @@ void test_fun_004022f0() {
     using namespace re5::recovered;
 
     AllocatorState allocator{};
-    FUN_00402360_Services services{'X', &allocator, allocate_aligned, free_aligned};
+    static constexpr char fallback[] = "X";
+    FUN_00402360_Services services{'X', &allocator, allocate_aligned, free_aligned, fallback};
     FUN_00402360_SetServices(&services);
 
     FUN_004022F0_Object text_object{nullptr, "Chris"};
@@ -80,6 +87,32 @@ void test_fun_004022f0() {
     FUN_00402360_String null_value{};
     FUN_004023E0(null_value);
     assert(allocator.free_calls == 1U);
+
+    StringBlockBuffer source_block{1U, 4U, "Jill"};
+    FUN_00402360_String source{&source_block};
+    assert(std::strcmp(FUN_00402420(source), "Jill") == 0);
+    FUN_00402360_String no_source{};
+    assert(FUN_00402420(no_source) == fallback);
+
+    StringBlockBuffer destination_block{1U, 3U, "Old"};
+    FUN_00402360_String destination{&destination_block};
+    const unsigned frees_before_assign = allocator.free_calls;
+    const unsigned allocs_before_assign = allocator.alloc_calls;
+    assert(FUN_00402430(destination, source) == &destination);
+    assert(allocator.free_calls == frees_before_assign + 1U);
+    assert(allocator.freed_pointer == &destination_block);
+    assert(allocator.alloc_calls == allocs_before_assign + 1U);
+    auto* assigned = static_cast<FUN_00402360_Block*>(destination.pointer);
+    assert(assigned->ref_count == 1U);
+    assert(assigned->length == 4U);
+    assert(std::strcmp(assigned->data, "Jill") == 0);
+
+    StringBlockBuffer second_destination_block{1U, 3U, "Old"};
+    FUN_00402360_String second_destination{&second_destination_block};
+    assert(FUN_00402430(second_destination, no_source) == &second_destination);
+    auto* fallback_block = static_cast<FUN_00402360_Block*>(second_destination.pointer);
+    assert(fallback_block->length == 1U);
+    assert(std::strcmp(fallback_block->data, fallback) == 0);
 
     FUN_00402360_SetServices(nullptr);
 }

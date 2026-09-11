@@ -30,6 +30,7 @@ struct FUN_00402360_Services {
     void* context;
     void* (*allocate_aligned)(void* context, std::size_t size, std::size_t alignment) noexcept;
     void (*free_aligned)(void* context, void* pointer) noexcept;
+    const char* fallback_literal;
 };
 
 void FUN_00402360_SetServices(const FUN_00402360_Services* services) noexcept;
@@ -37,5 +38,7 @@ int FUN_004022F0(const FUN_004022F0_Object* object, const char* input) noexcept;
 std::uint32_t FUN_00402350(const FUN_00402350_Object* object) noexcept;
 FUN_00402360_String* FUN_00402360(FUN_00402360_String& destination, const char* input) noexcept;
 void FUN_004023E0(FUN_00402360_String& value) noexcept;
+const char* FUN_00402420(const FUN_00402360_String& value) noexcept;
+FUN_00402360_String* FUN_00402430(FUN_00402360_String& destination, const FUN_00402360_String& source) noexcept;
 
 } // namespace re5::recovered
