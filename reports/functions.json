@@ -1866,7 +1866,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -1881,11 +1881,11 @@
     "source_file": "src/recovered/fun_004022f0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004022F0",
-    "pr": "",
-    "commit": "",
+    "pr": "#113",
+    "commit": "b1399de267185fea546263fd38f3e9d0b9d080fb",
     "test": "tests/unit/test_fun_004022f0.cpp",
     "evidence": "decomp/evidence/fun_004022f0.md",
-    "notes": "object string compare at target +0x08; null-object path compares one byte against literal at 0x0137AA5C"
+    "notes": "object string compare at target +0x08; null-object path compares one byte against literal at 0x0137AA5C; PR #113 CI 5/5 PASS"
   },
   {
     "stable_id": "FUN_00402350",
@@ -1898,7 +1898,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -1913,11 +1913,11 @@
     "source_file": "src/recovered/fun_004022f0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00402350",
-    "pr": "",
-    "commit": "",
+    "pr": "#113",
+    "commit": "b1399de267185fea546263fd38f3e9d0b9d080fb",
     "test": "tests/unit/test_fun_004022f0.cpp",
     "evidence": "decomp/evidence/fun_00402350.md",
-    "notes": "null-safe indirect dword getter through target object field +0x04"
+    "notes": "null-safe indirect dword getter through target object field +0x04; PR #113 CI 5/5 PASS"
   },
   {
     "stable_id": "FUN_00402360",
@@ -1930,7 +1930,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -1945,11 +1945,11 @@
     "source_file": "src/recovered/fun_004022f0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00402360",
-    "pr": "",
-    "commit": "",
+    "pr": "#113",
+    "commit": "b1399de267185fea546263fd38f3e9d0b9d080fb",
     "test": "tests/unit/test_fun_004022f0.cpp",
     "evidence": "decomp/evidence/fun_00402360.md",
-    "notes": "reference-counted string constructor; allocates length+0x0C at alignment 0x10 through global allocator slot +0x14"
+    "notes": "reference-counted string constructor; allocates length+0x0C at alignment 0x10 through global allocator slot +0x14; PR #113 CI 5/5 PASS"
   },
   {
     "stable_id": "FUN_004023E0",
@@ -1962,7 +1962,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -1977,10 +1977,10 @@
     "source_file": "src/recovered/fun_004022f0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004023E0",
-    "pr": "",
-    "commit": "",
+    "pr": "#113",
+    "commit": "b1399de267185fea546263fd38f3e9d0b9d080fb",
     "test": "tests/unit/test_fun_004022f0.cpp",
     "evidence": "decomp/evidence/fun_004023e0.md",
-    "notes": "reference-counted string release; decrements count and frees at zero through global allocator slot +0x18"
+    "notes": "reference-counted string release; decrements count and frees at zero through global allocator slot +0x18; PR #113 CI 5/5 PASS"
   }
 ]
