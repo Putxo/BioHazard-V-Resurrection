@@ -96,3 +96,7 @@ FUN_00402290,2026-09-11,FAST_PASS,FAST_PASS_VALIDATED,8f6e0402465cc2cd939fe144c9
 FUN_004022A0,2026-09-11,FAST_PASS,FAST_PASS_VALIDATED,8f6e0402465cc2cd939fe144c9e5dd3a97f08140,coordinator,PR #110 CI passed and merged into integration
 FUN_004022C0,2026-09-11,FAST_PASS,FAST_PASS_VALIDATED,8f6e0402465cc2cd939fe144c9e5dd3a97f08140,coordinator,PR #110 CI passed and merged into integration
 FUN_004022D0,2026-09-11,FAST_PASS,FAST_PASS_VALIDATED,8f6e0402465cc2cd939fe144c9e5dd3a97f08140,coordinator,PR #110 CI passed and merged into integration
+FUN_004022F0,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered refcounted string compare helper
+FUN_00402350,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered refcounted string length getter
+FUN_00402360,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered refcounted string allocation and copy helper
+FUN_004023E0,2026-09-11,UNSEEN,FAST_PASS,,coordinator,recovered refcounted string assignment helper with release/free path
