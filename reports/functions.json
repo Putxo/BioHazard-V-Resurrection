@@ -2154,7 +2154,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2169,11 +2169,11 @@
     "source_file": "src/recovered/fun_00402560.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00402560",
-    "pr": "",
-    "commit": "",
+    "pr": "#128",
+    "commit": "84aa50cb2b3d99f7448585399dfebd9bc7fd8ad1",
     "test": "tests/unit/test_fun_00402560.cpp",
     "evidence": "decomp/evidence/fun_00402560.md",
-    "notes": "recursive node count/log traversal over child +0x0C and sibling +0x08 skipping flag bit at +0x1F"
+    "notes": "recursive node count/log traversal over child +0x0C and sibling +0x08 skipping flag bit at +0x1F; PR #128 CI 5/5 PASS"
   },
   {
     "stable_id": "FUN_004025D0",
@@ -2186,7 +2186,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2201,11 +2201,11 @@
     "source_file": "src/recovered/fun_00402560.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004025D0",
-    "pr": "",
-    "commit": "",
+    "pr": "#128",
+    "commit": "84aa50cb2b3d99f7448585399dfebd9bc7fd8ad1",
     "test": "tests/unit/test_fun_00402560.cpp",
     "evidence": "decomp/evidence/fun_004025d0.md",
-    "notes": "recursive node collector appending accepted nodes into object array at +0x34 and count at +0x38"
+    "notes": "recursive node collector appending accepted nodes into object array at +0x34 and count at +0x38; PR #128 CI 5/5 PASS"
   },
   {
     "stable_id": "FUN_00402640",
@@ -2218,7 +2218,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2233,10 +2233,10 @@
     "source_file": "src/recovered/fun_00402560.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00402640",
-    "pr": "",
-    "commit": "",
+    "pr": "#128",
+    "commit": "84aa50cb2b3d99f7448585399dfebd9bc7fd8ad1",
     "test": "tests/unit/test_fun_00402560.cpp",
     "evidence": "decomp/evidence/fun_00402640.md",
-    "notes": "global table name lookup comparing entries with payload at pointer +0x08 or fallback literal"
+    "notes": "global table name lookup comparing entries with payload at pointer +0x08 or fallback literal; PR #128 CI 5/5 PASS"
   }
 ]

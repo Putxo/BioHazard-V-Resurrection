@@ -117,3 +117,6 @@ FUN_004024B0,2026-09-16,FAST_PASS,FAST_PASS_VALIDATED,722b668fc9170a05df96a2238a
 FUN_00402560,2026-09-16,UNSEEN,FAST_PASS,,coordinator,recovered recursive node count/log traversal
 FUN_004025D0,2026-09-16,UNSEEN,FAST_PASS,,coordinator,recovered recursive node collector
 FUN_00402640,2026-09-16,UNSEEN,FAST_PASS,,coordinator,recovered global table name lookup predicate
+FUN_00402560,2026-09-16,FAST_PASS,FAST_PASS_VALIDATED,84aa50cb2b3d99f7448585399dfebd9bc7fd8ad1,coordinator,PR #128 completed 5/5 CI checks
+FUN_004025D0,2026-09-16,FAST_PASS,FAST_PASS_VALIDATED,84aa50cb2b3d99f7448585399dfebd9bc7fd8ad1,coordinator,PR #128 completed 5/5 CI checks
+FUN_00402640,2026-09-16,FAST_PASS,FAST_PASS_VALIDATED,84aa50cb2b3d99f7448585399dfebd9bc7fd8ad1,coordinator,PR #128 completed 5/5 CI checks
