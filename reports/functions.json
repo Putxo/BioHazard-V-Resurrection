@@ -2250,7 +2250,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2265,11 +2265,11 @@
     "source_file": "src/recovered/fun_00402560.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004026C0",
-    "pr": "",
-    "commit": "",
+    "pr": "#131",
+    "commit": "7639917d679a175de376f8ecad058ebe2134e57b",
     "test": "tests/unit/test_fun_00402560.cpp",
     "evidence": "decomp/evidence/fun_004026c0.md",
-    "notes": "global table value lookup comparing names then returning associated value pointer"
+    "notes": "global table value lookup comparing names then returning associated value pointer; PR #131 CI 5/5 PASS"
   },
   {
     "stable_id": "FUN_00402770",
@@ -2282,7 +2282,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2297,10 +2297,10 @@
     "source_file": "src/recovered/fun_00402560.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00402770",
-    "pr": "",
-    "commit": "",
+    "pr": "#131",
+    "commit": "7639917d679a175de376f8ecad058ebe2134e57b",
     "test": "tests/unit/test_fun_00402560.cpp",
     "evidence": "decomp/evidence/fun_00402770.md",
-    "notes": "string-length based external formatter request wrapper with opcode 0x15E"
+    "notes": "string-length based external formatter request wrapper with opcode 0x15E; PR #131 CI 5/5 PASS"
   }
 ]
