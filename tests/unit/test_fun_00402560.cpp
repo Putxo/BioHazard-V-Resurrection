@@ -3,6 +3,7 @@
 #include <array>
 #include <cassert>
 #include <cstddef>
+#include <cstdint>
 #include <cstring>
 
 namespace {
@@ -20,6 +21,19 @@ void record_visit(
     state.nodes[state.count] = node;
     state.depths[state.count] = depth;
     ++state.count;
+}
+
+struct SubmitState {
+    re5::recovered::FUN_00402770_Request request{};
+    unsigned calls = 0;
+};
+
+void record_submit(
+    void* context,
+    const re5::recovered::FUN_00402770_Request& request) noexcept {
+    auto& state = *static_cast<SubmitState*>(context);
+    state.request = request;
+    ++state.calls;
 }
 } // namespace
 
@@ -54,7 +68,9 @@ void test_fun_00402560() {
     assert(output[1] == &root);
 
     const char* names[] = {"alpha", "beta"};
-    const void* values[] = {nullptr, nullptr};
+    const std::uintptr_t alpha_value = 0x1111U;
+    const std::uintptr_t beta_value = 0x2222U;
+    const void* values[] = {&alpha_value, &beta_value};
     FUN_00402640_Table table{names, values, 2U, "alpha"};
     FUN_00402640_SetTable(&table);
 
@@ -62,12 +78,30 @@ void test_fun_00402560() {
     std::strcpy(block + 8, "beta");
     FUN_00402640_StringRef ref{block};
     assert(FUN_00402640(ref));
+    assert(FUN_004026C0(ref) == &beta_value);
 
     FUN_00402640_StringRef fallback{};
     assert(FUN_00402640(fallback));
+    assert(FUN_004026C0(fallback) == &alpha_value);
 
     std::strcpy(block + 8, "gamma");
     assert(!FUN_00402640(ref));
+    assert(FUN_004026C0(ref) == nullptr);
 
+    SubmitState submit{};
+    FUN_00402770_Services services{0x016E201CU, 0x01652E48U, &submit, record_submit};
+    FUN_00402770_SetServices(&services);
+    FUN_00402770("RE5");
+    assert(submit.calls == 1U);
+    assert(std::strcmp(submit.request.text, "RE5") == 0);
+    assert(submit.request.width_x16 == ((0x50U - 3U) << 4U));
+    assert(submit.request.half_width_x16 == (((0x50U - 3U) << 4U) >> 1U));
+    assert(submit.request.min_dimension == 0x10U);
+    assert(submit.request.max_dimension == 0x10U);
+    assert(submit.request.opcode == 0x15EU);
+    assert(submit.request.resource_0165201c == 0x016E201CU);
+    assert(submit.request.resource_01652e48 == 0x01652E48U);
+
+    FUN_00402770_SetServices(nullptr);
     FUN_00402640_SetTable(nullptr);
 }

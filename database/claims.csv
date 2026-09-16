@@ -69,3 +69,5 @@ SEQ-004024B0,FUN_004024B0,coordinator,decomp/00402480-004024b0-clean,sequential 
 SEQ-00402560,FUN_00402560,coordinator,decomp/00402560-00402640,sequential decomp of recursive node count/log traversal,2026-09-16T20:48:00Z,,,true
 SEQ-004025D0,FUN_004025D0,coordinator,decomp/00402560-00402640,sequential decomp of recursive node collector,2026-09-16T20:49:00Z,,,true
 SEQ-00402640,FUN_00402640,coordinator,decomp/00402560-00402640,sequential decomp of global table lookup predicate,2026-09-16T20:50:00Z,,,true
+SEQ-004026C0,FUN_004026C0,coordinator,decomp/004026c0-00402770,sequential decomp of global table value lookup,2026-09-17T00:00:00Z,,,true
+SEQ-00402770,FUN_00402770,coordinator,decomp/004026c0-00402770,sequential decomp of string formatter request wrapper,2026-09-17T00:01:00Z,,,true
