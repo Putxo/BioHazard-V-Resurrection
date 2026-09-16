@@ -61,3 +61,8 @@ SEQ-004022F0,FUN_004022F0,coordinator,decomp/004022f0-004023e0-sequential,sequen
 SEQ-00402350,FUN_00402350,coordinator,decomp/004022f0-004023e0-sequential,sequential decomp of null-safe indirect dword getter,2026-09-11T07:41:00Z,,,true
 SEQ-00402360,FUN_00402360,coordinator,decomp/004022f0-004023e0-sequential,sequential decomp of reference-counted string constructor,2026-09-11T07:42:00Z,,,true
 SEQ-004023E0,FUN_004023E0,coordinator,decomp/004022f0-004023e0-sequential,sequential decomp of reference-counted string release,2026-09-11T07:43:00Z,,,true
+SEQ-00402420,FUN_00402420,coordinator,decomp/00402420-004024b0,sequential decomp of reference-counted string payload/fallback getter,2026-09-16T00:00:00Z,,,true
+SEQ-00402430,FUN_00402430,coordinator,decomp/00402420-004024b0,sequential decomp of reference-counted string assignment helper,2026-09-16T00:01:00Z,,,true
+SEQ-00402480,FUN_00402480,coordinator,decomp/00402420-004024b0,sequential decomp of aligned allocation wrapper,2026-09-16T00:02:00Z,,,true
+SEQ-004024A0,FUN_004024A0,coordinator,decomp/00402420-004024b0,sequential decomp of global value getter,2026-09-16T00:03:00Z,,,true
+SEQ-004024B0,FUN_004024B0,coordinator,decomp/00402420-004024b0,sequential decomp of reverse-order callback loop,2026-09-16T00:04:00Z,,,true
