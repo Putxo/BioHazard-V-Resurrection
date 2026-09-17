@@ -2346,7 +2346,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2361,11 +2361,11 @@
     "source_file": "src/recovered/fun_00402560.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00402DF0",
-    "pr": "",
-    "commit": "",
+    "pr": "#137",
+    "commit": "e466239131346228999c79d716657d2acf879b44",
     "test": "tests/unit/test_fun_00402560.cpp",
     "evidence": "decomp/evidence/fun_00402df0.md",
-    "notes": "formatted registry dispatch wrapper using this+0x54 name buffer active-name fallback and optional resolved-object activation"
+    "notes": "formatted registry dispatch wrapper using this+0x54 name buffer active-name fallback and optional resolved-object activation; PR #137 CI 5/5 PASS"
   },
   {
     "stable_id": "FUN_00402E70",
@@ -2378,7 +2378,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2393,10 +2393,10 @@
     "source_file": "src/recovered/fun_00402560.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00402E70",
-    "pr": "",
-    "commit": "",
+    "pr": "#137",
+    "commit": "e466239131346228999c79d716657d2acf879b44",
     "test": "tests/unit/test_fun_00402560.cpp",
     "evidence": "decomp/evidence/fun_00402e70.md",
-    "notes": "list iterator/state-machine label selector with linked-node advancement filter matching and decimal slot parsing"
+    "notes": "list iterator/state-machine label selector with linked-node advancement filter matching and decimal slot parsing; PR #137 CI 5/5 PASS"
   }
 ]
