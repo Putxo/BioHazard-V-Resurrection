@@ -2474,7 +2474,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2489,10 +2489,10 @@
     "source_file": "src/recovered/fun_00403640.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00403640",
-    "pr": "",
-    "commit": "",
+    "pr": "#146",
+    "commit": "45f9248df51f4d95e028176cbbded6f3c3ac76e6",
     "test": "tests/unit/test_fun_00403640.cpp",
     "evidence": "decomp/evidence/fun_00403640.md",
-    "notes": "registry-backed recursive resource binder with handle validation root opening registry ensure dot-entry filtering recursive descent leaf lookup and bind side effect"
+    "notes": "registry-backed recursive resource binder with handle validation root opening registry ensure dot-entry filtering recursive descent leaf lookup and bind side effect; PR #146 CI 5/5 PASS"
   }
 ]
