@@ -63,6 +63,10 @@ struct FUN_00402DF0_Object {
     FUN_00402E70_Node* current_4c;
     std::int32_t selected_50;
     char name_54[0x100];
+    std::uint8_t reserved_154[0x14];
+    const char* pending_name_168;
+    std::uint8_t reserved_16c[0x04];
+    std::uint8_t flags_170;
 };
 
 struct FUN_00402DF0_Message {
@@ -92,10 +96,27 @@ struct FUN_00402E70_Services {
     void (*submit_label)(void* context, const char* label, std::int32_t selected) noexcept;
 };
 
+struct FUN_00402FC0_Services {
+    const char* initial_format;
+    const char* pending_format;
+    const char* pending_message_format;
+    const char* fallback_name;
+    std::uintptr_t registry_016e216c;
+    void* context;
+    const char* (*active_name_1028)(void* context) noexcept;
+    const char* (*active_name_102c)(void* context) noexcept;
+    bool (*transition_ready)(void* context, bool first_probe) noexcept;
+    void (*submit_pending)(void* context, const char* label) noexcept;
+    void (*report)(void* context, const FUN_00402DF0_Message& message) noexcept;
+    void* (*resolve)(void* context, std::uintptr_t registry, const char* name, bool create) noexcept;
+    void (*activate)(void* context, void* resolved) noexcept;
+};
+
 void FUN_00402640_SetTable(const FUN_00402640_Table* table) noexcept;
 void FUN_00402770_SetServices(const FUN_00402770_Services* services) noexcept;
 void FUN_00402DF0_SetServices(const FUN_00402DF0_Services* services) noexcept;
 void FUN_00402E70_SetServices(const FUN_00402E70_Services* services) noexcept;
+void FUN_00402FC0_SetServices(const FUN_00402FC0_Services* services) noexcept;
 std::uint32_t FUN_00402560(FUN_00402560_Context& context, const FUN_00402560_Node* node, std::int32_t depth) noexcept;
 void FUN_004025D0(FUN_00402560_Context& context, FUN_00402560_Node* node, std::int32_t depth) noexcept;
 bool FUN_00402640(const FUN_00402640_StringRef& value) noexcept;
@@ -103,5 +124,6 @@ const void* FUN_004026C0(const FUN_00402640_StringRef& value) noexcept;
 void FUN_00402770(const char* text) noexcept;
 void FUN_00402DF0(FUN_00402DF0_Object& object, std::int32_t selector) noexcept;
 bool FUN_00402E70(FUN_00402DF0_Object& object, std::int32_t filter) noexcept;
+bool FUN_00402FC0(FUN_00402DF0_Object& object) noexcept;
 
 } // namespace re5::recovered
