@@ -75,3 +75,4 @@ SEQ-00402B10,FUN_00402B10,coordinator,decomp/00402b10-tree-registration,sequenti
 SEQ-00402DF0,FUN_00402DF0,coordinator,decomp/00402df0-dispatch,sequential decomp of formatted registry dispatch wrapper,2026-09-17T00:20:00Z,,,true
 SEQ-00402E70,FUN_00402E70,coordinator,decomp/00402df0-dispatch,sequential decomp of list iterator/state-machine label selector,2026-09-17T00:30:00Z,,,true
 SEQ-00402FC0,FUN_00402FC0,coordinator,decomp/00402fc0-state-machine,sequential decomp of four-state registry dispatch machine,2026-09-17T00:40:00Z,,,true
+SEQ-00403150,FUN_00403150,coordinator,decomp/00403150-session-check,sequential decomp of recursive resource walker,2026-09-17T00:50:00Z,,,true
