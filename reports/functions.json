@@ -2314,7 +2314,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2329,10 +2329,10 @@
     "source_file": "src/recovered/fun_00402b10.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00402B10",
-    "pr": "",
-    "commit": "",
+    "pr": "#134",
+    "commit": "228fad0be7717a8cc6c608e9f62d24ea8bcae2d9",
     "test": "tests/unit/test_fun_00402b10.cpp",
     "evidence": "decomp/evidence/fun_00402b10.md",
-    "notes": "recursive node/table registration pass with reset key and 0x200 capacity guard"
+    "notes": "recursive node/table registration pass with reset key and 0x200 capacity guard; PR #134 CI 5/5 PASS"
   }
 ]
