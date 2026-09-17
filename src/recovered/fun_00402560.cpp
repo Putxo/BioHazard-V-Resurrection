@@ -8,6 +8,7 @@ namespace {
 const FUN_00402640_Table* g_table = nullptr;
 const FUN_00402770_Services* g_services_00402770 = nullptr;
 const FUN_00402DF0_Services* g_services_00402df0 = nullptr;
+const FUN_00402E70_Services* g_services_00402e70 = nullptr;
 
 const char* payload_string(const FUN_00402640_StringRef& value) noexcept {
     if (value.pointer == nullptr) {
@@ -30,6 +31,10 @@ void FUN_00402770_SetServices(const FUN_00402770_Services* services) noexcept {
 
 void FUN_00402DF0_SetServices(const FUN_00402DF0_Services* services) noexcept {
     g_services_00402df0 = services;
+}
+
+void FUN_00402E70_SetServices(const FUN_00402E70_Services* services) noexcept {
+    g_services_00402e70 = services;
 }
 
 std::uint32_t FUN_00402560(
@@ -190,6 +195,69 @@ void FUN_00402DF0(FUN_00402DF0_Object& object, std::int32_t selector) noexcept {
             services->activate(services->context, resolved);
         }
     }
+}
+
+bool FUN_00402E70(FUN_00402DF0_Object& object, std::int32_t filter) noexcept {
+    const auto* services = g_services_00402e70;
+
+    if (object.state_2c == 2U) {
+        if (services != nullptr && services->release_first != nullptr) {
+            services->release_first(services->context, object.selected_50);
+        }
+        if (services != nullptr && services->release_second != nullptr) {
+            services->release_second(services->context, object.selected_50);
+        }
+        if (object.current_4c != nullptr) {
+            object.current_4c = object.current_4c->next_08;
+        }
+        --object.state_2c;
+        return false;
+    }
+
+    if (object.state_2c == 0U) {
+        object.current_4c = services != nullptr ? services->list_head_01657f20 : nullptr;
+        if (filter < 0) {
+            while (object.current_4c != nullptr) {
+                const char* name = object.current_4c->name_04 != nullptr ? object.current_4c->name_04 : "";
+                if (name[2] > '0') {
+                    break;
+                }
+                object.current_4c = object.current_4c->next_08;
+            }
+        }
+        object.state_2c = 1U;
+    } else if (object.state_2c != 1U) {
+        return false;
+    }
+
+    if (object.current_4c == nullptr) {
+        return true;
+    }
+
+    const char* name = object.current_4c->name_04 != nullptr ? object.current_4c->name_04 : "";
+    if (filter >= 0 && name[2] != static_cast<char>(filter + '0')) {
+        object.current_4c = object.current_4c->next_08;
+        return false;
+    }
+
+    const auto digit = [](char value) noexcept -> std::int32_t {
+        return value >= '0' && value <= '9' ? static_cast<std::int32_t>(value - '0') : 0;
+    };
+    object.selected_50 = digit(name[2]) * 100 + digit(name[3]) * 10 + digit(name[4]);
+
+    char label[0x100]{};
+    const char* label_format = services != nullptr && services->label_format != nullptr
+        ? services->label_format
+        : "%d";
+    std::snprintf(label, sizeof(label), label_format, object.selected_50);
+    if (services != nullptr && services->submit_label != nullptr) {
+        services->submit_label(services->context, label, object.selected_50);
+    } else {
+        FUN_00402770(label);
+    }
+
+    ++object.state_2c;
+    return false;
 }
 
 } // namespace re5::recovered

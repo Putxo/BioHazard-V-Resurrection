@@ -50,8 +50,18 @@ struct FUN_00402770_Services {
     void (*submit)(void* context, const FUN_00402770_Request& request) noexcept;
 };
 
+struct FUN_00402E70_Node {
+    void* field_00;
+    const char* name_04;
+    FUN_00402E70_Node* next_08;
+};
+
 struct FUN_00402DF0_Object {
-    std::uint8_t reserved_00[0x54];
+    std::uint8_t reserved_00[0x2c];
+    std::uint32_t state_2c;
+    std::uint8_t reserved_30[0x1c];
+    FUN_00402E70_Node* current_4c;
+    std::int32_t selected_50;
     char name_54[0x100];
 };
 
@@ -73,14 +83,25 @@ struct FUN_00402DF0_Services {
     void (*activate)(void* context, void* resolved) noexcept;
 };
 
+struct FUN_00402E70_Services {
+    FUN_00402E70_Node* list_head_01657f20;
+    const char* label_format;
+    void* context;
+    void (*release_first)(void* context, std::int32_t selected) noexcept;
+    void (*release_second)(void* context, std::int32_t selected) noexcept;
+    void (*submit_label)(void* context, const char* label, std::int32_t selected) noexcept;
+};
+
 void FUN_00402640_SetTable(const FUN_00402640_Table* table) noexcept;
 void FUN_00402770_SetServices(const FUN_00402770_Services* services) noexcept;
 void FUN_00402DF0_SetServices(const FUN_00402DF0_Services* services) noexcept;
+void FUN_00402E70_SetServices(const FUN_00402E70_Services* services) noexcept;
 std::uint32_t FUN_00402560(FUN_00402560_Context& context, const FUN_00402560_Node* node, std::int32_t depth) noexcept;
 void FUN_004025D0(FUN_00402560_Context& context, FUN_00402560_Node* node, std::int32_t depth) noexcept;
 bool FUN_00402640(const FUN_00402640_StringRef& value) noexcept;
 const void* FUN_004026C0(const FUN_00402640_StringRef& value) noexcept;
 void FUN_00402770(const char* text) noexcept;
 void FUN_00402DF0(FUN_00402DF0_Object& object, std::int32_t selector) noexcept;
+bool FUN_00402E70(FUN_00402DF0_Object& object, std::int32_t filter) noexcept;
 
 } // namespace re5::recovered
