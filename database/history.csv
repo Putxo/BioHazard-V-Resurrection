@@ -134,3 +134,5 @@ FUN_00402FC0,2026-09-17,UNSEEN,FAST_PASS,,coordinator,recovered four-state regis
 FUN_00402FC0,2026-09-17,FAST_PASS,FAST_PASS_VALIDATED,293d8b620d8a16280086759a84d7cf1d189daf1d,coordinator,PR #140 completed 5/5 CI checks
 FUN_00403150,2026-09-17,UNSEEN,FAST_PASS,,coordinator,recovered recursive resource walker
 FUN_00403150,2026-09-17,FAST_PASS,FAST_PASS_VALIDATED,c64e2e7f3925df4ef68efed1987e41c316297251,coordinator,PR #143 completed 5/5 CI checks
+FUN_00403640,2026-09-17,UNSEEN,FAST_PASS,,coordinator,recovered registry-backed recursive resource binder
+FUN_00403640,2026-09-17,FAST_PASS,FAST_PASS_VALIDATED,45f9248df51f4d95e028176cbbded6f3c3ac76e6,coordinator,PR #146 completed 5/5 CI checks
