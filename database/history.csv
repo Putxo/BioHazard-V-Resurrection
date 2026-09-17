@@ -126,3 +126,7 @@ FUN_004026C0,2026-09-17,FAST_PASS,FAST_PASS_VALIDATED,7639917d679a175de376f8ecad
 FUN_00402770,2026-09-17,FAST_PASS,FAST_PASS_VALIDATED,7639917d679a175de376f8ecad058ebe2134e57b,coordinator,PR #131 completed 5/5 CI checks
 FUN_00402B10,2026-09-17,UNSEEN,FAST_PASS,,coordinator,recovered recursive node/table registration pass with reset key and capacity guard
 FUN_00402B10,2026-09-17,FAST_PASS,FAST_PASS_VALIDATED,228fad0be7717a8cc6c608e9f62d24ea8bcae2d9,coordinator,PR #134 completed 5/5 CI checks
+FUN_00402DF0,2026-09-17,UNSEEN,FAST_PASS,,coordinator,recovered formatted registry dispatch wrapper
+FUN_00402E70,2026-09-17,UNSEEN,FAST_PASS,,coordinator,recovered list iterator/state-machine label selector
+FUN_00402DF0,2026-09-17,FAST_PASS,FAST_PASS_VALIDATED,e466239131346228999c79d716657d2acf879b44,coordinator,PR #137 completed 5/5 CI checks
+FUN_00402E70,2026-09-17,FAST_PASS,FAST_PASS_VALIDATED,e466239131346228999c79d716657d2acf879b44,coordinator,PR #137 completed 5/5 CI checks
