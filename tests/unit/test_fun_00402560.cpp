@@ -35,6 +35,68 @@ void record_submit(
     state.request = request;
     ++state.calls;
 }
+
+struct DispatchState {
+    re5::recovered::FUN_00402DF0_Message message{};
+    std::uintptr_t registry = 0;
+    char resolved_name[0x100]{};
+    char label[0x100]{};
+    bool create = false;
+    int resolved_token = 0x402df0;
+    std::int32_t selected = 0;
+    void* activated = nullptr;
+    unsigned reports = 0;
+    unsigned resolves = 0;
+    unsigned release_first_calls = 0;
+    unsigned release_second_calls = 0;
+    unsigned submitted_labels = 0;
+};
+
+const char* active_name(void*) noexcept {
+    return "active";
+}
+
+void report_dispatch(
+    void* context,
+    const re5::recovered::FUN_00402DF0_Message& message) noexcept {
+    auto& state = *static_cast<DispatchState*>(context);
+    state.message = message;
+    std::strncpy(state.message.text, message.text, sizeof(state.message.text) - 1U);
+    ++state.reports;
+}
+
+void* resolve_dispatch(void* context, std::uintptr_t registry, const char* name, bool create) noexcept {
+    auto& state = *static_cast<DispatchState*>(context);
+    state.registry = registry;
+    std::strncpy(state.resolved_name, name, sizeof(state.resolved_name) - 1U);
+    state.create = create;
+    ++state.resolves;
+    return &state.resolved_token;
+}
+
+void activate_dispatch(void* context, void* resolved) noexcept {
+    auto& state = *static_cast<DispatchState*>(context);
+    state.activated = resolved;
+}
+
+void release_first(void* context, std::int32_t selected) noexcept {
+    auto& state = *static_cast<DispatchState*>(context);
+    state.selected = selected;
+    ++state.release_first_calls;
+}
+
+void release_second(void* context, std::int32_t selected) noexcept {
+    auto& state = *static_cast<DispatchState*>(context);
+    state.selected = selected;
+    ++state.release_second_calls;
+}
+
+void submit_label(void* context, const char* label, std::int32_t selected) noexcept {
+    auto& state = *static_cast<DispatchState*>(context);
+    std::strncpy(state.label, label, sizeof(state.label) - 1U);
+    state.selected = selected;
+    ++state.submitted_labels;
+}
 } // namespace
 
 void test_fun_00402560() {
@@ -103,5 +165,67 @@ void test_fun_00402560() {
     assert(submit.request.resource_01652e48 == 0x01652E48U);
 
     FUN_00402770_SetServices(nullptr);
+
+    DispatchState dispatch{};
+    FUN_00402DF0_Services dispatch_services{
+        "entry_%02d",
+        "%s:%s",
+        "fallback",
+        0x016E216CU,
+        &dispatch,
+        active_name,
+        report_dispatch,
+        resolve_dispatch,
+        activate_dispatch,
+    };
+    FUN_00402DF0_SetServices(&dispatch_services);
+
+    FUN_00402DF0_Object object{};
+    FUN_00402DF0(object, 7);
+    assert(std::strcmp(object.name_54, "entry_07") == 0);
+    assert(dispatch.reports == 1U);
+    assert(std::strcmp(dispatch.message.formatted_name, "entry_07") == 0);
+    assert(std::strcmp(dispatch.message.active_name, "active") == 0);
+    assert(std::strcmp(dispatch.message.text, "active:entry_07") == 0);
+    assert(dispatch.resolves == 1U);
+    assert(dispatch.registry == 0x016E216CU);
+    assert(std::strcmp(dispatch.resolved_name, "entry_07") == 0);
+    assert(dispatch.create);
+    assert(dispatch.activated == &dispatch.resolved_token);
+
+    FUN_00402DF0_SetServices(nullptr);
+
+    FUN_00402E70_Node third{nullptr, "ab305", nullptr};
+    FUN_00402E70_Node second{nullptr, "ab205", &third};
+    FUN_00402E70_Node first{nullptr, "ab005", &second};
+    FUN_00402E70_Services iterator_services{
+        &first,
+        "slot_%03d",
+        &dispatch,
+        release_first,
+        release_second,
+        submit_label,
+    };
+    FUN_00402E70_SetServices(&iterator_services);
+
+    FUN_00402DF0_Object iterator{};
+    assert(!FUN_00402E70(iterator, -1));
+    assert(iterator.state_2c == 2U);
+    assert(iterator.current_4c == &second);
+    assert(iterator.selected_50 == 205);
+    assert(dispatch.submitted_labels == 1U);
+    assert(std::strcmp(dispatch.label, "slot_205") == 0);
+
+    assert(!FUN_00402E70(iterator, -1));
+    assert(iterator.state_2c == 1U);
+    assert(iterator.current_4c == &third);
+    assert(dispatch.release_first_calls == 1U);
+    assert(dispatch.release_second_calls == 1U);
+
+    assert(!FUN_00402E70(iterator, 4));
+    assert(iterator.current_4c == nullptr);
+    assert(FUN_00402E70(iterator, 4));
+
+    FUN_00402E70_SetServices(nullptr);
     FUN_00402640_SetTable(nullptr);
 }
