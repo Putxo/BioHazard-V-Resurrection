@@ -72,3 +72,4 @@ SEQ-00402640,FUN_00402640,coordinator,decomp/00402560-00402640,sequential decomp
 SEQ-004026C0,FUN_004026C0,coordinator,decomp/004026c0-00402770,sequential decomp of global table value lookup,2026-09-17T00:00:00Z,,,true
 SEQ-00402770,FUN_00402770,coordinator,decomp/004026c0-00402770,sequential decomp of string formatter request wrapper,2026-09-17T00:01:00Z,,,true
 SEQ-00402B10,FUN_00402B10,coordinator,decomp/00402b10-tree-registration,sequential decomp of recursive node/table registration pass,2026-09-17T00:10:00Z,,,true
+SEQ-00402DF0,FUN_00402DF0,coordinator,decomp/00402df0-dispatch,sequential decomp of formatted registry dispatch wrapper,2026-09-17T00:20:00Z,,,true

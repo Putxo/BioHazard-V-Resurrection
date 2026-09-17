@@ -35,6 +35,44 @@ void record_submit(
     state.request = request;
     ++state.calls;
 }
+
+struct DispatchState {
+    re5::recovered::FUN_00402DF0_Message message{};
+    std::uintptr_t registry = 0;
+    char resolved_name[0x100]{};
+    bool create = false;
+    int resolved_token = 0x402df0;
+    void* activated = nullptr;
+    unsigned reports = 0;
+    unsigned resolves = 0;
+};
+
+const char* active_name(void*) noexcept {
+    return "active";
+}
+
+void report_dispatch(
+    void* context,
+    const re5::recovered::FUN_00402DF0_Message& message) noexcept {
+    auto& state = *static_cast<DispatchState*>(context);
+    state.message = message;
+    std::strncpy(state.message.text, message.text, sizeof(state.message.text) - 1U);
+    ++state.reports;
+}
+
+void* resolve_dispatch(void* context, std::uintptr_t registry, const char* name, bool create) noexcept {
+    auto& state = *static_cast<DispatchState*>(context);
+    state.registry = registry;
+    std::strncpy(state.resolved_name, name, sizeof(state.resolved_name) - 1U);
+    state.create = create;
+    ++state.resolves;
+    return &state.resolved_token;
+}
+
+void activate_dispatch(void* context, void* resolved) noexcept {
+    auto& state = *static_cast<DispatchState*>(context);
+    state.activated = resolved;
+}
 } // namespace
 
 void test_fun_00402560() {
@@ -103,5 +141,34 @@ void test_fun_00402560() {
     assert(submit.request.resource_01652e48 == 0x01652E48U);
 
     FUN_00402770_SetServices(nullptr);
+
+    DispatchState dispatch{};
+    FUN_00402DF0_Services dispatch_services{
+        "entry_%02d",
+        "%s:%s",
+        "fallback",
+        0x016E216CU,
+        &dispatch,
+        active_name,
+        report_dispatch,
+        resolve_dispatch,
+        activate_dispatch,
+    };
+    FUN_00402DF0_SetServices(&dispatch_services);
+
+    FUN_00402DF0_Object object{};
+    FUN_00402DF0(object, 7);
+    assert(std::strcmp(object.name_54, "entry_07") == 0);
+    assert(dispatch.reports == 1U);
+    assert(std::strcmp(dispatch.message.formatted_name, "entry_07") == 0);
+    assert(std::strcmp(dispatch.message.active_name, "active") == 0);
+    assert(std::strcmp(dispatch.message.text, "active:entry_07") == 0);
+    assert(dispatch.resolves == 1U);
+    assert(dispatch.registry == 0x016E216CU);
+    assert(std::strcmp(dispatch.resolved_name, "entry_07") == 0);
+    assert(dispatch.create);
+    assert(dispatch.activated == &dispatch.resolved_token);
+
+    FUN_00402DF0_SetServices(nullptr);
     FUN_00402640_SetTable(nullptr);
 }
