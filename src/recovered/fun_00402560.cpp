@@ -9,6 +9,7 @@ const FUN_00402640_Table* g_table = nullptr;
 const FUN_00402770_Services* g_services_00402770 = nullptr;
 const FUN_00402DF0_Services* g_services_00402df0 = nullptr;
 const FUN_00402E70_Services* g_services_00402e70 = nullptr;
+const FUN_00402FC0_Services* g_services_00402fc0 = nullptr;
 
 const char* payload_string(const FUN_00402640_StringRef& value) noexcept {
     if (value.pointer == nullptr) {
@@ -35,6 +36,10 @@ void FUN_00402DF0_SetServices(const FUN_00402DF0_Services* services) noexcept {
 
 void FUN_00402E70_SetServices(const FUN_00402E70_Services* services) noexcept {
     g_services_00402e70 = services;
+}
+
+void FUN_00402FC0_SetServices(const FUN_00402FC0_Services* services) noexcept {
+    g_services_00402fc0 = services;
 }
 
 std::uint32_t FUN_00402560(
@@ -258,6 +263,107 @@ bool FUN_00402E70(FUN_00402DF0_Object& object, std::int32_t filter) noexcept {
 
     ++object.state_2c;
     return false;
+}
+
+bool FUN_00402FC0(FUN_00402DF0_Object& object) noexcept {
+    const auto* services = g_services_00402fc0;
+    const char* fallback = services != nullptr && services->fallback_name != nullptr
+        ? services->fallback_name
+        : "";
+
+    const auto active1028 = [&]() noexcept {
+        if (services != nullptr && services->active_name_1028 != nullptr) {
+            const char* value = services->active_name_1028(services->context);
+            return value != nullptr ? value : fallback;
+        }
+        return fallback;
+    };
+
+    const auto active102c = [&]() noexcept {
+        if (services != nullptr && services->active_name_102c != nullptr) {
+            const char* value = services->active_name_102c(services->context);
+            return value != nullptr ? value : fallback;
+        }
+        return fallback;
+    };
+
+    const auto ready = [&](bool first_probe) noexcept {
+        return services != nullptr && services->transition_ready != nullptr
+            ? services->transition_ready(services->context, first_probe)
+            : true;
+    };
+
+    switch (object.state_2c) {
+    case 0: {
+        const char* format = services != nullptr && services->initial_format != nullptr
+            ? services->initial_format
+            : "%s";
+        std::snprintf(object.name_54, sizeof(object.name_54), format, active1028());
+        if (!ready(true)) {
+            return true;
+        }
+        ++object.state_2c;
+        [[fallthrough]];
+    }
+
+    case 1: {
+        const char* pending = object.pending_name_168 != nullptr ? object.pending_name_168 : fallback;
+        if (pending[0] == '.' || (object.flags_170 & 1U) != 0U) {
+            object.state_2c = 3U;
+            return false;
+        }
+
+        const char* format = services != nullptr && services->pending_format != nullptr
+            ? services->pending_format
+            : "%s";
+        std::snprintf(object.name_54, sizeof(object.name_54), format, pending);
+
+        char label[0x100]{};
+        const char* message_format = services != nullptr && services->pending_message_format != nullptr
+            ? services->pending_message_format
+            : "%s";
+        std::snprintf(label, sizeof(label), message_format, object.name_54);
+        if (services != nullptr && services->submit_pending != nullptr) {
+            services->submit_pending(services->context, label);
+        } else {
+            FUN_00402770(label);
+        }
+        ++object.state_2c;
+        return false;
+    }
+
+    case 2: {
+        FUN_00402DF0_Message message{};
+        message.formatted_name = object.name_54;
+        message.active_name = active102c();
+        std::snprintf(message.text, sizeof(message.text), "%s %s", message.active_name, object.name_54);
+        if (services != nullptr && services->report != nullptr) {
+            services->report(services->context, message);
+        }
+        if (services != nullptr && services->resolve != nullptr) {
+            void* resolved = services->resolve(
+                services->context,
+                services->registry_016e216c,
+                object.name_54,
+                true);
+            if (resolved != nullptr && services->activate != nullptr) {
+                services->activate(services->context, resolved);
+            }
+        }
+        ++object.state_2c;
+        [[fallthrough]];
+    }
+
+    case 3:
+        if (!ready(false)) {
+            return true;
+        }
+        object.state_2c = 1U;
+        return false;
+
+    default:
+        return false;
+    }
 }
 
 } // namespace re5::recovered
