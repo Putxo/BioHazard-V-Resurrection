@@ -2410,7 +2410,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2425,10 +2425,10 @@
     "source_file": "src/recovered/fun_00402560.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00402FC0",
-    "pr": "",
-    "commit": "",
+    "pr": "#140",
+    "commit": "293d8b620d8a16280086759a84d7cf1d189daf1d",
     "test": "tests/unit/test_fun_00402560.cpp",
     "evidence": "decomp/evidence/fun_00402fc0.md",
-    "notes": "four-state registry dispatch machine with active-name probe pending-label submission registry activation and transition polling"
+    "notes": "four-state registry dispatch machine with active-name probe pending-label submission registry activation and transition polling; PR #140 CI 5/5 PASS"
   }
 ]
