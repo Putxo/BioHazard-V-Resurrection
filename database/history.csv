@@ -130,3 +130,4 @@ FUN_00402DF0,2026-09-17,UNSEEN,FAST_PASS,,coordinator,recovered formatted regist
 FUN_00402E70,2026-09-17,UNSEEN,FAST_PASS,,coordinator,recovered list iterator/state-machine label selector
 FUN_00402DF0,2026-09-17,FAST_PASS,FAST_PASS_VALIDATED,e466239131346228999c79d716657d2acf879b44,coordinator,PR #137 completed 5/5 CI checks
 FUN_00402E70,2026-09-17,FAST_PASS,FAST_PASS_VALIDATED,e466239131346228999c79d716657d2acf879b44,coordinator,PR #137 completed 5/5 CI checks
+FUN_00402FC0,2026-09-17,UNSEEN,FAST_PASS,,coordinator,recovered four-state registry dispatch machine

@@ -50,6 +50,9 @@ struct DispatchState {
     unsigned release_first_calls = 0;
     unsigned release_second_calls = 0;
     unsigned submitted_labels = 0;
+    unsigned ready_calls = 0;
+    bool first_ready = true;
+    bool final_ready = true;
 };
 
 const char* active_name(void*) noexcept {
@@ -95,6 +98,26 @@ void submit_label(void* context, const char* label, std::int32_t selected) noexc
     auto& state = *static_cast<DispatchState*>(context);
     std::strncpy(state.label, label, sizeof(state.label) - 1U);
     state.selected = selected;
+    ++state.submitted_labels;
+}
+
+const char* active_1028(void*) noexcept {
+    return "boot";
+}
+
+const char* active_102c(void*) noexcept {
+    return "done";
+}
+
+bool transition_ready(void* context, bool first_probe) noexcept {
+    auto& state = *static_cast<DispatchState*>(context);
+    ++state.ready_calls;
+    return first_probe ? state.first_ready : state.final_ready;
+}
+
+void submit_pending(void* context, const char* label) noexcept {
+    auto& state = *static_cast<DispatchState*>(context);
+    std::strncpy(state.label, label, sizeof(state.label) - 1U);
     ++state.submitted_labels;
 }
 } // namespace
@@ -227,5 +250,50 @@ void test_fun_00402560() {
     assert(FUN_00402E70(iterator, 4));
 
     FUN_00402E70_SetServices(nullptr);
+
+    DispatchState machine{};
+    FUN_00402FC0_Services machine_services{
+        "open_%s",
+        "pend_%s",
+        "show_%s",
+        "fallback",
+        0x016E216CU,
+        &machine,
+        active_1028,
+        active_102c,
+        transition_ready,
+        submit_pending,
+        report_dispatch,
+        resolve_dispatch,
+        activate_dispatch,
+    };
+    FUN_00402FC0_SetServices(&machine_services);
+
+    FUN_00402DF0_Object state_object{};
+    state_object.pending_name_168 = "target";
+    assert(!FUN_00402FC0(state_object));
+    assert(state_object.state_2c == 2U);
+    assert(std::strcmp(state_object.name_54, "pend_target") == 0);
+    assert(machine.ready_calls == 1U);
+    assert(machine.submitted_labels == 1U);
+    assert(std::strcmp(machine.label, "show_pend_target") == 0);
+
+    assert(!FUN_00402FC0(state_object));
+    assert(state_object.state_2c == 1U);
+    assert(machine.reports == 1U);
+    assert(machine.resolves == 1U);
+    assert(machine.activated == &machine.resolved_token);
+    assert(std::strcmp(machine.message.active_name, "done") == 0);
+
+    state_object.pending_name_168 = ".hidden";
+    assert(!FUN_00402FC0(state_object));
+    assert(state_object.state_2c == 3U);
+    machine.final_ready = false;
+    assert(FUN_00402FC0(state_object));
+    machine.final_ready = true;
+    assert(!FUN_00402FC0(state_object));
+    assert(state_object.state_2c == 1U);
+
+    FUN_00402FC0_SetServices(nullptr);
     FUN_00402640_SetTable(nullptr);
 }
