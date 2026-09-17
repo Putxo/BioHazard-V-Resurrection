@@ -2442,7 +2442,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2457,10 +2457,10 @@
     "source_file": "src/recovered/fun_00403150.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00403150",
-    "pr": "",
-    "commit": "",
+    "pr": "#143",
+    "commit": "c64e2e7f3925df4ef68efed1987e41c316297251",
     "test": "tests/unit/test_fun_00403150.cpp",
     "evidence": "decomp/evidence/fun_00403150.md",
-    "notes": "recursive resource walker with opener iterator dot-entry filtering child path formatting recursive descent leaf resolution and activation"
+    "notes": "recursive resource walker with opener iterator dot-entry filtering child path formatting recursive descent leaf resolution and activation; PR #143 CI 5/5 PASS"
   }
 ]
