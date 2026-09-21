@@ -2602,7 +2602,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2617,10 +2617,10 @@
     "source_file": "src/recovered/fun_00404f90.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00404F90",
-    "pr": "",
-    "commit": "",
+    "pr": "#158",
+    "commit": "5e4fd0b32f2c9270ca6804447812a2cda6c7ee15",
     "test": "tests/unit/test_fun_00404f90.cpp",
     "evidence": "decomp/evidence/fun_00404f90.md",
-    "notes": "table-driven registration candidate block with 48 pair entries marker calls group registration and documented internal aligned helper range before 0x00405710"
+    "notes": "table-driven registration candidate block with 48 pair entries marker calls group registration and documented internal aligned helper range before 0x00405710; PR #158 CI 5/5 PASS"
   }
 ]
