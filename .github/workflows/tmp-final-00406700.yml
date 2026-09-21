@@ -1,0 +1,80 @@
+name: tmp-final-00406700
+
+on:
+  push:
+    branches: [decomp/00406700-next]
+    paths:
+      - '.github/workflows/tmp-final-00406700.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Restore target-only snapshot
+        run: |
+          git fetch --depth=1 origin 4f8a3da29a0f7fb5704df9bad76c9b5a8fae5c4e
+          mkdir -p include/re5/recovered src/recovered tests/unit decomp/evidence
+          git show FETCH_HEAD:include/re5/recovered/fun_00406700.hpp > include/re5/recovered/fun_00406700.hpp
+          git show FETCH_HEAD:src/recovered/fun_00406700.cpp > src/recovered/fun_00406700.cpp
+          git show FETCH_HEAD:tests/unit/test_fun_00406700.cpp > tests/unit/test_fun_00406700.cpp
+          git show FETCH_HEAD:decomp/evidence/fun_00406700.md > decomp/evidence/fun_00406700.md
+      - name: Apply target-only wiring and metadata
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          target='FUN_00406700'
+          cmake=Path('CMakeLists.txt'); text=cmake.read_text(encoding='utf-8')
+          for line,anchor in [('    src/recovered/fun_00406700.cpp\n','    src/recovered/fun_004066e0.cpp\n'),('    tests/unit/test_fun_00406700.cpp\n','    tests/unit/test_fun_004066e0.cpp\n')]:
+              if line not in text:
+                  if anchor not in text: raise SystemExit('CMake anchor missing')
+                  text=text.replace(anchor,anchor+line,1)
+          cmake.write_text(text,encoding='utf-8')
+          smoke=Path('tests/unit/test_smoke.cpp'); text=smoke.read_text(encoding='utf-8')
+          for line,anchor in [('void test_fun_00406700();\n','void test_fun_004066e0();\n'),('    test_fun_00406700();\n','    test_fun_004066e0();\n')]:
+              if line not in text:
+                  if anchor not in text: raise SystemExit('smoke anchor missing')
+                  text=text.replace(anchor,anchor+line,1)
+          smoke.write_text(text,encoding='utf-8')
+          p=Path('database/functions.csv')
+          with p.open(newline='',encoding='utf-8') as f: rows=list(csv.DictReader(f)); fields=list(rows[0].keys())
+          if any(r['stable_id']==target for r in rows): raise SystemExit('target already present')
+          rows.append({'stable_id':target,'va':'0x00406700','rva':'0x00006700','section':'.text','size':'27','provisional_name':target,'refined_name':'','workflow_status':'ACTIVE','confidence':'HIGH','fast_pass':'true','fast_pass_validated':'false','converted':'false','refined':'false','verified':'false','matched':'false','linked':'false','calling_convention':'cdecl','return_type':'void','arguments':'void','this_type':'void','module':'UNKNOWN','subsystem':'Resource','source_file':'src/recovered/fun_00406700.cpp','owner':'coordinator','claim_id':'SEQ-00406700','pr':'','commit':'','test':'tests/unit/test_fun_00406700.cpp','evidence':'decomp/evidence/fun_00406700.md','notes':'Extra1Resource fixed -1 forwarding wrapper with exact twenty-entry direct table and no resolved table'})
+          with p.open('w',newline='',encoding='utf-8') as f: w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(rows)
+          p=Path('database/claims.csv')
+          with p.open(newline='',encoding='utf-8') as f: rows=list(csv.DictReader(f)); fields=list(rows[0].keys())
+          if any(r['stable_id']==target for r in rows): raise SystemExit('target already claimed')
+          rows.append({'claim_id':'SEQ-00406700','stable_id':target,'owner':'coordinator','branch':'decomp/00406700-next','task':'sequential decomp of Extra1Resource forwarding wrapper','claimed_at':'2026-09-21T23:33:00Z','expires_at':'','pr':'','active':'true'})
+          with p.open('w',newline='',encoding='utf-8') as f: w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(rows)
+          p=Path('database/history.csv')
+          with p.open(newline='',encoding='utf-8') as f: rows=list(csv.DictReader(f)); fields=list(rows[0].keys())
+          rows.append({'stable_id':target,'date':'2026-09-22','old_status':'UNSEEN','new_status':'FAST_PASS','commit':'','owner':'coordinator','reason':'recovered Extra1Resource fixed forwarding wrapper with exact twenty-entry direct table'})
+          with p.open('w',newline='',encoding='utf-8') as f: w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(rows)
+          PY
+      - name: Regenerate validate build test
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          python -m pip install pytest
+          python -m pytest -q tests/metadata
+          git diff --check
+          if git status --porcelain | grep -Ei '\.(exe|dll|obj)( |$)'; then exit 1; fi
+          sudo apt-get update && sudo apt-get install -y ninja-build
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Commit final candidate
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add CMakeLists.txt tests/unit/test_smoke.cpp database/functions.csv database/claims.csv database/history.csv reports/progress.md reports/functions.json reports/progress-treemap.svg include/re5/recovered/fun_00406700.hpp src/recovered/fun_00406700.cpp tests/unit/test_fun_00406700.cpp decomp/evidence/fun_00406700.md
+          git commit -m 'Decompile FUN_00406700 on stable integration'
+          git push
