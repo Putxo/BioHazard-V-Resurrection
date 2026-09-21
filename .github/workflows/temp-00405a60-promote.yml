@@ -1,0 +1,82 @@
+name: prepare-00405a60-promotion
+
+on:
+  push:
+    branches: [promote/00405a60-fastpass-valid]
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Promote FUN_00405A60 metadata only
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import csv
+
+          target = 'FUN_00405A60'
+          candidate_pr = '#169'
+          candidate_merge = '4ff96307fac4ebb8a4481f79e1cc9f81df22c1e1'
+
+          p = Path('database/functions.csv')
+          with p.open(newline='', encoding='utf-8') as f:
+              rows = list(csv.DictReader(f)); fields = list(rows[0].keys())
+          matches = [r for r in rows if r.get('stable_id') == target]
+          if len(matches) != 1:
+              raise SystemExit(f'expected exactly one {target} row, found {len(matches)}')
+          row = matches[0]
+          row['fast_pass_validated'] = 'true'
+          row['pr'] = candidate_pr
+          row['commit'] = candidate_merge
+          suffix = f'; PR {candidate_pr} CI 5/5 PASS'
+          if suffix not in row.get('notes',''):
+              row['notes'] = row.get('notes','') + suffix
+          with p.open('w', newline='', encoding='utf-8') as f:
+              w = csv.DictWriter(f, fieldnames=fields, lineterminator='\n')
+              w.writeheader(); w.writerows(rows)
+
+          p = Path('database/history.csv')
+          with p.open(newline='', encoding='utf-8') as f:
+              rows = list(csv.DictReader(f)); fields = list(rows[0].keys())
+          if not any(r.get('stable_id') == target and r.get('new_status') == 'FAST_PASS_VALIDATED' for r in rows):
+              rows.append({
+                  'stable_id':target,'date':'2026-09-21','old_status':'FAST_PASS','new_status':'FAST_PASS_VALIDATED',
+                  'commit':candidate_merge,'owner':'coordinator','reason':'PR #169 completed 5/5 CI checks'
+              })
+          with p.open('w', newline='', encoding='utf-8') as f:
+              w = csv.DictWriter(f, fieldnames=fields, lineterminator='\n')
+              w.writeheader(); w.writerows(rows)
+          PY
+      - name: Regenerate canonical reports
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+      - name: Validate metadata and diff
+        run: |
+          python tools/validate/validate.py
+          git diff --check
+      - name: Configure
+        run: cmake --preset dev
+      - name: Build
+        run: cmake --build --preset dev
+      - name: Test
+        run: ctest --preset dev
+      - name: Commit promotion
+        shell: bash
+        run: |
+          rm .github/workflows/temp-00405a60-promote.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add database/functions.csv database/history.csv reports/ .github/workflows/temp-00405a60-promote.yml
+          git commit -m 'Validate FUN_00405A60 fast-pass block'
+          git push origin HEAD:promote/00405a60-fastpass-valid
