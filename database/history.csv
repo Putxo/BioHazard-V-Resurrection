@@ -171,3 +171,4 @@ FUN_004065D0,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered ShowTitleResourc
 FUN_004065D0,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,2a22e0775881a21fc167cd6384ee3dd6ba6d376f,coordinator,PR #197 completed 5/5 CI checks
 FUN_00406600,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered MenuResource fixed -1 forwarding wrapper with exact 22-entry direct table and no resolved entries
 FUN_00406600,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,e621a22d8b0a03c3a07335092353c68d71446ba5,coordinator,PR #199 completed 5/5 CI checks
+FUN_00406620,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered Menu2Resource fixed forwarding wrapper with exact direct-table constants
