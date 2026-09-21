@@ -2538,7 +2538,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2553,10 +2553,10 @@
     "source_file": "src/recovered/fun_00403f50.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00403F50",
-    "pr": "",
-    "commit": "",
+    "pr": "#152",
+    "commit": "78cc0075ff03ceb013705dfa6f89ce7127af9042",
     "test": "tests/unit/test_fun_00403f50.cpp",
     "evidence": "decomp/evidence/fun_00403f50.md",
-    "notes": "resource scan batch initializer with 0x130 state allocation repeated FUN_00403640-style grouped scans and owner state cleanup"
+    "notes": "resource scan batch initializer with 0x130 state allocation repeated FUN_00403640-style grouped scans and owner state cleanup; PR #152 CI 5/5 PASS"
   }
 ]
