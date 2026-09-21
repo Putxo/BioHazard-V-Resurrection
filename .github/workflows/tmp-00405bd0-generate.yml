@@ -17,11 +17,6 @@ jobs:
           python tools/reports/report.py
           python tools/progress/treemap.py
           python tools/validate/validate.py
-      - name: Build and test
-        run: |
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-          cmake --build build --config Release
-          ctest --test-dir build --output-on-failure -C Release
       - uses: actions/upload-artifact@v4
         with:
           name: generated-00405bd0
@@ -29,3 +24,11 @@ jobs:
             reports/progress.md
             reports/functions.json
             reports/progress-treemap.svg
+      - name: Install Ninja
+        run: sudo apt-get update && sudo apt-get install -y ninja-build
+      - name: Configure
+        run: cmake --preset dev
+      - name: Build
+        run: cmake --build --preset dev
+      - name: Test
+        run: ctest --preset dev
