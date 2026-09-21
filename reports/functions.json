@@ -2922,7 +2922,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2937,10 +2937,10 @@
     "source_file": "src/recovered/fun_00406540.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00406540",
-    "pr": "",
-    "commit": "",
+    "pr": "#184",
+    "commit": "90444724ef6040379b990c1c6c4116bf910bd0a0",
     "test": "tests/unit/test_fun_00406540.cpp",
     "evidence": "decomp/evidence/fun_00406540.md",
-    "notes": "Game2Resource forwarding wrapper to separately assigned 0x004061F0 with exact archive literal and 2/5 table tokens"
+    "notes": "Game2Resource forwarding wrapper to separately assigned 0x004061F0 with exact archive literal and 2/5 table tokens; PR #184 CI 5/5 PASS"
   }
 ]
