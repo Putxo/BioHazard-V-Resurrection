@@ -1,0 +1,97 @@
+name: prepare-004064e0
+
+on:
+  push:
+    branches:
+      - decomp/004064e0-next
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/004064e0-next
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Wire FUN_004064E0 and metadata
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          cmake = Path('CMakeLists.txt')
+          text = cmake.read_text()
+          src = '    src/recovered/fun_004064e0.cpp\n'
+          test = '    tests/unit/test_fun_004064e0.cpp\n'
+          if src not in text:
+              anchor = '    src/recovered/fun_00405df0.cpp\n'
+              if anchor not in text:
+                  raise SystemExit('CMake source anchor missing')
+              text = text.replace(anchor, anchor + src, 1)
+          if test not in text:
+              anchor = '    tests/unit/test_fun_00405df0.cpp\n'
+              if anchor not in text:
+                  raise SystemExit('CMake test anchor missing')
+              text = text.replace(anchor, anchor + test, 1)
+          cmake.write_text(text)
+
+          smoke = Path('tests/unit/test_smoke.cpp')
+          text = smoke.read_text()
+          if 'void test_fun_004064e0();' not in text:
+              text = text.replace('void test_fun_00405df0();\n', 'void test_fun_00405df0();\nvoid test_fun_004064e0();\n', 1)
+          if '    test_fun_004064e0();' not in text:
+              text = text.replace('    test_fun_00405df0();\n', '    test_fun_00405df0();\n    test_fun_004064e0();\n', 1)
+          smoke.write_text(text)
+
+          functions = Path('database/functions.csv')
+          text = functions.read_text()
+          marker = 'FUN_004064E0,0x004064E0,'
+          row = ('FUN_004064E0,0x004064E0,0x000064E0,.text,33,FUN_004064E0,,ACTIVE,HIGH,'
+                 'true,false,false,false,false,false,false,cdecl,void,std::uint32_t selector,void,UNKNOWN,Resource,'
+                 'src/recovered/fun_004064e0.cpp,coordinator,SEQ-004064E0,,,tests/unit/test_fun_004064e0.cpp,'
+                 'decomp/evidence/fun_004064e0.md,GameResource forwarding wrapper to separately assigned 0x004061F0 with exact archive literal and 15/7 table tokens')
+          if marker not in text:
+              functions.write_text(text.rstrip('\n') + '\n' + row + '\n')
+
+          claims = Path('database/claims.csv')
+          text = claims.read_text()
+          if 'SEQ-004064E0,' not in text:
+              row = ('SEQ-004064E0,FUN_004064E0,coordinator,decomp/004064e0-next,'
+                     'sequential decomp of GameResource forwarding wrapper,2026-09-21T22:06:00Z,,,true')
+              claims.write_text(text.rstrip('\n') + '\n' + row + '\n')
+
+          history = Path('database/history.csv')
+          text = history.read_text()
+          if 'FUN_004064E0,2026-09-21,UNSEEN,FAST_PASS' not in text:
+              row = ('FUN_004064E0,2026-09-21,UNSEEN,FAST_PASS,,coordinator,'
+                     'recovered 33-byte GameResource forwarding wrapper with exact selector archive literal table tokens and counts')
+              history.write_text(text.rstrip('\n') + '\n' + row + '\n')
+          PY
+      - name: Regenerate and validate
+        shell: bash
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          git diff --check
+      - name: Build and test
+        shell: bash
+        run: |
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Commit prepared candidate and remove helper
+        shell: bash
+        run: |
+          rm .github/workflows/prepare-004064e0.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add CMakeLists.txt tests/unit/test_smoke.cpp database/functions.csv database/claims.csv database/history.csv reports .github/workflows/prepare-004064e0.yml
+          git commit -m 'Register and validate FUN_004064E0 [prepare-004064e0]'
+          git push origin HEAD:decomp/004064e0-next
