@@ -1,0 +1,418 @@
+name: Decompile FUN_00406720
+
+on:
+  push:
+    branches:
+      - decomp/00406720-next
+
+permissions:
+  contents: write
+
+jobs:
+  decompile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/00406720-next
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Reconstruct FUN_00406720 target files
+        shell: bash
+        run: |
+          cat > include/re5/recovered/fun_00406720.hpp <<'EOF'
+          #pragma once
+
+          #include <cstdint>
+
+          namespace re5::recovered {
+
+          struct FUN_00406720_Services {
+              void* context;
+              void (*dispatch_resource_group)(
+                  void* context,
+                  std::int32_t message_index,
+                  const char* archive_name,
+                  std::uintptr_t direct_table,
+                  std::int32_t direct_count,
+                  std::uintptr_t resolved_table,
+                  std::int32_t resolved_count) noexcept;
+          };
+
+          void FUN_00406720_SetServices(const FUN_00406720_Services* services) noexcept;
+          void FUN_00406720() noexcept;
+
+          } // namespace re5::recovered
+          EOF
+
+          cat > src/recovered/fun_00406720.cpp <<'EOF'
+          #include "re5/recovered/fun_00406720.hpp"
+
+          namespace re5::recovered {
+          namespace {
+          const FUN_00406720_Services* g_services = nullptr;
+
+          constexpr std::int32_t k_message_index = -1;
+          constexpr const char* k_archive_name = "Image\\Archive\\Extra2Resource";
+          constexpr std::uintptr_t k_direct_table = 0x01567A80U;
+          constexpr std::int32_t k_direct_count = 18;
+          constexpr std::uintptr_t k_resolved_table = 0U;
+          constexpr std::int32_t k_resolved_count = 0;
+          } // namespace
+
+          void FUN_00406720_SetServices(const FUN_00406720_Services* services) noexcept {
+              g_services = services;
+          }
+
+          void FUN_00406720() noexcept {
+              const auto* services = g_services;
+              if (services == nullptr || services->dispatch_resource_group == nullptr) {
+                  return;
+              }
+
+              services->dispatch_resource_group(
+                  services->context,
+                  k_message_index,
+                  k_archive_name,
+                  k_direct_table,
+                  k_direct_count,
+                  k_resolved_table,
+                  k_resolved_count);
+          }
+
+          } // namespace re5::recovered
+          EOF
+
+          cat > tests/unit/test_fun_00406720.cpp <<'EOF'
+          #include "re5/recovered/fun_00406720.hpp"
+
+          #include <cassert>
+          #include <cstdint>
+          #include <cstring>
+
+          namespace {
+          struct State {
+              unsigned dispatch_calls = 0U;
+              std::int32_t message_index = 0;
+              const char* archive_name = nullptr;
+              std::uintptr_t direct_table = 0U;
+              std::int32_t direct_count = 0;
+              std::uintptr_t resolved_table = 1U;
+              std::int32_t resolved_count = 1;
+          };
+
+          void dispatch_resource_group(
+              void* context,
+              std::int32_t message_index,
+              const char* archive_name,
+              std::uintptr_t direct_table,
+              std::int32_t direct_count,
+              std::uintptr_t resolved_table,
+              std::int32_t resolved_count) noexcept {
+              auto& state = *static_cast<State*>(context);
+              ++state.dispatch_calls;
+              state.message_index = message_index;
+              state.archive_name = archive_name;
+              state.direct_table = direct_table;
+              state.direct_count = direct_count;
+              state.resolved_table = resolved_table;
+              state.resolved_count = resolved_count;
+          }
+          } // namespace
+
+          void test_fun_00406720() {
+              using namespace re5::recovered;
+
+              // Portable-host guard only. The original 27-byte wrapper has no branch.
+              FUN_00406720_SetServices(nullptr);
+              FUN_00406720();
+
+              // Missing host dispatch is another harness-only early exit.
+              State no_dispatch_state{};
+              FUN_00406720_Services no_dispatch_services{&no_dispatch_state, nullptr};
+              FUN_00406720_SetServices(&no_dispatch_services);
+              FUN_00406720();
+              assert(no_dispatch_state.dispatch_calls == 0U);
+
+              State state{};
+              FUN_00406720_Services services{&state, dispatch_resource_group};
+              FUN_00406720_SetServices(&services);
+              FUN_00406720();
+
+              assert(state.dispatch_calls == 1U);
+              assert(state.message_index == -1);
+              assert(state.archive_name != nullptr);
+              assert(std::strcmp(state.archive_name, "Image\\Archive\\Extra2Resource") == 0);
+              assert(state.direct_table == 0x01567A80U);
+              assert(state.direct_count == 18);
+              assert(state.resolved_table == 0U);
+              assert(state.resolved_count == 0);
+
+              FUN_00406720_SetServices(nullptr);
+          }
+          EOF
+
+          cat > decomp/evidence/fun_00406720.md <<'EOF'
+          # FUN_00406720 evidence
+
+          ## Target
+
+          - Evidence was decoded directly from the exact local reference executable; no binary is committed.
+          - Reference SHA-256: `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815`.
+          - Reference size: 19,977,216 bytes.
+          - PE32 x86 image base: `0x00400000`.
+          - Function VA `0x00406720`, RVA `0x00006720`.
+          - Candidate body: 27 bytes (`0x1B`), through the `ret` at `0x0040673A`.
+          - Candidate byte SHA-256: `a7d1f78eda7a5391eb449e78d188e9df8bae632b0af67fd59386ba99d3438e63`.
+          - `0x0040673B..0x0040673F` is `INT3` padding. The separately assigned `FUN_00406740` starts at `0x00406740` and is excluded.
+
+          ## Instruction evidence
+
+          ```text
+          00406720  6A 00                   push 0
+          00406722  6A 00                   push 0
+          00406724  6A 12                   push 18
+          00406726  68 80 7A 56 01          push 0x01567A80
+          0040672B  68 08 C2 37 01          push 0x0137C208
+          00406730  6A FF                   push -1
+          00406732  E8 B9 FA FF FF          call 0x004061F0
+          00406737  83 C4 18                add esp,0x18
+          0040673A  C3                      ret
+          0040673B  CC                      int3
+          0040673C  CC                      int3
+          0040673D  CC                      int3
+          0040673E  CC                      int3
+          0040673F  CC                      int3
+          ```
+
+          The wrapper pushes exactly six cdecl arguments, calls the separately recovered `FUN_004061F0`, removes exactly `0x18` bytes from the stack, and returns. There are no conditional branches and no native early returns.
+
+          ## Referenced data
+
+          - `0x0137C208` = `Image\\Archive\\Extra2Resource`.
+          - `0x01567A80` is the direct-table token and the pushed direct count is exactly `18`.
+          - The resolved-table pointer/count pair is exactly `(0, 0)`.
+          - The message index is exactly `-1` (`0xFFFFFFFF`).
+
+          The 18 native direct-table records at `0x01567A80` are:
+
+          | # | path pointer | resource token | path |
+          |---:|---:|---:|---|
+          | 0 | `0x0137C228` | `0x016E2758` | `id\\jpn\\extra\\extra_02` |
+          | 1 | `0x0137C240` | `0x01692E3C` | `id\\jpn\\extra\\top54` |
+          | 2 | `0x0137C254` | `0x01692E3C` | `id\\jpn\\extra\\top55` |
+          | 3 | `0x0137C268` | `0x01692E3C` | `id\\jpn\\extra\\top56` |
+          | 4 | `0x0137C27C` | `0x01692E3C` | `id\\jpn\\extra\\top57` |
+          | 5 | `0x0137BFEC` | `0x01692E3C` | `id\\jpn\\versus\\versus_01` |
+          | 6 | `0x0137BD3C` | `0x01692E3C` | `id\\jpn\\menu\\top02` |
+          | 7 | `0x0137BD50` | `0x01692E3C` | `id\\jpn\\menu\\top03` |
+          | 8 | `0x0137BDA0` | `0x01692E3C` | `id\\jpn\\menu\\top08` |
+          | 9 | `0x0137BDB4` | `0x01692E3C` | `id\\jpn\\menu\\top09` |
+          | 10 | `0x0137BE18` | `0x01692E3C` | `id\\jpn\\menu\\top15` |
+          | 11 | `0x0137B574` | `0x016E22B0` | `etc\\vibration_dc` |
+          | 12 | `0x0137C168` | `0x016E2DB8` | `sound\\se\\bio5_00_dc` |
+          | 13 | `0x0137C17C` | `0x01693688` | `sound\\se\\bio5_dc` |
+          | 14 | `0x0137C190` | `0x016E2830` | `sound\\bgm_dc\\st_bgm_dc` |
+          | 15 | `0x0137C290` | `0x016938D0` | `stage\\s702\\soft\\s702` |
+          | 16 | `0x0137C2A8` | `0x016938D0` | `stage\\s703\\soft\\s703` |
+          | 17 | `0x0137C2C0` | `0x016938D0` | `stage\\s704\\soft\\s704` |
+
+          These records document the observed native forwarding contract only. The portable wrapper keeps the native table address opaque and does not reinterpret or duplicate the separately recovered `FUN_004061F0` implementation.
+
+          ## Caller evidence
+
+          A direct `CALL rel32` scan of the exact `.text` image finds exactly one direct call to `0x00406720`, at `0x00509C63`.
+
+          ```text
+          00509C51  BF 08 C2 37 01          mov edi,0x0137C208
+          00509C56  8B F5                   mov esi,ebp
+          00509C58  B9 1D 00 00 00          mov ecx,0x1D
+          00509C5D  33 D2                   xor edx,edx
+          00509C5F  F3 A6                   repz cmps byte ptr [esi],byte ptr [edi]
+          00509C61  75 0F                   jne 0x00509C72
+          00509C63  E8 B8 CA EF FF          call 0x00406720
+          00509C68  5D                      pop ebp
+          ```
+
+          No argument is pushed for the call and the callee uses a plain `ret`, confirming a `cdecl void(void)` wrapper contract. The caller compares the requested archive name against the exact `Extra2Resource` literal before invoking this wrapper.
+
+          ## Reconstructed behavior and early exits
+
+          The native body has no conditional branch. It always performs exactly:
+
+          1. `FUN_004061F0(-1, "Image\\Archive\\Extra2Resource", 0x01567A80, 18, 0, 0)`;
+          2. return.
+
+          For portable host testing, the reconstruction adds a null-services guard and a null-dispatch guard so unit tests can execute without dereferencing or calling native absolute addresses. Both are harness-only safety paths and are not claimed as native control flow.
+
+          `FUN_004066E0`, `FUN_00406700`, and `FUN_00406740` are parallel assignments and are not modified by this recovery.
+
+          ## Tests
+
+          `tests/unit/test_fun_00406720.cpp` verifies:
+
+          - portable null-services early exit;
+          - portable missing-dispatch early exit;
+          - exactly one dispatch when the service is present;
+          - exact message index `-1`;
+          - exact `Image\\Archive\\Extra2Resource` literal;
+          - direct table token `0x01567A80` and count `18`;
+          - exact null/zero resolved-table pair.
+          EOF
+
+      - name: Reserve metadata and wire target only
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+
+          target = 'FUN_00406720'
+          claim = 'SEQ-00406720'
+
+          claims = Path('database/claims.csv')
+          with claims.open(newline='') as f:
+              rows = list(csv.DictReader(f))
+              fields = list(rows[0].keys())
+          if any(r['stable_id'] == target and r.get('active', '').lower() == 'true' for r in rows):
+              raise SystemExit(f'{target} unexpectedly became claimed')
+          if any(r['stable_id'] == target for r in rows):
+              raise SystemExit(f'{target} already has a claim row')
+          rows.append({
+              'claim_id': claim,
+              'stable_id': target,
+              'owner': 'coordinator',
+              'branch': 'decomp/00406720-next',
+              'task': 'sequential decomp of Extra2Resource forwarding wrapper',
+              'claimed_at': '2026-09-21T23:48:00Z',
+              'expires_at': '',
+              'pr': '',
+              'active': 'true',
+          })
+          with claims.open('w', newline='') as f:
+              w = csv.DictWriter(f, fieldnames=fields, lineterminator='\n')
+              w.writeheader(); w.writerows(rows)
+
+          functions = Path('database/functions.csv')
+          with functions.open(newline='') as f:
+              rows = list(csv.DictReader(f))
+              fields = list(rows[0].keys())
+          if any(r['stable_id'] == target for r in rows):
+              raise SystemExit(f'{target} unexpectedly exists in functions.csv')
+          rows.append({
+              'stable_id': target,
+              'va': '0x00406720',
+              'rva': '0x00006720',
+              'section': '.text',
+              'size': '27',
+              'provisional_name': target,
+              'refined_name': '',
+              'workflow_status': 'ACTIVE',
+              'confidence': 'HIGH',
+              'fast_pass': 'true',
+              'fast_pass_validated': 'false',
+              'converted': 'false',
+              'refined': 'false',
+              'verified': 'false',
+              'matched': 'false',
+              'linked': 'false',
+              'calling_convention': 'cdecl',
+              'return_type': 'void',
+              'arguments': 'void',
+              'this_type': 'void',
+              'module': 'UNKNOWN',
+              'subsystem': 'Resource',
+              'source_file': 'src/recovered/fun_00406720.cpp',
+              'owner': 'coordinator',
+              'claim_id': claim,
+              'pr': '',
+              'commit': '',
+              'test': 'tests/unit/test_fun_00406720.cpp',
+              'evidence': 'decomp/evidence/fun_00406720.md',
+              'notes': 'Extra2Resource fixed -1 forwarding wrapper with exact eighteen-entry direct table and no resolved table',
+          })
+          with functions.open('w', newline='') as f:
+              w = csv.DictWriter(f, fieldnames=fields, lineterminator='\n')
+              w.writeheader(); w.writerows(rows)
+
+          history = Path('database/history.csv')
+          event = 'FUN_00406720,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered Extra2Resource forwarding wrapper with exact eighteen-entry direct table contract'
+          text = history.read_text(encoding='utf-8')
+          if event not in text:
+              history.write_text(text.rstrip('\n') + '\n' + event + '\n', encoding='utf-8')
+
+          cmake = Path('CMakeLists.txt')
+          text = cmake.read_text(encoding='utf-8')
+          src_line = '    src/recovered/fun_00406720.cpp\n'
+          test_line = '    tests/unit/test_fun_00406720.cpp\n'
+          if src_line not in text:
+              anchor = '    src/recovered/fun_00406700.cpp\n'
+              if anchor not in text:
+                  raise SystemExit('CMake source anchor FUN_00406700 missing')
+              text = text.replace(anchor, anchor + src_line, 1)
+          if test_line not in text:
+              anchor = '    tests/unit/test_fun_00406700.cpp\n'
+              if anchor not in text:
+                  raise SystemExit('CMake test anchor FUN_00406700 missing')
+              text = text.replace(anchor, anchor + test_line, 1)
+          cmake.write_text(text, encoding='utf-8')
+
+          smoke = Path('tests/unit/test_smoke.cpp')
+          text = smoke.read_text(encoding='utf-8')
+          if 'void test_fun_00406720();' not in text:
+              anchor = 'void test_fun_00406700();\n'
+              if anchor not in text:
+                  raise SystemExit('smoke declaration anchor FUN_00406700 missing')
+              text = text.replace(anchor, anchor + 'void test_fun_00406720();\n', 1)
+          if '    test_fun_00406720();' not in text:
+              anchor = '    test_fun_00406700();\n'
+              if anchor not in text:
+                  raise SystemExit('smoke call anchor FUN_00406700 missing')
+              text = text.replace(anchor, anchor + '    test_fun_00406720();\n', 1)
+          smoke.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Regenerate canonical reports
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+
+      - name: Validate metadata and reports
+        run: python tools/validate/validate.py
+
+      - name: Build and test
+        run: |
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+
+      - name: Diff hygiene and reject binary products
+        shell: bash
+        run: |
+          git diff --check
+          if git diff --name-only HEAD | grep -Ei '\.(exe|dll|obj|lib|pdb|pak|arc|bin)$'; then
+            echo 'Binary-like file detected in tracked delta' >&2
+            exit 1
+          fi
+          if git ls-files --others --exclude-standard | grep -Ei '\.(exe|dll|obj|lib|pdb|pak|arc|bin)$'; then
+            echo 'Untracked binary-like file detected' >&2
+            exit 1
+          fi
+
+      - name: Commit decompilation and remove temporary workflow
+        shell: bash
+        run: |
+          rm .github/workflows/decomp-00406720.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --check
+          if git diff --cached --name-only | grep -Ei '\.(exe|dll|obj|lib|pdb|pak|arc|bin)$'; then
+            echo 'Binary-like staged file detected' >&2
+            exit 1
+          fi
+          git commit -m 'Decompile FUN_00406720 Extra2Resource forwarding wrapper'
+          git push origin HEAD:decomp/00406720-next
