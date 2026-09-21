@@ -1,0 +1,114 @@
+name: Decompile FUN_00406680
+
+on:
+  push:
+    branches:
+      - decomp/00406680-next
+
+permissions:
+  contents: write
+
+jobs:
+  decompile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/00406680-next
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Restore only FUN_00406680 recovered files
+        shell: bash
+        run: |
+          SOURCE=53d6980cc02c03729a414a3fdb26d0ceda45243f
+          git fetch origin "$SOURCE"
+          git checkout "$SOURCE" -- \
+            include/re5/recovered/fun_00406680.hpp \
+            src/recovered/fun_00406680.cpp \
+            tests/unit/test_fun_00406680.cpp \
+            decomp/evidence/fun_00406680.md
+
+      - name: Add metadata build wiring and claim
+        shell: python
+        run: |
+          import csv
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          target = 'FUN_00406680'
+          claim = 'SEQ-00406680'
+
+          claims = Path('database/claims.csv')
+          with claims.open(newline='') as f:
+              rows = list(csv.DictReader(f)); fields = list(rows[0].keys())
+          if any(r['stable_id'] == target and r.get('active', '').lower() == 'true' for r in rows):
+              raise SystemExit(f'{target} unexpectedly became claimed')
+          rows.append({'claim_id': claim,'stable_id': target,'owner': 'coordinator','branch': 'decomp/00406680-next','task': 'sequential decomp of ShopResource forwarding wrapper','claimed_at': datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00','Z'),'expires_at': '','pr': '','active': 'true'})
+          with claims.open('w', newline='') as f:
+              w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(rows)
+
+          functions=Path('database/functions.csv')
+          with functions.open(newline='') as f:
+              rows=list(csv.DictReader(f)); fields=list(rows[0].keys())
+          if any(r['stable_id']==target for r in rows): raise SystemExit(f'{target} unexpectedly exists in functions.csv')
+          rows.append({'stable_id':target,'va':'0x00406680','rva':'0x00006680','section':'.text','size':'27','provisional_name':target,'refined_name':'','workflow_status':'ACTIVE','confidence':'HIGH','fast_pass':'true','fast_pass_validated':'false','converted':'false','refined':'false','verified':'false','matched':'false','linked':'false','calling_convention':'cdecl','return_type':'void','arguments':'void','this_type':'void','module':'UNKNOWN','subsystem':'Resource','source_file':'src/recovered/fun_00406680.cpp','owner':'coordinator','claim_id':claim,'pr':'','commit':'','test':'tests/unit/test_fun_00406680.cpp','evidence':'decomp/evidence/fun_00406680.md','notes':'ShopResource fixed -1 forwarding wrapper with exact three-entry direct table and no resolved table; caller also aliases Shop2Resource to this wrapper'})
+          with functions.open('w',newline='') as f:
+              w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(rows)
+
+          history=Path('database/history.csv')
+          event='FUN_00406680,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered ShopResource fixed -1 forwarding wrapper with exact three-entry direct table'
+          text=history.read_text(encoding='utf-8')
+          if event not in text: history.write_text(text.rstrip('\n')+'\n'+event+'\n',encoding='utf-8')
+
+          cmake=Path('CMakeLists.txt'); text=cmake.read_text(encoding='utf-8')
+          src='    src/recovered/fun_00406680.cpp\n'; test='    tests/unit/test_fun_00406680.cpp\n'
+          if src not in text:
+              anchor='    src/recovered/fun_00406620.cpp\n'
+              if anchor not in text: raise SystemExit('CMake source anchor missing')
+              text=text.replace(anchor,anchor+src,1)
+          if test not in text:
+              anchor='    tests/unit/test_fun_00406620.cpp\n'
+              if anchor not in text: raise SystemExit('CMake test anchor missing')
+              text=text.replace(anchor,anchor+test,1)
+          cmake.write_text(text,encoding='utf-8')
+
+          smoke=Path('tests/unit/test_smoke.cpp'); text=smoke.read_text(encoding='utf-8')
+          if 'void test_fun_00406680();' not in text:
+              anchor='void test_fun_00406620();\n'
+              if anchor not in text: raise SystemExit('smoke declaration anchor missing')
+              text=text.replace(anchor,anchor+'void test_fun_00406680();\n',1)
+          if '    test_fun_00406680();' not in text:
+              anchor='    test_fun_00406620();\n'
+              if anchor not in text: raise SystemExit('smoke call anchor missing')
+              text=text.replace(anchor,anchor+'    test_fun_00406680();\n',1)
+          smoke.write_text(text,encoding='utf-8')
+
+      - name: Regenerate canonical reports
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+      - name: Validate metadata and reports
+        run: python tools/validate/validate.py
+      - name: Build and test
+        run: |
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Diff hygiene and reject binary products
+        shell: bash
+        run: |
+          git diff --check
+          if git diff --name-only HEAD | grep -Ei '\.(exe|dll|obj|lib|pdb|pak|arc|bin)$'; then exit 1; fi
+      - name: Commit decompilation and remove temporary workflow
+        shell: bash
+        run: |
+          rm .github/workflows/decomp-00406680.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --check
+          git commit -m 'Decompile FUN_00406680 ShopResource forwarding wrapper'
+          git push origin HEAD:decomp/00406680-next
