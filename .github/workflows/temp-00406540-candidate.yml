@@ -1,0 +1,337 @@
+name: prepare-00406540-candidate
+
+on:
+  push:
+    branches:
+      - decomp/00406540-next
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/00406540-next
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Materialize FUN_00406540 recovery
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cat > include/re5/recovered/fun_00406540.hpp <<'EOF'
+          #pragma once
+
+          #include <cstdint>
+
+          namespace re5::recovered {
+
+          struct FUN_00406540_Services {
+              void* context;
+              void (*dispatch_resource_group)(
+                  void* context,
+                  std::uint32_t selector,
+                  const char* archive_name,
+                  std::uintptr_t primary_table,
+                  std::uint32_t primary_count,
+                  std::uintptr_t secondary_table,
+                  std::uint32_t secondary_count) noexcept;
+          };
+
+          void FUN_00406540_SetServices(const FUN_00406540_Services* services) noexcept;
+          void FUN_00406540(std::uint32_t selector) noexcept;
+
+          } // namespace re5::recovered
+          EOF
+
+          cat > src/recovered/fun_00406540.cpp <<'EOF'
+          #include "re5/recovered/fun_00406540.hpp"
+
+          namespace re5::recovered {
+          namespace {
+          const FUN_00406540_Services* g_services = nullptr;
+
+          constexpr const char* k_archive_name = "Image\\Archive\\Game2Resource";
+          constexpr std::uintptr_t k_primary_table = 0x015676D0U;
+          constexpr std::uint32_t k_primary_count = 2U;
+          constexpr std::uintptr_t k_secondary_table = 0x015676E0U;
+          constexpr std::uint32_t k_secondary_count = 5U;
+          } // namespace
+
+          void FUN_00406540_SetServices(const FUN_00406540_Services* services) noexcept {
+              g_services = services;
+          }
+
+          void FUN_00406540(std::uint32_t selector) noexcept {
+              const auto* services = g_services;
+              if (services == nullptr || services->dispatch_resource_group == nullptr) {
+                  return;
+              }
+
+              services->dispatch_resource_group(
+                  services->context,
+                  selector,
+                  k_archive_name,
+                  k_primary_table,
+                  k_primary_count,
+                  k_secondary_table,
+                  k_secondary_count);
+          }
+
+          } // namespace re5::recovered
+          EOF
+
+          cat > tests/unit/test_fun_00406540.cpp <<'EOF'
+          #include "re5/recovered/fun_00406540.hpp"
+
+          #include <cassert>
+          #include <cstdint>
+          #include <cstring>
+
+          namespace {
+          struct State {
+              unsigned calls = 0U;
+              std::uint32_t selector = 0U;
+              const char* archive_name = nullptr;
+              std::uintptr_t primary_table = 0U;
+              std::uint32_t primary_count = 0U;
+              std::uintptr_t secondary_table = 0U;
+              std::uint32_t secondary_count = 0U;
+          };
+
+          void dispatch_resource_group(
+              void* context,
+              std::uint32_t selector,
+              const char* archive_name,
+              std::uintptr_t primary_table,
+              std::uint32_t primary_count,
+              std::uintptr_t secondary_table,
+              std::uint32_t secondary_count) noexcept {
+              auto& state = *static_cast<State*>(context);
+              ++state.calls;
+              state.selector = selector;
+              state.archive_name = archive_name;
+              state.primary_table = primary_table;
+              state.primary_count = primary_count;
+              state.secondary_table = secondary_table;
+              state.secondary_count = secondary_count;
+          }
+          } // namespace
+
+          void test_fun_00406540() {
+              using namespace re5::recovered;
+
+              // Portable-host early exits only. The original 33-byte wrapper has no branch.
+              FUN_00406540_SetServices(nullptr);
+              FUN_00406540(3U);
+
+              State no_dispatch_state{};
+              FUN_00406540_Services no_dispatch_services{&no_dispatch_state, nullptr};
+              FUN_00406540_SetServices(&no_dispatch_services);
+              FUN_00406540(5U);
+              assert(no_dispatch_state.calls == 0U);
+
+              State state{};
+              FUN_00406540_Services services{&state, dispatch_resource_group};
+              FUN_00406540_SetServices(&services);
+              FUN_00406540(12U);
+
+              assert(state.calls == 1U);
+              assert(state.selector == 12U);
+              assert(state.archive_name != nullptr);
+              assert(std::strcmp(state.archive_name, "Image\\Archive\\Game2Resource") == 0);
+              assert(state.primary_table == 0x015676D0U);
+              assert(state.primary_count == 2U);
+              assert(state.secondary_table == 0x015676E0U);
+              assert(state.secondary_count == 5U);
+
+              FUN_00406540_SetServices(nullptr);
+          }
+          EOF
+
+          cat > decomp/evidence/fun_00406540.md <<'EOF'
+          # FUN_00406540 evidence
+
+          ## Target
+
+          - Evidence was taken only from the exact local reference executable; no binary is committed.
+          - Reference SHA-256: `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815`.
+          - Reference size: 19,977,216 bytes.
+          - PE32 x86 image base: `0x00400000`.
+          - Function VA `0x00406540`, RVA `0x00006540`.
+          - Candidate body: 33 bytes (`0x21`), through the `ret` at `0x00406560`.
+          - Candidate byte SHA-256: `8e3b58077580cd2e479ae529519d330d79de389b1ea1d3473cadec821d346cea`.
+          - `0x00406561..0x0040656F` is `INT3` padding; the next aligned root begins at `0x00406570`.
+
+          ## Instruction evidence
+
+          ```text
+          00406540  mov eax,[esp+04h]
+          00406544  push 05h
+          00406546  push 015676E0h
+          0040654B  push 02h
+          0040654D  push 015676D0h
+          00406552  push 0137B8E4h
+          00406557  push eax
+          00406558  call 004061F0h
+          0040655D  add esp,18h
+          00406560  ret
+          ```
+
+          The wrapper therefore accepts one caller-cleaned dword argument and forwards six cdecl arguments to the separately assigned `0x004061F0`:
+
+          1. incoming selector;
+          2. archive literal at `0x0137B8E4`;
+          3. primary table token `0x015676D0`;
+          4. primary count `2`;
+          5. secondary table token `0x015676E0`;
+          6. secondary count `5`.
+
+          The literal at `0x0137B8E4` is `Image\\Archive\\Game2Resource`.
+
+          The table boundaries are internally consistent with the pushed counts: `0x015676E0 - 0x015676D0 = 0x10 = 2 * 8`, and the following table begins after five 8-byte records at `0x01567708`.
+
+          ## Table evidence
+
+          The two primary records at `0x015676D0` are 8-byte `(name pointer, resource token)` pairs:
+
+          ```text
+          0 sound\\bgm_dc\\st_door       016E2830
+          1 sound\\bgm_dc\\st_camera_dc  016E2830
+          ```
+
+          The five secondary records at `0x015676E0` are:
+
+          ```text
+          0 id\\cockpit\\cp_life_360_dc  01692E3C
+          1 id\\cockpit\\act_btn_360     01692E3C
+          2 id\\slot\\cp_bukislot_360    01692E3C
+          3 id\\scope\\cp_scope_360      01692E3C
+          4 id\\cockpit\\cp_aim_ps3      01692E3C
+          ```
+
+          These records are evidence for the constants passed by the wrapper; the reconstruction does not duplicate the implementation of `0x004061F0` or reinterpret its table-processing internals.
+
+          ## Caller evidence
+
+          A direct `CALL rel32` scan of the exact `.text` image finds one direct call to `0x00406540`, at `0x00509AE3`.
+
+          Immediately before that call the caller compares the active resource name with the same `Image\\Archive\\Game2Resource` literal and then executes:
+
+          ```text
+          00509AD0  mov eax,[0165BBB0h]
+          00509AD5  mov ecx,[eax+20h]
+          00509AD8  imul ecx,ecx,00008C74h
+          00509ADE  mov edx,[ecx+eax+70h]
+          00509AE2  push edx
+          00509AE3  call 00406540h
+          00509AE8  add esp,04h
+          ```
+
+          The caller passes the active-slot field at `+0x70` and performs caller cleanup, confirming the one-dword cdecl contract.
+
+          ## Early exits and reconstruction choice
+
+          The original 33-byte machine-code wrapper has no conditional branch or early-return path: it always forwards to `0x004061F0` and returns. The portable host reconstruction adds only null-service and null-dispatch guards so unit tests can execute without the original engine. Those two harness-only early exits are explicitly tested and are not claimed as original binary control flow.
+
+          Because `FUN_004061F0` is assigned in parallel, this recovery deliberately treats it as an injectable opaque dispatch service. No code, metadata, or behavior belonging to `FUN_004061F0`, `FUN_00405930`, or `FUN_00406510` is modified.
+          EOF
+
+      - name: Wire candidate and update metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import csv
+
+          cmake = Path('CMakeLists.txt')
+          text = cmake.read_text()
+          source_anchor = '    src/recovered/fun_00406510.cpp\n'
+          test_anchor = '    tests/unit/test_fun_00406510.cpp\n'
+          if 'src/recovered/fun_00406540.cpp' not in text:
+              if source_anchor not in text:
+                  raise SystemExit('CMake source anchor missing')
+              text = text.replace(source_anchor, source_anchor + '    src/recovered/fun_00406540.cpp\n', 1)
+          if 'tests/unit/test_fun_00406540.cpp' not in text:
+              if test_anchor not in text:
+                  raise SystemExit('CMake test anchor missing')
+              text = text.replace(test_anchor, test_anchor + '    tests/unit/test_fun_00406540.cpp\n', 1)
+          cmake.write_text(text)
+
+          smoke = Path('tests/unit/test_smoke.cpp')
+          text = smoke.read_text()
+          decl_anchor = 'void test_fun_00406510();\n'
+          call_anchor = '    test_fun_00406510();\n'
+          if 'void test_fun_00406540();' not in text:
+              if decl_anchor not in text:
+                  raise SystemExit('smoke declaration anchor missing')
+              text = text.replace(decl_anchor, decl_anchor + 'void test_fun_00406540();\n', 1)
+          if '    test_fun_00406540();' not in text:
+              if call_anchor not in text:
+                  raise SystemExit('smoke call anchor missing')
+              text = text.replace(call_anchor, call_anchor + '    test_fun_00406540();\n', 1)
+          smoke.write_text(text)
+
+          def append_csv(path, key, row):
+              p = Path(path)
+              with p.open(newline='') as f:
+                  rows = list(csv.reader(f))
+              if any(r and r[0] == key for r in rows[1:]):
+                  raise SystemExit(f'{key} already present in {path}')
+              with p.open('a', newline='') as f:
+                  csv.writer(f, lineterminator='\n').writerow(row)
+
+          append_csv('database/claims.csv', 'SEQ-00406540', [
+              'SEQ-00406540', 'FUN_00406540', 'coordinator', 'decomp/00406540-next',
+              'sequential decomp of Game2Resource forwarding wrapper',
+              '2026-09-21T22:29:00Z', '', '', 'true'
+          ])
+
+          append_csv('database/functions.csv', 'FUN_00406540', [
+              'FUN_00406540', '0x00406540', '0x00006540', '.text', '33',
+              'FUN_00406540', '', 'ACTIVE', 'HIGH', 'true', 'false',
+              'false', 'false', 'false', 'false', 'false', 'cdecl', 'void',
+              'std::uint32_t selector', 'void', 'UNKNOWN', 'Resource',
+              'src/recovered/fun_00406540.cpp', 'coordinator', 'SEQ-00406540',
+              '', '', 'tests/unit/test_fun_00406540.cpp',
+              'decomp/evidence/fun_00406540.md',
+              'Game2Resource forwarding wrapper to separately assigned 0x004061F0 with exact archive literal and 2/5 table tokens'
+          ])
+
+          append_csv('database/history.csv', 'FUN_00406540', [
+              'FUN_00406540', '2026-09-22', 'UNSEEN', 'FAST_PASS', '',
+              'coordinator',
+              'recovered Game2Resource forwarding wrapper with exact archive literal and 2/5 table tokens'
+          ])
+          PY
+
+      - name: Regenerate and validate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          git diff --check
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+
+      - name: Commit validated candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm .github/workflows/temp-00406540-candidate.yml
+          git add -A
+          git commit -m "Recover FUN_00406540 Game2Resource wrapper"
+          git push origin HEAD:decomp/00406540-next
