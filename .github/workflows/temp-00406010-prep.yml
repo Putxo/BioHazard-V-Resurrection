@@ -1,0 +1,136 @@
+name: prepare-00406010
+
+on:
+  push:
+    branches: [decomp/00406010-next]
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply FUN_00406010 metadata and build wiring
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import csv
+
+          p = Path('CMakeLists.txt')
+          text = p.read_text(encoding='utf-8')
+          src_line = '    src/recovered/fun_00406010.cpp\n'
+          if src_line not in text:
+              anchor = '    src/recovered/fun_00405930.cpp\n'
+              if anchor not in text:
+                  anchor = '    src/recovered/fun_00405df0.cpp\n'
+              if anchor not in text:
+                  raise SystemExit('source anchor missing')
+              text = text.replace(anchor, anchor + src_line, 1)
+          test_line = '    tests/unit/test_fun_00406010.cpp\n'
+          if test_line not in text:
+              anchor = '    tests/unit/test_fun_00405930.cpp\n'
+              if anchor not in text:
+                  anchor = '    tests/unit/test_fun_00405df0.cpp\n'
+              if anchor not in text:
+                  raise SystemExit('test anchor missing')
+              text = text.replace(anchor, anchor + test_line, 1)
+          p.write_text(text, encoding='utf-8')
+
+          p = Path('tests/unit/test_smoke.cpp')
+          text = p.read_text(encoding='utf-8')
+          decl = 'void test_fun_00406010();\n'
+          if decl not in text:
+              anchor = 'void test_fun_00405930();\n'
+              if anchor not in text:
+                  anchor = 'void test_fun_00405df0();\n'
+              if anchor not in text:
+                  raise SystemExit('smoke declaration anchor missing')
+              text = text.replace(anchor, anchor + decl, 1)
+          call = '    test_fun_00406010();\n'
+          if call not in text:
+              anchor = '    test_fun_00405930();\n'
+              if anchor not in text:
+                  anchor = '    test_fun_00405df0();\n'
+              if anchor not in text:
+                  raise SystemExit('smoke call anchor missing')
+              text = text.replace(anchor, anchor + call, 1)
+          p.write_text(text, encoding='utf-8')
+
+          p = Path('database/claims.csv')
+          with p.open(newline='', encoding='utf-8') as f:
+              rows = list(csv.DictReader(f))
+              fields = list(rows[0].keys()) if rows else ['claim_id','stable_id','owner','branch','task','claimed_at','expires_at','pr','active']
+          if any(r.get('stable_id') == 'FUN_00406010' and r.get('active','').lower() == 'true' for r in rows):
+              existing = next(r for r in rows if r.get('stable_id') == 'FUN_00406010' and r.get('active','').lower() == 'true')
+              if existing.get('branch') != 'decomp/00406010-next':
+                  raise SystemExit('FUN_00406010 already claimed by ' + existing.get('branch',''))
+          elif not any(r.get('stable_id') == 'FUN_00406010' for r in rows):
+              rows.append({
+                  'claim_id':'SEQ-00406010','stable_id':'FUN_00406010','owner':'coordinator',
+                  'branch':'decomp/00406010-next','task':'sequential decomp of recursive convertDir resource walker',
+                  'claimed_at':'2026-09-21T22:04:00Z','expires_at':'','pr':'','active':'true'
+              })
+          with p.open('w', newline='', encoding='utf-8') as f:
+              w = csv.DictWriter(f, fieldnames=fields, lineterminator='\n')
+              w.writeheader(); w.writerows(rows)
+
+          p = Path('database/functions.csv')
+          with p.open(newline='', encoding='utf-8') as f:
+              rows = list(csv.DictReader(f)); fields = list(rows[0].keys())
+          if not any(r.get('stable_id') == 'FUN_00406010' for r in rows):
+              rows.append({
+                  'stable_id':'FUN_00406010','va':'0x00406010','rva':'0x00006010','section':'.text','size':'467',
+                  'provisional_name':'FUN_00406010','refined_name':'','workflow_status':'ACTIVE','confidence':'HIGH',
+                  'fast_pass':'true','fast_pass_validated':'false','converted':'false','refined':'false','verified':'false','matched':'false','linked':'false',
+                  'calling_convention':'cdecl','return_type':'void','arguments':'const char* base_path; const char* key; const char* extension','this_type':'void',
+                  'module':'UNKNOWN','subsystem':'Resource','source_file':'src/recovered/fun_00406010.cpp','owner':'coordinator','claim_id':'SEQ-00406010',
+                  'pr':'','commit':'','test':'tests/unit/test_fun_00406010.cpp','evidence':'decomp/evidence/fun_00406010.md',
+                  'notes':'recursive convertDir resource walker with wildcard scan dot-entry filtering extension-token truncation resolve/create suppressor gates and registration sink'
+              })
+          with p.open('w', newline='', encoding='utf-8') as f:
+              w = csv.DictWriter(f, fieldnames=fields, lineterminator='\n')
+              w.writeheader(); w.writerows(rows)
+
+          p = Path('database/history.csv')
+          with p.open(newline='', encoding='utf-8') as f:
+              rows = list(csv.DictReader(f)); fields = list(rows[0].keys())
+          if not any(r.get('stable_id') == 'FUN_00406010' and r.get('new_status') == 'FAST_PASS' for r in rows):
+              rows.append({
+                  'stable_id':'FUN_00406010','date':'2026-09-22','old_status':'UNSEEN','new_status':'FAST_PASS','commit':'',
+                  'owner':'coordinator','reason':'recovered recursive convertDir walker with extension-token filtering and suppressor-aware registration'
+              })
+          with p.open('w', newline='', encoding='utf-8') as f:
+              w = csv.DictWriter(f, fieldnames=fields, lineterminator='\n')
+              w.writeheader(); w.writerows(rows)
+          PY
+      - name: Regenerate canonical reports
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+      - name: Validate metadata and diff
+        run: |
+          python tools/validate/validate.py
+          git diff --check
+      - name: Configure
+        run: cmake --preset dev
+      - name: Build
+        run: cmake --build --preset dev
+      - name: Test
+        run: ctest --preset dev
+      - name: Commit prepared candidate
+        shell: bash
+        run: |
+          rm .github/workflows/temp-00406010-prep.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add CMakeLists.txt tests/unit/test_smoke.cpp database/claims.csv database/functions.csv database/history.csv reports/ src/recovered/fun_00406010.cpp include/re5/recovered/fun_00406010.hpp tests/unit/test_fun_00406010.cpp decomp/evidence/fun_00406010.md .github/workflows/temp-00406010-prep.yml
+          git commit -m 'Decompile FUN_00406010 recursive convertDir resource walker'
+          git push origin HEAD:decomp/00406010-next
