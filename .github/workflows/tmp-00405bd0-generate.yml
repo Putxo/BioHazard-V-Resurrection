@@ -1,0 +1,31 @@
+name: tmp-00405bd0-generate
+
+on:
+  push:
+    branches: [decomp/00405bd0-next]
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Regenerate reports and validate metadata
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+      - name: Build and test
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --config Release
+          ctest --test-dir build --output-on-failure -C Release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: generated-00405bd0
+          path: |
+            reports/progress.md
+            reports/functions.json
+            reports/progress-treemap.svg
