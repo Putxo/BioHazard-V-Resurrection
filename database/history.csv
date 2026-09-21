@@ -166,3 +166,4 @@ FUN_004061F0,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,0a08af19efbd4c5387706ab5b6
 FUN_00406570,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered TitleResource registration wrapper with marker log and exact 24-entry direct table forwarding contract
 FUN_00406570,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,ee9c21c57dba196b881d2c7df84235ffd826e327,coordinator,PR #190 completed 5/5 CI checks
 FUN_004065A0,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered 42-byte Title2Resource wrapper with exact diagnostic marker fixed -1 selector and two-entry direct table
+FUN_004065A0,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,6d8f0b34fedac6e2400375631e22356d10da8aad,coordinator,PR #194 completed 5/5 CI checks
