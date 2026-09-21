@@ -151,3 +151,5 @@ FUN_00405DF0,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered message-resource
 FUN_00405DF0,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,151ee48c5f3ef44c0d32e0006373e7c0bee98be2,coordinator,PR #164 completed 5/5 CI checks
 FUN_00405A60,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered static six-entry resource registration pass with archive preflight early cancel and loading-state restoration
 FUN_00405A60,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,4ff96307fac4ebb8a4481f79e1cc9f81df22c1e1,coordinator,PR #169 completed 5/5 CI checks
+FUN_004064E0,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered 33-byte GameResource forwarding wrapper with exact selector archive literal table tokens and counts
+FUN_004064E0,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,dcbf0ac0fa50d1581f9eb3396910d980fff510d9,coordinator,PR #174 completed 5/5 CI checks
