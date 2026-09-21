@@ -3,6 +3,11 @@ name: tmp-00405bd0-generate
 on:
   push:
     branches: [decomp/00405bd0-next]
+    paths-ignore:
+      - 'reports/**'
+
+permissions:
+  contents: write
 
 jobs:
   generate:
@@ -17,13 +22,6 @@ jobs:
           python tools/reports/report.py
           python tools/progress/treemap.py
           python tools/validate/validate.py
-      - uses: actions/upload-artifact@v4
-        with:
-          name: generated-00405bd0
-          path: |
-            reports/progress.md
-            reports/functions.json
-            reports/progress-treemap.svg
       - name: Install Ninja
         run: sudo apt-get update && sudo apt-get install -y ninja-build
       - name: Configure
@@ -32,3 +30,12 @@ jobs:
         run: cmake --build --preset dev
       - name: Test
         run: ctest --preset dev
+      - name: Commit generated reports
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reports/progress.md reports/functions.json reports/progress-treemap.svg
+          if ! git diff --cached --quiet; then
+            git commit -m 'Regenerate FUN_00405BD0 reports'
+            git push
+          fi
