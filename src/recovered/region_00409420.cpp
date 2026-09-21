@@ -35,9 +35,9 @@ bool FUN_00409530(const FUN_00409480_Object* self) noexcept {
 
 bool FUN_00409550(const FUN_00409480_Object* self) noexcept {
     const std::uint32_t value = self->flags_04;
-    const std::uint8_t low = static_cast<std::uint8_t>(value);
+    const std::uint8_t masked_low = static_cast<std::uint8_t>(value) & 0x7U;
     const std::uint8_t shifted = static_cast<std::uint8_t>(value >> 10U);
-    return (low & 0x7U) == 2U && (low & shifted) != 0U && (shifted & 0x10U) != 0U;
+    return masked_low == 2U && (masked_low & shifted) != 0U && (shifted & 0x10U) != 0U;
 }
 
 float* FUN_004095D0(FUN_00409480_Object* self) noexcept {
