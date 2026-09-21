@@ -2506,7 +2506,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2521,10 +2521,10 @@
     "source_file": "src/recovered/fun_00403af0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00403AF0",
-    "pr": "",
-    "commit": "",
+    "pr": "#149",
+    "commit": "2c378d4a85eaf4a69c4c8b8a57ed5faf748dc1e7",
     "test": "tests/unit/test_fun_00403af0.cpp",
     "evidence": "decomp/evidence/fun_00403af0.md",
-    "notes": "registry-table resource scanner with name validation registry ensure dot-entry filtering recursive descent table lookup bind and missing-report side effects"
+    "notes": "registry-table resource scanner with name validation registry ensure dot-entry filtering recursive descent table lookup bind and missing-report side effects; PR #149 CI 5/5 PASS"
   }
 ]
