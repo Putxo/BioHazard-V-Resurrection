@@ -2698,7 +2698,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2713,10 +2713,10 @@
     "source_file": "src/recovered/fun_00405df0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00405DF0",
-    "pr": "",
-    "commit": "",
+    "pr": "#164",
+    "commit": "151ee48c5f3ef44c0d32e0006373e7c0bee98be2",
     "test": "tests/unit/test_fun_00405df0.cpp",
     "evidence": "decomp/evidence/fun_00405df0.md",
-    "notes": "message-resource registration batch under temporary selector with exact nine table entries special registration cancel cleanup and global state restoration"
+    "notes": "message-resource registration batch under temporary selector with exact nine table entries special registration cancel cleanup and global state restoration; PR #164 CI 5/5 PASS"
   }
 ]
