@@ -2890,7 +2890,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2905,11 +2905,11 @@
     "source_file": "src/recovered/fun_004061f0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004061F0",
-    "pr": "",
-    "commit": "",
+    "pr": "#181",
+    "commit": "0a08af19efbd4c5387706ab5b6178537e73adfdc",
     "test": "tests/unit/test_fun_004061f0.cpp",
     "evidence": "decomp/evidence/fun_004061f0.md",
-    "notes": "general archive resource registration helper with optional indexed path resolution two entry tables early archive-cancel cleanup and exact state restoration"
+    "notes": "general archive resource registration helper with optional indexed path resolution two entry tables early archive-cancel cleanup and exact state restoration; PR #181 CI 5/5 PASS"
   },
   {
     "stable_id": "FUN_00406540",
