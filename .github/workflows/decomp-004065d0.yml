@@ -1,0 +1,177 @@
+name: Decompile FUN_004065D0
+
+on:
+  push:
+    branches:
+      - decomp/004065d0-next
+
+permissions:
+  contents: write
+
+jobs:
+  decompile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/004065d0-next
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Reserve metadata and wire target only
+        shell: bash
+        run: |
+          test -f include/re5/recovered/fun_004065d0.hpp
+          test -f src/recovered/fun_004065d0.cpp
+          test -f tests/unit/test_fun_004065d0.cpp
+          test -f decomp/evidence/fun_004065d0.md
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+
+          target = 'FUN_004065D0'
+          claim = 'SEQ-004065D0'
+
+          claims = Path('database/claims.csv')
+          with claims.open(newline='') as f:
+              rows = list(csv.DictReader(f))
+              fields = list(rows[0].keys())
+          if any(r['stable_id'] == target and r.get('active', '').lower() == 'true' for r in rows):
+              raise SystemExit(f'{target} unexpectedly became claimed')
+          rows.append({
+              'claim_id': claim,
+              'stable_id': target,
+              'owner': 'coordinator',
+              'branch': 'decomp/004065d0-next',
+              'task': 'sequential decomp of ShowTitleResource forwarding wrapper',
+              'claimed_at': '2026-09-21T23:04:12Z',
+              'expires_at': '',
+              'pr': '',
+              'active': 'true',
+          })
+          with claims.open('w', newline='') as f:
+              w = csv.DictWriter(f, fieldnames=fields, lineterminator='\n')
+              w.writeheader(); w.writerows(rows)
+
+          functions = Path('database/functions.csv')
+          with functions.open(newline='') as f:
+              rows = list(csv.DictReader(f))
+              fields = list(rows[0].keys())
+          if any(r['stable_id'] == target for r in rows):
+              raise SystemExit(f'{target} unexpectedly exists in functions.csv')
+          rows.append({
+              'stable_id': target,
+              'va': '0x004065D0',
+              'rva': '0x000065D0',
+              'section': '.text',
+              'size': '42',
+              'provisional_name': target,
+              'refined_name': '',
+              'workflow_status': 'ACTIVE',
+              'confidence': 'HIGH',
+              'fast_pass': 'true',
+              'fast_pass_validated': 'false',
+              'converted': 'false',
+              'refined': 'false',
+              'verified': 'false',
+              'matched': 'false',
+              'linked': 'false',
+              'calling_convention': 'cdecl',
+              'return_type': 'void',
+              'arguments': 'void',
+              'this_type': '',
+              'module': 'UNKNOWN',
+              'subsystem': 'Resource',
+              'source_file': 'src/recovered/fun_004065d0.cpp',
+              'owner': 'coordinator',
+              'claim_id': claim,
+              'pr': '',
+              'commit': '',
+              'test': 'tests/unit/test_fun_004065d0.cpp',
+              'evidence': 'decomp/evidence/fun_004065d0.md',
+              'notes': 'ShowTitleResource fixed -1 forwarding wrapper with diagnostic marker exact five-entry direct table and no resolved table',
+          })
+          with functions.open('w', newline='') as f:
+              w = csv.DictWriter(f, fieldnames=fields, lineterminator='\n')
+              w.writeheader(); w.writerows(rows)
+
+          history = Path('database/history.csv')
+          event = 'FUN_004065D0,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered ShowTitleResource forwarding wrapper with diagnostic marker and exact five-entry direct table contract'
+          text = history.read_text(encoding='utf-8')
+          if event not in text:
+              history.write_text(text.rstrip('\n') + '\n' + event + '\n', encoding='utf-8')
+
+          cmake = Path('CMakeLists.txt')
+          text = cmake.read_text(encoding='utf-8')
+          src_line = '    src/recovered/fun_004065d0.cpp\n'
+          test_line = '    tests/unit/test_fun_004065d0.cpp\n'
+          if src_line not in text:
+              anchor = '    src/recovered/fun_004065a0.cpp\n'
+              if anchor not in text:
+                  raise SystemExit('CMake source anchor FUN_004065A0 missing')
+              text = text.replace(anchor, anchor + src_line, 1)
+          if test_line not in text:
+              anchor = '    tests/unit/test_fun_004065a0.cpp\n'
+              if anchor not in text:
+                  raise SystemExit('CMake test anchor FUN_004065A0 missing')
+              text = text.replace(anchor, anchor + test_line, 1)
+          cmake.write_text(text, encoding='utf-8')
+
+          smoke = Path('tests/unit/test_smoke.cpp')
+          text = smoke.read_text(encoding='utf-8')
+          if 'void test_fun_004065d0();' not in text:
+              anchor = 'void test_fun_004065a0();\n'
+              if anchor not in text:
+                  raise SystemExit('smoke declaration anchor FUN_004065A0 missing')
+              text = text.replace(anchor, anchor + 'void test_fun_004065d0();\n', 1)
+          if '    test_fun_004065d0();' not in text:
+              anchor = '    test_fun_004065a0();\n'
+              if anchor not in text:
+                  raise SystemExit('smoke call anchor FUN_004065A0 missing')
+              text = text.replace(anchor, anchor + '    test_fun_004065d0();\n', 1)
+          smoke.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Regenerate canonical reports
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+
+      - name: Validate metadata and reports
+        run: python tools/validate/validate.py
+
+      - name: Build and test
+        run: |
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+
+      - name: Diff hygiene and reject binary products
+        shell: bash
+        run: |
+          git diff --check
+          if git diff --name-only HEAD | grep -Ei '\.(exe|dll|obj|lib|pdb|pak|arc|bin)$'; then
+            echo 'Binary-like file detected in tracked delta' >&2
+            exit 1
+          fi
+          if git ls-files --others --exclude-standard | grep -Ei '\.(exe|dll|obj|lib|pdb|pak|arc|bin)$'; then
+            echo 'Untracked binary-like file detected' >&2
+            exit 1
+          fi
+
+      - name: Commit metadata reports and remove temporary workflow
+        shell: bash
+        run: |
+          rm .github/workflows/decomp-004065d0.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --check
+          if git diff --cached --name-only | grep -Ei '\.(exe|dll|obj|lib|pdb|pak|arc|bin)$'; then
+            echo 'Binary-like staged file detected' >&2
+            exit 1
+          fi
+          git commit -m 'Finalize FUN_004065D0 decompilation metadata and reports'
+          git push origin HEAD:decomp/004065d0-next
