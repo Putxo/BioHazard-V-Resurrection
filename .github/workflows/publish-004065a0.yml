@@ -1,0 +1,156 @@
+name: publish-004065a0
+
+on:
+  push:
+    branches:
+      - release/main-fastpass93-004065a0
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Apply only validated FUN_004065A0 delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin integration
+          git show origin/integration:database/functions.csv > /tmp/integration-functions.csv
+          git show origin/integration:database/claims.csv > /tmp/integration-claims.csv
+          git show origin/integration:database/history.csv > /tmp/integration-history.csv
+          python - <<'PY'
+          import csv
+          def one(path, key, value):
+              with open(path, newline='') as f:
+                  rows=list(csv.DictReader(f))
+              m=[r for r in rows if r[key]==value]
+              if len(m)!=1:
+                  raise SystemExit(f'{path}: expected one {value}, got {len(m)}')
+              return m[0]
+          r=one('/tmp/integration-functions.csv','stable_id','FUN_004065A0')
+          expected={
+              'fast_pass':'true','fast_pass_validated':'true','pr':'#194',
+              'commit':'6d8f0b34fedac6e2400375631e22356d10da8aad',
+              'source_file':'src/recovered/fun_004065a0.cpp',
+              'test':'tests/unit/test_fun_004065a0.cpp',
+              'evidence':'decomp/evidence/fun_004065a0.md'
+          }
+          for k,v in expected.items():
+              if r.get(k)!=v:
+                  raise SystemExit(f'integration target {k}={r.get(k)!r}, expected {v!r}')
+          one('/tmp/integration-claims.csv','stable_id','FUN_004065A0')
+          PY
+          mkdir -p include/re5/recovered src/recovered tests/unit decomp/evidence
+          git show origin/integration:include/re5/recovered/fun_004065a0.hpp > include/re5/recovered/fun_004065a0.hpp
+          git show origin/integration:src/recovered/fun_004065a0.cpp > src/recovered/fun_004065a0.cpp
+          git show origin/integration:tests/unit/test_fun_004065a0.cpp > tests/unit/test_fun_004065a0.cpp
+          git show origin/integration:decomp/evidence/fun_004065a0.md > decomp/evidence/fun_004065a0.md
+          python - <<'PY'
+          from pathlib import Path
+          import csv
+
+          def transplant(dest_path, src_path, key, value):
+              dest=Path(dest_path)
+              with dest.open(newline='') as f:
+                  dr=csv.DictReader(f); fields=dr.fieldnames; rows=list(dr)
+              with open(src_path,newline='') as f:
+                  sr=list(csv.DictReader(f))
+              match=[r for r in sr if r[key]==value]
+              if len(match)!=1: raise SystemExit(f'{src_path}: expected one {value}')
+              rows=[r for r in rows if r[key]!=value]
+              rows.append(match[0])
+              with dest.open('w',newline='') as f:
+                  w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(rows)
+
+          transplant('database/functions.csv','/tmp/integration-functions.csv','stable_id','FUN_004065A0')
+          transplant('database/claims.csv','/tmp/integration-claims.csv','stable_id','FUN_004065A0')
+
+          dest=Path('database/history.csv')
+          with dest.open(newline='') as f:
+              dr=csv.DictReader(f); fields=dr.fieldnames; rows=list(dr)
+          with open('/tmp/integration-history.csv',newline='') as f:
+              src=list(csv.DictReader(f))
+          target=[r for r in src if r['stable_id']=='FUN_004065A0']
+          if len(target)<2: raise SystemExit(f'expected target FAST_PASS and validation history, got {len(target)}')
+          rows=[r for r in rows if r['stable_id']!='FUN_004065A0'] + target
+          with dest.open('w',newline='') as f:
+              w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(rows)
+
+          cmake=Path('CMakeLists.txt'); text=cmake.read_text()
+          source='    src/recovered/fun_004065a0.cpp\n'; test='    tests/unit/test_fun_004065a0.cpp\n'
+          if source not in text:
+              anchor='    src/recovered/fun_00406570.cpp\n'
+              if anchor not in text: raise SystemExit('source anchor missing')
+              text=text.replace(anchor,anchor+source,1)
+          if test not in text:
+              anchor='    tests/unit/test_fun_00406570.cpp\n'
+              if anchor not in text: raise SystemExit('test anchor missing')
+              text=text.replace(anchor,anchor+test,1)
+          cmake.write_text(text)
+
+          smoke=Path('tests/unit/test_smoke.cpp'); text=smoke.read_text()
+          decl='void test_fun_004065a0();\n'; call='    test_fun_004065a0();\n'
+          if decl not in text:
+              anchor='void test_fun_00406570();\n'
+              if anchor not in text: raise SystemExit('smoke declaration anchor missing')
+              text=text.replace(anchor,anchor+decl,1)
+          if call not in text:
+              anchor='    test_fun_00406570();\n'
+              if anchor not in text: raise SystemExit('smoke call anchor missing')
+              text=text.replace(anchor,anchor+call,1)
+          smoke.write_text(text)
+          PY
+      - name: Publish README and regenerate canonical progress
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          progress=Path('reports/progress.md').read_text()
+          blocks=re.findall(r'```\n.*?```', progress, flags=re.S)
+          if len(blocks)<2: raise SystemExit('could not find progress/tier blocks')
+          readme=Path('README.md'); text=readme.read_text()
+          text,n1=re.subn(r'<!-- progress:start -->\n.*?\n<!-- progress:end -->', '<!-- progress:start -->\n'+blocks[0]+'\n<!-- progress:end -->', text, count=1, flags=re.S)
+          text,n2=re.subn(r'<!-- tiers:start -->\n.*?\n<!-- tiers:end -->', '<!-- tiers:start -->\n'+blocks[1]+'\n<!-- tiers:end -->', text, count=1, flags=re.S)
+          if n1!=1 or n2!=1: raise SystemExit(f'README marker replacement failed {n1=} {n2=}')
+          readme.write_text(text)
+          PY
+          python tools/validate/validate.py
+          git diff --check
+      - name: Configure build and tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ninja-build
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Reject binary-like release content
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git status --porcelain | awk '{print $2}' | grep -Ei '\.(exe|dll|obj)$'; then exit 31; fi
+      - name: Commit publication and remove helper
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/publish-004065a0.yml
+          git add CMakeLists.txt README.md database/functions.csv database/claims.csv database/history.csv reports include/re5/recovered/fun_004065a0.hpp src/recovered/fun_004065a0.cpp tests/unit/test_fun_004065a0.cpp tests/unit/test_smoke.cpp decomp/evidence/fun_004065a0.md .github/workflows/publish-004065a0.yml
+          if git diff --cached --name-only | grep -Ei '\.(exe|dll|obj)$'; then exit 32; fi
+          git diff --cached --check
+          git commit -m 'Publish FUN_004065A0 fast-pass dashboard [publish-004065a0]'
+          git push origin HEAD:release/main-fastpass93-004065a0
