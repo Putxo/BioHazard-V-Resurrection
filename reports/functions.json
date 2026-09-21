@@ -2666,7 +2666,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2681,11 +2681,11 @@
     "source_file": "src/recovered/fun_00405930.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00405930",
-    "pr": "",
-    "commit": "",
+    "pr": "#172",
+    "commit": "b4481a234514e9e47f863d2f33072b3a8bf86473",
     "test": "tests/unit/test_fun_00405930.cpp",
     "evidence": "decomp/evidence/fun_00405930.md",
-    "notes": "three-state node conversion worker with counted table allocation convert-message submission FUN_00405710 processing and early completion cleanup"
+    "notes": "three-state node conversion worker with counted table allocation convert-message submission FUN_00405710 processing and early completion cleanup; PR #172 CI 5/5 PASS"
   },
   {
     "stable_id": "FUN_00405BD0",
