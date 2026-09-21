@@ -45,6 +45,7 @@ void test_fun_00403f50();
 void test_fun_00404e60();
 void test_fun_00404f90();
 void test_fun_00405710();
+void test_fun_00405a60();
 void test_fun_00405bd0();
 void test_fun_00405df0();
 
@@ -91,6 +92,7 @@ int main() {
     test_fun_00404e60();
     test_fun_00404f90();
     test_fun_00405710();
+    test_fun_00405a60();
     test_fun_00405bd0();
     test_fun_00405df0();
     return 0;
