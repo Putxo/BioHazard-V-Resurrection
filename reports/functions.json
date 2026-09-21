@@ -2826,7 +2826,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2841,10 +2841,10 @@
     "source_file": "src/recovered/fun_00406010.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00406010",
-    "pr": "",
-    "commit": "",
+    "pr": "#176",
+    "commit": "5b516c943a6e225d66638905842d332586889ff8",
     "test": "tests/unit/test_fun_00406010.cpp",
     "evidence": "decomp/evidence/fun_00406010.md",
-    "notes": "recursive convertDir resource walker with wildcard scan dot-entry filtering extension-token truncation resolve/create suppressor gates and registration sink"
+    "notes": "recursive convertDir resource walker with wildcard scan dot-entry filtering extension-token truncation resolve/create suppressor gates and registration sink; PR #176 CI 5/5 PASS"
   }
 ]

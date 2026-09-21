@@ -155,3 +155,4 @@ FUN_00405930,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered three-state node
 FUN_004064E0,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered 33-byte GameResource forwarding wrapper with exact selector archive literal table tokens and counts
 FUN_004064E0,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,dcbf0ac0fa50d1581f9eb3396910d980fff510d9,coordinator,PR #174 completed 5/5 CI checks
 FUN_00406010,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered recursive convertDir walker with extension-token filtering and suppressor-aware registration
+FUN_00406010,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,5b516c943a6e225d66638905842d332586889ff8,coordinator,PR #176 completed 5/5 CI checks
