@@ -1,0 +1,52 @@
+name: tmp-00405bd0-repair
+
+on:
+  push:
+    branches: [decomp/00405bd0-next]
+    paths-ignore:
+      - 'database/functions.csv'
+      - 'reports/**'
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Restore unrelated evidence paths
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('database/functions.csv')
+          text = p.read_text(encoding='utf-8')
+          old_c0 = 'decomp/evidence/fun_004022C0.md'
+          old_d0 = 'decomp/evidence/fun_004022D0.md'
+          assert text.count(old_c0) == 1
+          assert text.count(old_d0) == 1
+          text = text.replace(old_c0, 'decomp/evidence/fun_00402250.md')
+          text = text.replace(old_d0, 'decomp/evidence/fun_00402250.md')
+          p.write_text(text, encoding='utf-8')
+          PY
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+      - name: Install Ninja
+        run: sudo apt-get update && sudo apt-get install -y ninja-build
+      - name: Configure
+        run: cmake --preset dev
+      - name: Build
+        run: cmake --build --preset dev
+      - name: Test
+        run: ctest --preset dev
+      - name: Commit repaired metadata and reports
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add database/functions.csv reports/progress.md reports/functions.json reports/progress-treemap.svg
+          git diff --cached --quiet || git commit -m 'Restore unrelated metadata and regenerate reports'
+          git push
