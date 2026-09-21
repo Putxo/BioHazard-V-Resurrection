@@ -3082,7 +3082,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3097,10 +3097,10 @@
     "source_file": "src/recovered/fun_00406620.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00406620",
-    "pr": "",
-    "commit": "",
+    "pr": "#202",
+    "commit": "f605689055793132eb06275b0bb942ebd60c6448",
     "test": "tests/unit/test_fun_00406620.cpp",
     "evidence": "decomp/evidence/fun_00406620.md",
-    "notes": "Menu2Resource fixed -1 forwarding wrapper with exact two-entry direct table and no resolved table"
+    "notes": "Menu2Resource fixed -1 forwarding wrapper with exact two-entry direct table and no resolved table; PR #202 CI 5/5 PASS"
   }
 ]
