@@ -1,0 +1,79 @@
+name: Promote FUN_00405930 FAST_PASS_VALIDATED
+
+on:
+  push:
+    branches:
+      - promote/00405930-fastpass-valid
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Promote FUN_00405930 metadata only
+        shell: python
+        run: |
+          import csv
+          import io
+          from pathlib import Path
+
+          functions = Path('database/functions.csv')
+          lines = functions.read_text(encoding='utf-8').rstrip('\n').split('\n')
+          found = False
+          for i, line in enumerate(lines):
+              if not line.startswith('FUN_00405930,'):
+                  continue
+              fields = next(csv.reader([line]))
+              fields[10] = 'true'
+              fields[25] = '#172'
+              fields[26] = 'b4481a234514e9e47f863d2f33072b3a8bf86473'
+              suffix = 'PR #172 CI 5/5 PASS'
+              if suffix not in fields[29]:
+                  fields[29] = fields[29].rstrip('; ') + '; ' + suffix
+              out = io.StringIO()
+              csv.writer(out, lineterminator='').writerow(fields)
+              lines[i] = out.getvalue()
+              found = True
+              break
+          if not found:
+              raise SystemExit('FUN_00405930 row not found')
+          functions.write_text('\n'.join(lines) + '\n', encoding='utf-8')
+
+          history = Path('database/history.csv')
+          text = history.read_text(encoding='utf-8')
+          event = 'FUN_00405930,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,b4481a234514e9e47f863d2f33072b3a8bf86473,coordinator,PR #172 completed 5/5 CI checks'
+          if event not in text:
+              history.write_text(text.rstrip('\n') + '\n' + event + '\n', encoding='utf-8')
+
+      - name: Regenerate canonical reports
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+
+      - name: Validate metadata and reports
+        run: python tools/validate/validate.py
+
+      - name: Build and test
+        run: |
+          cmake -S . -B build
+          cmake --build build
+          ctest --test-dir build --output-on-failure
+
+      - name: Diff hygiene
+        run: git diff --check
+
+      - name: Commit promotion and remove temporary workflow
+        run: |
+          rm .github/workflows/promote-00405930.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "Validate FUN_00405930 fast-pass block"
+          git push origin HEAD:promote/00405930-fastpass-valid
