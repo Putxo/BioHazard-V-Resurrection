@@ -49,9 +49,8 @@ jobs:
                   writer.writeheader()
                   writer.writerows(rows)
 
-          # functions.csv: exact validated target row from integration.
           dst_fields, dst_rows = read_csv('database/functions.csv')
-          src_fields, src_rows = read_csv('/tmp/functions.integration.csv')
+          _, src_rows = read_csv('/tmp/functions.integration.csv')
           target_rows = [r for r in src_rows if r.get('stable_id') == TARGET]
           if len(target_rows) != 1:
               raise SystemExit(f'expected one {TARGET} functions row, got {len(target_rows)}')
@@ -59,9 +58,8 @@ jobs:
           dst_rows.extend(target_rows)
           write_csv('database/functions.csv', dst_fields, dst_rows)
 
-          # claims.csv: exact target claim row(s), without touching any other claim.
           dst_fields, dst_rows = read_csv('database/claims.csv')
-          src_fields, src_rows = read_csv('/tmp/claims.integration.csv')
+          _, src_rows = read_csv('/tmp/claims.integration.csv')
           target_rows = [r for r in src_rows if r.get('stable_id') == TARGET]
           if not target_rows:
               raise SystemExit(f'no {TARGET} claim row found')
@@ -69,9 +67,8 @@ jobs:
           dst_rows.extend(target_rows)
           write_csv('database/claims.csv', dst_fields, dst_rows)
 
-          # history.csv: copy all target transitions, preserving every other row.
           dst_fields, dst_rows = read_csv('database/history.csv')
-          src_fields, src_rows = read_csv('/tmp/history.integration.csv')
+          _, src_rows = read_csv('/tmp/history.integration.csv')
           target_rows = [r for r in src_rows if r.get('stable_id') == TARGET]
           if len(target_rows) < 2:
               raise SystemExit(f'expected target FAST_PASS and validation history, got {len(target_rows)} rows')
@@ -139,3 +136,5 @@ jobs:
           git add README.md CMakeLists.txt database/functions.csv database/claims.csv database/history.csv decomp/evidence/fun_004061f0.md include/re5/recovered/fun_004061f0.hpp src/recovered/fun_004061f0.cpp tests/unit/test_fun_004061f0.cpp tests/unit/test_smoke.cpp reports/progress.md reports/functions.json reports/progress-treemap.svg
           git diff --cached --quiet || git commit -m 'Publish FUN_004061F0 validated fast-pass'
           git push
+
+# retrigger-clean
