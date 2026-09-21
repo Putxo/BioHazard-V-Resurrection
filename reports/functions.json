@@ -3146,7 +3146,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3161,10 +3161,10 @@
     "source_file": "src/recovered/fun_00406680.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00406680",
-    "pr": "",
-    "commit": "",
+    "pr": "#205",
+    "commit": "deb873467afe1ac8f226aff7ad064de075b80f72",
     "test": "tests/unit/test_fun_00406680.cpp",
     "evidence": "decomp/evidence/fun_00406680.md",
-    "notes": "ShopResource fixed -1 forwarding wrapper with exact three-entry direct table and no resolved table; caller also aliases Shop2Resource to this wrapper"
+    "notes": "ShopResource fixed -1 forwarding wrapper with exact three-entry direct table and no resolved table; caller also aliases Shop2Resource to this wrapper; PR #205 CI 5/5 PASS"
   }
 ]
