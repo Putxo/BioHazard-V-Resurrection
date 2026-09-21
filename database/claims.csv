@@ -93,3 +93,4 @@ SEQ-004061F0,FUN_004061F0,coordinator,decomp/004061f0-next,sequential decomp of 
 SEQ-00406540,FUN_00406540,coordinator,decomp/00406540-next,sequential decomp of Game2Resource forwarding wrapper,2026-09-21T22:29:00Z,,,true
 SEQ-00406570,FUN_00406570,coordinator,decomp/00406570-next,sequential decomp of TitleResource registration wrapper,2026-09-21T22:45:26Z,,,true
 SEQ-004065A0,FUN_004065A0,coordinator,decomp/004065a0-next,sequential decomp of Title2Resource forwarding wrapper,2026-09-21T22:48:56Z,,,true
+SEQ-004065D0,FUN_004065D0,coordinator,decomp/004065d0-next,sequential decomp of ShowTitleResource forwarding wrapper,2026-09-21T23:04:12Z,,,true
