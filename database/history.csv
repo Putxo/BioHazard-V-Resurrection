@@ -177,3 +177,5 @@ FUN_00406680,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered ShopResource fix
 FUN_00406680,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,deb873467afe1ac8f226aff7ad064de075b80f72,coordinator,PR #205 completed 5/5 CI checks
 FUN_004066C0,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered VersusResource fixed -1 forwarding wrapper with exact nine-entry direct table and no resolved entries
 FUN_004066C0,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,c80b30865fe79ac232f63b7add9f60e023eb0f04,coordinator,PR #206 completed 5/5 CI checks
+FUN_004066E0,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered MerceResource fixed -1 forwarding wrapper with exact eight-entry direct table and no resolved entries
+FUN_004066E0,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,454d328671f10c83db6468366bcd883f5e36dfc1,coordinator,PR #214 completed 5/5 CI checks
