@@ -153,3 +153,4 @@ FUN_00405A60,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered static six-entry
 FUN_00405A60,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,4ff96307fac4ebb8a4481f79e1cc9f81df22c1e1,coordinator,PR #169 completed 5/5 CI checks
 FUN_00405930,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered three-state node conversion worker with allocation and early-return coverage
 FUN_004064E0,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered 33-byte GameResource forwarding wrapper with exact selector archive literal table tokens and counts
+FUN_004064E0,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,dcbf0ac0fa50d1581f9eb3396910d980fff510d9,coordinator,PR #174 completed 5/5 CI checks

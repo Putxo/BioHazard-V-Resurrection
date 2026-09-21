@@ -82,7 +82,7 @@
 <g><title>FUN_00405A60 | FUN_00405A60 | VA 0x00405A60 | 368 bytes | FAST_PASS_VALIDATED</title><rect x="661.01" y="594.53" width="273.46" height="54.47" fill="#bef264" stroke="#111827" stroke-width="0.35"/></g>
 <g><title>FUN_00405BD0 | FUN_00405BD0 | VA 0x00405BD0 | 544 bytes | FAST_PASS_VALIDATED</title><rect x="935.47" y="466.70" width="132.62" height="167.44" fill="#bef264" stroke="#111827" stroke-width="0.35"/></g>
 <g><title>FUN_00405DF0 | FUN_00405DF0 | VA 0x00405DF0 | 533 bytes | FAST_PASS_VALIDATED</title><rect x="1069.09" y="466.70" width="129.91" height="167.44" fill="#bef264" stroke="#111827" stroke-width="0.35"/></g>
-<g><title>FUN_004064E0 | FUN_004064E0 | VA 0x004064E0 | 33 bytes | FAST_PASS</title><rect x="935.47" y="635.14" width="90.89" height="13.86" fill="#facc15" stroke="#111827" stroke-width="0.35"/></g>
+<g><title>FUN_004064E0 | FUN_004064E0 | VA 0x004064E0 | 33 bytes | FAST_PASS_VALIDATED</title><rect x="935.47" y="635.14" width="90.89" height="13.86" fill="#bef264" stroke="#111827" stroke-width="0.35"/></g>
 <g><title>FUN_00BB9070 | FUN_00BB9070 | VA 0x00BB9070 | 3 bytes | CONVERTED</title><rect x="1027.36" y="635.14" width="171.64" height="0.00" fill="#2dd4bf" stroke="#111827" stroke-width="0.35"/></g>
 <g><title>FUN_00BB9080 | FUN_00BB9080 | VA 0x00BB9080 | 4 bytes | CONVERTED</title><rect x="1027.36" y="635.86" width="10.70" height="13.14" fill="#2dd4bf" stroke="#111827" stroke-width="0.35"/></g>
 <g><title>FUN_00BB9090 | FUN_00BB9090 | VA 0x00BB9090 | 4 bytes | CONVERTED</title><rect x="1039.06" y="635.86" width="159.94" height="0.03" fill="#2dd4bf" stroke="#111827" stroke-width="0.35"/></g>
