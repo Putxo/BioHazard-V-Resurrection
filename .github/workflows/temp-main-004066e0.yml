@@ -38,7 +38,6 @@ jobs:
               data = subprocess.check_output(['git','show',f'origin/integration:{path}'], text=True)
               return list(csv.DictReader(io.StringIO(data))), next(csv.reader(io.StringIO(data)))
 
-          # Wire source and test into current public main without replacing parallel entries.
           cmake = Path('CMakeLists.txt')
           text = cmake.read_text()
           if 'src/recovered/fun_004066e0.cpp' not in text:
@@ -71,7 +70,6 @@ jobs:
               text = text.replace(needle, needle + '    test_fun_004066e0();\n', 1)
           smoke.write_text(text)
 
-          # Import only FUN_004066E0 canonical rows from validated integration.
           for path, key in [('database/functions.csv','stable_id'), ('database/claims.csv','stable_id')]:
               local = Path(path)
               with local.open(newline='') as f:
@@ -103,7 +101,7 @@ jobs:
           text = evidence.read_text().rstrip()
           if '## Public publication' not in text:
               text += '\n\n## Public publication\n\nThe cumulative public release was prepared on top of main `ff9393eda86bd56ba7d95b1edc1dca5288f534a8`, preserving already-published parallel state. Candidate PR #214 merged into integration as `454d328671f10c83db6468366bcd883f5e36dfc1`; promotion PR #215 merged as `3b0c94fbb6a77a872a67d2f596d255af1990f46f`. Only the validated `FUN_004066E0` delta is added by this publication.\n'
-          evidence.write_text(text + '\n')
+          evidence.write_text(text.rstrip() + '\n')
           PY
       - name: Regenerate public dashboard and validate
         run: |
