@@ -169,3 +169,4 @@ FUN_004065A0,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered 42-byte Title2Re
 FUN_004065A0,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,6d8f0b34fedac6e2400375631e22356d10da8aad,coordinator,PR #194 completed 5/5 CI checks
 FUN_004065D0,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered ShowTitleResource forwarding wrapper with diagnostic marker and exact five-entry direct table contract
 FUN_004065D0,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,2a22e0775881a21fc167cd6384ee3dd6ba6d376f,coordinator,PR #197 completed 5/5 CI checks
+FUN_00406600,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered MenuResource fixed -1 forwarding wrapper with exact 22-entry direct table and no resolved entries
