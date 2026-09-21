@@ -2954,7 +2954,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2969,10 +2969,10 @@
     "source_file": "src/recovered/fun_00406570.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00406570",
-    "pr": "",
-    "commit": "",
+    "pr": "#190",
+    "commit": "ee9c21c57dba196b881d2c7df84235ffd826e327",
     "test": "tests/unit/test_fun_00406570.cpp",
     "evidence": "decomp/evidence/fun_00406570.md",
-    "notes": "TitleResource registration wrapper with leading marker log and exact -1 message index 24-entry direct table no resolved entries forwarding to FUN_004061F0"
+    "notes": "TitleResource registration wrapper with leading marker log and exact -1 message index 24-entry direct table no resolved entries forwarding to FUN_004061F0; PR #190 CI 5/5 PASS"
   }
 ]
