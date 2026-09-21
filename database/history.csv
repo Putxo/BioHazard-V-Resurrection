@@ -142,3 +142,4 @@ FUN_00403F50,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered resource scan ba
 FUN_00403F50,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,78cc0075ff03ceb013705dfa6f89ce7127af9042,coordinator,PR #152 completed 5/5 CI checks
 FUN_00404E60,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered effect resource scan dispatcher
 FUN_00404E60,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,7359d058e7efc9439775808672cabdc819aa4989,coordinator,PR #155 completed 5/5 CI checks
+FUN_00404F90,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered table registration candidate block
