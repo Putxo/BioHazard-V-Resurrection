@@ -40,4 +40,4 @@ jobs:
           git diff --cached --quiet || git commit -m 'Publish FAST PASS 83 dashboard'
           git push
 
-# trigger retry
+# retry after validated non-fast-forward race
