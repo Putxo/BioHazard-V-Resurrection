@@ -105,3 +105,5 @@ jobs:
           git add README.md CMakeLists.txt database/functions.csv database/claims.csv database/history.csv decomp/evidence/fun_00406620.md include/re5/recovered/fun_00406620.hpp src/recovered/fun_00406620.cpp tests/unit/test_fun_00406620.cpp tests/unit/test_smoke.cpp reports/progress.md reports/functions.json reports/progress-treemap.svg
           git diff --cached --quiet || git commit -m 'Publish FUN_00406620 validated fast-pass'
           git push
+
+# trigger
