@@ -79,3 +79,4 @@ SEQ-00403150,FUN_00403150,coordinator,decomp/00403150-session-check,sequential d
 SEQ-00403640,FUN_00403640,coordinator,decomp/00403640-pointer-state,sequential decomp of registry-backed recursive resource binder,2026-09-17T01:00:00Z,,,true
 SEQ-00403AF0,FUN_00403AF0,coordinator,decomp/00403af0-next,sequential decomp of registry-table resource scanner,2026-09-21T00:00:00Z,,,true
 SEQ-00403F50,FUN_00403F50,coordinator,decomp/00403f50-next,sequential decomp of resource scan batch initializer,2026-09-21T00:10:00Z,,,true
+SEQ-00404E60,FUN_00404E60,coordinator,decomp/00404e60-next,sequential decomp of effect resource scan dispatcher,2026-09-21T17:18:00Z,,,true
