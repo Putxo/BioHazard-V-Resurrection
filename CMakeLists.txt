@@ -90,6 +90,7 @@ add_executable(re5_tests
     tests/unit/test_fun_00401950.cpp
     tests/unit/test_fun_00401b50.cpp
     tests/unit/test_fun_00401d10.cpp
+    tests/unit/test_fun_00401d50.cpp
     tests/unit/test_fun_00401e30.cpp
     tests/unit/test_fun_00401e60.cpp
     tests/unit/test_fun_00401fe0.cpp
