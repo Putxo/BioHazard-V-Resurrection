@@ -1,0 +1,111 @@
+name: sync-00406540-integration
+
+on:
+  push:
+    branches:
+      - decomp/00406540-next
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/00406540-next
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Merge current integration and preserve candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin integration
+          set +e
+          git merge --no-commit --no-ff origin/integration
+          rc=$?
+          set -e
+          if [ "$rc" -ne 0 ]; then
+            for f in database/functions.csv database/history.csv database/claims.csv reports/functions.json reports/progress-treemap.svg reports/progress.md; do
+              if git ls-files -u -- "$f" | grep -q .; then
+                git checkout --theirs -- "$f"
+                git add -- "$f"
+              fi
+            done
+            unresolved="$(git diff --name-only --diff-filter=U)"
+            if [ -n "$unresolved" ]; then
+              echo "Unresolved merge conflicts:"
+              echo "$unresolved"
+              exit 1
+            fi
+          fi
+
+          python - <<'PY'
+          from pathlib import Path
+          import csv
+
+          def load(path):
+              with open(path, newline='') as f:
+                  return list(csv.reader(f))
+
+          def append(path, row):
+              with open(path, 'a', newline='') as f:
+                  csv.writer(f, lineterminator='\n').writerow(row)
+
+          rows = load('database/claims.csv')
+          if not any(r and r[0] == 'SEQ-00406540' for r in rows[1:]):
+              append('database/claims.csv', [
+                  'SEQ-00406540', 'FUN_00406540', 'coordinator', 'decomp/00406540-next',
+                  'sequential decomp of Game2Resource forwarding wrapper',
+                  '2026-09-21T22:29:00Z', '', '', 'true'
+              ])
+
+          rows = load('database/functions.csv')
+          if not any(r and r[0] == 'FUN_00406540' for r in rows[1:]):
+              append('database/functions.csv', [
+                  'FUN_00406540', '0x00406540', '0x00006540', '.text', '33',
+                  'FUN_00406540', '', 'ACTIVE', 'HIGH', 'true', 'false',
+                  'false', 'false', 'false', 'false', 'false', 'cdecl', 'void',
+                  'std::uint32_t selector', 'void', 'UNKNOWN', 'Resource',
+                  'src/recovered/fun_00406540.cpp', 'coordinator', 'SEQ-00406540',
+                  '', '', 'tests/unit/test_fun_00406540.cpp',
+                  'decomp/evidence/fun_00406540.md',
+                  'Game2Resource forwarding wrapper to separately assigned 0x004061F0 with exact archive literal and 2/5 table tokens'
+              ])
+
+          rows = load('database/history.csv')
+          if not any(len(r) >= 4 and r[0] == 'FUN_00406540' and r[2] == 'UNSEEN' and r[3] == 'FAST_PASS' for r in rows[1:]):
+              append('database/history.csv', [
+                  'FUN_00406540', '2026-09-22', 'UNSEEN', 'FAST_PASS', '',
+                  'coordinator',
+                  'recovered Game2Resource forwarding wrapper with exact archive literal and 2/5 table tokens'
+              ])
+          PY
+
+      - name: Regenerate and revalidate synchronized candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          git diff --check
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+
+      - name: Commit synchronized candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm .github/workflows/temp-00406540-sync.yml
+          git add -A
+          git commit -m "Synchronize FUN_00406540 candidate with integration"
+          git push origin HEAD:decomp/00406540-next
