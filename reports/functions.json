@@ -2850,7 +2850,7 @@
   {
     "stable_id": "FUN_004061F0",
     "va": "0x004061F0",
-    "rva": "0x000051F0",
+    "rva": "0x000061F0",
     "section": ".text",
     "size": "656",
     "provisional_name": "FUN_004061F0",
