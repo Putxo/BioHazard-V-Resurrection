@@ -140,3 +140,4 @@ FUN_00403AF0,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered registry-table r
 FUN_00403AF0,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,2c378d4a85eaf4a69c4c8b8a57ed5faf748dc1e7,coordinator,PR #149 completed 5/5 CI checks
 FUN_00403F50,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered resource scan batch initializer
 FUN_00403F50,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,78cc0075ff03ceb013705dfa6f89ce7127af9042,coordinator,PR #152 completed 5/5 CI checks
+FUN_00404E60,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered effect resource scan dispatcher
