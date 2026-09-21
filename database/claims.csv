@@ -77,3 +77,4 @@ SEQ-00402E70,FUN_00402E70,coordinator,decomp/00402df0-dispatch,sequential decomp
 SEQ-00402FC0,FUN_00402FC0,coordinator,decomp/00402fc0-state-machine,sequential decomp of four-state registry dispatch machine,2026-09-17T00:40:00Z,,,true
 SEQ-00403150,FUN_00403150,coordinator,decomp/00403150-session-check,sequential decomp of recursive resource walker,2026-09-17T00:50:00Z,,,true
 SEQ-00403640,FUN_00403640,coordinator,decomp/00403640-pointer-state,sequential decomp of registry-backed recursive resource binder,2026-09-17T01:00:00Z,,,true
+SEQ-00403AF0,FUN_00403AF0,coordinator,decomp/00403af0-next,sequential decomp of registry-table resource scanner,2026-09-21T00:00:00Z,,,true
