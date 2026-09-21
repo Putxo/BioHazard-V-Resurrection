@@ -1,0 +1,82 @@
+name: regen-00405df0
+
+on:
+  push:
+    branches: [decomp/00405df0-next]
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    if: ${{ !contains(github.event.head_commit.message, '[regen-00405df0]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/00405df0-next
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply isolated candidate wiring and metadata
+        shell: python
+        run: |
+          from pathlib import Path
+
+          cmake = Path('CMakeLists.txt')
+          text = cmake.read_text(encoding='utf-8')
+          if '    src/recovered/fun_00405df0.cpp\n' not in text:
+              anchor = '    src/recovered/fun_00405bd0.cpp\n' if '    src/recovered/fun_00405bd0.cpp\n' in text else '    src/recovered/fun_00405710.cpp\n'
+              text = text.replace(anchor, anchor + '    src/recovered/fun_00405df0.cpp\n', 1)
+          if '    tests/unit/test_fun_00405df0.cpp\n' not in text:
+              anchor = '    tests/unit/test_fun_00405bd0.cpp\n' if '    tests/unit/test_fun_00405bd0.cpp\n' in text else '    tests/unit/test_fun_00405710.cpp\n'
+              text = text.replace(anchor, anchor + '    tests/unit/test_fun_00405df0.cpp\n', 1)
+          cmake.write_text(text, encoding='utf-8')
+
+          smoke = Path('tests/unit/test_smoke.cpp')
+          text = smoke.read_text(encoding='utf-8')
+          if 'void test_fun_00405df0();\n' not in text:
+              anchor = 'void test_fun_00405bd0();\n' if 'void test_fun_00405bd0();\n' in text else 'void test_fun_00405710();\n'
+              text = text.replace(anchor, anchor + 'void test_fun_00405df0();\n', 1)
+          if '    test_fun_00405df0();\n' not in text:
+              anchor = '    test_fun_00405bd0();\n' if '    test_fun_00405bd0();\n' in text else '    test_fun_00405710();\n'
+              text = text.replace(anchor, anchor + '    test_fun_00405df0();\n', 1)
+          smoke.write_text(text, encoding='utf-8')
+
+          functions = Path('database/functions.csv')
+          text = functions.read_text(encoding='utf-8')
+          row = 'FUN_00405DF0,0x00405DF0,0x00005DF0,.text,533,FUN_00405DF0,,ACTIVE,HIGH,true,false,false,false,false,false,false,cdecl,void,std::uint32_t selector,void,UNKNOWN,Resource,src/recovered/fun_00405df0.cpp,coordinator,SEQ-00405DF0,,,tests/unit/test_fun_00405df0.cpp,decomp/evidence/fun_00405df0.md,message-resource registration batch under temporary selector with exact nine table entries special registration cancel cleanup and global state restoration\n'
+          if 'FUN_00405DF0,0x00405DF0,' not in text:
+              functions.write_text(text + row, encoding='utf-8')
+
+          claims = Path('database/claims.csv')
+          text = claims.read_text(encoding='utf-8')
+          row = 'SEQ-00405DF0,FUN_00405DF0,coordinator,decomp/00405df0-next,sequential decomp of message-resource registration batch,2026-09-21T21:03:00Z,,,true\n'
+          if 'SEQ-00405DF0,FUN_00405DF0,' not in text:
+              claims.write_text(text + row, encoding='utf-8')
+
+          history = Path('database/history.csv')
+          text = history.read_text(encoding='utf-8')
+          row = 'FUN_00405DF0,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered message-resource registration batch with exact nine-entry table cancel cleanup and global state restoration\n'
+          if 'FUN_00405DF0,2026-09-21,UNSEEN,FAST_PASS,' not in text:
+              history.write_text(text + row, encoding='utf-8')
+      - name: Regenerate canonical reports
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+      - name: Validate metadata
+        run: python tools/validate/validate.py
+      - name: Configure and test recovered C++
+        run: |
+          cmake -S . -B build
+          cmake --build build --parallel
+          ctest --test-dir build --output-on-failure
+      - name: Commit canonical generated files and remove helper
+        run: |
+          rm .github/workflows/regen-00405df0.yml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add CMakeLists.txt tests/unit/test_smoke.cpp database/functions.csv database/claims.csv database/history.csv reports/ .github/workflows/regen-00405df0.yml
+          git diff --cached --exit-code && exit 0 || true
+          git commit -m 'Regenerate rebased FUN_00405DF0 metadata and reports [regen-00405df0]'
+          git push origin HEAD:decomp/00405df0-next
