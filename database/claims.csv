@@ -99,3 +99,4 @@ SEQ-00406620,FUN_00406620,coordinator,decomp/00406620-next,sequential decomp of 
 SEQ-004066C0,FUN_004066C0,coordinator,decomp/004066c0-next,sequential decomp of VersusResource forwarding wrapper,2026-09-21T23:22:00Z,,,true
 SEQ-00406680,FUN_00406680,coordinator,decomp/00406680-next,sequential decomp of ShopResource forwarding wrapper,2026-09-21T23:25:29Z,,,true
 SEQ-004066E0,FUN_004066E0,coordinator,decomp/004066e0-next,sequential decomp of MerceResource forwarding wrapper,2026-09-21T23:35:00Z,,,true
+SEQ-00406700,FUN_00406700,coordinator,decomp/00406700-next,sequential decomp of Extra1Resource forwarding wrapper,2026-09-21T23:33:00Z,,,true
