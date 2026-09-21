@@ -2570,7 +2570,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2585,10 +2585,10 @@
     "source_file": "src/recovered/fun_00404e60.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00404E60",
-    "pr": "",
-    "commit": "",
+    "pr": "#155",
+    "commit": "7359d058e7efc9439775808672cabdc819aa4989",
     "test": "tests/unit/test_fun_00404e60.cpp",
     "evidence": "decomp/evidence/fun_00404e60.md",
-    "notes": "effect resource scan dispatcher for six FUN_00403640-style keys under active-name \\\\effect root"
+    "notes": "effect resource scan dispatcher for six FUN_00403640-style keys under active-name \\\\effect root; PR #155 CI 5/5 PASS"
   }
 ]
