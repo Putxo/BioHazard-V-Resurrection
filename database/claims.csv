@@ -86,3 +86,4 @@ SEQ-00405BD0,FUN_00405BD0,coordinator,decomp/00405bd0-next,sequential decomp of 
 SEQ-00405DF0,FUN_00405DF0,coordinator,decomp/00405df0-next,sequential decomp of message-resource registration batch,2026-09-21T21:03:00Z,,,true
 SEQ-00405A60,FUN_00405A60,coordinator,decomp/00405a60-next,sequential decomp of static six-entry resource registration pass,2026-09-21T21:45:00Z,,,true
 SEQ-00405930,FUN_00405930,coordinator,decomp/00405930-next,sequential decomp of three-state node conversion worker,2026-09-21T21:00:00Z,,,true
+SEQ-004064E0,FUN_004064E0,coordinator,decomp/004064e0-next,sequential decomp of GameResource forwarding wrapper,2026-09-21T22:06:00Z,,,true
