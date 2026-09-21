@@ -1820,7 +1820,7 @@
     "pr": "#110",
     "commit": "8f6e0402465cc2cd939fe144c9e5dd3a97f08140",
     "test": "tests/unit/test_fun_00402250.cpp",
-    "evidence": "decomp/evidence/fun_004022C0.md",
+    "evidence": "decomp/evidence/fun_00402250.md",
     "notes": "zeroes one dword at destination and returns this"
   },
   {
@@ -1852,7 +1852,7 @@
     "pr": "#110",
     "commit": "8f6e0402465cc2cd939fe144c9e5dd3a97f08140",
     "test": "tests/unit/test_fun_00402250.cpp",
-    "evidence": "decomp/evidence/fun_004022D0.md",
+    "evidence": "decomp/evidence/fun_00402250.md",
     "notes": "reference-counted pointer copy helper increments pointed dword when non-null"
   },
   {
