@@ -89,3 +89,4 @@ SEQ-004064E0,FUN_004064E0,coordinator,decomp/004064e0-next,sequential decomp of 
 SEQ-00406010,FUN_00406010,coordinator,decomp/00406010-next,sequential decomp of recursive convertDir resource walker,2026-09-21T22:04:00Z,,,true
 SEQ-00406510,FUN_00406510,coordinator,decomp/00406510-next,sequential decomp of ShowGameResource forwarding wrapper,2026-09-21T22:18:00Z,,,true
 SEQ-00405930,FUN_00405930,coordinator,decomp/00405930-next,sequential decomp of three-state node conversion worker,2026-09-21T21:00:00Z,,,true
+SEQ-00406540,FUN_00406540,coordinator,decomp/00406540-next,sequential decomp of Game2Resource forwarding wrapper,2026-09-21T22:29:00Z,,,true
