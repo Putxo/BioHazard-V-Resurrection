@@ -2730,7 +2730,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -2745,10 +2745,10 @@
     "source_file": "src/recovered/fun_00405a60.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00405A60",
-    "pr": "",
-    "commit": "",
+    "pr": "#169",
+    "commit": "4ff96307fac4ebb8a4481f79e1cc9f81df22c1e1",
     "test": "tests/unit/test_fun_00405a60.cpp",
     "evidence": "decomp/evidence/fun_00405a60.md",
-    "notes": "static six-entry resource registration pass with archive preflight early cancel loading-state preservation suppressor-aware bind and trace markers"
+    "notes": "static six-entry resource registration pass with archive preflight early cancel loading-state preservation suppressor-aware bind and trace markers; PR #169 CI 5/5 PASS"
   }
 ]
