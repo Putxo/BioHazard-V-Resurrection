@@ -2986,7 +2986,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3001,10 +3001,10 @@
     "source_file": "src/recovered/fun_004065a0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004065A0",
-    "pr": "",
-    "commit": "",
+    "pr": "#194",
+    "commit": "6d8f0b34fedac6e2400375631e22356d10da8aad",
     "test": "tests/unit/test_fun_004065a0.cpp",
     "evidence": "decomp/evidence/fun_004065a0.md",
-    "notes": "Title2Resource fixed -1 forwarding wrapper with diagnostic marker exact two-entry direct table and no resolved table"
+    "notes": "Title2Resource fixed -1 forwarding wrapper with diagnostic marker exact two-entry direct table and no resolved table; PR #194 CI 5/5 PASS"
   }
 ]
