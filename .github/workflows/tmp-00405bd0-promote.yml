@@ -1,0 +1,63 @@
+name: tmp-00405bd0-promote
+
+on:
+  push:
+    branches: [promote/00405bd0-fastpass-valid]
+    paths-ignore:
+      - 'database/functions.csv'
+      - 'database/history.csv'
+      - 'reports/**'
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Promote exact target row and regenerate reports
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          functions = Path('database/functions.csv')
+          lines = functions.read_text(encoding='utf-8').splitlines()
+          hits = 0
+          for i, line in enumerate(lines):
+              if line.startswith('FUN_00405BD0,'):
+                  fields = line.split(',')
+                  assert len(fields) == 30, len(fields)
+                  assert fields[9] == 'true'
+                  assert fields[10] == 'false'
+                  assert fields[25] == ''
+                  assert fields[26] == ''
+                  fields[10] = 'true'
+                  fields[25] = '#162'
+                  fields[26] = '1c4a6cb58619689f43afab899afc5f824e048226'
+                  fields[29] = fields[29] + '; PR #162 CI 5/5 PASS'
+                  lines[i] = ','.join(fields)
+                  hits += 1
+          assert hits == 1, hits
+          functions.write_text('\n'.join(lines), encoding='utf-8')
+
+          history = Path('database/history.csv')
+          h = history.read_text(encoding='utf-8')
+          entry = 'FUN_00405BD0,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,1c4a6cb58619689f43afab899afc5f824e048226,coordinator,PR #162 completed 5/5 CI checks'
+          assert entry not in h
+          history.write_text(h.rstrip('\n') + '\n' + entry + '\n', encoding='utf-8')
+          PY
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          git diff --check
+      - name: Commit promotion
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add database/functions.csv database/history.csv reports/functions.json reports/progress-treemap.svg
+          git diff --cached --quiet || git commit -m 'Validate FUN_00405BD0 fast-pass'
+          git push
