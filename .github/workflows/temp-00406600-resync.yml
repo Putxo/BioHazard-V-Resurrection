@@ -1,0 +1,98 @@
+name: resync-00406600-current-integration
+
+on:
+  push:
+    branches: [scratch/00406600-resync]
+
+permissions:
+  contents: write
+
+jobs:
+  resync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: scratch/00406600-resync
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Apply only FUN_00406600 delta
+        shell: bash
+        run: |
+          git fetch origin decomp/00406600-next
+          for f in include/re5/recovered/fun_00406600.hpp src/recovered/fun_00406600.cpp tests/unit/test_fun_00406600.cpp decomp/evidence/fun_00406600.md; do
+            mkdir -p "$(dirname "$f")"
+            git show origin/decomp/00406600-next:"$f" > "$f"
+          done
+          python - <<'PY'
+          from pathlib import Path
+          from datetime import datetime, timezone
+
+          cmake = Path('CMakeLists.txt')
+          t = cmake.read_text()
+          if 'src/recovered/fun_00406600.cpp' not in t:
+              candidates = ['    src/recovered/fun_004065d0.cpp\n','    src/recovered/fun_004065a0.cpp\n']
+              for a in candidates:
+                  if a in t:
+                      t=t.replace(a,a+'    src/recovered/fun_00406600.cpp\n',1); break
+              else: raise SystemExit('source anchor missing')
+          if 'tests/unit/test_fun_00406600.cpp' not in t:
+              candidates = ['    tests/unit/test_fun_004065d0.cpp\n','    tests/unit/test_fun_004065a0.cpp\n']
+              for a in candidates:
+                  if a in t:
+                      t=t.replace(a,a+'    tests/unit/test_fun_00406600.cpp\n',1); break
+              else: raise SystemExit('test anchor missing')
+          cmake.write_text(t)
+
+          smoke=Path('tests/unit/test_smoke.cpp'); t=smoke.read_text()
+          if 'void test_fun_00406600();' not in t:
+              for a in ['void test_fun_004065d0();\n','void test_fun_004065a0();\n']:
+                  if a in t: t=t.replace(a,a+'void test_fun_00406600();\n',1); break
+              else: raise SystemExit('smoke decl anchor missing')
+          if '    test_fun_00406600();' not in t:
+              for a in ['    test_fun_004065d0();\n','    test_fun_004065a0();\n']:
+                  if a in t: t=t.replace(a,a+'    test_fun_00406600();\n',1); break
+              else: raise SystemExit('smoke call anchor missing')
+          smoke.write_text(t)
+
+          p=Path('database/claims.csv'); t=p.read_text()
+          if 'SEQ-00406600,FUN_00406600,' not in t:
+              stamp=datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00','Z')
+              t=t.rstrip('\n')+f'\nSEQ-00406600,FUN_00406600,coordinator,decomp/00406600-next,sequential decomp of MenuResource forwarding wrapper,{stamp},,,true\n'
+          p.write_text(t)
+
+          p=Path('database/functions.csv'); t=p.read_text()
+          if 'FUN_00406600,0x00406600,' not in t:
+              row=('FUN_00406600,0x00406600,0x00006600,.text,27,FUN_00406600,,ACTIVE,HIGH,true,false,false,false,false,false,false,cdecl,void,void,void,UNKNOWN,Resource,src/recovered/fun_00406600.cpp,coordinator,SEQ-00406600,,,tests/unit/test_fun_00406600.cpp,decomp/evidence/fun_00406600.md,MenuResource fixed -1 forwarding wrapper with exact 22-entry direct table no resolved entries')
+              t=t.rstrip('\n')+'\n'+row+'\n'
+          p.write_text(t)
+
+          p=Path('database/history.csv'); t=p.read_text()
+          if 'FUN_00406600,2026-09-22,UNSEEN,FAST_PASS,' not in t:
+              row='FUN_00406600,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered MenuResource fixed -1 forwarding wrapper with exact 22-entry direct table and no resolved entries'
+              t=t.rstrip('\n')+'\n'+row+'\n'
+          p.write_text(t)
+          PY
+      - name: Regenerate and validate
+        shell: bash
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          git diff --check
+          sudo apt-get update
+          sudo apt-get install -y ninja-build
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Commit clean rebased candidate
+        shell: bash
+        run: |
+          rm .github/workflows/temp-00406600-resync.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Rebase FUN_00406600 onto current integration'
+          git push origin HEAD:scratch/00406600-resync
