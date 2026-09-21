@@ -146,3 +146,4 @@ FUN_00404F90,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered table registrati
 FUN_00404F90,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,5e4fd0b32f2c9270ca6804447812a2cda6c7ee15,coordinator,PR #158 completed 5/5 CI checks
 FUN_00405710,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered guarded request child registration pass
 FUN_00405BD0,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered message resource registration pass with early cleanup path and state restoration
+FUN_00405BD0,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,1c4a6cb58619689f43afab899afc5f824e048226,coordinator,PR #162 completed 5/5 CI checks
