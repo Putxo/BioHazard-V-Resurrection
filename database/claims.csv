@@ -81,3 +81,5 @@ SEQ-00403AF0,FUN_00403AF0,coordinator,decomp/00403af0-next,sequential decomp of 
 SEQ-00403F50,FUN_00403F50,coordinator,decomp/00403f50-next,sequential decomp of resource scan batch initializer,2026-09-21T00:10:00Z,,,true
 SEQ-00404E60,FUN_00404E60,coordinator,decomp/00404e60-next,sequential decomp of effect resource scan dispatcher,2026-09-21T17:18:00Z,,,true
 SEQ-00404F90,FUN_00404F90,coordinator,decomp/00404f90-next,sequential decomp of table registration candidate block,2026-09-21T17:28:00Z,,,true
+SEQ-00405710,FUN_00405710,coordinator,decomp/00405710-next,sequential decomp of guarded request child registration pass,2026-09-21T17:45:00Z,,,true
+SEQ-00405BD0,FUN_00405BD0,coordinator,decomp/00405bd0-next,sequential decomp of message resource registration pass,2026-09-21T21:08:22Z,,,true
