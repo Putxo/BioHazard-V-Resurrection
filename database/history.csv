@@ -150,3 +150,4 @@ FUN_00405BD0,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,1c4a6cb58619689f43afab899a
 FUN_00405DF0,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered message-resource registration batch with exact nine-entry table cancel cleanup and global state restoration
 FUN_00405DF0,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,151ee48c5f3ef44c0d32e0006373e7c0bee98be2,coordinator,PR #164 completed 5/5 CI checks
 FUN_00405A60,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered static six-entry resource registration pass with archive preflight early cancel and loading-state restoration
+FUN_00405A60,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,4ff96307fac4ebb8a4481f79e1cc9f81df22c1e1,coordinator,PR #169 completed 5/5 CI checks
