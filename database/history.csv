@@ -161,3 +161,5 @@ FUN_00405930,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered three-state node
 FUN_00405930,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,b4481a234514e9e47f863d2f33072b3a8bf86473,coordinator,PR #172 completed 5/5 CI checks
 FUN_00406540,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered Game2Resource forwarding wrapper with exact archive literal and 2/5 table tokens
 FUN_00406540,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,90444724ef6040379b990c1c6c4116bf910bd0a0,coordinator,PR #184 completed 5/5 CI checks
+FUN_004061F0,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered generalized archive resource registration helper with conditional indexed resolution two tables early cleanup and state restoration
+FUN_004061F0,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,0a08af19efbd4c5387706ab5b6178537e73adfdc,coordinator,PR #181 completed 5/5 CI checks
