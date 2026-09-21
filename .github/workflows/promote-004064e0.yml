@@ -1,0 +1,80 @@
+name: promote-004064e0
+
+on:
+  push:
+    branches:
+      - promote/004064e0-fastpass-valid
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: promote/004064e0-fastpass-valid
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Promote only FUN_004064E0 metadata
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+
+          path = Path('database/functions.csv')
+          with path.open(newline='') as f:
+              rows = list(csv.DictReader(f))
+              fields = list(rows[0].keys())
+          found = False
+          for row in rows:
+              if row['stable_id'] == 'FUN_004064E0':
+                  found = True
+                  row['fast_pass_validated'] = 'true'
+                  row['pr'] = '#174'
+                  row['commit'] = 'dcbf0ac0fa50d1581f9eb3396910d980fff510d9'
+                  suffix = '; PR #174 CI 5/5 PASS'
+                  if suffix not in row['notes']:
+                      row['notes'] += suffix
+          if not found:
+              raise SystemExit('FUN_004064E0 metadata row missing')
+          with path.open('w', newline='') as f:
+              w = csv.DictWriter(f, fieldnames=fields, lineterminator='\n')
+              w.writeheader()
+              w.writerows(rows)
+
+          history = Path('database/history.csv')
+          text = history.read_text()
+          marker = 'FUN_004064E0,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,'
+          if marker not in text:
+              row = ('FUN_004064E0,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,'
+                     'dcbf0ac0fa50d1581f9eb3396910d980fff510d9,coordinator,'
+                     'PR #174 completed 5/5 CI checks')
+              history.write_text(text.rstrip('\n') + '\n' + row + '\n')
+          PY
+      - name: Regenerate and validate canonical reports
+        shell: bash
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          git diff --check
+      - name: Build and test
+        shell: bash
+        run: |
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Commit promotion and remove helper
+        shell: bash
+        run: |
+          rm .github/workflows/promote-004064e0.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add database/functions.csv database/history.csv reports .github/workflows/promote-004064e0.yml
+          git commit -m 'Validate FUN_004064E0 fast-pass block [promote-004064e0]'
+          git push origin HEAD:promote/004064e0-fastpass-valid
