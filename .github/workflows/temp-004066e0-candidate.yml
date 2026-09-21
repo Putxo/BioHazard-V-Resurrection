@@ -1,0 +1,148 @@
+name: prepare-004066e0-candidate
+
+on:
+  push:
+    branches:
+      - decomp/004066e0-next
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/004066e0-next
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Wire candidate into build and metadata
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import csv
+
+          cmake = Path('CMakeLists.txt')
+          text = cmake.read_text()
+          if 'src/recovered/fun_004066e0.cpp' not in text:
+              needle = '    src/recovered/fun_004066c0.cpp\n)'
+              assert needle in text
+              text = text.replace(needle, '    src/recovered/fun_004066c0.cpp\n    src/recovered/fun_004066e0.cpp\n)', 1)
+          if 'tests/unit/test_fun_004066e0.cpp' not in text:
+              needle = '    tests/unit/test_fun_004066c0.cpp\n)'
+              assert needle in text
+              text = text.replace(needle, '    tests/unit/test_fun_004066c0.cpp\n    tests/unit/test_fun_004066e0.cpp\n)', 1)
+          cmake.write_text(text)
+
+          smoke = Path('tests/unit/test_smoke.cpp')
+          text = smoke.read_text()
+          if 'void test_fun_004066e0();' not in text:
+              needle = 'void test_fun_004066c0();\n'
+              assert needle in text
+              text = text.replace(needle, needle + 'void test_fun_004066e0();\n', 1)
+          if '    test_fun_004066e0();\n' not in text:
+              needle = '    test_fun_004066c0();\n'
+              assert needle in text
+              text = text.replace(needle, needle + '    test_fun_004066e0();\n', 1)
+          smoke.write_text(text)
+
+          def append_csv(path, row, key):
+              p = Path(path)
+              with p.open(newline='') as f:
+                  reader = csv.DictReader(f)
+                  fields = reader.fieldnames
+                  assert fields is not None
+                  rows = list(reader)
+              if any(r.get(key[0]) == key[1] for r in rows):
+                  raise SystemExit(f'{key[1]} already present in {path}')
+              with p.open('a', newline='') as f:
+                  writer = csv.DictWriter(f, fieldnames=fields, lineterminator='\n')
+                  writer.writerow({name: row.get(name, '') for name in fields})
+
+          append_csv('database/functions.csv', {
+              'stable_id': 'FUN_004066E0',
+              'va': '0x004066E0',
+              'rva': '0x000066E0',
+              'section': '.text',
+              'size': '27',
+              'provisional_name': 'FUN_004066E0',
+              'refined_name': '',
+              'workflow_status': 'ACTIVE',
+              'confidence': 'HIGH',
+              'fast_pass': 'true',
+              'fast_pass_validated': 'false',
+              'converted': 'false',
+              'refined': 'false',
+              'verified': 'false',
+              'matched': 'false',
+              'linked': 'false',
+              'calling_convention': 'cdecl',
+              'return_type': 'void',
+              'arguments': 'void',
+              'this_type': 'void',
+              'module': 'UNKNOWN',
+              'subsystem': 'Resource',
+              'source_file': 'src/recovered/fun_004066e0.cpp',
+              'owner': 'coordinator',
+              'claim_id': 'SEQ-004066E0',
+              'pr': '',
+              'commit': '',
+              'test': 'tests/unit/test_fun_004066e0.cpp',
+              'evidence': 'decomp/evidence/fun_004066e0.md',
+              'notes': 'MerceResource fixed -1 forwarding wrapper with exact eight-entry direct table and no resolved table',
+          }, ('stable_id', 'FUN_004066E0'))
+
+          append_csv('database/claims.csv', {
+              'claim_id': 'SEQ-004066E0',
+              'stable_id': 'FUN_004066E0',
+              'owner': 'coordinator',
+              'branch': 'decomp/004066e0-next',
+              'task': 'sequential decomp of MerceResource forwarding wrapper',
+              'claimed_at': '2026-09-21T23:35:00Z',
+              'expires_at': '',
+              'pr': '',
+              'active': 'true',
+          }, ('stable_id', 'FUN_004066E0'))
+
+          history = Path('database/history.csv')
+          with history.open(newline='') as f:
+              reader = csv.DictReader(f)
+              fields = reader.fieldnames
+              assert fields is not None
+              rows = list(reader)
+          if not any(r.get('stable_id') == 'FUN_004066E0' for r in rows):
+              with history.open('a', newline='') as f:
+                  writer = csv.DictWriter(f, fieldnames=fields, lineterminator='\n')
+                  writer.writerow({
+                      'stable_id': 'FUN_004066E0',
+                      'date': '2026-09-22',
+                      'old_status': 'UNSEEN',
+                      'new_status': 'FAST_PASS',
+                      'commit': '',
+                      'owner': 'coordinator',
+                      'reason': 'recovered MerceResource fixed -1 forwarding wrapper with exact eight-entry direct table and no resolved entries',
+                  })
+          else:
+              raise SystemExit('FUN_004066E0 history already exists')
+          PY
+      - name: Regenerate and validate candidate
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          git diff --check
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev --output-on-failure
+      - name: Commit validated candidate tree
+        run: |
+          rm -f .github/workflows/temp-004066e0-candidate.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --check
+          git commit -m 'Complete FUN_004066E0 candidate'
+          git push origin HEAD:decomp/004066e0-next
