@@ -3178,7 +3178,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3193,10 +3193,10 @@
     "source_file": "src/recovered/fun_004066e0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004066E0",
-    "pr": "",
-    "commit": "",
+    "pr": "#214",
+    "commit": "454d328671f10c83db6468366bcd883f5e36dfc1",
     "test": "tests/unit/test_fun_004066e0.cpp",
     "evidence": "decomp/evidence/fun_004066e0.md",
-    "notes": "MerceResource fixed -1 forwarding wrapper with exact eight-entry direct table and no resolved table"
+    "notes": "MerceResource fixed -1 forwarding wrapper with exact eight-entry direct table and no resolved table; PR #214 CI 5/5 PASS"
   }
 ]
