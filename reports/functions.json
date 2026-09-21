@@ -3114,7 +3114,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3129,11 +3129,11 @@
     "source_file": "src/recovered/fun_004066c0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004066C0",
-    "pr": "",
-    "commit": "",
+    "pr": "#206",
+    "commit": "c80b30865fe79ac232f63b7add9f60e023eb0f04",
     "test": "tests/unit/test_fun_004066c0.cpp",
     "evidence": "decomp/evidence/fun_004066c0.md",
-    "notes": "VersusResource fixed -1 forwarding wrapper with exact nine-entry direct table and no resolved table"
+    "notes": "VersusResource fixed -1 forwarding wrapper with exact nine-entry direct table and no resolved table; PR #206 CI 5/5 PASS"
   },
   {
     "stable_id": "FUN_00406680",
