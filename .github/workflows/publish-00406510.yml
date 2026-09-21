@@ -1,0 +1,122 @@
+name: publish-00406510
+
+on:
+  push:
+    branches:
+      - release/main-fastpass88-00406510
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: release/main-fastpass88-00406510
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Apply only validated FUN_00406510 delta
+        shell: bash
+        run: |
+          VALIDATED=14e315694f0f8b6e3c1eefb6011db4f32d5eec3a
+          git fetch origin "$VALIDATED"
+          git checkout "$VALIDATED" -- \
+            include/re5/recovered/fun_00406510.hpp \
+            src/recovered/fun_00406510.cpp \
+            tests/unit/test_fun_00406510.cpp \
+            decomp/evidence/fun_00406510.md
+          git show "$VALIDATED":database/functions.csv > /tmp/integration-functions.csv
+          git show "$VALIDATED":database/claims.csv > /tmp/integration-claims.csv
+          git show "$VALIDATED":database/history.csv > /tmp/integration-history.csv
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+
+          target = 'FUN_00406510'
+
+          def replace_target_rows(dst_path, src_path, key):
+              dst = Path(dst_path)
+              src = Path(src_path)
+              with dst.open(newline='') as f:
+                  dst_rows = list(csv.DictReader(f))
+                  fields = list(dst_rows[0].keys())
+              with src.open(newline='') as f:
+                  src_rows = list(csv.DictReader(f))
+              target_rows = [r for r in src_rows if r[key] == target]
+              if not target_rows:
+                  raise SystemExit(f'{target} missing from {src_path}')
+              dst_rows = [r for r in dst_rows if r[key] != target]
+              dst_rows.extend(target_rows)
+              with dst.open('w', newline='') as f:
+                  w = csv.DictWriter(f, fieldnames=fields, lineterminator='\n')
+                  w.writeheader()
+                  w.writerows(dst_rows)
+
+          replace_target_rows('database/functions.csv', '/tmp/integration-functions.csv', 'stable_id')
+          replace_target_rows('database/claims.csv', '/tmp/integration-claims.csv', 'stable_id')
+          replace_target_rows('database/history.csv', '/tmp/integration-history.csv', 'stable_id')
+
+          cmake = Path('CMakeLists.txt')
+          text = cmake.read_text()
+          src_line = '    src/recovered/fun_00406510.cpp\n'
+          test_line = '    tests/unit/test_fun_00406510.cpp\n'
+          if src_line not in text:
+              anchor = '    src/recovered/fun_004064e0.cpp\n'
+              if anchor not in text:
+                  raise SystemExit('CMake source anchor missing')
+              text = text.replace(anchor, anchor + src_line, 1)
+          if test_line not in text:
+              anchor = '    tests/unit/test_fun_004064e0.cpp\n'
+              if anchor not in text:
+                  raise SystemExit('CMake test anchor missing')
+              text = text.replace(anchor, anchor + test_line, 1)
+          cmake.write_text(text)
+
+          smoke = Path('tests/unit/test_smoke.cpp')
+          text = smoke.read_text()
+          if 'void test_fun_00406510();' not in text:
+              anchor = 'void test_fun_004064e0();\n'
+              if anchor not in text:
+                  raise SystemExit('smoke declaration anchor missing')
+              text = text.replace(anchor, anchor + 'void test_fun_00406510();\n', 1)
+          if '    test_fun_00406510();' not in text:
+              anchor = '    test_fun_004064e0();\n'
+              if anchor not in text:
+                  raise SystemExit('smoke call anchor missing')
+              text = text.replace(anchor, anchor + '    test_fun_00406510();\n', 1)
+          smoke.write_text(text)
+          PY
+      - name: Publish README and regenerate canonical progress
+        shell: bash
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/reports/report.py --publish-readme
+          python tools/validate/validate.py
+          git diff --check
+      - name: Configure build and tests
+        shell: bash
+        run: |
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Reject binary-like release content
+        shell: bash
+        run: |
+          if git diff --name-only HEAD | grep -Ei '\.(exe|dll|obj|lib|pdb|pak|arc|bin)$'; then
+            echo 'Binary-like file detected' >&2
+            exit 1
+          fi
+      - name: Commit publication and remove helper
+        shell: bash
+        run: |
+          rm .github/workflows/publish-00406510.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md CMakeLists.txt database reports include/re5/recovered/fun_00406510.hpp src/recovered/fun_00406510.cpp tests/unit/test_fun_00406510.cpp tests/unit/test_smoke.cpp decomp/evidence/fun_00406510.md .github/workflows/publish-00406510.yml
+          git commit -m 'Publish FUN_00406510 fast-pass dashboard [publish-00406510]'
+          git push origin HEAD:release/main-fastpass88-00406510
