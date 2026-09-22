@@ -3498,7 +3498,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3513,10 +3513,10 @@
     "source_file": "src/recovered/fun_004067e0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004067E0",
-    "pr": "",
-    "commit": "",
+    "pr": "#251",
+    "commit": "b5cc90ae5739aceb7736c277ed995c4428b05e9d",
     "test": "tests/unit/test_fun_004067e0.cpp",
     "evidence": "decomp/evidence/fun_004067e0.md",
-    "notes": "FigureResource fixed -1 forwarding wrapper with exact seven-entry direct table and no resolved table; direct caller 0x00509CC6"
+    "notes": "FigureResource fixed -1 forwarding wrapper with exact seven-entry direct table and no resolved table; direct caller 0x00509CC6; PR #251 CI 5/5 PASS"
   }
 ]
