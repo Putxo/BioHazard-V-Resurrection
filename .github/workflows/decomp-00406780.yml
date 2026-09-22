@@ -1,0 +1,97 @@
+name: Decompile FUN_00406780
+
+on:
+  push:
+    branches:
+      - decomp/00406780-next
+
+permissions:
+  contents: write
+
+jobs:
+  decomp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: decomp/00406780-next
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Wire FUN_00406780 and metadata
+        shell: python
+        run: |
+          import csv
+          from pathlib import Path
+          target='FUN_00406780'
+          functions=Path('database/functions.csv')
+          with functions.open(newline='') as f:
+              rows=list(csv.DictReader(f)); fields=list(rows[0].keys())
+          if any(r['stable_id']==target for r in rows): raise SystemExit(f'{target} already exists')
+          row={k:'' for k in fields}
+          row.update({'stable_id':target,'va':'0x00406780','rva':'0x00006780','section':'.text','size':'27','provisional_name':target,'workflow_status':'ACTIVE','confidence':'HIGH','fast_pass':'true','fast_pass_validated':'false','converted':'false','refined':'false','verified':'false','matched':'false','linked':'false','calling_convention':'cdecl','return_type':'void','arguments':'void','this_type':'void','module':'UNKNOWN','subsystem':'Resource','source_file':'src/recovered/fun_00406780.cpp','owner':'coordinator','claim_id':'SEQ-00406780','test':'tests/unit/test_fun_00406780.cpp','evidence':'decomp/evidence/fun_00406780.md','notes':'Merce2Resource fixed -1 forwarding wrapper with exact thirteen-entry direct table and no resolved table'})
+          rows.append(row)
+          with functions.open('w',newline='') as f:
+              w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(rows)
+          claims=Path('database/claims.csv')
+          with claims.open(newline='') as f:
+              crows=list(csv.DictReader(f)); cfields=list(crows[0].keys())
+          if any(r['stable_id']==target and r['active'].lower()=='true' for r in crows): raise SystemExit(f'{target} already claimed')
+          c={k:'' for k in cfields}; c.update({'claim_id':'SEQ-00406780','stable_id':target,'owner':'coordinator','branch':'decomp/00406780-next','task':'sequential decomp of Merce2Resource forwarding wrapper','claimed_at':'2026-09-22T00:50:00Z','active':'true'})
+          crows.append(c)
+          with claims.open('w',newline='') as f:
+              w=csv.DictWriter(f,fieldnames=cfields,lineterminator='\n'); w.writeheader(); w.writerows(crows)
+          history=Path('database/history.csv')
+          event='FUN_00406780,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered Merce2Resource fixed -1 forwarding wrapper with exact thirteen-entry direct table and no resolved table'
+          text=history.read_text(encoding='utf-8')
+          if event not in text: history.write_text(text.rstrip('\n')+'\n'+event+'\n',encoding='utf-8')
+          cmake=Path('CMakeLists.txt'); text=cmake.read_text(encoding='utf-8')
+          src='    src/recovered/fun_00406780.cpp\n'; test='    tests/unit/test_fun_00406780.cpp\n'
+          if src not in text:
+              anchor='    src/recovered/fun_00406760.cpp\n'
+              if anchor not in text: raise SystemExit('source anchor missing')
+              text=text.replace(anchor,anchor+src,1)
+          if test not in text:
+              anchor='    tests/unit/test_fun_00406760.cpp\n'
+              if anchor not in text: raise SystemExit('test anchor missing')
+              text=text.replace(anchor,anchor+test,1)
+          cmake.write_text(text,encoding='utf-8')
+          smoke=Path('tests/unit/test_smoke.cpp'); text=smoke.read_text(encoding='utf-8')
+          if 'void test_fun_00406780();' not in text:
+              anchor='void test_fun_00406760();\n'
+              if anchor not in text: raise SystemExit('smoke declaration anchor missing')
+              text=text.replace(anchor,anchor+'void test_fun_00406780();\n',1)
+          if '    test_fun_00406780();' not in text:
+              anchor='    test_fun_00406760();\n'
+              if anchor not in text: raise SystemExit('smoke call anchor missing')
+              text=text.replace(anchor,anchor+'    test_fun_00406780();\n',1)
+          smoke.write_text(text,encoding='utf-8')
+      - name: Regenerate canonical reports
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+      - name: Validate metadata and reports
+        run: python tools/validate/validate.py
+      - name: Build and test
+        run: |
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Diff hygiene and reject binary products
+        shell: bash
+        run: |
+          git diff --check
+          if git diff --name-only HEAD | grep -Ei '\.(exe|dll|obj|lib|pdb|pak|arc|bin)$'; then exit 1; fi
+          if git ls-files --others --exclude-standard | grep -Ei '\.(exe|dll|obj|lib|pdb|pak|arc|bin)$'; then exit 1; fi
+      - name: Commit reconstruction and remove temporary workflow
+        shell: bash
+        run: |
+          rm .github/workflows/decomp-00406780.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --check
+          if git diff --cached --name-only | grep -Ei '\.(exe|dll|obj|lib|pdb|pak|arc|bin)$'; then exit 1; fi
+          git commit -m 'Decompile FUN_00406780 Merce2Resource forwarding wrapper'
+          git push origin HEAD:decomp/00406780-next
