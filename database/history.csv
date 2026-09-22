@@ -193,3 +193,5 @@ FUN_004067A0,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered RecordResource f
 FUN_004067A0,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,a88b1c0edb4daf65e5c3084de7f3be80f6dab705,coordinator,PR #234 completed 5/5 CI checks
 FUN_004067C0,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered ViewerResource forwarding wrapper from exact executable
 FUN_004067C0,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,6917f76e646a628bb0f37e8058a60dd809597bff,coordinator,PR #237 completed 5/5 CI checks
+FUN_00406800,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered CreditResource fixed forwarding wrapper with exact one-entry direct table
+FUN_00406800,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,9da285639e5c25b3ecae05cce4d6affb4c3551d8,coordinator,PR #241 completed 5/5 CI checks
