@@ -108,3 +108,4 @@ SEQ-004067A0,FUN_004067A0,coordinator,decomp/004067a0-next,sequential decomp of 
 SEQ-004067C0,FUN_004067C0,coordinator,decomp/004067c0-next,sequential decomp of ViewerResource forwarding wrapper,2026-09-22T16:39:43Z,,,true
 SEQ-00406800,FUN_00406800,coordinator,decomp/00406800-next,sequential decomp of CreditResource forwarding wrapper,2026-09-22T16:37:00Z,,,true
 SEQ-00406820,FUN_00406820,coordinator,decomp/00406820-next,sequential decomp of Credit2Resource forwarding wrapper,2026-09-22T18:37:00+02:00,,,true
+SEQ-004067E0,FUN_004067E0,coordinator,decomp/004067e0-next,sequential decomp of FigureResource forwarding wrapper,2026-09-22T16:36:00Z,,,true
