@@ -1,0 +1,45 @@
+name: Decompile FUN_004067E0
+on:
+  push:
+    branches: [decomp/004067e0-next]
+permissions:
+  contents: write
+jobs:
+  decomp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.x'}
+      - name: Wire target and metadata
+        shell: python
+        run: |
+          from pathlib import Path
+          import csv
+          p=Path('CMakeLists.txt'); s=p.read_text(); s=s.replace('    src/recovered/fun_00406800.cpp\n)', '    src/recovered/fun_00406800.cpp\n    src/recovered/fun_004067e0.cpp\n)'); s=s.replace('    tests/unit/test_fun_00406800.cpp\n)', '    tests/unit/test_fun_00406800.cpp\n    tests/unit/test_fun_004067e0.cpp\n)'); p.write_text(s)
+          p=Path('tests/unit/test_smoke.cpp'); s=p.read_text(); s=s.replace('void test_fun_00406800();\n', 'void test_fun_00406800();\nvoid test_fun_004067e0();\n'); s=s.replace('    test_fun_00406800();\n    return 0;', '    test_fun_00406800();\n    test_fun_004067e0();\n    return 0;'); p.write_text(s)
+          def add(path,row):
+              p=Path(path); rows=list(csv.reader(p.open(newline=''))); assert row[0] not in {r[0] for r in rows[1:]}; rows.append(row)
+              with p.open('w',newline='') as f: csv.writer(f,lineterminator='\n').writerows(rows)
+          add('database/functions.csv',['FUN_004067E0','0x004067E0','0x000067E0','.text','27','FUN_004067E0','','ACTIVE','HIGH','true','false','false','false','false','false','false','cdecl','void','void','void','UNKNOWN','Resource','src/recovered/fun_004067e0.cpp','coordinator','SEQ-004067E0','','','tests/unit/test_fun_004067e0.cpp','decomp/evidence/fun_004067e0.md','FigureResource fixed -1 forwarding wrapper with exact seven-entry direct table and no resolved table; direct caller 0x00509CC6'])
+          add('database/claims.csv',['SEQ-004067E0','FUN_004067E0','coordinator','decomp/004067e0-next','sequential decomp of FigureResource forwarding wrapper','2026-09-22T16:36:00Z','','','true'])
+          add('database/history.csv',['FUN_004067E0','2026-09-22','UNSEEN','FAST_PASS','','coordinator','recovered FigureResource fixed -1 forwarding wrapper with exact seven-entry direct table'])
+      - name: Validate
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+          git diff --check
+          if git ls-files | grep -Ei '\.(exe|dll|obj)$' | grep -v '^$'; then exit 1; fi
+      - name: Commit final candidate
+        run: |
+          rm .github/workflows/decomp-004067e0.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add CMakeLists.txt database/claims.csv database/functions.csv database/history.csv decomp/evidence/fun_004067e0.md include/re5/recovered/fun_004067e0.hpp reports/functions.json reports/progress-treemap.svg reports/progress.md src/recovered/fun_004067e0.cpp tests/unit/test_fun_004067e0.cpp tests/unit/test_smoke.cpp
+          git commit -m 'Decompile FUN_004067E0 FigureResource forwarding wrapper'
+          git push
