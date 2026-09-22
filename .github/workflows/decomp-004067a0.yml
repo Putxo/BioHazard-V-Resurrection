@@ -1,0 +1,78 @@
+name: Decompile FUN_004067A0
+on:
+  push:
+    branches: [decomp/004067a0-next]
+permissions:
+  contents: write
+jobs:
+  decomp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Wire FUN_004067A0 and metadata
+        shell: python
+        run: |
+          from pathlib import Path
+          import csv, io
+
+          p=Path('CMakeLists.txt')
+          s=p.read_text()
+          s=s.replace('    src/recovered/fun_00406780.cpp\n)', '    src/recovered/fun_00406780.cpp\n    src/recovered/fun_004067a0.cpp\n)')
+          s=s.replace('    tests/unit/test_fun_00406780.cpp\n)', '    tests/unit/test_fun_00406780.cpp\n    tests/unit/test_fun_004067a0.cpp\n)')
+          p.write_text(s)
+
+          p=Path('tests/unit/test_smoke.cpp')
+          s=p.read_text()
+          s=s.replace('void test_fun_00406780();\n', 'void test_fun_00406780();\nvoid test_fun_004067a0();\n')
+          s=s.replace('    test_fun_00406780();\n    return 0;', '    test_fun_00406780();\n    test_fun_004067a0();\n    return 0;')
+          p.write_text(s)
+
+          def append_csv(path, row):
+              p=Path(path)
+              with p.open(newline='') as f:
+                  rows=list(csv.reader(f))
+              assert row[0] not in {r[0] for r in rows[1:]}
+              rows.append(row)
+              with p.open('w', newline='') as f:
+                  csv.writer(f, lineterminator='\n').writerows(rows)
+
+          append_csv('database/functions.csv', [
+              'FUN_004067A0','0x004067A0','0x000067A0','.text','27','FUN_004067A0','','ACTIVE','HIGH',
+              'true','false','false','false','false','false','false','cdecl','void','void','void','UNKNOWN','Resource',
+              'src/recovered/fun_004067a0.cpp','coordinator','SEQ-004067A0','','','tests/unit/test_fun_004067a0.cpp',
+              'decomp/evidence/fun_004067a0.md','RecordResource fixed -1 forwarding wrapper with exact one-entry direct table and no resolved table; no direct CALL rel32 caller in .text'])
+          append_csv('database/claims.csv', [
+              'SEQ-004067A0','FUN_004067A0','coordinator','decomp/004067a0-next',
+              'sequential decomp of RecordResource forwarding wrapper','2026-09-22T15:50:00Z','','','true'])
+          append_csv('database/history.csv', [
+              'FUN_004067A0','2026-09-22','UNSEEN','FAST_PASS','','coordinator',
+              'recovered RecordResource fixed -1 forwarding wrapper with exact one-entry direct table'])
+      - name: Regenerate canonical reports
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+      - name: Validate metadata and reports
+        run: python tools/validate/validate.py
+      - name: Build and test
+        run: |
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Diff hygiene and reject binary products
+        run: |
+          git diff --check
+          if git ls-files | grep -Ei '\.(exe|dll|obj)$' | grep -v '^$'; then exit 1; fi
+          if find . -type f \( -name '*.exe' -o -name '*.dll' -o -name '*.obj' \) -not -path './build/*' -not -path './out/*' | grep .; then exit 1; fi
+      - name: Commit reconstruction and remove temporary workflow
+        run: |
+          rm .github/workflows/decomp-004067a0.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add CMakeLists.txt database/claims.csv database/functions.csv database/history.csv decomp/evidence/fun_004067a0.md include/re5/recovered/fun_004067a0.hpp reports/functions.json reports/progress-treemap.svg reports/progress.md src/recovered/fun_004067a0.cpp tests/unit/test_fun_004067a0.cpp tests/unit/test_smoke.cpp
+          git commit -m 'Decompile FUN_004067A0 RecordResource forwarding wrapper'
+          git push
