@@ -1,0 +1,85 @@
+name: tmp-resync-00406800
+
+on:
+  push:
+    branches: [decomp/00406800-next]
+    paths:
+      - '.github/workflows/tmp-resync-00406800.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  resync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Restore target-only snapshot
+        run: |
+          git fetch --depth=1 origin 4381619dcc2a9e49f3dd4bd53bdc42aaface7512
+          mkdir -p include/re5/recovered src/recovered tests/unit decomp/evidence
+          git show FETCH_HEAD:include/re5/recovered/fun_00406800.hpp > include/re5/recovered/fun_00406800.hpp
+          git show FETCH_HEAD:src/recovered/fun_00406800.cpp > src/recovered/fun_00406800.cpp
+          git show FETCH_HEAD:tests/unit/test_fun_00406800.cpp > tests/unit/test_fun_00406800.cpp
+          git show FETCH_HEAD:decomp/evidence/fun_00406800.md > decomp/evidence/fun_00406800.md
+      - name: Apply target-only wiring and metadata
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          target='FUN_00406800'
+          cmake=Path('CMakeLists.txt'); text=cmake.read_text(encoding='utf-8')
+          for line,anchor in [('    src/recovered/fun_00406800.cpp\n','    src/recovered/fun_004067c0.cpp\n'),('    tests/unit/test_fun_00406800.cpp\n','    tests/unit/test_fun_004067c0.cpp\n')]:
+              if line not in text:
+                  if anchor not in text: raise SystemExit('CMake anchor missing')
+                  text=text.replace(anchor,anchor+line,1)
+          cmake.write_text(text,encoding='utf-8')
+
+          smoke=Path('tests/unit/test_smoke.cpp'); text=smoke.read_text(encoding='utf-8')
+          for line,anchor in [('void test_fun_00406800();\n','void test_fun_004067c0();\n'),('    test_fun_00406800();\n','    test_fun_004067c0();\n')]:
+              if line not in text:
+                  if anchor not in text: raise SystemExit('smoke anchor missing')
+                  text=text.replace(anchor,anchor+line,1)
+          smoke.write_text(text,encoding='utf-8')
+
+          p=Path('database/functions.csv')
+          with p.open(newline='',encoding='utf-8') as f: rows=list(csv.DictReader(f)); fields=list(rows[0].keys())
+          rows=[r for r in rows if r['stable_id']!=target]
+          rows.append({'stable_id':target,'va':'0x00406800','rva':'0x00006800','section':'.text','size':'27','provisional_name':target,'refined_name':'','workflow_status':'ACTIVE','confidence':'HIGH','fast_pass':'true','fast_pass_validated':'false','converted':'false','refined':'false','verified':'false','matched':'false','linked':'false','calling_convention':'cdecl','return_type':'void','arguments':'void','this_type':'void','module':'UNKNOWN','subsystem':'Resource','source_file':'src/recovered/fun_00406800.cpp','owner':'coordinator','claim_id':'SEQ-00406800','pr':'','commit':'','test':'tests/unit/test_fun_00406800.cpp','evidence':'decomp/evidence/fun_00406800.md','notes':'CreditResource fixed -1 forwarding wrapper with exact one-entry direct table and no resolved table'})
+          with p.open('w',newline='',encoding='utf-8') as f: w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(rows)
+
+          p=Path('database/claims.csv')
+          with p.open(newline='',encoding='utf-8') as f: rows=list(csv.DictReader(f)); fields=list(rows[0].keys())
+          rows=[r for r in rows if r['stable_id']!=target]
+          rows.append({'claim_id':'SEQ-00406800','stable_id':target,'owner':'coordinator','branch':'decomp/00406800-next','task':'sequential decomp of CreditResource forwarding wrapper','claimed_at':'2026-09-22T16:37:00Z','expires_at':'','pr':'','active':'true'})
+          with p.open('w',newline='',encoding='utf-8') as f: w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(rows)
+
+          p=Path('database/history.csv')
+          with p.open(newline='',encoding='utf-8') as f: rows=list(csv.DictReader(f)); fields=list(rows[0].keys())
+          rows=[r for r in rows if r['stable_id']!=target]
+          rows.append({'stable_id':target,'date':'2026-09-22','old_status':'UNSEEN','new_status':'FAST_PASS','commit':'','owner':'coordinator','reason':'recovered CreditResource fixed forwarding wrapper with exact one-entry direct table'})
+          with p.open('w',newline='',encoding='utf-8') as f: w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(rows)
+          PY
+      - name: Regenerate validate build test
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          python -m pip install pytest
+          python -m pytest -q tests/metadata
+          git diff --check
+          if git status --porcelain | grep -Ei '\.(exe|dll|obj)( |$)'; then exit 1; fi
+          sudo apt-get update && sudo apt-get install -y ninja-build
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Commit resynced candidate
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add CMakeLists.txt tests/unit/test_smoke.cpp database/functions.csv database/claims.csv database/history.csv reports/progress.md reports/functions.json reports/progress-treemap.svg include/re5/recovered/fun_00406800.hpp src/recovered/fun_00406800.cpp tests/unit/test_fun_00406800.cpp decomp/evidence/fun_00406800.md
+          git commit -m 'Decompile FUN_00406800 on current integration'
+          git push
