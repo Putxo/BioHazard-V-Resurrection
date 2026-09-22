@@ -190,3 +190,4 @@ FUN_00406760,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,57ba3a7e04f95c9f2fdec0c74a
 FUN_00406780,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered Merce2Resource fixed -1 forwarding wrapper with exact thirteen-entry direct table and no resolved table
 FUN_00406780,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,db9265f2aaee5f0aa0fe09d50d6f24fba0438721,coordinator,PR #231 completed 5/5 CI checks
 FUN_004067A0,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered RecordResource fixed -1 forwarding wrapper with exact one-entry direct table
+FUN_004067A0,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,a88b1c0edb4daf65e5c3084de7f3be80f6dab705,coordinator,PR #234 completed 5/5 CI checks

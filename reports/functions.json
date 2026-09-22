@@ -3370,7 +3370,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3385,10 +3385,10 @@
     "source_file": "src/recovered/fun_004067a0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004067A0",
-    "pr": "",
-    "commit": "",
+    "pr": "#234",
+    "commit": "a88b1c0edb4daf65e5c3084de7f3be80f6dab705",
     "test": "tests/unit/test_fun_004067a0.cpp",
     "evidence": "decomp/evidence/fun_004067a0.md",
-    "notes": "RecordResource fixed -1 forwarding wrapper with exact one-entry direct table and no resolved table; no direct CALL rel32 caller in .text"
+    "notes": "RecordResource fixed -1 forwarding wrapper with exact one-entry direct table and no resolved table; no direct CALL rel32 caller in .text; PR #234 CI 5/5 PASS"
   }
 ]
