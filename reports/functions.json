@@ -3434,7 +3434,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3449,10 +3449,10 @@
     "source_file": "src/recovered/fun_00406800.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00406800",
-    "pr": "",
-    "commit": "",
+    "pr": "#241",
+    "commit": "9da285639e5c25b3ecae05cce4d6affb4c3551d8",
     "test": "tests/unit/test_fun_00406800.cpp",
     "evidence": "decomp/evidence/fun_00406800.md",
-    "notes": "CreditResource fixed -1 forwarding wrapper with exact one-entry direct table and no resolved table"
+    "notes": "CreditResource fixed -1 forwarding wrapper with exact one-entry direct table and no resolved table; PR #241 CI 5/5 PASS"
   }
 ]
