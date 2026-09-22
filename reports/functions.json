@@ -3338,7 +3338,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3353,10 +3353,10 @@
     "source_file": "src/recovered/fun_00406780.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00406780",
-    "pr": "",
-    "commit": "",
+    "pr": "#231",
+    "commit": "db9265f2aaee5f0aa0fe09d50d6f24fba0438721",
     "test": "tests/unit/test_fun_00406780.cpp",
     "evidence": "decomp/evidence/fun_00406780.md",
-    "notes": "Merce2Resource fixed -1 forwarding wrapper with exact thirteen-entry direct table and no resolved table"
+    "notes": "Merce2Resource fixed -1 forwarding wrapper with exact thirteen-entry direct table and no resolved table; PR #231 CI 5/5 PASS"
   }
 ]
