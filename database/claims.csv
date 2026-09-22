@@ -102,3 +102,4 @@ SEQ-004066E0,FUN_004066E0,coordinator,decomp/004066e0-next,sequential decomp of 
 SEQ-00406700,FUN_00406700,coordinator,decomp/00406700-next,sequential decomp of Extra1Resource forwarding wrapper,2026-09-21T23:33:00Z,,,true
 SEQ-00406720,FUN_00406720,coordinator,decomp/00406720-next,sequential decomp of Extra2Resource forwarding wrapper,2026-09-21T23:48:00Z,,,true
 SEQ-00406740,FUN_00406740,coordinator,decomp/00406740-next,sequential decomp of Extra1End forwarding wrapper,2026-09-21T23:56:54Z,,,true
+SEQ-00406760,FUN_00406760,coordinator,decomp/00406760-next,sequential decomp of Extra2End forwarding wrapper,2026-09-22T02:46:00+02:00,,,true
