@@ -1,0 +1,69 @@
+name: tmp-publish-correction-00407b60
+
+on:
+  push:
+    branches: [release/main-correction-00407b60]
+    paths:
+      - '.github/workflows/tmp-publish-correction-00407b60.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch validated correction snapshot
+        run: |
+          git fetch --depth=1 origin 8f77af7abcb2c60b1ee04d2c8bf3482abb04e76f
+          mkdir -p decomp/evidence
+          git show FETCH_HEAD:config/inventory_freeze.json > config/inventory_freeze.json
+          git show FETCH_HEAD:decomp/evidence/candidate_00407b60_rejection.md > decomp/evidence/candidate_00407b60_rejection.md
+          git show FETCH_HEAD:reports/function-count-audit.md > reports/function-count-audit.md
+      - name: Update public README and reports
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('README.md')
+          t=p.read_text(encoding='utf-8')
+          old='> **Foundation and Inventory are validated. The raw V6 full-scan candidate union contains 79,782 potential starts; 3 evidence-proven false positives (0x00407A10, 0x00407AB0, 0x00407AD0) have been removed, so the current dashboard denominator is 79,779. V5\'s 79,016 fixed-point set is retained as the stricter high-confidence cross-check. Ordered decompilation is active in Phase 14 with one coordinator.**'
+          if old not in t:
+              old='> **Foundation and Inventory are validated. The raw V6 full-scan candidate union contains 79,782 potential starts; 4 evidence-proven false positives (0x00407A10, 0x00407AB0, 0x00407AD0, 0x00407BA0) have been removed, so the current dashboard denominator is 79,778. V5\'s 79,016 fixed-point set is retained as the stricter high-confidence cross-check. Ordered decompilation is active in Phase 14 with one coordinator.**'
+          new='> **Foundation and Inventory are validated. The raw V6 full-scan candidate union contains 79,782 potential starts; 5 evidence-proven false positives (0x00407A10, 0x00407AB0, 0x00407AD0, 0x00407BA0, 0x00407B60) have been removed, so the current dashboard denominator is 79,777. V5\'s 79,016 fixed-point set is retained as the stricter high-confidence cross-check. Ordered decompilation is active in Phase 14 with one coordinator.**'
+          if old not in t:
+              raise SystemExit('README headline anchor missing')
+          t=t.replace(old,new,1)
+
+          old2='The raw V6 detector output remains a **79,782-entry broader candidate union**, but the current public dashboard denominator is **79,779** after three evidence-backed false-positive removals. None of these values is presented as a mathematically exact original C/C++ source-symbol count: the PE has no authoritative all-function symbol table and the matching `BH5DCRelease.pdb`/MAP is unavailable. The previous **79,016** V5 fixed-point CFG set remains recorded as a stricter high-confidence subset.'
+          if old2 not in t:
+              old2='The raw V6 detector output remains a **79,782-entry broader candidate union**, but the current public dashboard denominator is **79,778** after four evidence-backed false-positive removals. None of these values is presented as a mathematically exact original C/C++ source-symbol count: the PE has no authoritative all-function symbol table and the matching `BH5DCRelease.pdb`/MAP is unavailable. The previous **79,016** V5 fixed-point CFG set remains recorded as a stricter high-confidence subset.'
+          new2='The raw V6 detector output remains a **79,782-entry broader candidate union**, but the current public dashboard denominator is **79,777** after five evidence-backed false-positive removals. None of these values is presented as a mathematically exact original C/C++ source-symbol count: the PE has no authoritative all-function symbol table and the matching `BH5DCRelease.pdb`/MAP is unavailable. The previous **79,016** V5 fixed-point CFG set remains recorded as a stricter high-confidence subset.'
+          if old2 in t:
+              t=t.replace(old2,new2,1)
+          p.write_text(t,encoding='utf-8')
+          PY
+          python tools/reports/report.py --publish-readme
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          python -m pip install pytest
+          python -m pytest -q tests/metadata
+          git diff --check
+          if git status --porcelain | grep -Ei '\.(exe|dll|obj)( |$)'; then exit 1; fi
+      - name: Configure build and test
+        run: |
+          sudo apt-get update >/dev/null
+          sudo apt-get install -y ninja-build >/dev/null
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Commit public correction
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md config/inventory_freeze.json decomp/evidence/candidate_00407b60_rejection.md reports/function-count-audit.md reports/progress.md reports/progress-treemap.svg
+          git diff --cached --quiet || git commit -m 'Publish 00407B60 candidate correction'
+          git push
