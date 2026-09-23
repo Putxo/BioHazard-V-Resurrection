@@ -2,13 +2,13 @@
 
 From-scratch Resident Evil 5 PC 1.1.0 Dev decompilation/reimplementation project, organized around a canonical binary inventory and real C/C++ source recovery.
 
-> **Foundation and Inventory are validated. The current V6 full-scan candidate baseline contains 79,782 potential function starts. V5's 79,016 fixed-point set is retained as the stricter high-confidence cross-check. Ordered decompilation is active in Phase 14 with one coordinator.**
+> **Foundation and Inventory are validated. The raw V6 full-scan candidate union contains 79,782 potential starts; one evidence-proven jump-table false positive at 0x00407A10 has been removed, so the current dashboard denominator is 79,781. V5's 79,016 fixed-point set is retained as the stricter high-confidence cross-check. Ordered decompilation is active in Phase 14 with one coordinator.**
 
 ## Progress
 
 <!-- progress:start -->
 ```
-Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.2%  120 / 79,782
+Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.2%  120 / 79,781
 Code size   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.1%  22,373 / 15,568,343
 ```
 <!-- progress:end -->
@@ -17,12 +17,12 @@ The tiers below are independent dimensions. A function can eventually be MATCHED
 
 <!-- tiers:start -->
 ```
-FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.1%  119 / 79,782
-CONVERTED  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  4 / 79,782
-REFINED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,782
-VERIFIED   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,782
-MATCHED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,782
-LINKED     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,782
+FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.1%  119 / 79,781
+CONVERTED  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  4 / 79,781
+REFINED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,781
+VERIFIED   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,781
+MATCHED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,781
+LINKED     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,781
 ```
 <!-- tiers:end -->
 
