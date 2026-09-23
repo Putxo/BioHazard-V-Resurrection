@@ -3562,7 +3562,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3577,11 +3577,11 @@
     "source_file": "src/recovered/fun_004068a0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004068A0",
-    "pr": "",
-    "commit": "",
+    "pr": "#257",
+    "commit": "a0cec16270a4e13adda6a3b5eaae97cf3339e59f",
     "test": "tests/unit/test_fun_004068a0.cpp",
     "evidence": "decomp/evidence/fun_004068a0.md",
-    "notes": "MerceResult01-08 indexed -1 forwarding wrapper with exact eight archive pointers and two-entry direct-table stride; observed direct callers pass indices 0..7"
+    "notes": "MerceResult01-08 indexed -1 forwarding wrapper with exact eight archive pointers and two-entry direct-table stride; observed direct callers pass indices 0..7; PR #257 CI 5/5 PASS"
   },
   {
     "stable_id": "FUN_004068D0",
