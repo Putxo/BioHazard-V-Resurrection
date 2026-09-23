@@ -26,7 +26,7 @@ LINKED     ░░░░░░░░░░░░░░░░░░░░░░░
 ```
 <!-- tiers:end -->
 
-The raw V6 detector output remains a **79,782-entry broader candidate union**, but the current public dashboard denominator is **79,780** after two evidence-backed false-positive removals. None of these values is presented as a mathematically exact original C/C++ source-symbol count: the PE has no authoritative all-function symbol table and the matching `BH5DCRelease.pdb`/MAP is unavailable. The previous **79,016** V5 fixed-point CFG set remains recorded as a stricter high-confidence subset.
+The raw V6 detector output remains a **79,782-entry broader candidate union**, but the current public dashboard denominator is **79,779** after three evidence-backed false-positive removals. None of these values is presented as a mathematically exact original C/C++ source-symbol count: the PE has no authoritative all-function symbol table and the matching `BH5DCRelease.pdb`/MAP is unavailable. The previous **79,016** V5 fixed-point CFG set remains recorded as a stricter high-confidence subset.
 
 ## Progress atlas
 
