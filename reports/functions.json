@@ -3626,7 +3626,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3641,10 +3641,10 @@
     "source_file": "src/recovered/fun_00406870.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00406870",
-    "pr": "",
-    "commit": "",
+    "pr": "#264",
+    "commit": "863d3bda66c16a0d604d0c018774a995cf367202",
     "test": "tests/unit/test_fun_00406870.cpp",
     "evidence": "decomp/evidence/fun_00406870.md",
-    "notes": "VersusResult01-08 selector forwarding wrapper with eight archive-name pointers and exact two-entry direct tables; eight direct callers push variants 0..7"
+    "notes": "VersusResult01-08 selector forwarding wrapper with eight archive-name pointers and exact two-entry direct tables; eight direct callers push variants 0..7; PR #264 CI 5/5 PASS"
   }
 ]
