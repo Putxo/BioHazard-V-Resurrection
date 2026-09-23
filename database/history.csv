@@ -209,3 +209,5 @@ FUN_00406910,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered guarded Merce-DC
 FUN_00406910,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,53ba2d7dcdecb1a52dfdd681be37be4fc55c1312,coordinator,PR #268 completed 5/5 CI checks
 FUN_00406B20,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered LoadResource batch coordinator with exact 13-entry table and trailing eleven message-group loads
 FUN_00406B20,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,b51a130253c16de340197c07678465cce5949dbf,coordinator,PR #271 completed 5/5 CI checks
+FUN_00406870,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered VersusResult01-08 selector wrapper with exact eight-name pointer table and two-entry direct tables
+FUN_00406870,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,863d3bda66c16a0d604d0c018774a995cf367202,coordinator,PR #264 completed 5/5 CI checks
