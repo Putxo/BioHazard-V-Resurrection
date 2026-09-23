@@ -3882,7 +3882,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3897,10 +3897,10 @@
     "source_file": "src/recovered/fun_00407af0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407AF0",
-    "pr": "",
-    "commit": "",
+    "pr": "#297",
+    "commit": "3202f2336d2e23f4ce8873d2e7ed015152207d6e",
     "test": "tests/unit/test_fun_00407af0.cpp",
     "evidence": "decomp/evidence/fun_00407af0.md",
-    "notes": "std::bad_alloc copy-constructor wrapper: calls std::exception base copy at 0x01251B8B, installs RTTI-proven vtable 0x01541F48, returns this; entry referenced by exception metadata at 0x01563F4C"
+    "notes": "std::bad_alloc copy-constructor wrapper: calls std::exception base copy at 0x01251B8B, installs RTTI-proven vtable 0x01541F48, returns this; entry referenced by exception metadata at 0x01563F4C; PR #297 CI 5/5 PASS"
   }
 ]
