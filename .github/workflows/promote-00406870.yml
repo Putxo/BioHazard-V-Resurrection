@@ -1,0 +1,58 @@
+name: Promote FUN_00406870
+on:
+  push:
+    branches: [promote/00406870-fastpass-valid]
+permissions:
+  contents: write
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.x'}
+      - name: Promote metadata
+        shell: python
+        run: |
+          from pathlib import Path
+          import csv
+          p=Path('database/functions.csv')
+          with p.open(newline='') as f:
+              rows=list(csv.DictReader(f))
+              fields=list(rows[0].keys())
+          found=False
+          for row in rows:
+              if row['stable_id']=='FUN_00406870':
+                  assert row['fast_pass']=='true'
+                  row['fast_pass_validated']='true'
+                  row['pr']='#264'
+                  row['commit']='863d3bda66c16a0d604d0c018774a995cf367202'
+                  row['notes']=row['notes'].split('; PR #')[0] + '; PR #264 CI 5/5 PASS'
+                  found=True
+          assert found
+          with p.open('w',newline='') as f:
+              w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(rows)
+          p=Path('database/history.csv')
+          rows=list(csv.reader(p.open(newline='')))
+          new=['FUN_00406870','2026-09-23','FAST_PASS','FAST_PASS_VALIDATED','863d3bda66c16a0d604d0c018774a995cf367202','coordinator','PR #264 completed 5/5 CI checks']
+          assert new not in rows
+          rows.append(new)
+          with p.open('w',newline='') as f: csv.writer(f,lineterminator='\n').writerows(rows)
+      - name: Regenerate and validate
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+          git diff --check
+          if git ls-files | grep -Ei '\.(exe|dll|obj)$' | grep -v '^$'; then exit 1; fi
+      - name: Commit promotion
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add database/functions.csv database/history.csv reports/functions.json reports/progress-treemap.svg reports/progress.md
+          git commit -m 'Validate FUN_00406870 fast-pass block'
+          git push
