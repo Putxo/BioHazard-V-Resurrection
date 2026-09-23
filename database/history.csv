@@ -205,3 +205,4 @@ FUN_004068A0,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered indexed MerceRes
 FUN_004068D0,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered BenchResource fixed -1 forwarding wrapper with exact two-entry direct table contract
 FUN_004068D0,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,01b3f7d87e7191756b4e5e66d811c0ede6271435,coordinator,PR #259 completed 5/5 CI checks
 FUN_004068A0,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,a0cec16270a4e13adda6a3b5eaae97cf3339e59f,coordinator,PR #257 completed 5/5 CI checks
+FUN_00406870,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered VersusResult01-08 selector wrapper with exact eight-name pointer table and two-entry direct tables
