@@ -116,3 +116,4 @@ SEQ-00406870,FUN_00406870,coordinator,decomp/00406870-next,sequential decomp of 
 SEQ-00406910,FUN_00406910,coordinator,decomp/00406910-next,sequential decomp of guarded Merce-DC stage conversion worker,2026-09-23T18:12:00Z,,,true
 SEQ-00406B20,FUN_00406B20,coordinator,decomp/00406b20-next,sequential decomp of LoadResource batch coordinator,2026-09-23T20:04:00+02:00,,,true
 SEQ-00406CA0,FUN_00406CA0,coordinator,decomp/00406ca0-next,sequential decomp of Game2Resource eleven-message forwarding loop,2026-09-23T18:40:00Z,,,true
+SEQ-00406CD0,FUN_00406CD0,coordinator,decomp/00406cd0-next,sequential decomp of eight-group resource registration batch,2026-09-23T18:23:00Z,,,true
