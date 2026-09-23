@@ -1,0 +1,89 @@
+name: Decompile FUN_00407AF0
+on:
+  push:
+    branches: [decomp/00407af0-next]
+permissions:
+  contents: write
+jobs:
+  decomp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.x'}
+      - name: Wire FUN_00407AF0 and metadata
+        shell: python
+        run: |
+          from pathlib import Path
+          import csv
+          p=Path('CMakeLists.txt'); s=p.read_text()
+          if 'src/recovered/fun_00407af0.cpp' not in s:
+              marker=')\ntarget_include_directories(re5_recovered PUBLIC include)'
+              assert marker in s
+              s=s.replace(marker,'    src/recovered/fun_00407af0.cpp\n'+marker,1)
+          if 'tests/unit/test_fun_00407af0.cpp' not in s:
+              marker=')\ntarget_link_libraries(re5_tests PRIVATE re5_recovered)'
+              assert marker in s
+              s=s.replace(marker,'    tests/unit/test_fun_00407af0.cpp\n'+marker,1)
+          p.write_text(s)
+
+          p=Path('tests/unit/test_smoke.cpp'); s=p.read_text()
+          if 'void test_fun_00407af0();' not in s:
+              marker='\nint main() {'
+              assert marker in s
+              s=s.replace(marker,'\nvoid test_fun_00407af0();'+marker,1)
+          if '    test_fun_00407af0();' not in s:
+              marker='    return 0;\n}'
+              assert marker in s
+              s=s.replace(marker,'    test_fun_00407af0();\n'+marker,1)
+          p.write_text(s)
+
+          def add(path,idx,key,row):
+              p=Path(path)
+              with p.open(newline='') as f: rows=list(csv.reader(f))
+              assert not any(len(r)>idx and r[idx]==key for r in rows[1:])
+              rows.append(row)
+              with p.open('w',newline='') as f: csv.writer(f,lineterminator='\n').writerows(rows)
+
+          add('database/functions.csv',0,'FUN_00407AF0',[
+              'FUN_00407AF0','0x00407AF0','0x00007AF0','.text','23','FUN_00407AF0','','ACTIVE','HIGH',
+              'true','false','false','false','false','false','false','thiscall',
+              'FUN_00407AF0_Object*','const FUN_00407AF0_Object& source','FUN_00407AF0_Object*',
+              'UNKNOWN','Runtime','src/recovered/fun_00407af0.cpp','coordinator','SEQ-00407AF0','','',
+              'tests/unit/test_fun_00407af0.cpp','decomp/evidence/fun_00407af0.md',
+              'std::bad_alloc copy-constructor wrapper: calls std::exception base copy at 0x01251B8B, installs RTTI-proven vtable 0x01541F48, returns this; entry referenced by exception metadata at 0x01563F4C'])
+          add('database/claims.csv',1,'FUN_00407AF0',[
+              'SEQ-00407AF0','FUN_00407AF0','coordinator','decomp/00407af0-next',
+              'sequential decomp of RTTI-proven std::bad_alloc copy constructor wrapper',
+              '2026-09-23T23:15:00Z','','','true'])
+          p=Path('database/history.csv')
+          with p.open(newline='') as f: rows=list(csv.reader(f))
+          assert not any(r and r[0]=='FUN_00407AF0' for r in rows[1:])
+          rows.append(['FUN_00407AF0','2026-09-23','UNSEEN','FAST_PASS','','coordinator',
+                       'recovered RTTI-proven std::bad_alloc copy constructor wrapper from exact executable'])
+          with p.open('w',newline='') as f: csv.writer(f,lineterminator='\n').writerows(rows)
+      - name: Regenerate canonical reports
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+      - name: Validate
+        run: python tools/validate/validate.py
+      - name: Build and test
+        run: |
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Hygiene and binary rejection
+        run: |
+          git diff --check
+          if git ls-files | grep -Ei '\.(exe|dll|obj)$' | grep -v '^$'; then exit 1; fi
+          if find . -type f \( -name '*.exe' -o -name '*.dll' -o -name '*.obj' \) -not -path './build/*' -not -path './out/*' | grep .; then exit 1; fi
+      - name: Commit and remove helper
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/decomp-00407af0.yml
+          git add CMakeLists.txt database/claims.csv database/functions.csv database/history.csv reports/functions.json reports/progress-treemap.svg reports/progress.md tests/unit/test_smoke.cpp
+          git commit -m 'Decompile FUN_00407AF0 bad_alloc copy constructor'
+          git push
