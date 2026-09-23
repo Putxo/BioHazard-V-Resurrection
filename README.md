@@ -2,13 +2,13 @@
 
 From-scratch Resident Evil 5 PC 1.1.0 Dev decompilation/reimplementation project, organized around a canonical binary inventory and real C/C++ source recovery.
 
-> **Foundation and Inventory are validated. The raw V6 full-scan candidate union contains 79,782 potential starts; 5 evidence-proven false positives (0x00407A10, 0x00407AB0, 0x00407AD0, 0x00407BA0, 0x00407B60) have been removed, so the current dashboard denominator is 79,777. V5's 79,016 fixed-point set is retained as the stricter high-confidence cross-check. Ordered decompilation is active in Phase 14 with one coordinator.**
+> **Foundation and Inventory are validated. The raw V6 full-scan candidate union contains 79,782 potential starts; 6 evidence-proven false positives (0x00407A10, 0x00407AB0, 0x00407AD0, 0x00407BA0, 0x00407B60, 0x00407BE0) have been removed, so the current dashboard denominator is 79,776. V5's 79,016 fixed-point set is retained as the stricter high-confidence cross-check. Ordered decompilation is active in Phase 14 with one coordinator.**
 
 ## Progress
 
 <!-- progress:start -->
 ```
-Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.2%  123 / 79,777
+Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.2%  123 / 79,776
 Code size   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.1%  22,492 / 15,568,343
 ```
 <!-- progress:end -->
@@ -17,16 +17,16 @@ The tiers below are independent dimensions. A function can eventually be MATCHED
 
 <!-- tiers:start -->
 ```
-FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.2%  122 / 79,777
-CONVERTED  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  4 / 79,777
-REFINED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,777
-VERIFIED   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,777
-MATCHED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,777
-LINKED     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,777
+FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.2%  122 / 79,776
+CONVERTED  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  4 / 79,776
+REFINED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,776
+VERIFIED   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,776
+MATCHED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,776
+LINKED     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,776
 ```
 <!-- tiers:end -->
 
-The raw V6 detector output remains a **79,782-entry broader candidate union**, but the current public dashboard denominator is **79,777** after five evidence-backed false-positive removals. None of these values is presented as a mathematically exact original C/C++ source-symbol count: the PE has no authoritative all-function symbol table and the matching `BH5DCRelease.pdb`/MAP is unavailable. The previous **79,016** V5 fixed-point CFG set remains recorded as a stricter high-confidence subset.
+The raw V6 detector output remains a **79,782-entry broader candidate union**, but the current public dashboard denominator is **79,776** after six evidence-backed false-positive removals. None of these values is presented as a mathematically exact original C/C++ source-symbol count: the PE has no authoritative all-function symbol table and the matching `BH5DCRelease.pdb`/MAP is unavailable. The previous **79,016** V5 fixed-point CFG set remains recorded as a stricter high-confidence subset.
 
 ## Progress atlas
 
