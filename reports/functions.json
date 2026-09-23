@@ -3946,7 +3946,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3961,10 +3961,10 @@
     "source_file": "src/recovered/fun_00407c00.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407C00",
-    "pr": "",
-    "commit": "",
+    "pr": "#311",
+    "commit": "6462ab5c952ac1fca1856ea487ab744654d8327c",
     "test": "tests/unit/test_fun_00407c00.cpp",
     "evidence": "decomp/evidence/fun_00407c00.md",
-    "notes": "linked-chain key lookup via vslot +0x10 comparing key/node +0x04 and advancing node+0x10; returns this on match and null on exhaustion; 974 decoded direct CALL/JMP references"
+    "notes": "linked-chain key lookup via vslot +0x10 comparing key/node +0x04 and advancing node+0x10; returns this on match and null on exhaustion; 974 decoded direct CALL/JMP references; PR #311 CI 5/5 PASS"
   }
 ]
