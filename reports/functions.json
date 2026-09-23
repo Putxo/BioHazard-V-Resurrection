@@ -3818,7 +3818,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3833,10 +3833,10 @@
     "source_file": "src/recovered/fun_00407250.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407250",
-    "pr": "",
-    "commit": "",
+    "pr": "#285",
+    "commit": "747cc4743b97b72a55a5eaaf273b0295c06095de",
     "test": "tests/unit/test_fun_00407250.cpp",
     "evidence": "decomp/evidence/fun_00407250.md",
-    "notes": "Resource dispatch coordinator with exact 44-call sequence across GameResource chapter versus merce and BenchResource tables; local validation PASS"
+    "notes": "Resource dispatch coordinator with exact 44-call sequence across GameResource chapter versus merce and BenchResource tables; PR #285 CI 5/5 PASS"
   }
 ]
