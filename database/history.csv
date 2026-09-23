@@ -199,3 +199,4 @@ FUN_00406820,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered Credit2Resource 
 FUN_00406820,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,69e69f78cb6b7d4f012a85532761d54079496ddc,coordinator,PR #247 completed 5/5 CI checks
 FUN_004067E0,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered FigureResource fixed -1 forwarding wrapper with exact seven-entry direct table
 FUN_004067E0,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,b5cc90ae5739aceb7736c277ed995c4428b05e9d,coordinator,PR #251 completed 5/5 CI checks
+FUN_00406840,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered indexed ChapterEnd forwarding wrapper from exact executable
