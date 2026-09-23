@@ -3850,7 +3850,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3865,10 +3865,10 @@
     "source_file": "src/recovered/fun_00407a30.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407A30",
-    "pr": "",
-    "commit": "",
+    "pr": "#289",
+    "commit": "02ea4ec3c99dbe6bd66627500f0e6b1eacee48be",
     "test": "tests/unit/test_fun_00407a30.cpp",
     "evidence": "decomp/evidence/fun_00407a30.md",
-    "notes": "resource-conversion phase helper over this+0x28 with marker/increment states 0-2 state-3 batch plus opaque manager vslot dispatch and no-op states above 3"
+    "notes": "resource-conversion phase helper over this+0x28 with marker/increment states 0-2 state-3 batch plus opaque manager vslot dispatch and no-op states above 3; PR #289 CI 5/5 PASS"
   }
 ]
