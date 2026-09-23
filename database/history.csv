@@ -219,3 +219,4 @@ FUN_00406DB0,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered resource bootstr
 FUN_00406DB0,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,4076aba392ce43cbd9ba03b4fb01f1007f5b281b,coordinator,PR #281 completed 5/5 CI checks
 FUN_00407250,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered exact 44-call resource dispatch coordinator for GameResource result families and BenchResource
 FUN_00407250,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,747cc4743b97b72a55a5eaaf273b0295c06095de,coordinator,PR #285 completed 5/5 CI checks
+FUN_00407A30,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered this+0x28 resource-conversion phase helper with exact marker state transitions and state-3 manager dispatch
