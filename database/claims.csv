@@ -112,3 +112,4 @@ SEQ-004067E0,FUN_004067E0,coordinator,decomp/004067e0-next,sequential decomp of 
 SEQ-00406840,FUN_00406840,coordinator,decomp/00406840-next,sequential decomp of indexed ChapterEnd forwarding wrapper,2026-09-23T18:02:00Z,,,true
 SEQ-004068D0,FUN_004068D0,coordinator,decomp/004068d0-next,sequential decomp of BenchResource forwarding wrapper,2026-09-23T20:04:00+02:00,,,true
 SEQ-004068A0,FUN_004068A0,coordinator,decomp/004068a0-next,sequential decomp of indexed MerceResult01-08 forwarding wrapper,2026-09-23T18:03:00Z,,,true
+SEQ-00406870,FUN_00406870,coordinator,decomp/00406870-next,sequential decomp of VersusResult01-08 selector forwarding wrapper,2026-09-23T18:03:00Z,,,true
