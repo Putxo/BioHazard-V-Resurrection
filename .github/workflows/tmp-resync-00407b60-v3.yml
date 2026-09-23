@@ -1,0 +1,84 @@
+name: tmp-resync-00407b60-v3
+
+on:
+  push:
+    branches: [decomp/00407b60-next]
+    paths:
+      - '.github/workflows/tmp-resync-00407b60-v3.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  resync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Restore target evidence only
+        run: |
+          git fetch --depth=1 origin 2758d4a6422bb1a0a0a55d5bb1dbb6662f1b34c7
+          mkdir -p decomp/evidence
+          git show FETCH_HEAD:decomp/evidence/candidate_00407b60_rejection.md > decomp/evidence/candidate_00407b60_rejection.md
+      - name: Apply cumulative correction
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('config/inventory_freeze.json')
+          d=json.loads(p.read_text(encoding='utf-8'))
+          if int(d['function_candidate_denominator']) != 79778:
+              raise SystemExit(f"unexpected denominator {d['function_candidate_denominator']}")
+          d['function_candidate_denominator']=79777
+          d['source_symbol_exact_count_reason']="The exact target has no authoritative embedded all-function symbol/boundary table and the matching PDB/MAP is unavailable. V6 produced a raw union of 79,782 potential starts; evidence-backed per-candidate classification has removed five proven false positives at 0x00407A10, 0x00407AB0, 0x00407AD0, 0x00407BA0, and 0x00407B60, so the current dashboard denominator is 79,777 while the raw V6 union remains preserved for audit."
+          s=d['supersedes']
+          s['reason']='The independent V6 full-file analysis produced 79,782 raw potential starts. Candidates 0x00407A10, 0x00407AB0, 0x00407AD0, 0x00407BA0, and 0x00407B60 have since been proven not to be function entries, yielding an evidence-backed current dashboard denominator of 79,777.'
+          s['current_dashboard_denominator']=79777
+          s['classified_false_positive_removals']=5
+          d['policy']="Use 79,777 as the current evidence-corrected decompilation dashboard candidate denominator. Retain the raw V6 union of 79,782 and V5's 79,016 fixed-point set as audit/cross-check baselines. Do not describe any of these values as an exact original C/C++ source-symbol function count without the matching PDB/MAP or equivalent authoritative metadata."
+          c=d.get('classified_false_positive_corrections',{})
+          vas=list(c.get('excluded_vas',[]))
+          if '0x00407B60' not in vas:
+              vas.append('0x00407B60')
+          c['count']=len(vas)
+          c['excluded_vas']=vas
+          c['reason']='Exact executable evidence proves 0x00407A10 is switch jump-table data, 0x00407AB0 lies inside the JMP at 0x00407AAC, 0x00407AD0 lies inside the CALL at 0x00407ACE, 0x00407BA0 lies inside the TEST at 0x00407B9E, and 0x00407B60 is the third immediate byte of the MOV at 0x00407B5E. None is a callable function entry.'
+          d['classified_false_positive_corrections']=c
+          p.write_text(json.dumps(d,indent=2)+'\n',encoding='utf-8')
+
+          p=Path('reports/function-count-audit.md')
+          t=p.read_text(encoding='utf-8')
+          t=t.replace('**Current evidence-corrected dashboard universe: 79,778 potential function starts**','**Current evidence-corrected dashboard universe: 79,777 potential function starts**')
+          t=t.replace('The dashboard denominator is now **79,778 potential function starts**.','The dashboard denominator is now **79,777 potential function starts**.')
+          t=t.replace('For project accounting, **79,778 is now the canonical evidence-corrected candidate universe shown in `main`**. The raw V6 detector output of 79,782 remains preserved as an audit baseline.','For project accounting, **79,777 is now the canonical evidence-corrected candidate universe shown in `main`**. The raw V6 detector output of 79,782 remains preserved as an audit baseline.')
+          if '## Evidence-backed candidate correction — 0x00407B60' not in t:
+              block='''\n## Evidence-backed candidate correction — 0x00407B60\n\nCandidate `0x00407B60` has been removed from the dashboard denominator after exact instruction-boundary classification proved it is not executable function entry code.\n\n- The real helper begins at `0x00407B50`.\n- `B8 5C AA 37 01` at `0x00407B5E` is `mov eax,0x0137AA5C`; therefore `0x00407B60` is the third byte of that instruction's immediate operand, not an instruction boundary.\n- GNU objdump and LLVM llvm-objdump independently agree on the decode.\n- A complete direct relative CALL/JMP/Jcc scan finds zero control-flow references to `0x00407B60`, and a whole-file raw-pointer scan finds zero little-endian pointers to that address.\n- Real entry `0x00407B50` has many direct callers; next real helper `0x00407B70` also has a direct caller.\n\nThe raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,778 to **79,777**. Full evidence: `decomp/evidence/candidate_00407b60_rejection.md`.\n'''
+              marker='\n## Exact source-function count remains unavailable\n'
+              if marker not in t:
+                  raise SystemExit('audit insertion marker missing')
+              t=t.replace(marker,block+marker,1)
+          p.write_text(t,encoding='utf-8')
+          PY
+      - name: Regenerate validate build test
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          python -m pip install pytest
+          python -m pytest -q tests/metadata
+          git diff --check
+          if git status --porcelain | grep -Ei '\.(exe|dll|obj)( |$)'; then exit 1; fi
+          sudo apt-get update >/dev/null
+          sudo apt-get install -y ninja-build >/dev/null
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Commit final correction
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add config/inventory_freeze.json decomp/evidence/candidate_00407b60_rejection.md reports/function-count-audit.md reports/progress.md
+          git diff --cached --quiet || git commit -m 'Classify 00407B60 on stable integration'
+          git push
