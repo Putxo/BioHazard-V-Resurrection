@@ -4,7 +4,7 @@ Target SHA-256: `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e6781
 
 ## Current dashboard denominator
 
-**Current evidence-corrected dashboard universe: 79,776 potential function starts**
+**Current evidence-corrected dashboard universe: 79,775 potential function starts**
 
 This replaces `79,016` as the public total-work denominator so the independently detected 766-candidate difference pool is not silently excluded.
 
@@ -40,7 +40,7 @@ The entire **19,977,216-byte** PE is accounted for by headers plus `.text`, `.rd
 
 ## What the dashboard means
 
-The dashboard denominator is now **79,776 potential function starts**.
+The dashboard denominator is now **79,775 potential function starts**.
 
 During decompilation each candidate must ultimately be classified as one of the project-supported outcomes, for example:
 
@@ -118,6 +118,18 @@ Candidate `0x00407BE0` has been removed from the dashboard denominator after exa
 - The 49-byte real body at `0x00407BC0..0x00407BF0` has SHA-256 `55c18b3e5aea58ce310701d9ffeb7fced3d762fa75f235928e803675815993d2`, followed by INT3 padding through `0x00407BFF`; the next aligned callable function begins at `0x00407C00`.
 
 The raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,777 to **79,776**. Full evidence: `decomp/evidence/candidate_00407be0_rejection.md`.
+
+## Evidence-backed candidate correction — 0x00407C70
+
+Candidate 0x00407C70 has been removed from the dashboard denominator after exact instruction-boundary classification proved it is not executable function entry code.
+
+- 68 00 04 00 00 at 0x00407C6F is the five-byte instruction push 0x400; 0x00407C70 is inside that instruction's immediate operand.
+- GNU objdump and LLVM llvm-objdump independently agree on the decode and boundaries.
+- The next real instruction begins at 0x00407C74. The containing aligned function is rooted at 0x00407C60, terminates at 0x00407CCC, and the next aligned function begins at 0x00407CD0.
+- A complete direct relative CALL/JMP/Jcc target scan finds zero references to 0x00407C70, and the executable contains zero raw little-endian pointer values for that address.
+- The 109-byte containing native body has SHA-256 42d47f7c6cc96507eee3e4402437438da1b3cdbcaa5913e1ff57d63e08dcf4c5.
+
+The raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,776 to **79,775**. Full evidence: decomp/evidence/candidate_00407c70_rejection.md.
 
 ## Exact source-function count remains unavailable
 
