@@ -4,7 +4,7 @@ Target SHA-256: `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e6781
 
 ## Current dashboard denominator
 
-**Current evidence-corrected dashboard universe: 79,778 potential function starts**
+**Current evidence-corrected dashboard universe: 79,777 potential function starts**
 
 This replaces `79,016` as the public total-work denominator so the independently detected 766-candidate difference pool is not silently excluded.
 
@@ -40,7 +40,7 @@ The entire **19,977,216-byte** PE is accounted for by headers plus `.text`, `.rd
 
 ## What the dashboard means
 
-The dashboard denominator is now **79,778 potential function starts**.
+The dashboard denominator is now **79,777 potential function starts**.
 
 During decompilation each candidate must ultimately be classified as one of the project-supported outcomes, for example:
 
@@ -94,8 +94,20 @@ Candidate `0x00407BA0` has been removed from the dashboard denominator after exa
 
 The raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,779 to **79,778**. Full evidence: `decomp/evidence/candidate_00407ba0_rejection.md`.
 
+## Evidence-backed candidate correction — 0x00407B60
+
+Candidate `0x00407B60` has been removed from the dashboard denominator after exact instruction-boundary classification proved it is not executable function entry code.
+
+- The real helper begins at `0x00407B50`.
+- `B8 5C AA 37 01` at `0x00407B5E` is `mov eax,0x0137AA5C`; therefore `0x00407B60` is the third byte of that instruction's immediate operand, not an instruction boundary.
+- GNU objdump and LLVM llvm-objdump independently agree on the decode.
+- A complete direct relative CALL/JMP/Jcc scan finds zero control-flow references to `0x00407B60`, and a whole-file raw-pointer scan finds zero little-endian pointers to that address.
+- Real entry `0x00407B50` has many direct callers; next real helper `0x00407B70` also has a direct caller.
+
+The raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,778 to **79,777**. Full evidence: `decomp/evidence/candidate_00407b60_rejection.md`.
+
 ## Exact source-function count remains unavailable
 
 The PE has no COFF function-symbol table or authoritative embedded all-function boundary table. Therefore neither **79,782** nor **79,016** is presented as a mathematically exact original source-symbol count.
 
-For project accounting, **79,778 is now the canonical evidence-corrected candidate universe shown in `main`**. The raw V6 detector output of 79,782 remains preserved as an audit baseline.
+For project accounting, **79,777 is now the canonical evidence-corrected candidate universe shown in `main`**. The raw V6 detector output of 79,782 remains preserved as an audit baseline.
