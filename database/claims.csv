@@ -118,3 +118,4 @@ SEQ-00406870,FUN_00406870,coordinator,decomp/00406870-next,sequential decomp of 
 SEQ-00406CA0,FUN_00406CA0,coordinator,decomp/00406ca0-next,sequential decomp of Game2Resource eleven-message forwarding loop,2026-09-23T18:40:00Z,,,true
 SEQ-00406CD0,FUN_00406CD0,coordinator,decomp/00406cd0-next,sequential decomp of eight-group resource registration batch,2026-09-23T18:23:00Z,,,true
 SEQ-00406DB0,FUN_00406DB0,coordinator,decomp/00406db0-next,sequential decomp of resource bootstrap and message loading sequence,2026-09-23T18:55:00Z,,,true
+SEQ-00407250,FUN_00407250,coordinator,decomp/00407250-next,sequential decomp of resource dispatch coordinator,2026-09-23T20:41:00+02:00,,,true

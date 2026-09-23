@@ -82,6 +82,7 @@ void test_fun_00406870();
 
 void test_fun_00406910();
 void test_fun_00406b20();
+void test_fun_00407250();
 void test_fun_00406ca0();
 void test_fun_00406cd0();
 void test_fun_00406db0();
@@ -161,6 +162,7 @@ int main() {
     test_fun_00406870();
     test_fun_00406910();
     test_fun_00406b20();
+    test_fun_00407250();
     test_fun_00406ca0();
     test_fun_00406cd0();
     test_fun_00406db0();
