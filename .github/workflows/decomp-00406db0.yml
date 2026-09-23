@@ -1,0 +1,76 @@
+name: Decompile FUN_00406DB0
+on:
+  push:
+    branches: [decomp/00406db0-next]
+permissions:
+  contents: write
+jobs:
+  decomp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.x'}
+      - name: Wire FUN_00406DB0 and metadata
+        shell: python
+        run: |
+          from pathlib import Path
+          import csv
+          p=Path('CMakeLists.txt'); s=p.read_text()
+          if 'src/recovered/fun_00406db0.cpp' not in s:
+              marker='    src/recovered/fun_00406cd0.cpp\n)'
+              assert marker in s
+              s=s.replace(marker,'    src/recovered/fun_00406cd0.cpp\n    src/recovered/fun_00406db0.cpp\n)')
+          if 'tests/unit/test_fun_00406db0.cpp' not in s:
+              marker='    tests/unit/test_fun_00406cd0.cpp\n)'
+              assert marker in s
+              s=s.replace(marker,'    tests/unit/test_fun_00406cd0.cpp\n    tests/unit/test_fun_00406db0.cpp\n)')
+          p.write_text(s)
+          p=Path('tests/unit/test_smoke.cpp'); s=p.read_text()
+          if 'void test_fun_00406db0();' not in s:
+              marker='void test_fun_00406cd0();\n'
+              assert marker in s
+              s=s.replace(marker,marker+'void test_fun_00406db0();\n')
+          if '    test_fun_00406db0();' not in s:
+              marker='    test_fun_00406cd0();\n    return 0;'
+              assert marker in s
+              s=s.replace(marker,'    test_fun_00406cd0();\n    test_fun_00406db0();\n    return 0;')
+          p.write_text(s)
+          def add(path,idx,key,row):
+              p=Path(path)
+              with p.open(newline='') as f: rows=list(csv.reader(f))
+              assert not any(len(r)>idx and r[idx]==key for r in rows[1:])
+              rows.append(row)
+              with p.open('w',newline='') as f: csv.writer(f,lineterminator='\n').writerows(rows)
+          add('database/functions.csv',0,'FUN_00406DB0',['FUN_00406DB0','0x00406DB0','0x00006DB0','.text','366','FUN_00406DB0','','ACTIVE','HIGH','true','false','false','false','false','false','false','cdecl','void','void','void','UNKNOWN','Resource','src/recovered/fun_00406db0.cpp','coordinator','SEQ-00406DB0','','','tests/unit/test_fun_00406db0.cpp','decomp/evidence/fun_00406db0.md','Resource bootstrap sequence: fixed archive groups, message selectors 0..10, Game2Resource load, music tree scan, and trace markers'])
+          add('database/claims.csv',1,'FUN_00406DB0',['SEQ-00406DB0','FUN_00406DB0','coordinator','decomp/00406db0-next','sequential decomp of resource bootstrap and message loading sequence','2026-09-23T18:55:00Z','','','true'])
+          p=Path('database/history.csv')
+          with p.open(newline='') as f: rows=list(csv.reader(f))
+          assert not any(r and r[0]=='FUN_00406DB0' for r in rows[1:])
+          rows.append(['FUN_00406DB0','2026-09-23','UNSEEN','FAST_PASS','','coordinator','recovered resource bootstrap sequence from exact executable'])
+          with p.open('w',newline='') as f: csv.writer(f,lineterminator='\n').writerows(rows)
+      - name: Reports
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+      - name: Validate
+        run: python tools/validate/validate.py
+      - name: Build and test
+        run: |
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Hygiene
+        run: |
+          git diff --check
+          if git ls-files | grep -Ei '\.(exe|dll|obj)$' | grep -v '^$'; then exit 1; fi
+          if find . -type f \( -name '*.exe' -o -name '*.dll' -o -name '*.obj' \) -not -path './build/*' -not -path './out/*' | grep .; then exit 1; fi
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/decomp-00406db0.yml
+          git add CMakeLists.txt database/claims.csv database/functions.csv database/history.csv reports/functions.json reports/progress-treemap.svg reports/progress.md tests/unit/test_smoke.cpp
+          git commit -m 'Decompile FUN_00406DB0 resource bootstrap'
+          git push
