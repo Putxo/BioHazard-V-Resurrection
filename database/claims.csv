@@ -121,3 +121,4 @@ SEQ-00406DB0,FUN_00406DB0,coordinator,decomp/00406db0-next,sequential decomp of 
 SEQ-00407250,FUN_00407250,coordinator,decomp/00407250-next,sequential decomp of resource dispatch coordinator,2026-09-23T20:41:00+02:00,,,true
 SEQ-00407A30,FUN_00407A30,coordinator,decomp/00407a30-next,sequential decomp of resource-conversion phase helper,2026-09-23T23:06:33Z,,,true
 SEQ-00407AF0,FUN_00407AF0,coordinator,decomp/00407af0-next,sequential decomp of RTTI-proven std::bad_alloc copy constructor wrapper,2026-09-23T23:15:00Z,,,true
+SEQ-00407B10,FUN_00407B10,coordinator,decomp/00407b10-next,sequential decomp of conditional EnterCriticalSection wrapper,2026-09-23T23:31:04Z,,,true
