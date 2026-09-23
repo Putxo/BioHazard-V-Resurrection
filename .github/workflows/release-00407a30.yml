@@ -1,0 +1,90 @@
+name: Publish FUN_00407A30
+on:
+  push:
+    branches: [release/main-fastpass120-00407a30]
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.x'}
+      - name: Overlay validated target only
+        shell: bash
+        run: |
+          git fetch origin integration
+          git show origin/integration:include/re5/recovered/fun_00407a30.hpp > include/re5/recovered/fun_00407a30.hpp
+          git show origin/integration:src/recovered/fun_00407a30.cpp > src/recovered/fun_00407a30.cpp
+          git show origin/integration:tests/unit/test_fun_00407a30.cpp > tests/unit/test_fun_00407a30.cpp
+          git show origin/integration:decomp/evidence/fun_00407a30.md > decomp/evidence/fun_00407a30.md
+      - name: Overlay target metadata and wiring
+        shell: python
+        run: |
+          from pathlib import Path
+          import csv, subprocess, io
+          def remote_rows(path):
+              text=subprocess.check_output(['git','show',f'origin/integration:{path}'],text=True)
+              return list(csv.reader(io.StringIO(text)))
+          def append_selected(path,key,multiple=False):
+              p=Path(path)
+              local=list(csv.reader(p.open(newline='')))
+              remote=remote_rows(path)
+              if multiple:
+                  selected=[r for r in remote[1:] if r and r[0]==key]
+                  local.extend([r for r in selected if r not in local])
+              else:
+                  selected=[r for r in remote[1:] if r and r[0]==key]
+                  assert len(selected)==1,(path,key,len(selected))
+                  if not any(r and r[0]==key for r in local[1:]):
+                      local.append(selected[0])
+              with p.open('w',newline='') as f:
+                  csv.writer(f,lineterminator='\n').writerows(local)
+
+          append_selected('database/functions.csv','FUN_00407A30')
+          append_selected('database/claims.csv','SEQ-00407A30')
+          append_selected('database/history.csv','FUN_00407A30',True)
+
+          p=Path('CMakeLists.txt'); s=p.read_text()
+          if 'src/recovered/fun_00407a30.cpp' not in s:
+              lines=s.splitlines()
+              idx=next(i for i,l in enumerate(lines) if 'src/recovered/fun_00406b20.cpp' in l)
+              lines.insert(idx+1,'    src/recovered/fun_00407a30.cpp')
+              s='\n'.join(lines)+'\n'
+          if 'tests/unit/test_fun_00407a30.cpp' not in s:
+              lines=s.splitlines()
+              idx=next(i for i,l in enumerate(lines) if 'tests/unit/test_fun_00406b20.cpp' in l)
+              lines.insert(idx+1,'    tests/unit/test_fun_00407a30.cpp')
+              s='\n'.join(lines)+'\n'
+          p.write_text(s)
+
+          p=Path('tests/unit/test_smoke.cpp'); s=p.read_text()
+          if 'void test_fun_00407a30();' not in s:
+              anchor='void test_fun_00406b20();\n'
+              assert anchor in s
+              s=s.replace(anchor,anchor+'void test_fun_00407a30();\n',1)
+          if '    test_fun_00407a30();' not in s:
+              anchor='    test_fun_00406b20();\n'
+              assert anchor in s
+              s=s.replace(anchor,anchor+'    test_fun_00407a30();\n',1)
+          p.write_text(s)
+      - name: Regenerate public dashboard and validate
+        run: |
+          python tools/reports/report.py --publish-readme
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+          git diff --check
+          if git ls-files | grep -Ei '\.(exe|dll|obj)$' | grep -v '^$'; then exit 1; fi
+      - name: Commit publication
+        run: |
+          rm .github/workflows/release-00407a30.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md CMakeLists.txt database/claims.csv database/functions.csv database/history.csv decomp/evidence/fun_00407a30.md include/re5/recovered/fun_00407a30.hpp reports/functions.json reports/progress-treemap.svg reports/progress.md src/recovered/fun_00407a30.cpp tests/unit/test_fun_00407a30.cpp tests/unit/test_smoke.cpp
+          git commit -m 'Publish validated FUN_00407A30 dashboard'
+          git push
