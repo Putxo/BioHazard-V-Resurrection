@@ -205,3 +205,5 @@ FUN_004068D0,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered BenchResource fi
 FUN_004068D0,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,01b3f7d87e7191756b4e5e66d811c0ede6271435,coordinator,PR #259 completed 5/5 CI checks
 FUN_004068A0,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered indexed MerceResult01-08 forwarding wrapper with exact archive and direct-table selection
 FUN_004068A0,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,a0cec16270a4e13adda6a3b5eaae97cf3339e59f,coordinator,PR #257 completed 5/5 CI checks
+FUN_00406910,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered guarded Merce-DC stage conversion worker from exact executable
+FUN_00406910,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,53ba2d7dcdecb1a52dfdd681be37be4fc55c1312,coordinator,PR #268 completed 5/5 CI checks
