@@ -4,7 +4,7 @@ Target SHA-256: `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e6781
 
 ## Current dashboard denominator
 
-**V6 broader reconstructed candidate universe: 79,782 potential function starts**
+**Current evidence-corrected dashboard universe: 79,781 potential function starts**
 
 This replaces `79,016` as the public total-work denominator so the independently detected 766-candidate difference pool is not silently excluded.
 
@@ -40,7 +40,7 @@ The entire **19,977,216-byte** PE is accounted for by headers plus `.text`, `.rd
 
 ## What the dashboard means
 
-The dashboard denominator is now **79,782 potential function starts**.
+The dashboard denominator is now **79,781 potential function starts**.
 
 During decompilation each candidate must ultimately be classified as one of the project-supported outcomes, for example:
 
@@ -52,8 +52,20 @@ During decompilation each candidate must ultimately be classified as one of the 
 
 If later classification proves that a candidate is not a real function entry, the canonical denominator may decrease, but only through a versioned, evidence-backed inventory update.
 
+## Evidence-backed candidate correction — 0x00407A10
+
+Candidate `0x00407A10` has been removed from the dashboard denominator after exact-byte classification proved it is not executable function entry code.
+
+- The real switch dispatcher is rooted at `0x00407960`.
+- At `0x0040796F` it executes `jmp dword ptr [eax*4+0x00407A0C]` for selector values `0..6`.
+- The 28 bytes at `0x00407A0C..0x00407A27` are seven little-endian code pointers: `0x00407976, 0x00407976, 0x00407976, 0x00407986, 0x004079A9, 0x004079B2, 0x004079D6`.
+- Therefore `0x00407A10` is the address of the **second four-byte jump-table cell**, whose value is `0x00407976`; it is not a code entry.
+- A complete direct `CALL rel32` / direct `JMP rel32` scan finds no branch targeting `0x00407A10`.
+
+This is exactly the kind of per-candidate classification anticipated by the inventory policy: the raw V6 union remains 79,782 for audit, while the current evidence-corrected denominator decreases by one to **79,781**.
+
 ## Exact source-function count remains unavailable
 
 The PE has no COFF function-symbol table or authoritative embedded all-function boundary table. Therefore neither **79,782** nor **79,016** is presented as a mathematically exact original source-symbol count.
 
-For project accounting, however, **79,782 is now the canonical total candidate universe shown in `main`**.
+For project accounting, **79,781 is now the canonical evidence-corrected candidate universe shown in `main`**. The raw V6 detector output of 79,782 remains preserved as an audit baseline.
