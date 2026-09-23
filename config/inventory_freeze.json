@@ -6,7 +6,7 @@
   "entry_va": "0x012570A9",
   "text_va_start": "0x00401000",
   "text_va_end_exclusive": "0x0137083B",
-  "function_candidate_denominator": 79782,
+  "function_candidate_denominator": 79781,
   "estimated_function_bytes": 15568343,
   "estimated_function_bytes_status": "PROVISIONAL_FROM_PREVIOUS_INVENTORY",
   "whole_file_accounting": {
@@ -62,13 +62,22 @@
   "exception_directory_present": false,
   "base_relocation_directory_present": false,
   "source_symbol_exact_count_available": false,
-  "source_symbol_exact_count_reason": "The exact target has no authoritative embedded all-function symbol/boundary table and the matching PDB/MAP is unavailable. V6 therefore publishes 79,782 as the broader reconstructed potential-function-start universe, while retaining V5's 79,016 fixed-point set as a stricter high-confidence subset/cross-check.",
+  "source_symbol_exact_count_reason": "The exact target has no authoritative embedded all-function symbol/boundary table and the matching PDB/MAP is unavailable. V6 produced a raw union of 79,782 potential starts; evidence-backed per-candidate classification has removed one proven jump-table-data false positive at 0x00407A10, so the current dashboard denominator is 79,781 while the raw V6 union remains preserved for audit.",
   "supersedes": {
     "v5_dashboard_denominator": 79016,
     "v6_dashboard_denominator": 79782,
     "added_candidate_pool": 766,
-    "reason": "An independent full-file analysis of the exact target found 79,782 potential starts from three separately auditable evidence classes. The dashboard now uses the broader candidate universe so those 766 candidates are not silently excluded from total-work accounting."
+    "reason": "The independent V6 full-file analysis produced 79,782 raw potential starts. Candidate 0x00407A10 has since been proven to be embedded switch-table data rather than a function entry, yielding an evidence-backed current dashboard denominator of 79,781.",
+    "current_dashboard_denominator": 79781,
+    "classified_false_positive_removals": 1
   },
   "status": "FULL_PE_INDEPENDENT_CANDIDATE_UNION_BASELINE",
-  "policy": "Use 79,782 as the decompilation dashboard candidate denominator. Retain 79,016 as the stricter V5 high-confidence CFG cross-check. Do not describe either value as an exact original C/C++ source-symbol function count without the matching PDB/MAP or equivalent authoritative metadata."
+  "policy": "Use 79,781 as the current evidence-corrected decompilation dashboard candidate denominator. Retain the raw V6 union of 79,782 and V5's 79,016 fixed-point set as audit/cross-check baselines. Do not describe any of these values as an exact original C/C++ source-symbol function count without the matching PDB/MAP or equivalent authoritative metadata.",
+  "classified_false_positive_corrections": {
+    "count": 1,
+    "excluded_vas": [
+      "0x00407A10"
+    ],
+    "reason": "Exact executable evidence proves 0x00407A10 is the second 32-bit entry of the switch jump table at 0x00407A0C used by the real function rooted at 0x00407960. It is data, has no direct CALL/JMP target evidence, and is not a callable entry."
+  }
 }
