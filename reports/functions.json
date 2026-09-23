@@ -3530,7 +3530,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3545,10 +3545,10 @@
     "source_file": "src/recovered/fun_00406840.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00406840",
-    "pr": "",
-    "commit": "",
+    "pr": "#254",
+    "commit": "b0f0b97ba37b698442aa4f633d25d0224ff7e4df",
     "test": "tests/unit/test_fun_00406840.cpp",
     "evidence": "decomp/evidence/fun_00406840.md",
-    "notes": "ChapterEnd indexed fixed -1 forwarding wrapper with sixteen archive variants and exact two-entry direct tables; 16 direct callers pass indices 0..15"
+    "notes": "ChapterEnd indexed fixed -1 forwarding wrapper with sixteen archive variants and exact two-entry direct tables; 16 direct callers pass indices 0..15; PR #254 CI 5/5 PASS"
   }
 ]
