@@ -1,0 +1,60 @@
+name: Decompile FUN_00406870
+on:
+  push:
+    branches: [decomp/00406870-next]
+permissions:
+  contents: write
+jobs:
+  decomp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.x'}
+      - name: Wire target and metadata
+        shell: python
+        run: |
+          from pathlib import Path
+          import csv
+          p=Path('CMakeLists.txt'); s=p.read_text()
+          if 'src/recovered/fun_00406870.cpp' not in s:
+              marker='    src/recovered/fun_004068a0.cpp\n)'
+              assert marker in s
+              s=s.replace(marker,'    src/recovered/fun_004068a0.cpp\n    src/recovered/fun_00406870.cpp\n)')
+          if 'tests/unit/test_fun_00406870.cpp' not in s:
+              marker='    tests/unit/test_fun_004068a0.cpp\n)'
+              assert marker in s
+              s=s.replace(marker,'    tests/unit/test_fun_004068a0.cpp\n    tests/unit/test_fun_00406870.cpp\n)')
+          p.write_text(s)
+          p=Path('tests/unit/test_smoke.cpp'); s=p.read_text()
+          if 'void test_fun_00406870();' not in s:
+              s=s.replace('void test_fun_004068a0();\n','void test_fun_004068a0();\nvoid test_fun_00406870();\n')
+          if '    test_fun_00406870();' not in s:
+              s=s.replace('    test_fun_004068a0();\n    return 0;','    test_fun_004068a0();\n    test_fun_00406870();\n    return 0;')
+          p.write_text(s)
+          def add(path,row):
+              p=Path(path); rows=list(csv.reader(p.open(newline='')))
+              assert row[0] not in {r[0] for r in rows[1:]}, (path,row[0])
+              rows.append(row)
+              with p.open('w',newline='') as f: csv.writer(f,lineterminator='\n').writerows(rows)
+          add('database/functions.csv',['FUN_00406870','0x00406870','0x00006870','.text','41','FUN_00406870','','ACTIVE','HIGH','true','false','false','false','false','false','false','cdecl','void','std::uint32_t variant','void','UNKNOWN','Resource','src/recovered/fun_00406870.cpp','coordinator','SEQ-00406870','','','tests/unit/test_fun_00406870.cpp','decomp/evidence/fun_00406870.md','VersusResult01-08 selector forwarding wrapper with eight archive-name pointers and exact two-entry direct tables; eight direct callers push variants 0..7'])
+          add('database/claims.csv',['SEQ-00406870','FUN_00406870','coordinator','decomp/00406870-next','sequential decomp of VersusResult01-08 selector forwarding wrapper','2026-09-23T18:03:00Z','','','true'])
+          add('database/history.csv',['FUN_00406870','2026-09-23','UNSEEN','FAST_PASS','','coordinator','recovered VersusResult01-08 selector wrapper with exact eight-name pointer table and two-entry direct tables'])
+      - name: Validate
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+          git diff --check
+          if git ls-files | grep -Ei '\.(exe|dll|obj)$' | grep -v '^$'; then exit 1; fi
+      - name: Commit final candidate
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add CMakeLists.txt database/claims.csv database/functions.csv database/history.csv decomp/evidence/fun_00406870.md include/re5/recovered/fun_00406870.hpp reports/functions.json reports/progress-treemap.svg reports/progress.md src/recovered/fun_00406870.cpp tests/unit/test_fun_00406870.cpp tests/unit/test_smoke.cpp
+          git commit -m 'Decompile FUN_00406870 VersusResult selector wrapper'
+          git push
