@@ -1,0 +1,62 @@
+name: tmp-resync-00407ab0-v3
+on:
+  push:
+    branches: [decomp/00407ab0-next]
+    paths: ['.github/workflows/tmp-resync-00407ab0-v3.yml']
+permissions: {contents: write}
+jobs:
+  resync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Restore evidence and apply correction
+        run: |
+          git fetch --depth=1 origin 9f4e33cacd466d4f0771ccfe45b9eab6d09ee3a8
+          mkdir -p decomp/evidence
+          git show FETCH_HEAD:decomp/evidence/candidate_00407ab0_rejection.md > decomp/evidence/candidate_00407ab0_rejection.md
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('config/inventory_freeze.json'); d=json.loads(p.read_text())
+          assert int(d['function_candidate_denominator'])==79781
+          d['function_candidate_denominator']=79780
+          d['source_symbol_exact_count_reason']="The exact target has no authoritative embedded all-function symbol/boundary table and the matching PDB/MAP is unavailable. V6 produced a raw union of 79,782 potential starts; evidence-backed per-candidate classification has removed two proven false positives at 0x00407A10 and 0x00407AB0, so the current dashboard denominator is 79,780 while the raw V6 union remains preserved for audit."
+          s=d['supersedes']; s['reason']='The independent V6 full-file analysis produced 79,782 raw potential starts. Candidates 0x00407A10 and 0x00407AB0 have since been proven not to be function entries, yielding an evidence-backed current dashboard denominator of 79,780.'; s['current_dashboard_denominator']=79780; s['classified_false_positive_removals']=2
+          d['policy']="Use 79,780 as the current evidence-corrected decompilation dashboard candidate denominator. Retain the raw V6 union of 79,782 and V5's 79,016 fixed-point set as audit/cross-check baselines. Do not describe any of these values as an exact original C/C++ source-symbol function count without the matching PDB/MAP or equivalent authoritative metadata."
+          c=d.get('classified_false_positive_corrections',{}); vas=list(c.get('excluded_vas',[]))
+          if '0x00407AB0' not in vas: vas.append('0x00407AB0')
+          c['count']=len(vas); c['excluded_vas']=vas; c['reason']='Exact executable evidence proves 0x00407A10 is switch jump-table data and 0x00407AB0 is the final rel32 displacement byte of the JMP beginning at 0x00407AAC. Neither is a callable function entry.'
+          d['classified_false_positive_corrections']=c
+          p.write_text(json.dumps(d,indent=2)+'\n')
+          p=Path('reports/function-count-audit.md'); t=p.read_text()
+          t=t.replace('**Current evidence-corrected dashboard universe: 79,781 potential function starts**','**Current evidence-corrected dashboard universe: 79,780 potential function starts**')
+          t=t.replace('The dashboard denominator is now **79,781 potential function starts**.','The dashboard denominator is now **79,780 potential function starts**.')
+          t=t.replace('For project accounting, **79,781 is now the canonical evidence-corrected candidate universe shown in `main`**. The raw V6 detector output of 79,782 remains preserved as an audit baseline.','For project accounting, **79,780 is now the canonical evidence-corrected candidate universe shown in `main`**. The raw V6 detector output of 79,782 remains preserved as an audit baseline.')
+          if '## Evidence-backed candidate correction — 0x00407AB0' not in t:
+            block='''\n## Evidence-backed candidate correction — 0x00407AB0\n\nCandidate `0x00407AB0` has been removed from the dashboard denominator after exact instruction-boundary classification proved it is not executable function entry code.\n\n- `E9 C0 99 E4 00` at `0x00407AAC` is a five-byte near JMP; `0x00407AB0` is its fifth byte, inside the rel32 displacement.\n- The next actual instruction is `0x00407AB1`, an internal basic-block target reached from `0x00407A99`.\n- A complete direct relative CALL/JMP/Jcc scan finds zero control-flow references to `0x00407AB0`; `0x00407A90` has a direct CALL from `0x00407E77`.\n\nThe raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,781 to **79,780**. Full evidence: `decomp/evidence/candidate_00407ab0_rejection.md`.\n'''
+            t=t.replace('\n## Exact source-function count remains unavailable\n',block+'\n## Exact source-function count remains unavailable\n',1)
+          p.write_text(t)
+          PY
+      - name: Validate
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          python -m pip install pytest
+          python -m pytest -q tests/metadata
+          git diff --check
+          if git status --porcelain | grep -Ei '\.(exe|dll|obj)( |$)'; then exit 1; fi
+          sudo apt-get update >/dev/null
+          sudo apt-get install -y ninja-build >/dev/null
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add config/inventory_freeze.json decomp/evidence/candidate_00407ab0_rejection.md reports/function-count-audit.md reports/progress.md
+          git diff --cached --quiet || git commit -m 'Classify 00407AB0 as non-entry byte'
+          git push
