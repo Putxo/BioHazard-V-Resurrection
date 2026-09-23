@@ -1,0 +1,62 @@
+name: tmp-publish-correction-00407ab0
+
+on:
+  push:
+    branches: [release/main-correction-00407ab0]
+    paths:
+      - '.github/workflows/tmp-publish-correction-00407ab0.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch validated correction snapshot
+        run: |
+          git fetch --depth=1 origin 8d414324ae6cf91b7a2069f05af0a0a8ff07c4a2
+          mkdir -p decomp/evidence
+          git show FETCH_HEAD:config/inventory_freeze.json > config/inventory_freeze.json
+          git show FETCH_HEAD:decomp/evidence/candidate_00407ab0_rejection.md > decomp/evidence/candidate_00407ab0_rejection.md
+          git show FETCH_HEAD:reports/function-count-audit.md > reports/function-count-audit.md
+      - name: Update public README prose and dashboard
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('README.md')
+          t=p.read_text(encoding='utf-8')
+          old='> **Foundation and Inventory are validated. The raw V6 full-scan candidate union contains 79,782 potential starts; one evidence-proven jump-table false positive at 0x00407A10 has been removed, so the current dashboard denominator is 79,781. V5\'s 79,016 fixed-point set is retained as the stricter high-confidence cross-check. Ordered decompilation is active in Phase 14 with one coordinator.**'
+          new='> **Foundation and Inventory are validated. The raw V6 full-scan candidate union contains 79,782 potential starts; two evidence-proven false positives at 0x00407A10 and 0x00407AB0 have been removed, so the current dashboard denominator is 79,780. V5\'s 79,016 fixed-point set is retained as the stricter high-confidence cross-check. Ordered decompilation is active in Phase 14 with one coordinator.**'
+          if old not in t: raise SystemExit('README headline anchor missing')
+          t=t.replace(old,new,1)
+          old2='The public denominator is now the **79,782-entry broader candidate universe** reconstructed from the exact target. It is not presented as a mathematically exact original C/C++ source-symbol count: the PE has no authoritative all-function symbol table and the matching `BH5DCRelease.pdb`/MAP is unavailable. The previous **79,016** V5 fixed-point CFG set remains recorded as a stricter high-confidence subset.'
+          new2='The raw V6 detector output remains a **79,782-entry broader candidate union**, but the current public dashboard denominator is **79,780** after two evidence-backed false-positive removals. None of these values is presented as a mathematically exact original C/C++ source-symbol count: the PE has no authoritative all-function symbol table and the matching `BH5DCRelease.pdb`/MAP is unavailable. The previous **79,016** V5 fixed-point CFG set remains recorded as a stricter high-confidence subset.'
+          if old2 in t: t=t.replace(old2,new2,1)
+          p.write_text(t,encoding='utf-8')
+          PY
+          python tools/reports/report.py --publish-readme
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          python -m pip install pytest
+          python -m pytest -q tests/metadata
+          git diff --check
+          if git status --porcelain | grep -Ei '\.(exe|dll|obj)( |$)'; then exit 1; fi
+      - name: Configure build and test
+        run: |
+          sudo apt-get update >/dev/null
+          sudo apt-get install -y ninja-build >/dev/null
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Commit public correction
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md config/inventory_freeze.json decomp/evidence/candidate_00407ab0_rejection.md reports/function-count-audit.md reports/progress.md reports/progress-treemap.svg
+          git diff --cached --quiet || git commit -m 'Publish 00407AB0 candidate correction'
+          git push
