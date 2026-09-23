@@ -3754,7 +3754,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3769,10 +3769,10 @@
     "source_file": "src/recovered/fun_00406cd0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00406CD0",
-    "pr": "",
-    "commit": "",
+    "pr": "#278",
+    "commit": "d39120c06f32d9e60da410be5db3245159ed471f",
     "test": "tests/unit/test_fun_00406cd0.cpp",
     "evidence": "decomp/evidence/fun_00406cd0.md",
-    "notes": "batch resource registration routine with diagnostic marker and eight exact FUN_004061F0 dispatch groups; four direct callers; native body has no conditional branch"
+    "notes": "batch resource registration routine with diagnostic marker and eight exact FUN_004061F0 dispatch groups; four direct callers; native body has no conditional branch; PR #278 CI 5/5 PASS"
   }
 ]
