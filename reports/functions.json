@@ -3690,7 +3690,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3705,10 +3705,10 @@
     "source_file": "src/recovered/fun_00406b20.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00406B20",
-    "pr": "",
-    "commit": "",
+    "pr": "#271",
+    "commit": "b51a130253c16de340197c07678465cce5949dbf",
     "test": "tests/unit/test_fun_00406b20.cpp",
     "evidence": "decomp/evidence/fun_00406b20.md",
-    "notes": "LoadResource batch coordinator with exact 13-entry table; special-path native early exit; eleven trailing FUN_00405BD0 calls; local validation PASS"
+    "notes": "LoadResource batch coordinator with exact 13-entry table; special-path native early exit; eleven trailing FUN_00405BD0 calls; PR #271 CI 5/5 PASS"
   }
 ]
