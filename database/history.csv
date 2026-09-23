@@ -203,3 +203,4 @@ FUN_00406840,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered indexed ChapterE
 FUN_00406840,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,b0f0b97ba37b698442aa4f633d25d0224ff7e4df,coordinator,PR #254 completed 5/5 CI checks
 FUN_004068A0,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered indexed MerceResult01-08 forwarding wrapper with exact archive and direct-table selection
 FUN_004068D0,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered BenchResource fixed -1 forwarding wrapper with exact two-entry direct table contract
+FUN_004068D0,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,01b3f7d87e7191756b4e5e66d811c0ede6271435,coordinator,PR #259 completed 5/5 CI checks
