@@ -2,14 +2,14 @@
 
 From-scratch Resident Evil 5 PC 1.1.0 Dev decompilation/reimplementation project, organized around a canonical binary inventory and real C/C++ source recovery.
 
-> **Foundation and Inventory are validated. The raw V6 full-scan candidate union contains 79,782 potential starts; two evidence-proven false positives at 0x00407A10 and 0x00407AB0 have been removed, so the current dashboard denominator is 79,780. V5's 79,016 fixed-point set is retained as the stricter high-confidence cross-check. Ordered decompilation is active in Phase 14 with one coordinator.**
+> **Foundation and Inventory are validated. The raw V6 full-scan candidate union contains 79,782 potential starts; 3 evidence-proven false positives (0x00407A10, 0x00407AB0, 0x00407AD0) have been removed, so the current dashboard denominator is 79,779. V5's 79,016 fixed-point set is retained as the stricter high-confidence cross-check. Ordered decompilation is active in Phase 14 with one coordinator.**
 
 ## Progress
 
 <!-- progress:start -->
 ```
-Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.2%  121 / 79,779
-Code size   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.1%  22,437 / 15,568,343
+Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.2%  122 / 79,779
+Code size   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.1%  22,460 / 15,568,343
 ```
 <!-- progress:end -->
 
@@ -17,7 +17,7 @@ The tiers below are independent dimensions. A function can eventually be MATCHED
 
 <!-- tiers:start -->
 ```
-FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.2%  120 / 79,779
+FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.2%  121 / 79,779
 CONVERTED  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  4 / 79,779
 REFINED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,779
 VERIFIED   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,779
