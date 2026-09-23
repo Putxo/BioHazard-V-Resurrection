@@ -3658,7 +3658,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3673,10 +3673,10 @@
     "source_file": "src/recovered/fun_00406910.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00406910",
-    "pr": "",
-    "commit": "",
+    "pr": "#268",
+    "commit": "53ba2d7dcdecb1a52dfdd681be37be4fc55c1312",
     "test": "tests/unit/test_fun_00406910.cpp",
     "evidence": "decomp/evidence/fun_00406910.md",
-    "notes": "Merce-DC stage conversion worker for exact stage range 0x190..0x197 with archive prepare/early-complete branch, sound registration, three recursive directory conversions, and exact mode save/restore"
+    "notes": "Merce-DC stage conversion worker for exact stage range 0x190..0x197 with archive prepare/early-complete branch, sound registration, three recursive directory conversions, and exact mode save/restore; PR #268 CI 5/5 PASS"
   }
 ]
