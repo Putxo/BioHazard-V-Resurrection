@@ -212,3 +212,4 @@ FUN_00406910,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,53ba2d7dcdecb1a52dfdd681be
 FUN_00406B20,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered LoadResource batch coordinator with exact 13-entry table and trailing eleven message-group loads
 FUN_00406B20,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,b51a130253c16de340197c07678465cce5949dbf,coordinator,PR #271 completed 5/5 CI checks
 FUN_00406CA0,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered Game2Resource eleven-message forwarding loop from exact executable
+FUN_00406CA0,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,ad914d99e95aa5e4f265a17259963e24f559fe28,coordinator,PR #275 completed 5/5 CI checks

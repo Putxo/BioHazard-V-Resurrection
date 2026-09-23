@@ -3722,7 +3722,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -3737,10 +3737,10 @@
     "source_file": "src/recovered/fun_00406ca0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00406CA0",
-    "pr": "",
-    "commit": "",
+    "pr": "#275",
+    "commit": "ad914d99e95aa5e4f265a17259963e24f559fe28",
     "test": "tests/unit/test_fun_00406ca0.cpp",
     "evidence": "decomp/evidence/fun_00406ca0.md",
-    "notes": "Game2Resource message-index loop dispatching exact indices 0..10 with fixed two-entry direct table and five-entry resolved table"
+    "notes": "Game2Resource message-index loop dispatching exact indices 0..10 with fixed two-entry direct table and five-entry resolved table; PR #275 CI 5/5 PASS"
   }
 ]
