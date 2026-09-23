@@ -1,0 +1,76 @@
+name: tmp-promote-00406cd0
+
+on:
+  push:
+    branches: [promote/00406cd0-fastpass-valid]
+    paths:
+      - '.github/workflows/tmp-promote-00406cd0.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Promote canonical metadata
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          target='FUN_00406CD0'
+          merge='d39120c06f32d9e60da410be5db3245159ed471f'
+
+          p=Path('database/functions.csv')
+          with p.open(newline='',encoding='utf-8') as f:
+              rows=list(csv.DictReader(f)); fields=list(rows[0].keys())
+          found=0
+          for r in rows:
+              if r['stable_id']==target:
+                  found+=1
+                  r['fast_pass_validated']='true'
+                  r['pr']='#278'
+                  r['commit']=merge
+                  suffix='PR #278 CI 5/5 PASS'
+                  if suffix not in r['notes']:
+                      r['notes']=r['notes'].rstrip('; ')+'; '+suffix
+          if found != 1: raise SystemExit(f'expected one target row, got {found}')
+          with p.open('w',newline='',encoding='utf-8') as f:
+              w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(rows)
+
+          p=Path('database/history.csv')
+          with p.open(newline='',encoding='utf-8') as f:
+              rows=list(csv.DictReader(f)); fields=list(rows[0].keys())
+          if not any(r['stable_id']==target and r['new_status']=='FAST_PASS_VALIDATED' for r in rows):
+              rows.append({
+                  'stable_id':target,'date':'2026-09-23','old_status':'FAST_PASS','new_status':'FAST_PASS_VALIDATED',
+                  'commit':merge,'owner':'coordinator','reason':'PR #278 completed 5/5 CI checks'
+              })
+          with p.open('w',newline='',encoding='utf-8') as f:
+              w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n'); w.writeheader(); w.writerows(rows)
+          PY
+      - name: Regenerate validate build test
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          python -m pip install pytest
+          python -m pytest -q tests/metadata
+          git diff --check
+          if git status --porcelain | grep -Ei '\.(exe|dll|obj)( |$)'; then exit 1; fi
+          sudo apt-get update
+          sudo apt-get install -y ninja-build
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Commit promotion
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add database/functions.csv database/history.csv reports/progress.md reports/functions.json reports/progress-treemap.svg
+          git diff --cached --quiet || git commit -m 'Validate FUN_00406CD0 fast-pass block'
+          git push
