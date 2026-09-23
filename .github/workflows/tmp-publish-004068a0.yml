@@ -1,0 +1,111 @@
+name: tmp-publish-004068a0
+
+on:
+  push:
+    branches: [release/main-004068a0]
+    paths:
+      - '.github/workflows/tmp-publish-004068a0.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch validated FUN_004068A0 snapshot
+        run: |
+          git fetch --depth=1 origin a765858bdbe721708e4480859e462a1549e51d13
+          mkdir -p include/re5/recovered src/recovered tests/unit decomp/evidence
+          git show FETCH_HEAD:include/re5/recovered/fun_004068a0.hpp > include/re5/recovered/fun_004068a0.hpp
+          git show FETCH_HEAD:src/recovered/fun_004068a0.cpp > src/recovered/fun_004068a0.cpp
+          git show FETCH_HEAD:tests/unit/test_fun_004068a0.cpp > tests/unit/test_fun_004068a0.cpp
+          git show FETCH_HEAD:decomp/evidence/fun_004068a0.md > decomp/evidence/fun_004068a0.md
+          git show FETCH_HEAD:database/functions.csv > /tmp/functions.integration.csv
+          git show FETCH_HEAD:database/claims.csv > /tmp/claims.integration.csv
+          git show FETCH_HEAD:database/history.csv > /tmp/history.integration.csv
+      - name: Merge only FUN_004068A0 into public tree
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          TARGET='FUN_004068A0'
+
+          def read_csv(path):
+              with open(path,newline='',encoding='utf-8') as f:
+                  r=csv.DictReader(f)
+                  return r.fieldnames,list(r)
+          def write_csv(path,fields,rows):
+              with open(path,'w',newline='',encoding='utf-8') as f:
+                  w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n')
+                  w.writeheader(); w.writerows(rows)
+
+          fields,dst=read_csv('database/functions.csv')
+          _,src=read_csv('/tmp/functions.integration.csv')
+          target=[r for r in src if r.get('stable_id')==TARGET]
+          if len(target)!=1: raise SystemExit(f'expected one functions row, got {len(target)}')
+          write_csv('database/functions.csv',fields,[r for r in dst if r.get('stable_id')!=TARGET]+target)
+
+          fields,dst=read_csv('database/claims.csv')
+          _,src=read_csv('/tmp/claims.integration.csv')
+          target=[r for r in src if r.get('stable_id')==TARGET]
+          if not target: raise SystemExit('target claim missing')
+          write_csv('database/claims.csv',fields,[r for r in dst if r.get('stable_id')!=TARGET]+target)
+
+          fields,dst=read_csv('database/history.csv')
+          _,src=read_csv('/tmp/history.integration.csv')
+          target=[r for r in src if r.get('stable_id')==TARGET]
+          if len(target)<2: raise SystemExit(f'expected target history rows, got {len(target)}')
+          write_csv('database/history.csv',fields,[r for r in dst if r.get('stable_id')!=TARGET]+target)
+
+          cmake=Path('CMakeLists.txt')
+          text=cmake.read_text(encoding='utf-8')
+          for line,anchors in [
+              ('    src/recovered/fun_004068a0.cpp\n',['    src/recovered/fun_00406840.cpp\n','    src/recovered/fun_00406820.cpp\n']),
+              ('    tests/unit/test_fun_004068a0.cpp\n',['    tests/unit/test_fun_00406840.cpp\n','    tests/unit/test_fun_00406820.cpp\n'])]:
+              if line not in text:
+                  anchor=next((a for a in anchors if a in text),None)
+                  if anchor is None: raise SystemExit('CMake anchor missing')
+                  text=text.replace(anchor,anchor+line,1)
+          cmake.write_text(text,encoding='utf-8')
+
+          smoke=Path('tests/unit/test_smoke.cpp')
+          text=smoke.read_text(encoding='utf-8')
+          for line,anchors in [
+              ('void test_fun_004068a0();\n',['void test_fun_00406840();\n','void test_fun_00406820();\n']),
+              ('    test_fun_004068a0();\n',['    test_fun_00406840();\n','    test_fun_00406820();\n'])]:
+              if line not in text:
+                  anchor=next((a for a in anchors if a in text),None)
+                  if anchor is None: raise SystemExit('smoke anchor missing')
+                  text=text.replace(anchor,anchor+line,1)
+          smoke.write_text(text,encoding='utf-8')
+          PY
+      - name: Publish README and regenerate canonical reports
+        run: |
+          python tools/reports/report.py --publish-readme
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          python -m pip install pytest
+          python -m pytest -q tests/metadata
+          git diff --check
+      - name: Reject binary-like release content
+        run: |
+          if git status --porcelain | grep -Ei '\.(exe|dll|obj)( |$)'; then exit 1; fi
+      - name: Configure build and test
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Commit public release candidate
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md CMakeLists.txt database/functions.csv database/claims.csv database/history.csv decomp/evidence/fun_004068a0.md include/re5/recovered/fun_004068a0.hpp src/recovered/fun_004068a0.cpp tests/unit/test_fun_004068a0.cpp tests/unit/test_smoke.cpp reports/progress.md reports/functions.json reports/progress-treemap.svg
+          git diff --cached --quiet || git commit -m 'Publish FUN_004068A0 validated fast-pass'
+          git push
