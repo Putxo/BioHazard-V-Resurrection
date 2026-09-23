@@ -1,0 +1,86 @@
+name: Publish FUN_00406DB0
+on:
+  push:
+    branches: [release/main-00406db0]
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.x'}
+      - name: Apply validated target snapshot
+        run: |
+          git fetch origin integration
+          git show f28ecf41b91120229fd3a142371c443a60c067e4:include/re5/recovered/fun_00406db0.hpp > include/re5/recovered/fun_00406db0.hpp
+          git show f28ecf41b91120229fd3a142371c443a60c067e4:src/recovered/fun_00406db0.cpp > src/recovered/fun_00406db0.cpp
+          git show f28ecf41b91120229fd3a142371c443a60c067e4:tests/unit/test_fun_00406db0.cpp > tests/unit/test_fun_00406db0.cpp
+          git show f28ecf41b91120229fd3a142371c443a60c067e4:decomp/evidence/fun_00406db0.md > decomp/evidence/fun_00406db0.md
+      - name: Merge only FUN_00406DB0 metadata and wiring
+        shell: python
+        run: |
+          from pathlib import Path
+          import csv, io, subprocess
+          snap='f28ecf41b91120229fd3a142371c443a60c067e4'
+          def show(path):
+              return subprocess.check_output(['git','show',f'{snap}:{path}'],text=True)
+          def merge_rows(path,pred):
+              p=Path(path)
+              with p.open(newline='') as f: cur=list(csv.reader(f))
+              src=list(csv.reader(io.StringIO(show(path))))
+              assert cur[0]==src[0]
+              picked=[r for r in src[1:] if pred(r)]
+              assert picked
+              kept=[r for r in cur[1:] if not pred(r)]
+              with p.open('w',newline='') as f:
+                  csv.writer(f,lineterminator='\n').writerows([cur[0]]+kept+picked)
+          merge_rows('database/functions.csv',lambda r:r and r[0]=='FUN_00406DB0')
+          merge_rows('database/claims.csv',lambda r:len(r)>1 and r[1]=='FUN_00406DB0')
+          merge_rows('database/history.csv',lambda r:r and r[0]=='FUN_00406DB0')
+          p=Path('CMakeLists.txt'); s=p.read_text()
+          if 'src/recovered/fun_00406db0.cpp' not in s:
+              marker=')\ntarget_include_directories(re5_recovered PUBLIC include)'
+              assert marker in s
+              s=s.replace(marker,'    src/recovered/fun_00406db0.cpp\n'+marker,1)
+          if 'tests/unit/test_fun_00406db0.cpp' not in s:
+              marker=')\ntarget_link_libraries(re5_tests PRIVATE re5_recovered)'
+              assert marker in s
+              s=s.replace(marker,'    tests/unit/test_fun_00406db0.cpp\n'+marker,1)
+          p.write_text(s)
+          p=Path('tests/unit/test_smoke.cpp'); s=p.read_text()
+          if 'void test_fun_00406db0();' not in s:
+              marker='\nint main() {'
+              assert marker in s
+              s=s.replace(marker,'\nvoid test_fun_00406db0();'+marker,1)
+          if '    test_fun_00406db0();' not in s:
+              marker='    return 0;\n}'
+              assert marker in s
+              s=s.replace(marker,'    test_fun_00406db0();\n'+marker,1)
+          p.write_text(s)
+      - name: Regenerate public reports
+        run: |
+          python tools/reports/report.py --publish-readme
+          python tools/progress/treemap.py
+      - name: Validate
+        run: python tools/validate/validate.py
+      - name: Build and test
+        run: |
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Hygiene
+        run: |
+          git diff --check
+          if git ls-files | grep -Ei '\.(exe|dll|obj)$' | grep -v '^$'; then exit 1; fi
+          if find . -type f \( -name '*.exe' -o -name '*.dll' -o -name '*.obj' \) -not -path './build/*' -not -path './out/*' | grep .; then exit 1; fi
+      - name: Commit publication and remove helper
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/publish-00406db0.yml
+          git add CMakeLists.txt README.md database/claims.csv database/functions.csv database/history.csv decomp/evidence/fun_00406db0.md include/re5/recovered/fun_00406db0.hpp reports/functions.json reports/progress-treemap.svg reports/progress.md src/recovered/fun_00406db0.cpp tests/unit/test_fun_00406db0.cpp tests/unit/test_smoke.cpp
+          git commit -m 'Publish FUN_00406DB0 fast-pass dashboard [publish-00406db0]'
+          git push
