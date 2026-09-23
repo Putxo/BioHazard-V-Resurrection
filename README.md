@@ -8,8 +8,8 @@ From-scratch Resident Evil 5 PC 1.1.0 Dev decompilation/reimplementation project
 
 <!-- progress:start -->
 ```
-Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.2%  123 / 79,776
-Code size   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.1%  22,492 / 15,568,343
+Functions   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.2%  124 / 79,776
+Code size   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.1%  22,548 / 15,568,343
 ```
 <!-- progress:end -->
 
@@ -17,7 +17,7 @@ The tiers below are independent dimensions. A function can eventually be MATCHED
 
 <!-- tiers:start -->
 ```
-FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.2%  122 / 79,776
+FAST PASS  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.2%  123 / 79,776
 CONVERTED  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  4 / 79,776
 REFINED    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,776
 VERIFIED   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%  0 / 79,776
