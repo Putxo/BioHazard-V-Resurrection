@@ -1,0 +1,38 @@
+name: Publish 00407C70 candidate correction
+on:
+  push:
+    branches: [release/main-candidate-correction-00407c70]
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.x'}
+      - name: Overlay validated correction only
+        shell: bash
+        run: |
+          git fetch origin integration
+          git show origin/integration:config/inventory_freeze.json > config/inventory_freeze.json
+          git show origin/integration:decomp/evidence/candidate_00407c70_rejection.md > decomp/evidence/candidate_00407c70_rejection.md
+          git show origin/integration:reports/function-count-audit.md > reports/function-count-audit.md
+      - name: Regenerate public progress and validate
+        run: |
+          python tools/reports/report.py --publish-readme
+          python tools/validate/validate.py
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+          git diff --check
+          if git ls-files | grep -Ei '\.(exe|dll|obj)$' | grep -v '^$'; then exit 1; fi
+      - name: Commit publication
+        run: |
+          rm -f .github/workflows/release-00407c70.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md config/inventory_freeze.json decomp/evidence/candidate_00407c70_rejection.md reports/function-count-audit.md reports/progress.md
+          git commit -m 'Publish evidence-backed 00407C70 candidate correction'
+          git push
