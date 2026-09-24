@@ -4746,7 +4746,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4761,10 +4761,10 @@
     "source_file": "src/recovered/fun_00408550.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00408550",
-    "pr": "",
-    "commit": "",
+    "pr": "#395",
+    "commit": "4f0d3023a0c00e4c5c1bc5f8404ea11caaa195e8",
     "test": "tests/unit/test_fun_00408550.cpp",
     "evidence": "decomp/evidence/fun_00408550.md",
-    "notes": "55-byte std::logic_error copy-construction layer: exact std::exception base-copy ownership semantics, final logic_error vtable, embedded SSO init and full message copy through FUN_004082E0; 1 direct call; local tests PASS"
+    "notes": "55-byte std::logic_error copy-construction layer: exact std::exception base-copy ownership semantics, final logic_error vtable, embedded SSO init and full message copy through FUN_004082E0; 1 direct call; local tests PASS; PR #395 CI 5/5 PASS"
   }
 ]
