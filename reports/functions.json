@@ -4298,7 +4298,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4313,10 +4313,10 @@
     "source_file": "src/recovered/fun_00407d10.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407D10",
-    "pr": "",
-    "commit": "",
+    "pr": "#354",
+    "commit": "6c1e871f12c6e1557b631a7bb50986a34a577bee",
     "test": "tests/unit/test_fun_00407d10.cpp",
     "evidence": "decomp/evidence/fun_00407d10.md",
-    "notes": "118-byte refcounted-string append helper using FUN_00402360 temporary and opaque 0x01199FB0 concatenate path; 75 direct calls"
+    "notes": "118-byte refcounted-string append helper using FUN_00402360 temporary and opaque 0x01199FB0 concatenate path; 75 direct calls; PR #354 CI 5/5 PASS"
   }
 ]
