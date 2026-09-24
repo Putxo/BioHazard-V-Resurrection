@@ -4138,7 +4138,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4153,10 +4153,10 @@
     "source_file": "src/recovered/fun_00407b50.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407B50",
-    "pr": "",
-    "commit": "",
+    "pr": "#323",
+    "commit": "2d11460a43a57cfa570f68618e42417050d4bc53",
     "test": "tests/unit/test_fun_00407b50.cpp",
     "evidence": "decomp/evidence/fun_00407b50.md",
-    "notes": "nullable this+0x1028 address accessor returning value+8 or exact fallback 0x0137AA5C; 20-byte body; many direct callers"
+    "notes": "nullable this+0x1028 address accessor returning value+8 or exact fallback 0x0137AA5C; 20-byte body; many direct callers; PR #323 CI 5/5 PASS"
   }
 ]

@@ -237,3 +237,4 @@ FUN_00407B70,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact nullable t
 FUN_00407B70,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,822a25a04e055783e7c1e27ef9773f691ced9f3d,coordinator,PR #333 completed 5/5 CI checks
 FUN_00407BC0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact linked-chain boolean membership test over node +0x04/+0x10
 FUN_00407B50,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact nullable this+0x1028 address accessor with +8 payload path and fallback 0x0137AA5C
+FUN_00407B50,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,2d11460a43a57cfa570f68618e42417050d4bc53,coordinator,PR #323 completed 5/5 CI checks
