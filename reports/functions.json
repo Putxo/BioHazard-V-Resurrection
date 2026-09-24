@@ -4810,7 +4810,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4825,10 +4825,10 @@
     "source_file": "src/recovered/fun_004085f0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004085F0",
-    "pr": "",
-    "commit": "",
+    "pr": "#403",
+    "commit": "db9f4a0113e552739f1d0ba0ced78a4565fe6cfa",
     "test": "tests/unit/test_fun_004085f0.cpp",
     "evidence": "decomp/evidence/fun_004085f0.md",
-    "notes": "27-byte reflective Fix-property setter: low-byte zero clears flags bit 0x2000 at this+4, any nonzero byte sets it, preserving all other bits; paired getter 0x004C4E10 and literal Fix registration; 2 direct calls"
+    "notes": "27-byte reflective Fix-property setter: low-byte zero clears flags bit 0x2000 at this+4, any nonzero byte sets it, preserving all other bits; paired getter 0x004C4E10 and literal Fix registration; 2 direct calls; PR #403 CI 5/5 PASS"
   }
 ]
