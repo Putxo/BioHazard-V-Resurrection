@@ -285,3 +285,4 @@ FUN_00408610,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 5-byte thi
 FUN_00408610,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,a694562fcc8886fb70781b33c3c8e586d34da4d5,coordinator,PR #406 completed 5/5 CI checks
 FUN_00408630,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 6-byte fixed-global pointer getter reading 0x016E2EFC
 FUN_00408630,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,89e0a523cef397408681f05e7c1458fa2cddcb88,coordinator,PR #410 completed 5/5 CI checks
+FUN_00408640,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 18-byte thiscall constructor over base 0x00A67E10 with final vtable 0x0137E440
