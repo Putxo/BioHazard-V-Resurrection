@@ -245,3 +245,4 @@ FUN_00407C60,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact variadic r
 FUN_00407C60,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,506ef5acab8b99a6fad67bb78a26af1aa892a890,coordinator,PR #343 completed 5/5 CI checks
 FUN_00407CD0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 31-byte refcounted-string release helper with null/shared early exits and zero-ref allocator dispatch
 FUN_00407CD0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,8d6b84d44fcb9ce46dfbcc57f1b747511a8089b0,coordinator,PR #346 completed 5/5 CI checks
+FUN_00407CF0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 25-byte pre-cleared const-char wrapper constructor over FUN_00402360 returning this
