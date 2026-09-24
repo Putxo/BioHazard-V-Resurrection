@@ -240,3 +240,4 @@ FUN_00407B50,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact nullable t
 FUN_00407B50,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,2d11460a43a57cfa570f68618e42417050d4bc53,coordinator,PR #323 completed 5/5 CI checks
 FUN_00407BC0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,cc0da68e7377c334de819831a9fc964eab2c0a3c,coordinator,PR #336 completed 5/5 CI checks
 FUN_00407C40,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 19-byte const-char wrapper constructor over FUN_00402360 returning this
+FUN_00407C40,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,f166f6d6b1f33524b853b381351aa22375c5bb68,coordinator,PR #339 completed 5/5 CI checks

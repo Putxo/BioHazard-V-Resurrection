@@ -4170,7 +4170,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4185,10 +4185,10 @@
     "source_file": "src/recovered/fun_00407c40.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407C40",
-    "pr": "",
-    "commit": "",
+    "pr": "#339",
+    "commit": "f166f6d6b1f33524b853b381351aa22375c5bb68",
     "test": "tests/unit/test_fun_00407c40.cpp",
     "evidence": "decomp/evidence/fun_00407c40.md",
-    "notes": "19-byte wrapper constructor forwarding const char* to recovered FUN_00402360 refcounted-string holder and returning this; one direct caller at 0x0084F28B"
+    "notes": "19-byte wrapper constructor forwarding const char* to recovered FUN_00402360 refcounted-string holder and returning this; one direct caller at 0x0084F28B; PR #339 CI 5/5 PASS"
   }
 ]
