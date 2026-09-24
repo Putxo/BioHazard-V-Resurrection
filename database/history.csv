@@ -243,3 +243,4 @@ FUN_00407C40,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 19-byte co
 FUN_00407C40,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,f166f6d6b1f33524b853b381351aa22375c5bb68,coordinator,PR #339 completed 5/5 CI checks
 FUN_00407C60,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact variadic refcounted-string formatter with fixed scratch allocator and release/reconstruct flow
 FUN_00407C60,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,506ef5acab8b99a6fad67bb78a26af1aa892a890,coordinator,PR #343 completed 5/5 CI checks
+FUN_00407CD0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 31-byte refcounted-string release helper with null/shared early exits and zero-ref allocator dispatch
