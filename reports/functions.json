@@ -4884,19 +4884,16 @@
     "return_type": "std::uintptr_t",
     "arguments": "",
     "this_type": "",
-    "module": "",
+    "module": "UNKNOWN",
     "subsystem": "UNKNOWN",
-    "source_file": "UNKNOWN",
-    "owner": "src/recovered/fun_00408620.cpp",
-    "claim_id": "coordinator",
-    "pr": "SEQ-00408620",
+    "source_file": "src/recovered/fun_00408620.cpp",
+    "owner": "coordinator",
+    "claim_id": "SEQ-00408620",
+    "pr": "",
     "commit": "",
-    "test": "",
-    "evidence": "tests/unit/test_fun_00408620.cpp",
-    "notes": "decomp/evidence/fun_00408620.md",
-    "null": [
-      "6-byte fixed-address getter returning exact token 0x016F0230; stateless mov-immediate/ret body; 6 direct calls"
-    ]
+    "test": "tests/unit/test_fun_00408620.cpp",
+    "evidence": "decomp/evidence/fun_00408620.md",
+    "notes": "6-byte fixed-address getter returning exact token 0x016F0230; stateless mov-immediate/ret body; 6 direct calls"
   },
   {
     "stable_id": "FUN_00408630",
