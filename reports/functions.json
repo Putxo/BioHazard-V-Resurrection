@@ -4106,7 +4106,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4121,11 +4121,11 @@
     "source_file": "src/recovered/fun_00407bc0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407BC0",
-    "pr": "",
-    "commit": "",
+    "pr": "#336",
+    "commit": "cc0da68e7377c334de819831a9fc964eab2c0a3c",
     "test": "tests/unit/test_fun_00407bc0.cpp",
     "evidence": "decomp/evidence/fun_00407bc0.md",
-    "notes": "linked-chain boolean membership test via vslot +0x10 comparing key/node +0x04 and advancing node+0x10; returns true in AL on first match and false on exhaustion; 566 direct rel32 transfers"
+    "notes": "linked-chain boolean membership test via vslot +0x10 comparing key/node +0x04 and advancing node+0x10; returns true in AL on first match and false on exhaustion; 566 direct rel32 transfers; PR #336 CI 5/5 PASS"
   },
   {
     "stable_id": "FUN_00407B50",
