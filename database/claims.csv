@@ -135,3 +135,4 @@ SEQ-00407CD0,FUN_00407CD0,coordinator,decomp/00407cd0-next,sequential decomp of 
 SEQ-00407CF0,FUN_00407CF0,coordinator,decomp/00407cf0-next,sequential decomp of pre-cleared refcounted-string wrapper constructor,2026-09-24T01:22:00Z,,,true
 SEQ-00407D10,FUN_00407D10,coordinator,decomp/00407d10-next,sequential decomp of refcounted-string append helper,2026-09-24T01:23:00Z,,,true
 SEQ-00407DC0,FUN_00407DC0,coordinator,decomp/00407dc0-next,sequential decomp of synchronized indexed dword setter,2026-09-24T01:47:00Z,,,true
+SEQ-00407D90,FUN_00407D90,coordinator,decomp/00407d90-next,sequential decomp of refcounted-string copy-then-append wrapper,2026-09-24T01:55:00Z,,,true
