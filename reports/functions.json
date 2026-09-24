@@ -4202,7 +4202,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4217,10 +4217,10 @@
     "source_file": "src/recovered/fun_00407c60.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407C60",
-    "pr": "",
-    "commit": "",
+    "pr": "#343",
+    "commit": "506ef5acab8b99a6fad67bb78a26af1aa892a890",
     "test": "tests/unit/test_fun_00407c60.cpp",
     "evidence": "decomp/evidence/fun_00407c60.md",
-    "notes": "variadic refcounted-string formatter: 0x400/0x10 scratch allocation, formatting, release/reconstruct destination, scratch free; 109-byte body; 326 direct references"
+    "notes": "variadic refcounted-string formatter: 0x400/0x10 scratch allocation, formatting, release/reconstruct destination, scratch free; 109-byte body; 326 direct references; PR #343 CI 5/5 PASS"
   }
 ]
