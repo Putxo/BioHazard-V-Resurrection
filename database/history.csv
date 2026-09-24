@@ -251,3 +251,5 @@ FUN_00407DC0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 75-byte sy
 FUN_00407DC0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,a45b112e987e1ec7e0b5305b4ceca8c486b205fa,coordinator,PR #357 completed 5/5 CI checks
 FUN_00407E10,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 74-byte synchronized current-slot dword setter using this+0x20 index and 0x8C74 stride
 FUN_00407E10,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,eee1ef89be4e54b839a3e64ec2a38ce834813280,coordinator,PR #362 completed 5/5 CI checks
+FUN_00407D10,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 118-byte refcounted-string append helper with temp construction adopt-or-concatenate and reference cleanup
+FUN_00407D10,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,6c1e871f12c6e1557b631a7bb50986a34a577bee,coordinator,PR #354 completed 5/5 CI checks
