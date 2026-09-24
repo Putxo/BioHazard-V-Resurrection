@@ -144,3 +144,4 @@ SEQ-00408070,FUN_00408070,coordinator,decomp/00408070-next,sequential decomp of 
 SEQ-00408100,FUN_00408100,coordinator,decomp/00408100-next,sequential decomp of SSO buffer growth/reallocation helper,2026-09-24T02:33:00Z,,,true
 SEQ-004082E0,FUN_004082E0,coordinator,decomp/004082e0-next,sequential decomp of SSO substring assignment helper,2026-09-24T02:45:00Z,,,true
 SEQ-004083C0,FUN_004083C0,coordinator,decomp/004083c0-next,sequential decomp of 191-byte SSO pointer-length assignment helper,2026-09-24T02:56:00Z,,,true
+SEQ-00408490,FUN_00408490,coordinator,decomp/00408490-next,sequential decomp of std::logic_error SSO-message constructor,2026-09-24T03:08:00Z,,,true
