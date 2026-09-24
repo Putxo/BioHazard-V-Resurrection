@@ -150,3 +150,4 @@ SEQ-00408510,FUN_00408510,coordinator,decomp/00408510-next,sequential decomp of 
 SEQ-00408550,FUN_00408550,coordinator,decomp/00408550-next,sequential decomp of 55-byte std::logic_error copy constructor,2026-09-24T03:18:00Z,,,true
 SEQ-004085D0,FUN_004085D0,coordinator,decomp/004085d0-next,sequential decomp of aligned allocator virtual-dispatch thunk,2026-09-24T03:40:00Z,,,true
 SEQ-004085F0,FUN_004085F0,coordinator,decomp/004085f0-next,sequential decomp of reflective Fix-property bit setter,2026-09-24T03:54:00Z,,,true
+SEQ-00408610,FUN_00408610,coordinator,decomp/00408610-next,sequential decomp of global four-word PRNG advance thunk,2026-09-24T03:54:00Z,,,true
