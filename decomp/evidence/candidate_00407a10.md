@@ -1,4 +1,8 @@
-# Candidate 0x00407A10 classification evidence
+# Supplemental address analysis — 0x00407A10
+
+## Candidate-universe membership correction — 2026-09-24
+
+The canonical local `work/analysis/function_candidates.csv` was rechecked and **0x00407A10 is not a row in that CSV**. This file is retained only as supplemental binary/address analysis. Any earlier wording that described 0x00407A10 as a V6 candidate, a removed candidate, or a denominator decrement is superseded. This address has **no effect** on the 79,782-row V6 dashboard denominator.
 
 ## Result
 
@@ -52,7 +56,7 @@ Decoded little-endian entries:
 | 5 | `0x00407A20` | `0x004079B2` |
 | 6 | `0x00407A24` | `0x004079D6` |
 
-Thus the candidate address itself is the storage address of table entry 1. Its four bytes are `76 79 40 00`, i.e. the pointer value `0x00407976`.
+Thus the analyzed address address itself is the storage address of table entry 1. Its four bytes are `76 79 40 00`, i.e. the pointer value `0x00407976`.
 
 ## Xref / entry-point checks
 
@@ -63,9 +67,9 @@ A complete direct-relative branch scan of the exact `.text` section finds:
 
 The exact executable also contains no raw little-endian pointer value `0x00407A10` elsewhere. The only semantic use of this address is as the second cell selected by the indexed jump through table base `0x00407A0C`.
 
-## Inventory accounting
+## Candidate-universe accounting
 
-The project inventory explicitly permits evidence-backed removal of candidates later proven to be internal basic-block/jump-table data. This classification reduces the current dashboard denominator from 79,782 to 79,781 while preserving the original raw V6 union count for audit.
+0x00407A10 is absent from the canonical local `function_candidates.csv`. Its byte-level classification remains useful, but it is not a false-positive removal from the V6 universe and does not change the denominator. The canonical denominator remains **79,782**.
 
 ## Scope exclusions
 
