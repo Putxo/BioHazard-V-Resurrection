@@ -280,4 +280,5 @@ FUN_00408550,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,4f0d3023a0c00e4c5c1bc5f840
 FUN_004085D0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 21-byte aligned allocator thunk over global 0x01641A0C slot +0x14 with fixed 0x10 alignment
 FUN_004085D0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,a02eb072475dded26e9c11408a12c724b23aca32,coordinator,PR #400 completed 5/5 CI checks
 FUN_004085F0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 27-byte Fix-property setter with byte-test set/clear branches for flags bit 0x2000
+FUN_004085F0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,db9f4a0113e552739f1d0ba0ced78a4565fe6cfa,coordinator,PR #403 completed 5/5 CI checks
 FUN_00408610,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 5-byte thiscall tail-jump thunk to four-word global PRNG advance routine at 0x0119F610
