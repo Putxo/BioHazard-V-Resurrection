@@ -249,3 +249,5 @@ FUN_00407CF0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 25-byte pr
 FUN_00407CF0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,33a111bf082b9d94076ef6d041b9693b314793a7,coordinator,PR #349 completed 5/5 CI checks
 FUN_00407DC0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 75-byte synchronized indexed dword setter with conditional critical-section gate and unconditional 0x5E0-stride store
 FUN_00407DC0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,a45b112e987e1ec7e0b5305b4ceca8c486b205fa,coordinator,PR #357 completed 5/5 CI checks
+FUN_00407E10,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 74-byte synchronized current-slot dword setter using this+0x20 index and 0x8C74 stride
+FUN_00407E10,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,eee1ef89be4e54b839a3e64ec2a38ce834813280,coordinator,PR #362 completed 5/5 CI checks
