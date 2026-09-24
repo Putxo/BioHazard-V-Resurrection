@@ -4874,7 +4874,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4889,10 +4889,10 @@
     "source_file": "src/recovered/fun_00408630.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00408630",
-    "pr": "",
-    "commit": "",
+    "pr": "#410",
+    "commit": "89e0a523cef397408681f05e7c1458fa2cddcb88",
     "test": "tests/unit/test_fun_00408630.cpp",
     "evidence": "decomp/evidence/fun_00408630.md",
-    "notes": "6-byte no-argument getter returning the dword stored at fixed global 0x016E2EFC unchanged; 4 direct calls; null value permitted"
+    "notes": "6-byte no-argument getter returning the dword stored at fixed global 0x016E2EFC unchanged; 4 direct calls; null value permitted; PR #410 CI 5/5 PASS"
   }
 ]
