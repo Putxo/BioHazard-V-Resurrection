@@ -109,6 +109,7 @@ void test_fun_00407fd0();
 void test_fun_00408040();
 void test_fun_00408070();
 void test_fun_00408100();
+void test_fun_004082e0();
 int main() {
     if (re5::recovered_runtime_abi_version() != 1U) return 1;
     test_pilot_bb9070_accessors();
@@ -212,5 +213,6 @@ int main() {
     test_fun_00408040();
     test_fun_00408070();
     test_fun_00408100();
+    test_fun_004082e0();
     return 0;
 }
