@@ -123,3 +123,4 @@ SEQ-00407A30,FUN_00407A30,coordinator,decomp/00407a30-next,sequential decomp of 
 SEQ-00407AF0,FUN_00407AF0,coordinator,decomp/00407af0-next,sequential decomp of RTTI-proven std::bad_alloc copy constructor wrapper,2026-09-23T23:15:00Z,,,true
 SEQ-00407B10,FUN_00407B10,coordinator,decomp/00407b10-next,sequential decomp of conditional EnterCriticalSection wrapper,2026-09-23T23:31:04Z,,,true
 SEQ-00407C00,FUN_00407C00,coordinator,decomp/00407c00-next,sequential decomp of linked-chain key lookup returning owner,2026-09-23T23:40:00Z,,,true
+SEQ-00407A70,FUN_00407A70,coordinator,decomp/00407a70-next,sequential decomp of null-guarded four-byte-element count helper,2026-09-24T00:21:00Z,,,true
