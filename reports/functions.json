@@ -4778,7 +4778,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4793,10 +4793,10 @@
     "source_file": "src/recovered/fun_004085d0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004085D0",
-    "pr": "",
-    "commit": "",
+    "pr": "#400",
+    "commit": "a02eb072475dded26e9c11408a12c724b23aca32",
     "test": "tests/unit/test_fun_004085d0.cpp",
     "evidence": "decomp/evidence/fun_004085d0.md",
-    "notes": "21-byte aligned allocator thunk: global 0x01641A0C virtual slot +0x14, forwards caller size unchanged with fixed alignment 0x10 and returns allocator result; 7 direct calls"
+    "notes": "21-byte aligned allocator thunk: global 0x01641A0C virtual slot +0x14, forwards caller size unchanged with fixed alignment 0x10 and returns allocator result; 7 direct calls; PR #400 CI 5/5 PASS"
   }
 ]
