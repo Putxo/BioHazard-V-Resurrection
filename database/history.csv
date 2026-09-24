@@ -231,3 +231,4 @@ FUN_00407A70,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact null-guard
 FUN_00407A70,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,fd067180d12ea934b9e3ec6777d66942fcb4843a,coordinator,PR #324 completed 5/5 CI checks
 FUN_00407B30,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact two-flag LeaveCriticalSection wrapper and native inactive early return
 FUN_00407B30,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,76d349e06a438ce36a15b80189ec3af4e5059a02,coordinator,PR #326 completed 5/5 CI checks
+FUN_00407A90,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered 16-byte aligned allocation adapter with exact std::bad_alloc metadata path
