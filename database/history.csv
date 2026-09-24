@@ -234,3 +234,4 @@ FUN_00407B30,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,76d349e06a438ce36a15b80189
 FUN_00407A90,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered 16-byte aligned allocation adapter with exact std::bad_alloc metadata path
 FUN_00407A90,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,ae0a8ca259c311595242533a6ac8b3f7f0f8fece,coordinator,PR #329 completed 5/5 CI checks
 FUN_00407B70,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact nullable this+0x102C address accessor with fallback token and 32-bit add semantics
+FUN_00407B70,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,822a25a04e055783e7c1e27ef9773f691ced9f3d,coordinator,PR #333 completed 5/5 CI checks
