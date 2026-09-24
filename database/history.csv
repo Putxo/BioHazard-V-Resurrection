@@ -255,3 +255,4 @@ FUN_00407D90,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 47-byte re
 FUN_00407D90,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,1d8fe55d4867b73c39bc04f444a0931588d45fac,coordinator,PR #359 completed 5/5 CI checks
 FUN_00407E10,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 74-byte synchronized current-slot dword setter using this+0x20 index and 0x8C74 stride
 FUN_00407E10,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,eee1ef89be4e54b839a3e64ec2a38ce834813280,coordinator,PR #362 completed 5/5 CI checks
+FUN_00407E70,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 18-byte thiscall allocation wrapper forwarding requested size to FUN_00407A90 with null type tag
