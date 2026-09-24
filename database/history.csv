@@ -268,3 +268,4 @@ FUN_00408100,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,5d20f66b8b13acd022f948395e
 FUN_004082E0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 217-byte SSO substring assignment helper with self-alias erase path growth dependency and checked copy
 FUN_004082E0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,df2e85e173672a55767c006ce8a79b65e72271ea,coordinator,PR #381 completed 5/5 CI checks
 FUN_004083C0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 191-byte SSO pointer-length assignment helper with self-alias 82E0 path and 8100-shaped growth dependency
+FUN_004083C0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,efe0ecf765150793bd9eaf90d7df4800e93270fc,coordinator,PR #385 completed 5/5 CI checks
