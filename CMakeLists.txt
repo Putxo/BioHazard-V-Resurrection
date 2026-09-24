@@ -104,6 +104,7 @@ add_library(re5_recovered STATIC
     src/recovered/fun_00407cf0.cpp
     src/recovered/fun_00407d10.cpp
     src/recovered/fun_00407d90.cpp
+    src/recovered/fun_00407e10.cpp
     src/recovered/fun_00407dc0.cpp
 )
 target_include_directories(re5_recovered PUBLIC include)
@@ -211,6 +212,7 @@ add_executable(re5_tests
     tests/unit/test_fun_00407cf0.cpp
     tests/unit/test_fun_00407d10.cpp
     tests/unit/test_fun_00407d90.cpp
+    tests/unit/test_fun_00407e10.cpp
     tests/unit/test_fun_00407dc0.cpp
 )
 target_link_libraries(re5_tests PRIVATE re5_recovered)
