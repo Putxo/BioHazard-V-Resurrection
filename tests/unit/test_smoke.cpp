@@ -100,6 +100,7 @@ void test_fun_00407c40();
 void test_fun_00407c60();
 void test_fun_00407cd0();
 void test_fun_00407cf0();
+void test_fun_00407d10();
 void test_fun_00407dc0();
 void test_fun_00407e10();
 int main() {
@@ -196,6 +197,7 @@ int main() {
     test_fun_00407c60();
     test_fun_00407cd0();
     test_fun_00407cf0();
+    test_fun_00407d10();
     test_fun_00407dc0();
     test_fun_00407e10();
     return 0;
