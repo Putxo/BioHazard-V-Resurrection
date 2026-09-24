@@ -4842,7 +4842,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4857,10 +4857,10 @@
     "source_file": "src/recovered/fun_00408610.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00408610",
-    "pr": "",
-    "commit": "",
+    "pr": "#406",
+    "commit": "a694562fcc8886fb70781b33c3c8e586d34da4d5",
     "test": "tests/unit/test_fun_00408610.cpp",
     "evidence": "decomp/evidence/fun_00408610.md",
-    "notes": "5-byte thiscall tail-jump thunk to 0x0119F610 global four-word xorshift-style PRNG advance; state at 0x01653058..0x01653064 rotates and new word is returned; 3 direct calls"
+    "notes": "5-byte thiscall tail-jump thunk to 0x0119F610 global four-word xorshift-style PRNG advance; state at 0x01653058..0x01653064 rotates and new word is returned; 3 direct calls; PR #406 CI 5/5 PASS"
   }
 ]
