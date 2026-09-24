@@ -4682,7 +4682,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4697,11 +4697,11 @@
     "source_file": "src/recovered/fun_004084d0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004084D0",
-    "pr": "",
-    "commit": "",
+    "pr": "#391",
+    "commit": "96bdb3f346688b119725e0f08537b3f7fd56f459",
     "test": "tests/unit/test_fun_004084d0.cpp",
     "evidence": "decomp/evidence/fun_004084d0.md",
-    "notes": "50-byte std::logic_error destructor: restores logic_error vtable, conditionally frees embedded SSO heap, resets message, then tail-calls std::exception destructor which restores base vtable and conditionally releases base_message; 2 direct transfers"
+    "notes": "50-byte std::logic_error destructor: restores logic_error vtable, conditionally frees embedded SSO heap, resets message, then tail-calls std::exception destructor which restores base vtable and conditionally releases base_message; 2 direct transfers; PR #391 CI 5/5 PASS"
   },
   {
     "stable_id": "FUN_00408510",
