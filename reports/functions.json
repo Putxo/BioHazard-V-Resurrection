@@ -4458,7 +4458,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4473,10 +4473,10 @@
     "source_file": "src/recovered/fun_00407fd0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407FD0",
-    "pr": "",
-    "commit": "",
+    "pr": "#370",
+    "commit": "959f6e9791f1d5f00ab2a3e6bf0cfd2e7abae09f",
     "test": "tests/unit/test_fun_00407fd0.cpp",
     "evidence": "decomp/evidence/fun_00407fd0.md",
-    "notes": "108-byte refcounted-string append helper: temporary FUN_00402360 construction, null-temporary early exit, adopt-empty destination or concatenate via opaque 0x01199FB0, balanced old/temporary releases; 111 direct calls"
+    "notes": "108-byte refcounted-string append helper: temporary FUN_00402360 construction, null-temporary early exit, adopt-empty destination or concatenate via opaque 0x01199FB0, balanced old/temporary releases; 111 direct calls; PR #370 CI 5/5 PASS"
   }
 ]
