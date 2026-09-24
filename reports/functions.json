@@ -4650,7 +4650,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4665,10 +4665,10 @@
     "source_file": "src/recovered/fun_00408490.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00408490",
-    "pr": "",
-    "commit": "",
+    "pr": "#388",
+    "commit": "b11a8d66f2e79691c5e7e354e3eca991ceaba76b",
     "test": "tests/unit/test_fun_00408490.cpp",
     "evidence": "decomp/evidence/fun_00408490.md",
-    "notes": "51-byte std::logic_error construction layer: exact std::exception base initialization, logic_error vtable, embedded SSO message init and full-source copy through FUN_004082E0; 2 direct calls"
+    "notes": "51-byte std::logic_error construction layer: exact std::exception base initialization, logic_error vtable, embedded SSO message init and full-source copy through FUN_004082E0; 2 direct calls; PR #388 CI 5/5 PASS"
   }
 ]
