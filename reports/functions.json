@@ -4234,7 +4234,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4249,10 +4249,10 @@
     "source_file": "src/recovered/fun_00407cd0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407CD0",
-    "pr": "",
-    "commit": "",
+    "pr": "#346",
+    "commit": "8d6b84d44fcb9ce46dfbcc57f1b747511a8089b0",
     "test": "tests/unit/test_fun_00407cd0.cpp",
     "evidence": "decomp/evidence/fun_00407cd0.md",
-    "notes": "31-byte refcounted-string release helper: null return, decrement leading refcount, free through allocator 0x01652F28 vslot +0x18 only at zero, holder pointer unchanged; 267 direct calls"
+    "notes": "31-byte refcounted-string release helper: null return, decrement leading refcount, free through allocator 0x01652F28 vslot +0x18 only at zero, holder pointer unchanged; 267 direct calls; PR #346 CI 5/5 PASS"
   }
 ]
