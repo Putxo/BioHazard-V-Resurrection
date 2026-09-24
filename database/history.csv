@@ -257,3 +257,4 @@ FUN_00407E10,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 74-byte sy
 FUN_00407E10,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,eee1ef89be4e54b839a3e64ec2a38ce834813280,coordinator,PR #362 completed 5/5 CI checks
 FUN_00407E70,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 18-byte thiscall allocation wrapper forwarding requested size to FUN_00407A90 with null type tag
 FUN_00407E70,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,5facb7947567c2adf2e14e7efdb0bb48574ffee5,coordinator,PR #366 completed 5/5 CI checks
+FUN_00407FD0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 108-byte refcounted-string append helper with temporary construction concatenate and balanced releases
