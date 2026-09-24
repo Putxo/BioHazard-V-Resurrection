@@ -83,6 +83,7 @@ void test_fun_00406870();
 void test_fun_00406910();
 void test_fun_00406b20();
 void test_fun_00407a30();
+void test_fun_00407a70();
 void test_fun_00407250();
 void test_fun_00406ca0();
 void test_fun_00406cd0();
@@ -167,6 +168,7 @@ int main() {
     test_fun_00406910();
     test_fun_00406b20();
     test_fun_00407a30();
+    test_fun_00407a70();
     test_fun_00407250();
     test_fun_00406ca0();
     test_fun_00406cd0();
