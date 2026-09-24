@@ -229,3 +229,4 @@ FUN_00407C00,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact linked-cha
 FUN_00407C00,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,6462ab5c952ac1fca1856ea487ab744654d8327c,coordinator,PR #311 completed 5/5 CI checks
 FUN_00407A70,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact null-guarded four-byte-element count helper over this+0x04/0x08
 FUN_00407A70,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,fd067180d12ea934b9e3ec6777d66942fcb4843a,coordinator,PR #324 completed 5/5 CI checks
+FUN_00407B30,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact two-flag LeaveCriticalSection wrapper and native inactive early return
