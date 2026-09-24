@@ -153,3 +153,4 @@ SEQ-004085F0,FUN_004085F0,coordinator,decomp/004085f0-next,sequential decomp of 
 SEQ-00408610,FUN_00408610,coordinator,decomp/00408610-next,sequential decomp of global four-word PRNG advance thunk,2026-09-24T03:54:00Z,,,true
 SEQ-00408630,FUN_00408630,coordinator,decomp/00408630-next,sequential decomp of fixed-global pointer getter,2026-09-24T19:08:00Z,,,true
 SEQ-00408640,FUN_00408640,coordinator,decomp/00408640-next,sequential decomp of 8-byte object constructor,2026-09-24T19:06:00Z,,,true
+SEQ-00408620,FUN_00408620,coordinator,decomp/00408620-resync,sequential decomp of fixed-address token getter,2026-09-24T19:04:00Z,,,true
