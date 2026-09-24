@@ -288,3 +288,4 @@ FUN_00408630,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 6-byte fix
 FUN_00408630,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,89e0a523cef397408681f05e7c1458fa2cddcb88,coordinator,PR #410 completed 5/5 CI checks
 FUN_00408640,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 18-byte thiscall constructor over base 0x00A67E10 with final vtable 0x0137E440
 FUN_00408640,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,ed3042e74e05569b8a50fb1115b5a3ba418571ea,coordinator,PR #413 completed 5/5 CI checks
+FUN_00408620,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,4649170e7bee74ff04a8ee003a2381441e1315bb,coordinator,PR #418 completed 5/5 CI checks
