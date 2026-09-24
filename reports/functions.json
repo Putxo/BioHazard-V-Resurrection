@@ -4714,7 +4714,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4729,10 +4729,10 @@
     "source_file": "src/recovered/fun_00408510.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00408510",
-    "pr": "",
-    "commit": "",
+    "pr": "#394",
+    "commit": "036d7beb9a591f36c8a2a28d1d43f63487d69876",
     "test": "tests/unit/test_fun_00408510.cpp",
     "evidence": "decomp/evidence/fun_00408510.md",
-    "notes": "59-byte SSO C-string constructor: preserves opaque +0 dword, initializes cap=15/len=0/NUL, scans source after initialization, delegates exact length to FUN_004083C0 and returns this; 2 direct calls"
+    "notes": "59-byte SSO C-string constructor: preserves opaque +0 dword, initializes cap=15/len=0/NUL, scans source after initialization, delegates exact length to FUN_004083C0 and returns this; 2 direct calls; PR #394 CI 5/5 PASS"
   }
 ]
