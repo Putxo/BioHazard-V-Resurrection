@@ -277,3 +277,5 @@ FUN_00408510,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 59-byte SS
 FUN_00408510,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,036d7beb9a591f36c8a2a28d1d43f63487d69876,coordinator,PR #394 completed 5/5 CI checks
 FUN_00408550,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 55-byte std::logic_error copy-construction layer over std::exception base copy and FUN_004082E0
 FUN_00408550,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,4f0d3023a0c00e4c5c1bc5f8404ea11caaa195e8,coordinator,PR #395 completed 5/5 CI checks
+FUN_004085D0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 21-byte aligned allocator thunk over global 0x01641A0C slot +0x14 with fixed 0x10 alignment
+FUN_004085D0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,a02eb072475dded26e9c11408a12c724b23aca32,coordinator,PR #400 completed 5/5 CI checks
