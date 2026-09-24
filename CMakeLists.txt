@@ -120,6 +120,7 @@ add_library(re5_recovered STATIC
     src/recovered/fun_004085d0.cpp
     src/recovered/fun_004085f0.cpp
     src/recovered/fun_00408610.cpp
+    src/recovered/fun_00408620.cpp
     src/recovered/fun_00408630.cpp
     src/recovered/fun_00408640.cpp
 )
