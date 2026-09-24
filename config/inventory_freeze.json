@@ -6,7 +6,7 @@
   "entry_va": "0x012570A9",
   "text_va_start": "0x00401000",
   "text_va_end_exclusive": "0x0137083B",
-  "function_candidate_denominator": 79774,
+  "function_candidate_denominator": 79773,
   "estimated_function_bytes": 15568343,
   "estimated_function_bytes_status": "PROVISIONAL_FROM_PREVIOUS_INVENTORY",
   "whole_file_accounting": {
@@ -62,19 +62,19 @@
   "exception_directory_present": false,
   "base_relocation_directory_present": false,
   "source_symbol_exact_count_available": false,
-  "source_symbol_exact_count_reason": "The exact target has no authoritative embedded all-function symbol/boundary table and the matching PDB/MAP is unavailable. V6 produced a raw union of 79,782 potential starts; evidence-backed per-candidate classification has removed eight proven false positives at 0x00407A10, 0x00407AB0, 0x00407AD0, 0x00407BA0, 0x00407B60, 0x00407BE0, 0x00407C70, and 0x00407C90, so the current dashboard denominator is 79,774 while the raw V6 union remains preserved for audit.",
+  "source_symbol_exact_count_reason": "The exact target has no authoritative embedded all-function symbol/boundary table and the matching PDB/MAP is unavailable. V6 produced a raw union of 79,782 potential starts; evidence-backed per-candidate classification has removed nine proven false positives at 0x00407A10, 0x00407AB0, 0x00407AD0, 0x00407BA0, 0x00407B60, 0x00407BE0, 0x00407C70, 0x00407C90, and 0x00407CB0, so the current dashboard denominator is 79,773 while the raw V6 union remains preserved for audit.",
   "supersedes": {
     "v5_dashboard_denominator": 79016,
     "v6_dashboard_denominator": 79782,
     "added_candidate_pool": 766,
-    "reason": "The independent V6 full-file analysis produced 79,782 raw potential starts. Candidates 0x00407A10, 0x00407AB0, 0x00407AD0, 0x00407BA0, 0x00407B60, 0x00407BE0, 0x00407C70, and 0x00407C90 have since been proven not to be function entries, yielding an evidence-backed current dashboard denominator of 79,774.",
-    "current_dashboard_denominator": 79774,
-    "classified_false_positive_removals": 8
+    "reason": "The independent V6 full-file analysis produced 79,782 raw potential starts. Candidates 0x00407A10, 0x00407AB0, 0x00407AD0, 0x00407BA0, 0x00407B60, 0x00407BE0, 0x00407C70, 0x00407C90, and 0x00407CB0 have since been proven not to be function entries, yielding an evidence-backed current dashboard denominator of 79,773.",
+    "current_dashboard_denominator": 79773,
+    "classified_false_positive_removals": 9
   },
   "status": "FULL_PE_INDEPENDENT_CANDIDATE_UNION_BASELINE",
-  "policy": "Use 79,774 as the current evidence-corrected decompilation dashboard candidate denominator. Retain the raw V6 union of 79,782 and V5's 79,016 fixed-point set as audit/cross-check baselines. Do not describe any of these values as an exact original C/C++ source-symbol function count without the matching PDB/MAP or equivalent authoritative metadata.",
+  "policy": "Use 79,773 as the current evidence-corrected decompilation dashboard candidate denominator. Retain the raw V6 union of 79,782 and V5's 79,016 fixed-point set as audit/cross-check baselines. Do not describe any of these values as an exact original C/C++ source-symbol function count without the matching PDB/MAP or equivalent authoritative metadata.",
   "classified_false_positive_corrections": {
-    "count": 8,
+    "count": 9,
     "excluded_vas": [
       "0x00407A10",
       "0x00407AB0",
@@ -83,8 +83,9 @@
       "0x00407B60",
       "0x00407BE0",
       "0x00407C70",
-      "0x00407C90"
+      "0x00407C90",
+      "0x00407CB0"
     ],
-    "reason": "Exact executable evidence proves 0x00407A10 is switch jump-table data, 0x00407AB0 lies inside the JMP at 0x00407AAC, 0x00407AD0 lies inside the CALL at 0x00407ACE, 0x00407BA0 lies inside the TEST at 0x00407B9E, 0x00407B60 is the third immediate byte of the MOV at 0x00407B5E, 0x00407BE0 is an internal loop basic-block entry inside the real function rooted at 0x00407BC0, 0x00407C70 is the immediate byte of the PUSH at 0x00407C6F, and 0x00407C90 is the fourth byte (disp8 0x1C) of the MOV instruction beginning at 0x00407C8D. None is a callable function entry."
+    "reason": "Exact executable evidence proves 0x00407A10 is switch jump-table data, 0x00407AB0 lies inside the JMP at 0x00407AAC, 0x00407AD0 lies inside the CALL at 0x00407ACE, 0x00407BA0 lies inside the TEST at 0x00407B9E, 0x00407B60 is the third immediate byte of the MOV at 0x00407B5E, 0x00407BE0 is an internal loop basic-block entry inside the real function rooted at 0x00407BC0, 0x00407C70 lies inside the PUSH-immediate instruction at 0x00407C6F, 0x00407C90 is the fourth byte of the MOV instruction beginning at 0x00407C8D, and 0x00407CB0 is the internal indirect CALL at +0x50 inside the real function rooted at 0x00407C60. None is a callable function entry."
   }
 }
