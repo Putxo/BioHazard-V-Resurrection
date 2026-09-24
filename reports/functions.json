@@ -4362,7 +4362,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4377,10 +4377,10 @@
     "source_file": "src/recovered/fun_00407d90.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407D90",
-    "pr": "",
-    "commit": "",
+    "pr": "#359",
+    "commit": "1d8fe55d4867b73c39bc04f444a0931588d45fac",
     "test": "tests/unit/test_fun_00407d90.cpp",
     "evidence": "decomp/evidence/fun_00407d90.md",
-    "notes": "47-byte copy-then-append wrapper: source this payload or exact empty fallback, FUN_00402360 destination construction, FUN_00407D10 suffix append, returns destination; 16 direct calls"
+    "notes": "47-byte copy-then-append wrapper: source this payload or exact empty fallback, FUN_00402360 destination construction, FUN_00407D10 suffix append, returns destination; 16 direct calls; PR #359 CI 5/5 PASS"
   }
 ]
