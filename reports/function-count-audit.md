@@ -4,7 +4,7 @@ Target SHA-256: `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e6781
 
 ## Current dashboard denominator
 
-**Current evidence-corrected dashboard universe: 79,774 potential function starts**
+**Current evidence-corrected dashboard universe: 79,773 potential function starts**
 
 This replaces `79,016` as the public total-work denominator so the independently detected 766-candidate difference pool is not silently excluded.
 
@@ -40,7 +40,7 @@ The entire **19,977,216-byte** PE is accounted for by headers plus `.text`, `.rd
 
 ## What the dashboard means
 
-The dashboard denominator is now **79,774 potential function starts**.
+The dashboard denominator is now **79,773 potential function starts**.
 
 During decompilation each candidate must ultimately be classified as one of the project-supported outcomes, for example:
 
@@ -142,8 +142,20 @@ Candidate `0x00407C90` has been removed from the dashboard denominator after exa
 
 The raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,775 to **79,774**. Recovered-function count, recovered-byte count and FAST PASS count remain unchanged. Full evidence: `decomp/evidence/candidate_00407c90_rejection.md`.
 
+## Evidence-backed candidate correction — 0x00407CB0
+
+Candidate `0x00407CB0` has been removed from the dashboard denominator after exact control-flow classification proved it is an internal indirect-call instruction, not a callable function entry.
+
+- GNU `objdump` and LLVM `llvm-objdump` independently decode `FF D0` at `0x00407CB0` as `call eax`.
+- The candidate lies at +0x50 inside the real function rooted at `0x00407C60`, whose 109-byte body runs through the terminal `ret` at `0x00407CCC` and has SHA-256 `42d47f7c6cc96507eee3e4402437438da1b3cdbcaa5913e1ff57d63e08dcf4c5`.
+- Conditional branches at `0x00407C98` and `0x00407CA2` skip the internal call and rejoin at `0x00407CB2`; the `call eax` itself also falls through to that same internal continuation.
+- A complete decoded direct CALL/JMP/Jcc target scan finds zero transfers targeting `0x00407CB0`, while the containing real entry `0x00407C60` has 326 decoded direct references.
+- A whole-file raw-pointer scan finds zero little-endian pointer occurrences of `0x00407CB0`.
+
+The raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,774 to **79,773**. Recovered-function count, recovered-byte count and FAST PASS count remain unchanged. Full evidence: `decomp/evidence/candidate_00407cb0_rejection.md`.
+
 ## Exact source-function count remains unavailable
 
 The PE has no COFF function-symbol table or authoritative embedded all-function boundary table. Therefore neither **79,782** nor **79,016** is presented as a mathematically exact original source-symbol count.
 
-For project accounting, **79,774 is now the canonical evidence-corrected candidate universe**. The raw V6 detector output of 79,782 remains preserved as an audit baseline.
+For project accounting, **79,773 is now the canonical evidence-corrected candidate universe**. The raw V6 detector output of 79,782 remains preserved as an audit baseline.
