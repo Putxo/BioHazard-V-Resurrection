@@ -4554,7 +4554,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4569,10 +4569,10 @@
     "source_file": "src/recovered/fun_00408100.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00408100",
-    "pr": "",
-    "commit": "",
+    "pr": "#378",
+    "commit": "5d20f66b8b13acd022f948395e1ff3b74132544b",
     "test": "tests/unit/test_fun_00408100.cpp",
     "evidence": "decomp/evidence/fun_00408100.md",
-    "notes": "323-byte SSO buffer growth helper with aligned/1.5x capacity policy, catch-all exact-capacity retry, checked copy, old-heap release, and double-failure reset/rethrow; 2 direct calls"
+    "notes": "323-byte SSO buffer growth helper with aligned/1.5x capacity policy, catch-all exact-capacity retry, checked copy, old-heap release, and double-failure reset/rethrow; 2 direct calls; PR #378 CI 5/5 PASS"
   }
 ]
