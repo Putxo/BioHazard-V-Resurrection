@@ -4906,7 +4906,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4921,10 +4921,10 @@
     "source_file": "src/recovered/fun_00408640.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00408640",
-    "pr": "",
-    "commit": "",
+    "pr": "#413",
+    "commit": "ed3042e74e05569b8a50fb1115b5a3ba418571ea",
     "test": "tests/unit/test_fun_00408640.cpp",
     "evidence": "decomp/evidence/fun_00408640.md",
-    "notes": "18-byte thiscall constructor for an 8-byte object: calls base 0x00A67E10, base initialization clears bytes +4..+7, installs derived vtable 0x0137E440 and returns this; 1 direct call"
+    "notes": "18-byte thiscall constructor for an 8-byte object: calls base 0x00A67E10, base initialization clears bytes +4..+7, installs derived vtable 0x0137E440 and returns this; 1 direct call; PR #413 CI 5/5 PASS"
   }
 ]
