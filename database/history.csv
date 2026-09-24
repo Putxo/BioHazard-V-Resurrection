@@ -227,3 +227,5 @@ FUN_00407B10,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered exact two-flag E
 FUN_00407B10,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,64da44362c17fac4ef011d3718e8e765db8efa8a,coordinator,PR #303 completed 5/5 CI checks
 FUN_00407C00,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact linked-chain key lookup returning owner on matching +0x04 key
 FUN_00407C00,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,6462ab5c952ac1fca1856ea487ab744654d8327c,coordinator,PR #311 completed 5/5 CI checks
+FUN_00407A70,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact null-guarded four-byte-element count helper over this+0x04/0x08
+FUN_00407A70,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,fd067180d12ea934b9e3ec6777d66942fcb4843a,coordinator,PR #324 completed 5/5 CI checks
