@@ -130,3 +130,4 @@ SEQ-00407B70,FUN_00407B70,coordinator,decomp/00407b70-next,sequential decomp of 
 SEQ-00407B50,FUN_00407B50,coordinator,decomp/00407b50-next,sequential decomp of nullable this+0x1028 address accessor,2026-09-24T00:21:00Z,,,true
 SEQ-00407BC0,FUN_00407BC0,coordinator,decomp/00407bc0-next,sequential decomp of linked-chain boolean membership test,2026-09-24T00:54:00Z,,,true
 SEQ-00407C40,FUN_00407C40,coordinator,decomp/00407c40-next,sequential decomp of refcounted-string wrapper constructor,2026-09-24T00:58:00Z,,,true
+SEQ-00407C60,FUN_00407C60,coordinator,decomp/00407c60-next,sequential decomp of variadic refcounted-string formatter,2026-09-24T01:08:00Z,,,true
