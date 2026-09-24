@@ -4,7 +4,7 @@ Target SHA-256: `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e6781
 
 ## Current dashboard denominator
 
-**Current evidence-corrected dashboard universe: 79,775 potential function starts**
+**Current evidence-corrected dashboard universe: 79,774 potential function starts**
 
 This replaces `79,016` as the public total-work denominator so the independently detected 766-candidate difference pool is not silently excluded.
 
@@ -40,7 +40,7 @@ The entire **19,977,216-byte** PE is accounted for by headers plus `.text`, `.rd
 
 ## What the dashboard means
 
-The dashboard denominator is now **79,775 potential function starts**.
+The dashboard denominator is now **79,774 potential function starts**.
 
 During decompilation each candidate must ultimately be classified as one of the project-supported outcomes, for example:
 
@@ -131,8 +131,19 @@ Candidate 0x00407C70 has been removed from the dashboard denominator after exact
 
 The raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,776 to **79,775**. Full evidence: decomp/evidence/candidate_00407c70_rejection.md.
 
+## Evidence-backed candidate correction — 0x00407C90
+
+Candidate `0x00407C90` has been removed from the dashboard denominator after exact instruction-boundary classification proved it is not executable function entry code.
+
+- GNU `objdump` and LLVM `llvm-objdump` independently decode `8B 7C 24 1C` at `0x00407C8D` as `mov edi,dword ptr [esp+0x1c]`; therefore `0x00407C90` is the fourth byte of that instruction, specifically its one-byte displacement `0x1C`.
+- The next actual instruction begins at `0x00407C91`. The containing real function is rooted at `0x00407C60` and terminates at `0x00407CCC`, followed by INT3 alignment padding before the next real function at `0x00407CD0`.
+- A complete decoded direct CALL/JMP/Jcc scan finds zero control-flow references targeting `0x00407C90`, and a whole-file raw-pointer scan finds zero little-endian pointers to that address.
+- The surrounding real entries are independently well-supported: `0x00407C60` has 326 decoded direct references and `0x00407CD0` has 267.
+
+The raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,775 to **79,774**. Recovered-function count, recovered-byte count and FAST PASS count remain unchanged. Full evidence: `decomp/evidence/candidate_00407c90_rejection.md`.
+
 ## Exact source-function count remains unavailable
 
 The PE has no COFF function-symbol table or authoritative embedded all-function boundary table. Therefore neither **79,782** nor **79,016** is presented as a mathematically exact original source-symbol count.
 
-For project accounting, **79,776 is now the canonical evidence-corrected candidate universe shown in `main`**. The raw V6 detector output of 79,782 remains preserved as an audit baseline.
+For project accounting, **79,774 is now the canonical evidence-corrected candidate universe**. The raw V6 detector output of 79,782 remains preserved as an audit baseline.
