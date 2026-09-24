@@ -4522,7 +4522,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4537,10 +4537,10 @@
     "source_file": "src/recovered/fun_00408070.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00408070",
-    "pr": "",
-    "commit": "",
+    "pr": "#376",
+    "commit": "2715973afadcc465361cc5d30ccec19eeb74988d",
     "test": "tests/unit/test_fun_00408070.cpp",
     "evidence": "decomp/evidence/fun_00408070.md",
-    "notes": "130-byte SSO string erase helper: throws std::out_of_range on position>length, clamps count, no-op early exit, overlap-safe tail move, updates length/NUL; 2 direct calls"
+    "notes": "130-byte SSO string erase helper: throws std::out_of_range on position>length, clamps count, no-op early exit, overlap-safe tail move, updates length/NUL; 2 direct calls; PR #376 CI 5/5 PASS"
   }
 ]
