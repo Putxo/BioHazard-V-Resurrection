@@ -4394,7 +4394,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4409,10 +4409,10 @@
     "source_file": "src/recovered/fun_00407e10.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407E10",
-    "pr": "",
-    "commit": "",
+    "pr": "#362",
+    "commit": "eee1ef89be4e54b839a3e64ec2a38ce834813280",
     "test": "tests/unit/test_fun_00407e10.cpp",
     "evidence": "decomp/evidence/fun_00407e10.md",
-    "notes": "74-byte synchronized current-slot dword setter: optional Enter/LeaveCriticalSection at this+4 gated by this+0x1C/global 0x016E2090; index from this+0x20; unconditional store at this+0x70+index*0x8C74; 3 direct calls"
+    "notes": "74-byte synchronized current-slot dword setter: optional Enter/LeaveCriticalSection at this+4 gated by this+0x1C/global 0x016E2090; index from this+0x20; unconditional store at this+0x70+index*0x8C74; 3 direct calls; PR #362 CI 5/5 PASS"
   }
 ]
