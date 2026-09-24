@@ -147,3 +147,4 @@ SEQ-004083C0,FUN_004083C0,coordinator,decomp/004083c0-next,sequential decomp of 
 SEQ-00408490,FUN_00408490,coordinator,decomp/00408490-next,sequential decomp of std::logic_error SSO-message constructor,2026-09-24T03:08:00Z,,,true
 SEQ-004084D0,FUN_004084D0,coordinator,decomp/004084d0-next,sequential decomp of std::logic_error layered destructor,2026-09-24T03:15:00Z,,,true
 SEQ-00408510,FUN_00408510,coordinator,decomp/00408510-next,sequential decomp of SSO C-string constructor,2026-09-24T03:20:00Z,,,true
+SEQ-00408550,FUN_00408550,coordinator,decomp/00408550-next,sequential decomp of 55-byte std::logic_error copy constructor,2026-09-24T03:18:00Z,,,true

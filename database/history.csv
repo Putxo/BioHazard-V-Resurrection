@@ -275,3 +275,4 @@ FUN_004084D0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 50-byte st
 FUN_004084D0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,96bdb3f346688b119725e0f08537b3f7fd56f459,coordinator,PR #391 completed 5/5 CI checks
 FUN_00408510,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 59-byte SSO C-string constructor with post-init length scan and FUN_004083C0 delegation
 FUN_00408510,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,036d7beb9a591f36c8a2a28d1d43f63487d69876,coordinator,PR #394 completed 5/5 CI checks
+FUN_00408550,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 55-byte std::logic_error copy-construction layer over std::exception base copy and FUN_004082E0
