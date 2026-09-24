@@ -127,3 +127,4 @@ SEQ-00407A70,FUN_00407A70,coordinator,decomp/00407a70-next,sequential decomp of 
 SEQ-00407B30,FUN_00407B30,coordinator,decomp/00407b30-next,sequential decomp of conditional LeaveCriticalSection wrapper,2026-09-24T00:21:00Z,,,true
 SEQ-00407A90,FUN_00407A90,coordinator,decomp/00407a90-next,sequential decomp of 16-byte aligned allocation adapter and std::bad_alloc guard,2026-09-24T00:21:00Z,,,true
 SEQ-00407B70,FUN_00407B70,coordinator,decomp/00407b70-next,sequential decomp of nullable this+0x102C address accessor,2026-09-24T00:36:00Z,,,true
+SEQ-00407B50,FUN_00407B50,coordinator,decomp/00407b50-next,sequential decomp of nullable this+0x1028 address accessor,2026-09-24T00:21:00Z,,,true
