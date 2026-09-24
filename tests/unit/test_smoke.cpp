@@ -94,6 +94,7 @@ void test_fun_00407b10();
 void test_fun_00407b30();
 void test_fun_00407b50();
 void test_fun_00407b70();
+void test_fun_00407bc0();
 void test_fun_00407c00();
 int main() {
     if (re5::recovered_runtime_abi_version() != 1U) return 1;
@@ -183,6 +184,7 @@ int main() {
     test_fun_00407b30();
     test_fun_00407b50();
     test_fun_00407b70();
+    test_fun_00407bc0();
     test_fun_00407c00();
     return 0;
 }
