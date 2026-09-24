@@ -4618,7 +4618,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4633,10 +4633,10 @@
     "source_file": "src/recovered/fun_004083c0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004083C0",
-    "pr": "",
-    "commit": "",
+    "pr": "#385",
+    "commit": "efe0ecf765150793bd9eaf90d7df4800e93270fc",
     "test": "tests/unit/test_fun_004083c0.cpp",
     "evidence": "decomp/evidence/fun_004083c0.md",
-    "notes": "191-byte SSO pointer+length assignment helper: detects self-buffer alias and delegates to FUN_004082E0, rejects external UINT32_MAX, grows through isolated 8100-shaped service, copies external bytes and NUL-terminates; 2 direct calls; local tests PASS"
+    "notes": "191-byte SSO pointer+length assignment helper: detects self-buffer alias and delegates to FUN_004082E0, rejects external UINT32_MAX, grows through isolated 8100-shaped service, copies external bytes and NUL-terminates; 2 direct calls; local tests PASS; PR #385 CI 5/5 PASS"
   }
 ]
