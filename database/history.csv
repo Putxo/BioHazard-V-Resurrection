@@ -264,4 +264,5 @@ FUN_00408040,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,34d706481c40922c0995b55fdd
 FUN_00408070,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 130-byte SSO string erase helper with invalid-position throw count clamp and overlap-safe tail move
 FUN_00408070,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,2715973afadcc465361cc5d30ccec19eeb74988d,coordinator,PR #376 completed 5/5 CI checks
 FUN_00408100,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact SSO growth helper including two catch-all allocation fallback paths and empty-SSO reset on double failure
+FUN_00408100,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,5d20f66b8b13acd022f948395e1ff3b74132544b,coordinator,PR #378 completed 5/5 CI checks
 FUN_004082E0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 217-byte SSO substring assignment helper with self-alias erase path growth dependency and checked copy
