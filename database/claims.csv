@@ -132,3 +132,4 @@ SEQ-00407BC0,FUN_00407BC0,coordinator,decomp/00407bc0-next,sequential decomp of 
 SEQ-00407C40,FUN_00407C40,coordinator,decomp/00407c40-next,sequential decomp of refcounted-string wrapper constructor,2026-09-24T00:58:00Z,,,true
 SEQ-00407C60,FUN_00407C60,coordinator,decomp/00407c60-next,sequential decomp of variadic refcounted-string formatter,2026-09-24T01:08:00Z,,,true
 SEQ-00407CD0,FUN_00407CD0,coordinator,decomp/00407cd0-next,sequential decomp of refcounted-string release helper,2026-09-24T01:22:00Z,,,true
+SEQ-00407CF0,FUN_00407CF0,coordinator,decomp/00407cf0-next,sequential decomp of pre-cleared refcounted-string wrapper constructor,2026-09-24T01:22:00Z,,,true
