@@ -4042,7 +4042,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4057,10 +4057,10 @@
     "source_file": "src/recovered/fun_00407a90.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407A90",
-    "pr": "",
-    "commit": "",
+    "pr": "#329",
+    "commit": "ae0a8ca259c311595242533a6ac8b3f7f0f8fece",
     "test": "tests/unit/test_fun_00407a90.cpp",
     "evidence": "decomp/evidence/fun_00407a90.md",
-    "notes": "32-bit aligned allocation adapter: ignores second type-tag argument, preserves native UINT32_MAX/requested_size guard, tail-forwards size with 0x10 alignment to 0x01251471; RTTI error path is std::bad_alloc; direct caller at 0x00407E77"
+    "notes": "32-bit aligned allocation adapter: ignores second type-tag argument, preserves native UINT32_MAX/requested_size guard, tail-forwards size with 0x10 alignment to 0x01251471; RTTI error path is std::bad_alloc; direct caller at 0x00407E77; PR #329 CI 5/5 PASS"
   }
 ]
