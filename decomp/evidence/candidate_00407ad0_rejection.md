@@ -1,4 +1,8 @@
-# Candidate rejection evidence — 0x00407AD0
+# Supplemental address analysis — 0x00407AD0
+
+## Candidate-universe membership correction — 2026-09-24
+
+The canonical local `work/analysis/function_candidates.csv` was rechecked and **0x00407AD0 is not present in that CSV**. This document is retained only as supplemental binary analysis. All historical wording below that calls this address a V6 candidate, describes it as a removed candidate, or assigns it any denominator reduction is **superseded** and must not be used for accounting. The V6 denominator remains **79,782**.
 
 ## Conclusion
 

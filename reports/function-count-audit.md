@@ -4,15 +4,49 @@ Target SHA-256: `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e6781
 
 ## Current dashboard denominator
 
-**Current evidence-corrected dashboard universe: 79,773 potential function starts**
+**Current canonical dashboard universe: 79,782 potential function starts**
 
-This replaces `79,016` as the public total-work denominator so the independently detected 766-candidate difference pool is not silently excluded.
+The dashboard denominator is the raw V6 union represented by the canonical local `work/analysis/function_candidates.csv`. That CSV is intentionally not tracked in Git because it is a large local analysis artifact, so denominator corrections must distinguish two independent questions:
 
-It does **not** mean the original C/C++ source is proven to contain exactly 79,782 functions. The target has no authoritative embedded all-function symbol table and the matching PDB/MAP is unavailable.
+1. whether an address is actually a row in `function_candidates.csv`; and
+2. if it is a row, whether later binary analysis proves that row is not a real function entry.
+
+Only an address satisfying (1) can ever be subtracted from the 79,782-row denominator.
+
+## 2026-09-24 membership-audit repair
+
+A local exact membership check found that the following addresses are **not present** in `function_candidates.csv`:
+
+- `0x004070E0`
+- `0x00407A10`
+- `0x00407A30`
+- `0x00407AB0`
+- `0x00407AD0`
+- `0x00407AF0`
+- `0x00407B60`
+- `0x00407BA0`
+- `0x00407BE0`
+- `0x00407C70`
+- `0x00407C90`
+- `0x00407CB0`
+
+Among the recently worked addresses, only `0x00407B10` and `0x00407C00` are rows in that CSV.
+
+Nine of the absent addresses — `0x00407A10`, `0x00407AB0`, `0x00407AD0`, `0x00407BA0`, `0x00407B60`, `0x00407BE0`, `0x00407C70`, `0x00407C90`, and `0x00407CB0` — had incorrectly been counted as evidence-backed false-positive removals. That was a bookkeeping error: their binary classifications may still be useful, but they were never members of the 79,782-row candidate universe and therefore cannot reduce it.
+
+The earlier sequence of dashboard reductions from 79,782 down to 79,773 is superseded. The canonical denominator is restored to **79,782**, with **zero classified false-positive removals from the V6 CSV** at this point.
+
+## Recovered functions that are not V6 CSV rows
+
+Absence from `function_candidates.csv` does not prove that an address is not a real function. The candidate CSV is a detector output, not an authoritative source-symbol table.
+
+Accordingly, valid recovered implementations, tests, evidence, claims/history and validation metadata are preserved. In particular, the existing recoveries for `FUN_00407A30` and `FUN_00407AF0` remain valid despite those addresses not being V6 CSV rows. The valid recent recoveries for `FUN_00407B10` and `FUN_00407C00` are also preserved; those two addresses do appear in the CSV.
+
+No source code or test is deleted by this accounting repair.
 
 ## Independent full-scan evidence
 
-A complete independent static pass over the exact target produced:
+The V6 static pass over the exact target produced:
 
 - complete `.text` linear scan rows: **4,837,889**
 - undecodable bytes explicitly retained as data: **662**
@@ -20,142 +54,31 @@ A complete independent static pass over the exact target produced:
 - targets in aligned sequences of at least two code pointers: **40,912**
 - 16-byte-aligned starts after at least two `INT3`/`NOP` padding bytes: **69,076**
 
-Deduplicated union of those three candidate-start evidence classes:
+Deduplicated union of those candidate-start evidence classes:
 
 **79,782**
 
 ## V5 fixed-point cross-check
 
-The earlier V5 fixed-point CFG method remains useful as a stricter subset/cross-check:
+The earlier V5 fixed-point CFG method remains a stricter subset/cross-check:
 
 - V5 high-confidence machine-code entries: **79,016**
 - V6 broader candidate union: **79,782**
-- difference: **766** candidates (**0.97%**)
+- difference: **766** candidates
 
-V5 intentionally rejected roots whose evidence arose only outside its reachable fixed-point graph. The independent full-scan candidate union intentionally keeps broader evidence so those entries remain part of total decompilation work until individually classified.
+Neither number is presented as an exact count of original source-level C/C++ functions. The target has no authoritative embedded all-function symbol table and the matching PDB/MAP is unavailable.
 
-## Whole executable
+## Supplemental address analyses
 
-The entire **19,977,216-byte** PE is accounted for by headers plus `.text`, `.rdata`, `.data` and `.rsrc`, with zero raw-file bytes left unclassified.
+The existing files under `decomp/evidence/candidate_*_rejection.md` for the nine mistakenly subtracted addresses are retained for their byte-level disassembly and control-flow findings. They are reclassified as **supplemental address analyses**, not candidate removals. Their findings must not alter the denominator unless a future audit first proves that the analyzed address is actually a row in the canonical `function_candidates.csv`.
 
-## What the dashboard means
+## Accounting policy going forward
 
-The dashboard denominator is now **79,773 potential function starts**.
+For project accounting, **79,782 is the canonical candidate denominator**.
 
-During decompilation each candidate must ultimately be classified as one of the project-supported outcomes, for example:
+A future denominator reduction requires both:
 
-- real recovered function entry;
-- thunk/import stub/runtime helper;
-- internal basic-block/jump-table target;
-- data misidentified as code;
-- ambiguous/blocker pending more evidence.
+- exact membership evidence showing the address is a row in the canonical local `function_candidates.csv`; and
+- versioned binary evidence showing that CSV row is not a real function entry.
 
-If later classification proves that a candidate is not a real function entry, the canonical denominator may decrease, but only through a versioned, evidence-backed inventory update.
-
-## Evidence-backed candidate correction — 0x00407A10
-
-Candidate `0x00407A10` has been removed from the dashboard denominator after exact-byte classification proved it is not executable function entry code.
-
-- The real switch dispatcher is rooted at `0x00407960`.
-- At `0x0040796F` it executes `jmp dword ptr [eax*4+0x00407A0C]` for selector values `0..6`.
-- The 28 bytes at `0x00407A0C..0x00407A27` are seven little-endian code pointers: `0x00407976, 0x00407976, 0x00407976, 0x00407986, 0x004079A9, 0x004079B2, 0x004079D6`.
-- Therefore `0x00407A10` is the address of the **second four-byte jump-table cell**, whose value is `0x00407976`; it is not a code entry.
-- A complete direct `CALL rel32` / direct `JMP rel32` scan finds no branch targeting `0x00407A10`.
-
-This is exactly the kind of per-candidate classification anticipated by the inventory policy: the raw V6 union remains 79,782 for audit, while the current evidence-corrected denominator decreases by one to **79,781**.
-
-## Evidence-backed candidate correction — 0x00407AB0
-
-Candidate `0x00407AB0` has been removed from the dashboard denominator after exact instruction-boundary classification proved it is not executable function entry code.
-
-- `E9 C0 99 E4 00` at `0x00407AAC` is a five-byte near JMP; `0x00407AB0` is its fifth byte, inside the rel32 displacement.
-- The next actual instruction is `0x00407AB1`, an internal basic-block target reached from `0x00407A99`.
-- A complete direct relative CALL/JMP/Jcc scan finds zero control-flow references to `0x00407AB0`; `0x00407A90` has a direct CALL from `0x00407E77`.
-
-The raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,781 to **79,780**. Full evidence: `decomp/evidence/candidate_00407ab0_rejection.md`.
-
-## Evidence-backed candidate correction — 0x00407AD0
-
-Candidate `0x00407AD0` has been removed from the dashboard denominator after exact instruction-boundary classification proved it is not executable function entry code.
-
-- `E8 6A A0 E4 00` at `0x00407ACE` is a five-byte near CALL to `0x01251B3D`; `0x00407AD0` is inside that instruction's signed rel32 displacement.
-- The next actual instruction begins at `0x00407AD3`. The containing real function is rooted at `0x00407A90`, and the next aligned function begins at `0x00407AF0`.
-- A complete direct relative CALL/JMP/Jcc scan finds zero control-flow references to `0x00407AD0`, and the executable contains no raw pointer value to that address.
-
-The raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,780 to **79,779**. Full evidence: `decomp/evidence/candidate_00407ad0_rejection.md`.
-
-## Evidence-backed candidate correction — 0x00407BA0
-
-Candidate `0x00407BA0` has been removed from the dashboard denominator after exact instruction-boundary classification proved it is not executable function entry code.
-
-- `F6 44 24 08 01` at `0x00407B9E` is the five-byte instruction `test byte ptr [esp+8], 1`; `0x00407BA0` is its third byte.
-- The next actual instruction begins at `0x00407BA3`. The containing real function is rooted at `0x00407B90`, and the next aligned function begins at `0x00407BC0`.
-- A complete direct relative CALL/JMP/Jcc scan finds zero control-flow references to `0x00407BA0`, and the executable contains no raw pointer value to that address.
-
-The raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,779 to **79,778**. Full evidence: `decomp/evidence/candidate_00407ba0_rejection.md`.
-
-## Evidence-backed candidate correction — 0x00407B60
-
-Candidate `0x00407B60` has been removed from the dashboard denominator after exact instruction-boundary classification proved it is not executable function entry code.
-
-- The real helper begins at `0x00407B50`.
-- `B8 5C AA 37 01` at `0x00407B5E` is `mov eax,0x0137AA5C`; therefore `0x00407B60` is the third byte of that instruction's immediate operand, not an instruction boundary.
-- GNU objdump and LLVM llvm-objdump independently agree on the decode.
-- A complete direct relative CALL/JMP/Jcc scan finds zero control-flow references to `0x00407B60`, and a whole-file raw-pointer scan finds zero little-endian pointers to that address.
-- Real entry `0x00407B50` has many direct callers; next real helper `0x00407B70` also has a direct caller.
-
-The raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,778 to **79,776**. Full evidence: `decomp/evidence/candidate_00407b60_rejection.md`.
-
-
-## Evidence-backed candidate correction — 0x00407BE0
-
-Candidate `0x00407BE0` has been removed from the dashboard denominator after exact control-flow classification proved it is an internal loop basic-block target, not a callable function entry.
-
-- GNU `objdump` and LLVM `llvm-objdump` independently decode the real function at `0x00407BC0` through its terminal `ret 4` at `0x00407BEE`.
-- `0x00407BE0` begins the loop comparison `cmp dword ptr [eax+4], ecx`; it is a valid instruction boundary, but it is reached by the internal back-edge `jne 0x00407BE0` at `0x00407BEA`.
-- The function entry `0x00407BC0` has numerous direct CALL references, while the complete direct CALL/JMP/Jcc scan finds no external call or entry transfer to `0x00407BE0`; the only decoded direct target is the internal back-edge from `0x00407BEA`.
-- The executable contains zero raw little-endian pointer values for `0x00407BE0`.
-- The 49-byte real body at `0x00407BC0..0x00407BF0` has SHA-256 `55c18b3e5aea58ce310701d9ffeb7fced3d762fa75f235928e803675815993d2`, followed by INT3 padding through `0x00407BFF`; the next aligned callable function begins at `0x00407C00`.
-
-The raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,777 to **79,776**. Full evidence: `decomp/evidence/candidate_00407be0_rejection.md`.
-
-## Evidence-backed candidate correction — 0x00407C70
-
-Candidate 0x00407C70 has been removed from the dashboard denominator after exact instruction-boundary classification proved it is not executable function entry code.
-
-- 68 00 04 00 00 at 0x00407C6F is the five-byte instruction push 0x400; 0x00407C70 is inside that instruction's immediate operand.
-- GNU objdump and LLVM llvm-objdump independently agree on the decode and boundaries.
-- The next real instruction begins at 0x00407C74. The containing aligned function is rooted at 0x00407C60, terminates at 0x00407CCC, and the next aligned function begins at 0x00407CD0.
-- A complete direct relative CALL/JMP/Jcc target scan finds zero references to 0x00407C70, and the executable contains zero raw little-endian pointer values for that address.
-- The 109-byte containing native body has SHA-256 42d47f7c6cc96507eee3e4402437438da1b3cdbcaa5913e1ff57d63e08dcf4c5.
-
-The raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,776 to **79,775**. Full evidence: decomp/evidence/candidate_00407c70_rejection.md.
-
-## Evidence-backed candidate correction — 0x00407C90
-
-Candidate `0x00407C90` has been removed from the dashboard denominator after exact instruction-boundary classification proved it is not executable function entry code.
-
-- GNU `objdump` and LLVM `llvm-objdump` independently decode `8B 7C 24 1C` at `0x00407C8D` as `mov edi,dword ptr [esp+0x1c]`; therefore `0x00407C90` is the fourth byte of that instruction, specifically its one-byte displacement `0x1C`.
-- The next actual instruction begins at `0x00407C91`. The containing real function is rooted at `0x00407C60` and terminates at `0x00407CCC`, followed by INT3 alignment padding before the next real function at `0x00407CD0`.
-- A complete decoded direct CALL/JMP/Jcc scan finds zero control-flow references targeting `0x00407C90`, and a whole-file raw-pointer scan finds zero little-endian pointers to that address.
-- The surrounding real entries are independently well-supported: `0x00407C60` has 326 decoded direct references and `0x00407CD0` has 267.
-
-The raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,775 to **79,774**. Recovered-function count, recovered-byte count and FAST PASS count remain unchanged. Full evidence: `decomp/evidence/candidate_00407c90_rejection.md`.
-
-## Evidence-backed candidate correction — 0x00407CB0
-
-Candidate `0x00407CB0` has been removed from the dashboard denominator after exact control-flow classification proved it is an internal indirect-call instruction, not a callable function entry.
-
-- GNU `objdump` and LLVM `llvm-objdump` independently decode `FF D0` at `0x00407CB0` as `call eax`.
-- The candidate lies at +0x50 inside the real function rooted at `0x00407C60`, whose 109-byte body runs through the terminal `ret` at `0x00407CCC` and has SHA-256 `42d47f7c6cc96507eee3e4402437438da1b3cdbcaa5913e1ff57d63e08dcf4c5`.
-- Conditional branches at `0x00407C98` and `0x00407CA2` skip the internal call and rejoin at `0x00407CB2`; the `call eax` itself also falls through to that same internal continuation.
-- A complete decoded direct CALL/JMP/Jcc target scan finds zero transfers targeting `0x00407CB0`, while the containing real entry `0x00407C60` has 326 decoded direct references.
-- A whole-file raw-pointer scan finds zero little-endian pointer occurrences of `0x00407CB0`.
-
-The raw V6 detector output remains 79,782 for audit, while the current dashboard denominator decreases from 79,774 to **79,773**. Recovered-function count, recovered-byte count and FAST PASS count remain unchanged. Full evidence: `decomp/evidence/candidate_00407cb0_rejection.md`.
-
-## Exact source-function count remains unavailable
-
-The PE has no COFF function-symbol table or authoritative embedded all-function boundary table. Therefore neither **79,782** nor **79,016** is presented as a mathematically exact original source-symbol count.
-
-For project accounting, **79,773 is now the canonical evidence-corrected candidate universe**. The raw V6 detector output of 79,782 remains preserved as an audit baseline.
+This two-part check prevents a correct binary classification of an arbitrary address from being mistaken for removal of a candidate that never existed in the V6 universe.
