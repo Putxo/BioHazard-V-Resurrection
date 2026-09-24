@@ -4426,7 +4426,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4441,10 +4441,10 @@
     "source_file": "src/recovered/fun_00407e70.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407E70",
-    "pr": "",
-    "commit": "",
+    "pr": "#366",
+    "commit": "5facb7947567c2adf2e14e7efdb0bb48574ffee5",
     "test": "tests/unit/test_fun_00407e70.cpp",
     "evidence": "decomp/evidence/fun_00407e70.md",
-    "notes": "18-byte thiscall allocation wrapper: ignores this, forwards requested_size unchanged to FUN_00407A90 with null type/tag, propagates returned pointer; 2 direct calls"
+    "notes": "18-byte thiscall allocation wrapper: ignores this, forwards requested_size unchanged to FUN_00407A90 with null type/tag, propagates returned pointer; 2 direct calls; PR #366 CI 5/5 PASS"
   }
 ]
