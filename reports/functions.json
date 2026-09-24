@@ -4266,7 +4266,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4281,10 +4281,10 @@
     "source_file": "src/recovered/fun_00407cf0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407CF0",
-    "pr": "",
-    "commit": "",
+    "pr": "#349",
+    "commit": "33a111bf082b9d94076ef6d041b9693b314793a7",
     "test": "tests/unit/test_fun_00407cf0.cpp",
     "evidence": "decomp/evidence/fun_00407cf0.md",
-    "notes": "25-byte thiscall refcounted-string wrapper constructor that pre-clears the holder then forwards const char* to FUN_00402360 and returns this; 92 direct calls"
+    "notes": "25-byte thiscall refcounted-string wrapper constructor that pre-clears the holder then forwards const char* to FUN_00402360 and returns this; 92 direct calls; PR #349 CI 5/5 PASS"
   }
 ]
