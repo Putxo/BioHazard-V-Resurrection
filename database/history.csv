@@ -261,3 +261,5 @@ FUN_00407FD0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 108-byte r
 FUN_00407FD0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,959f6e9791f1d5f00ab2a3e6bf0cfd2e7abae09f,coordinator,PR #370 completed 5/5 CI checks
 FUN_00408040,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 34-byte refcounted-string copy-and-append wrapper over recovered FUN_00407FD0
 FUN_00408040,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,34d706481c40922c0995b55fdd0e55b21cb15203,coordinator,PR #373 completed 5/5 CI checks
+FUN_00408070,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 130-byte SSO string erase helper with invalid-position throw count clamp and overlap-safe tail move
+FUN_00408070,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,2715973afadcc465361cc5d30ccec19eeb74988d,coordinator,PR #376 completed 5/5 CI checks
