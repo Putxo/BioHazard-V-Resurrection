@@ -273,3 +273,4 @@ FUN_00408490,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 51-byte st
 FUN_00408490,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,b11a8d66f2e79691c5e7e354e3eca991ceaba76b,coordinator,PR #388 completed 5/5 CI checks
 FUN_004084D0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 50-byte std::logic_error destructor with SSO cleanup deterministic reset and std::exception base teardown
 FUN_004084D0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,96bdb3f346688b119725e0f08537b3f7fd56f459,coordinator,PR #391 completed 5/5 CI checks
+FUN_00408510,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 59-byte SSO C-string constructor with post-init length scan and FUN_004083C0 delegation
