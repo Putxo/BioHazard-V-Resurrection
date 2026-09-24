@@ -270,3 +270,4 @@ FUN_004082E0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,df2e85e173672a55767c006ce8
 FUN_004083C0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 191-byte SSO pointer-length assignment helper with self-alias 82E0 path and 8100-shaped growth dependency
 FUN_004083C0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,efe0ecf765150793bd9eaf90d7df4800e93270fc,coordinator,PR #385 completed 5/5 CI checks
 FUN_00408490,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 51-byte std::logic_error construction layer with base-state init embedded SSO message and full-source 82E0 copy
+FUN_00408490,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,b11a8d66f2e79691c5e7e354e3eca991ceaba76b,coordinator,PR #388 completed 5/5 CI checks
