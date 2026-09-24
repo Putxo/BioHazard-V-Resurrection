@@ -138,3 +138,4 @@ SEQ-00407E10,FUN_00407E10,coordinator,decomp/00407e10-next,sequential decomp of 
 SEQ-00407D10,FUN_00407D10,coordinator,decomp/00407d10-next,sequential decomp of refcounted-string append helper,2026-09-24T01:23:00Z,,,true
 SEQ-00407E70,FUN_00407E70,coordinator,decomp/00407e70-next,sequential decomp of thiscall allocation wrapper over FUN_00407A90,2026-09-24T02:12:00Z,,,true
 SEQ-00407D90,FUN_00407D90,coordinator,decomp/00407d90-next,sequential decomp of refcounted-string copy-then-append wrapper,2026-09-24T01:55:00Z,,,true
+SEQ-00407FD0,FUN_00407FD0,coordinator,decomp/00407fd0-next,sequential decomp of refcounted-string append helper,2026-09-24T02:22:00Z,,,true

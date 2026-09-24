@@ -257,3 +257,5 @@ FUN_00407E70,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 18-byte th
 FUN_00407E70,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,5facb7947567c2adf2e14e7efdb0bb48574ffee5,coordinator,PR #366 completed 5/5 CI checks
 FUN_00407D90,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 47-byte refcounted-string copy-then-append wrapper over FUN_00402360 and FUN_00407D10
 FUN_00407D90,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,1d8fe55d4867b73c39bc04f444a0931588d45fac,coordinator,PR #359 completed 5/5 CI checks
+FUN_00407FD0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 108-byte refcounted-string append helper with temporary construction concatenate and balanced releases
+FUN_00407FD0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,959f6e9791f1d5f00ab2a3e6bf0cfd2e7abae09f,coordinator,PR #370 completed 5/5 CI checks
