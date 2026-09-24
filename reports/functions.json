@@ -4010,7 +4010,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4025,10 +4025,10 @@
     "source_file": "src/recovered/fun_00407b30.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-00407B30",
-    "pr": "",
-    "commit": "",
+    "pr": "#326",
+    "commit": "76d349e06a438ce36a15b80189ec3af4e5059a02",
     "test": "tests/unit/test_fun_00407b30.cpp",
     "evidence": "decomp/evidence/fun_00407b30.md",
-    "notes": "conditional LeaveCriticalSection wrapper over this+4 gated by this+0x1C or global byte 0x016E2090"
+    "notes": "conditional LeaveCriticalSection wrapper over this+4 gated by this+0x1C or global byte 0x016E2090; PR #326 CI 5/5 PASS"
   }
 ]
