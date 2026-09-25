@@ -274,3 +274,6 @@ add_subdirectory(decomp/accessor323d1aab)
 
 # Exact attached EXE: additional guarded stores, initializers and bitfield readers.
 add_subdirectory(decomp/guarded323d1aab)
+
+# Exact attached EXE: conditional projections and I386 source/reference tests.
+add_subdirectory(decomp/projection323d1aab)
