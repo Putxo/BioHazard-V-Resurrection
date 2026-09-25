@@ -1,0 +1,120 @@
+name: Resync FUN_004086A0 publication
+on:
+  push:
+    branches: [publish/004086a0-main]
+    paths: [.github/workflows/resync-004086a0-public.yml]
+permissions:
+  contents: write
+concurrency:
+  group: resync-004086a0-public
+  cancel-in-progress: false
+jobs:
+  resync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Preserve existing publication and merge latest main
+        shell: python
+        run: |
+          from pathlib import Path
+          import csv, json, subprocess
+          original = 'e53be9f64e1e6c9a45163699a22c25ed8357b377'
+          def git(*args):
+              return subprocess.check_output(['git', *args], text=True).strip()
+          def content(ref, path):
+              return subprocess.check_output(['git', 'show', f'{ref}:{path}'], text=True)
+          assert git('rev-parse', 'HEAD^') == original, 'Publication branch moved; inspect before modifying'
+          subprocess.run(['git', 'fetch', 'origin', 'main'], check=True)
+          main = git('rev-parse', 'origin/main')
+          Path('/tmp/86a0-resync-main').write_text(main)
+          assert json.loads(content(main, 'config/inventory_freeze.json'))['function_candidate_denominator'] == 79782
+          additions = {}
+          for path, key, count in [('database/functions.csv', 0, 1), ('database/claims.csv', 1, 1), ('database/history.csv', 0, 2)]:
+              assert not any(next(csv.reader([line]))[key] == 'FUN_004086A0' for line in content(main, path).splitlines()), 'Target already published; inspect rather than duplicate'
+              additions[path] = [line for line in content(original, path).splitlines() if next(csv.reader([line]))[key] == 'FUN_004086A0']
+              assert len(additions[path]) == count
+          files = ['src/recovered/fun_004086a0.cpp', 'include/re5/recovered/fun_004086a0.hpp', 'tests/unit/test_fun_004086a0.cpp', 'decomp/evidence/fun_004086a0.md', 'decomp/evidence/fun_004086a0-resumption.md']
+          original_blobs = {path:git('rev-parse', f'{original}:{path}') for path in files}
+          subprocess.run(['git', 'config', 'user.name', 'github-actions[bot]'], check=True)
+          subprocess.run(['git', 'config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com'], check=True)
+          result = subprocess.run(['git', 'merge', '--no-commit', '--no-ff', main])
+          aggregate = {'README.md', 'CMakeLists.txt', 'tests/unit/test_smoke.cpp', *additions, 'reports/functions.json', 'reports/progress.md', 'reports/progress-treemap.svg'}
+          conflicts = set(git('diff', '--name-only', '--diff-filter=U').splitlines())
+          assert conflicts <= aggregate, f'Unexpected conflicts: {conflicts - aggregate}'
+          assert result.returncode == 0 or conflicts
+          # Preserve every current main aggregate row, including the parallel 8620
+          # publication, and replay only the already-validated 86A0 delta.
+          for path in aggregate:
+              Path(path).write_text(content(main, path))
+          for path, lines in additions.items():
+              text = Path(path).read_text()
+              Path(path).write_text(text.rstrip('\n') + '\n' + '\n'.join(lines) + '\n')
+          for path, pairs in [
+              ('CMakeLists.txt', [
+                  ('    src/recovered/fun_00408640.cpp\n', '    src/recovered/fun_004086a0.cpp\n'),
+                  ('    tests/unit/test_fun_00408640.cpp\n', '    tests/unit/test_fun_004086a0.cpp\n')]),
+              ('tests/unit/test_smoke.cpp', [
+                  ('void test_fun_00408640();\n', 'void test_fun_004086a0();\n'),
+                  ('    test_fun_00408640();\n', '    test_fun_004086a0();\n')]),
+          ]:
+              text = Path(path).read_text()
+              for anchor, added in pairs:
+                  assert text.count(anchor) == 1 and added not in text
+                  text = text.replace(anchor, anchor + added)
+              Path(path).write_text(text)
+          for path, sha in original_blobs.items():
+              assert git('hash-object', path) == sha, f'Original target work changed: {path}'
+          print('Latest main included without overwriting parallel work:', main)
+          print('Original target files preserved byte-for-byte.')
+      - name: Regenerate public dashboard, validate and test
+        run: |
+          python tools/reports/report.py --publish-readme
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Verify only target delta remains
+        shell: python
+        run: |
+          from pathlib import Path
+          import csv, io, re, subprocess
+          def git(*args):
+              return subprocess.check_output(['git', *args], text=True).strip()
+          def before(path):
+              return subprocess.check_output(['git', 'show', f'{base}:{path}'], text=True)
+          base = Path('/tmp/86a0-resync-main').read_text()
+          for path, count in [('database/functions.csv', 1), ('database/claims.csv', 1), ('database/history.csv', 2)]:
+              old = before(path).splitlines()
+              new = Path(path).read_text().splitlines()
+              assert new[:len(old)] == old and len(new) == len(old) + count, f'Parallel rows changed: {path}'
+          assert before('config/inventory_freeze.json') == Path('config/inventory_freeze.json').read_text()
+          strip = lambda text: re.sub(r'<!-- (progress|tiers):start -->.*?<!-- \1:end -->', '', text, flags=re.S)
+          assert strip(before('README.md')) == strip(Path('README.md').read_text())
+          old = list(csv.DictReader(io.StringIO(before('database/functions.csv'))))
+          new = list(csv.DictReader(Path('database/functions.csv').open(newline='')))
+          active = lambda rows: [r for r in rows if r['workflow_status'] != 'UNSEEN']
+          old, new = active(old), active(new)
+          size = lambda rows: sum(int(r['size'], 0) for r in rows if r['size'])
+          fast = lambda rows: sum(r['fast_pass'] == 'true' for r in rows)
+          assert len(new) == len(old) + 1 and size(new) == size(old) + 18 and fast(new) == fast(old) + 1
+          Path('.github/workflows/resync-004086a0-public.yml').unlink()
+          subprocess.run(['git', 'add', '-u'], check=True)
+          subprocess.run(['git', 'diff', '--cached', '--check'], check=True)
+          allowed = {'README.md', 'CMakeLists.txt', 'tests/unit/test_smoke.cpp', 'database/functions.csv', 'database/claims.csv', 'database/history.csv', 'reports/functions.json', 'reports/progress.md', 'reports/progress-treemap.svg', 'src/recovered/fun_004086a0.cpp', 'include/re5/recovered/fun_004086a0.hpp', 'tests/unit/test_fun_004086a0.cpp', 'decomp/evidence/fun_004086a0.md', 'decomp/evidence/fun_004086a0-resumption.md'}
+          changed = set(git('diff', '--cached', '--name-only', base).splitlines())
+          assert changed <= allowed, changed - allowed
+          assert not any(p.lower().endswith(('.exe', '.dll', '.obj')) for p in git('ls-files').splitlines())
+          subprocess.run(['git', 'fetch', 'origin', 'main'], check=True)
+          assert git('rev-parse', 'origin/main') == base, 'Main advanced again; inspect and resynchronize'
+          print('Resynchronized dashboard:', len(new), '/ 79782 functions;', size(new), '/ 15568343 bytes;', fast(new), '/ 79782 FAST PASS')
+          print('Current main preserved; target-only incremental publication: PASS')
+      - name: Commit resynchronization and fast-forward-only push
+        run: |
+          git commit -m 'Resynchronize FUN_004086A0 publication with parallel main advance'
+          git push origin HEAD:refs/heads/publish/004086a0-main
