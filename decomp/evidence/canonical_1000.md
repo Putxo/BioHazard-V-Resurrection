@@ -1,0 +1,7 @@
+# Canonical 1,000 milestone
+
+This milestone registers 800 **existing** `leaf323d1aab` C++ functions on top of the official 200-entry registry; it does not duplicate their implementations. Selection is fixed by `canonical_1000_selected.csv` and contains only starts that were locally rechecked against the single attached PE32 target SHA-256 `323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815`.
+
+All 800 are members of the reproduced frozen V6 79,782-address universe (sorted-u32le SHA-256 `a7fc3ad913d379f488b8de0a097a6cad290c41fe3cee921f39e3512dee3a4a25`), absent from the prior 200 canonical rows, and matched byte-for-byte when their existing C++ was compiled to Windows I386 with the locally recorded compiler. The selected set covers 4,812 original instruction bytes: 722 constant returns, 69 DWORD loads, 6 receiver-relative address returns and 3 WORD loads. The historical candidate CSV bytes are unavailable; only the reproducible address-set identity is claimed.
+
+Local revalidation passed the complete 7,171-body leaf test suite with GCC Release and Clang ASan/UBSan, exact-source restoration against the attached EXE, and a focused 800/800 COFF body comparison. CI rechecks registry bindings, all existing leaf tests through the established leaf workflow, and the focused 800-body Windows-I386 comparison. No EXE, assets, generated objects or reference binaries are committed. No whole-game linkage or higher semantic tier is implied by this registration.
