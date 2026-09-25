@@ -4970,7 +4970,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -4985,10 +4985,10 @@
     "source_file": "src/recovered/fun_004086a0.cpp",
     "owner": "coordinator",
     "claim_id": "SEQ-004086A0",
-    "pr": "",
-    "commit": "",
+    "pr": "#416",
+    "commit": "78add9e2826b252a59ea87fd2d8d3637c6f58b17",
     "test": "tests/unit/test_fun_004086a0.cpp",
     "evidence": "decomp/evidence/fun_004086a0.md",
-    "notes": "18-byte thiscall derived constructor for exact 0x1C object: transitively reconstructs base 0x00A712D0 state, preserves +0x14, installs vtable 0x0137E458 and returns this; 1 direct call"
+    "notes": "18-byte thiscall derived constructor for exact 0x1C object: transitively reconstructs base 0x00A712D0 state, preserves +0x14, installs vtable 0x0137E458 and returns this; 1 direct call; PR #416 CI 5/5 PASS"
   }
 ]
