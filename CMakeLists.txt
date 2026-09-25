@@ -277,3 +277,6 @@ add_subdirectory(decomp/guarded323d1aab)
 
 # Exact attached EXE: conditional projections and I386 source/reference tests.
 add_subdirectory(decomp/projection323d1aab)
+
+# Exact attached EXE: sequence and linked-list loops with native I386 fixtures.
+add_subdirectory(decomp/sequence323d1aab)

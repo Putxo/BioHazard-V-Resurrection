@@ -1,0 +1,95 @@
+{
+  "target_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "target_size": 19977216,
+  "utc": "2026-09-25T19:54:39.365656+00:00",
+  "bodies": 42,
+  "instruction_bytes": 2096,
+  "families": {
+    "AT": 2,
+    "TAIL": 2,
+    "COUNT": 5,
+    "PROPAGATE": 4,
+    "FIXED_STORE": 3,
+    "FIND_NODE": 2,
+    "PREVIOUS": 2,
+    "SUM": 3,
+    "ZERO_COUNT": 3,
+    "CLEAR": 13,
+    "FIND_KEY": 3
+  },
+  "original_input_and_ranges": "PASS",
+  "verified_call_sites": 173,
+  "starts_with_direct_calls": 20,
+  "llvm_i386_instructions": 765,
+  "gcc_ctest": {
+    "passed": 3,
+    "total": 3,
+    "property_checks": 773460,
+    "guard_and_fixture_checks": 748
+  },
+  "clang_asan_ubsan_ctest": {
+    "passed": 3,
+    "total": 3,
+    "property_checks": 773460,
+    "guard_and_fixture_checks": 748
+  },
+  "negative_controls_rejected": {
+    "suppress_original_missing_key_write": {
+      "returncode": 1,
+      "stdout": "FAIL FUN_00C16DC0 check 662837",
+      "stderr": ""
+    },
+    "off_by_one_linked_index": {
+      "returncode": 1,
+      "stdout": "FAIL FUN_0046D230 check 14",
+      "stderr": ""
+    },
+    "unsigned_signed_count": {
+      "returncode": -11,
+      "stdout": "",
+      "stderr": ""
+    },
+    "cache_mutable_propagation_table": {
+      "returncode": 1,
+      "stdout": "FAIL FUN_00573470 check 154300",
+      "stderr": ""
+    },
+    "reread_captured_propagation_count": {
+      "returncode": -11,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "coff": {
+    "machine": "I386",
+    "named_definitions": 42,
+    "exact_bodies": 0,
+    "exact_instruction_bytes": 0,
+    "object_sha256": "28e046d648134680edc5282f7f73c39f9821fb02eb64e3fe81f26cfe2b69dd68",
+    "game_linked": false
+  },
+  "elf32_builds": [
+    "GCC",
+    "Clang"
+  ],
+  "native_i386_local_execution": false,
+  "native_i386_local_reason": "ELF32 execution rejected with ENOEXEC; check native CI jobs independently.",
+  "game_linked": false,
+  "canonical_membership_verified": false,
+  "canonical_denominator": 79782,
+  "canonical_tiers_changed": false,
+  "files_sha256": {
+    ".gitignore": "2cbf1db2ba01d2079415de224c82287e3022193406d0a258cdbbaf37bb71b552",
+    "CMakeLists.txt": "2459ebbb2110639636c95b3b920132fb6ecc051323aaaa7fe46b36161aa068e2",
+    "README.md": "84354636e962dca48c5a9dff8c167f68db6eb4ac29cff7402891eb98cd49a7bd",
+    "call-sites.csv": "365ad1118ca3c80dad4a62ae14583dd6e8235ffdf89e4c6fc50c93e5ce14dfca",
+    "include/records.inc": "cda7863fb966368067d431d0787a2763be91d4ea046f65ac3f41469254773470",
+    "include/sequences.hpp": "0ddb7eecb7863af233c2ef3434183391893da2bec79684074b69b753373f1ec9",
+    "records.csv": "1a1a38167948b04b8cc60e15a43f41ee3e4f7e4286e214ce5e75de911f5d21e4",
+    "src/sequences.cpp": "7b6d6ca93983c065196bde7a219ffa9007334fcb4ad3e71821aa00e78463694f",
+    "tests/test_sequences.cpp": "90aece0e6aa7a490c14312e005f6320dfb6647eb969f84bdc6568e9ba5b3d625",
+    "tools/check_coff.py": "8c70b05c9c8bd9d6c9089413cb70a03122e3fbd2677340865955a4a87594481e",
+    "tools/run_i386.py": "278f62da471dc7fee4cb48cdb1879511b8dda03c235d31a013f72905bd3593d3",
+    "tools/verify.py": "3c838f126bb9bbff3044eef3951c1b6a7822002dbf3bf2c441d133de6f889bf3"
+  }
+}
