@@ -5002,7 +5002,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5017,11 +5017,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408B50",
-    "pr": "",
-    "commit": "",
+    "pr": "#427",
+    "commit": "a647953dcee8fe276595c13cce1136f91cda70ef",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "conditionally cancels old nonnegative handle; queries mode; stores 0x9D/0x9E and submits; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "conditionally cancels old nonnegative handle; queries mode; stores 0x9D/0x9E and submits; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; PR #427 standard CI 5/5 and batch GCC/Clang PASS on a4526a1d1bbbafaef345f514b7e1c8c0ecb9a4f7"
   },
   {
     "stable_id": "FUN_00408B90",
@@ -5034,7 +5034,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5049,11 +5049,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408B90",
-    "pr": "",
-    "commit": "",
+    "pr": "#427",
+    "commit": "a647953dcee8fe276595c13cce1136f91cda70ef",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "negative handle early true; status 2 true; status 0 clears to -1; other statuses false; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "negative handle early true; status 2 true; status 0 clears to -1; other statuses false; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; PR #427 standard CI 5/5 and batch GCC/Clang PASS on a4526a1d1bbbafaef345f514b7e1c8c0ecb9a4f7"
   },
   {
     "stable_id": "FUN_00408BC0",
@@ -5066,7 +5066,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5081,11 +5081,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408BC0",
-    "pr": "",
-    "commit": "",
+    "pr": "#427",
+    "commit": "a647953dcee8fe276595c13cce1136f91cda70ef",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "forwards stop request only for a nonnegative handle; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "forwards stop request only for a nonnegative handle; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; PR #427 standard CI 5/5 and batch GCC/Clang PASS on a4526a1d1bbbafaef345f514b7e1c8c0ecb9a4f7"
   },
   {
     "stable_id": "FUN_00408BE0",
@@ -5098,7 +5098,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5113,11 +5113,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408BE0",
-    "pr": "",
-    "commit": "",
+    "pr": "#427",
+    "commit": "a647953dcee8fe276595c13cce1136f91cda70ef",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "stop then cancel with post-callback handle/singleton reload; clears to -1 after cancellation; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "stop then cancel with post-callback handle/singleton reload; clears to -1 after cancellation; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; PR #427 standard CI 5/5 and batch GCC/Clang PASS on a4526a1d1bbbafaef345f514b7e1c8c0ecb9a4f7"
   },
   {
     "stable_id": "FUN_00408C10",
@@ -5130,7 +5130,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5145,11 +5145,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408C10",
-    "pr": "",
-    "commit": "",
+    "pr": "#427",
+    "commit": "a647953dcee8fe276595c13cce1136f91cda70ef",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "submits selector 0x98 and original receiver; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "submits selector 0x98 and original receiver; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; PR #427 standard CI 5/5 and batch GCC/Clang PASS on a4526a1d1bbbafaef345f514b7e1c8c0ecb9a4f7"
   },
   {
     "stable_id": "FUN_00408C30",
@@ -5162,7 +5162,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5177,11 +5177,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408C30",
-    "pr": "",
-    "commit": "",
+    "pr": "#427",
+    "commit": "a647953dcee8fe276595c13cce1136f91cda70ef",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "submits selector 0x99 and original receiver; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "submits selector 0x99 and original receiver; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; PR #427 standard CI 5/5 and batch GCC/Clang PASS on a4526a1d1bbbafaef345f514b7e1c8c0ecb9a4f7"
   },
   {
     "stable_id": "FUN_00408C50",
@@ -5194,7 +5194,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5209,11 +5209,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408C50",
-    "pr": "",
-    "commit": "",
+    "pr": "#427",
+    "commit": "a647953dcee8fe276595c13cce1136f91cda70ef",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "submits selector 0xA2 and original receiver; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "submits selector 0xA2 and original receiver; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; PR #427 standard CI 5/5 and batch GCC/Clang PASS on a4526a1d1bbbafaef345f514b7e1c8c0ecb9a4f7"
   },
   {
     "stable_id": "FUN_00408C70",
@@ -5226,7 +5226,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5241,11 +5241,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408C70",
-    "pr": "",
-    "commit": "",
+    "pr": "#427",
+    "commit": "a647953dcee8fe276595c13cce1136f91cda70ef",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "reads root+0x1E4EC node+0x58; selects 0xA0 for mode 2 or 0xD1; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "reads root+0x1E4EC node+0x58; selects 0xA0 for mode 2 or 0xD1; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; PR #427 standard CI 5/5 and batch GCC/Clang PASS on a4526a1d1bbbafaef345f514b7e1c8c0ecb9a4f7"
   },
   {
     "stable_id": "FUN_00408CA0",
@@ -5258,7 +5258,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5273,11 +5273,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408CA0",
-    "pr": "",
-    "commit": "",
+    "pr": "#427",
+    "commit": "a647953dcee8fe276595c13cce1136f91cda70ef",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "reads root+0x1E4EC node+0x58; selects 0xCD for mode 3 or 0xCF; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "reads root+0x1E4EC node+0x58; selects 0xCD for mode 3 or 0xCF; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; PR #427 standard CI 5/5 and batch GCC/Clang PASS on a4526a1d1bbbafaef345f514b7e1c8c0ecb9a4f7"
   },
   {
     "stable_id": "FUN_00408CD0",
@@ -5290,7 +5290,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5305,11 +5305,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408CD0",
-    "pr": "",
-    "commit": "",
+    "pr": "#427",
+    "commit": "a647953dcee8fe276595c13cce1136f91cda70ef",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "inverts low argument byte only and submits selector 1 or 0; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "inverts low argument byte only and submits selector 1 or 0; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; PR #427 standard CI 5/5 and batch GCC/Clang PASS on a4526a1d1bbbafaef345f514b7e1c8c0ecb9a4f7"
   },
   {
     "stable_id": "FUN_00408CF0",
@@ -5322,7 +5322,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5337,11 +5337,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408CF0",
-    "pr": "",
-    "commit": "",
+    "pr": "#427",
+    "commit": "a647953dcee8fe276595c13cce1136f91cda70ef",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "normalizes full argument word; four ordered resource load/deliver/release paths with independent null guards; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "normalizes full argument word; four ordered resource load/deliver/release paths with independent null guards; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; PR #427 standard CI 5/5 and batch GCC/Clang PASS on a4526a1d1bbbafaef345f514b7e1c8c0ecb9a4f7"
   },
   {
     "stable_id": "FUN_00408DD0",
@@ -5354,7 +5354,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5369,11 +5369,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408DD0",
-    "pr": "",
-    "commit": "",
+    "pr": "#427",
+    "commit": "a647953dcee8fe276595c13cce1136f91cda70ef",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "calls recovered 00408CF0 with zero variant; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "calls recovered 00408CF0 with zero variant; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; PR #427 standard CI 5/5 and batch GCC/Clang PASS on a4526a1d1bbbafaef345f514b7e1c8c0ecb9a4f7"
   },
   {
     "stable_id": "FUN_00408DE0",
@@ -5386,7 +5386,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5401,11 +5401,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408DE0",
-    "pr": "",
-    "commit": "",
+    "pr": "#427",
+    "commit": "a647953dcee8fe276595c13cce1136f91cda70ef",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "base constructor first; clears +0x28/+0x30; installs 0x0137E4A8 and returns self; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "base constructor first; clears +0x28/+0x30; installs 0x0137E4A8 and returns self; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; PR #427 standard CI 5/5 and batch GCC/Clang PASS on a4526a1d1bbbafaef345f514b7e1c8c0ecb9a4f7"
   },
   {
     "stable_id": "FUN_00408E00",
@@ -5418,7 +5418,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5433,10 +5433,10 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408E00",
-    "pr": "",
-    "commit": "",
+    "pr": "#427",
+    "commit": "a647953dcee8fe276595c13cce1136f91cda70ef",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "installs 0x0137A990; DeleteCriticalSection(this+8); installs 0x0137A97C; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "installs 0x0137A990; DeleteCriticalSection(this+8); installs 0x0137A97C; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; PR #427 standard CI 5/5 and batch GCC/Clang PASS on a4526a1d1bbbafaef345f514b7e1c8c0ecb9a4f7"
   }
 ]
