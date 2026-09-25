@@ -1,0 +1,66 @@
+name: prepare-promote-batch-00408b50
+on:
+  push:
+    branches: [promote/batch-00408b50-fastpass]
+    paths: [.github/workflows/prepare-promote-batch-00408b50.yml]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: promote/batch-00408b50-fastpass
+          fetch-depth: 0
+      - name: Check exact successful recovery head and merge
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json,os,urllib.request
+          base='https://api.github.com/repos/Putxo/BioHazard-V-Resurrection/'
+          def get(path):
+              req=urllib.request.Request(base+path,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
+              return json.load(urllib.request.urlopen(req))
+          pr=get('pulls/427')
+          assert pr['merged'] and pr['head']['sha']=='a4526a1d1bbbafaef345f514b7e1c8c0ecb9a4f7' and pr['merge_commit_sha']=='a647953dcee8fe276595c13cce1136f91cda70ef'
+          runs=get('actions/runs?event=pull_request&head_sha='+pr['head']['sha']+'&per_page=100')['workflow_runs']
+          required={'build','validate-binaries','validate-claims','validate-metadata','validate-progress','verify-attachment-323d1aab','verify-batch-00408b50'}
+          seen={}
+          for run in runs:
+              if run['name'] in required and run['name'] not in seen: seen[run['name']]=run
+          assert set(seen)==required and all(r['status']=='completed' and r['conclusion']=='success' for r in seen.values())
+          print('Actual recovery CI and merge verified:', sorted(seen))
+          PY
+      - name: Promote only the recovered batch and validate
+        run: |
+          python tools/maintenance/batch_00408b50.py promote --recovery-pr 427 --recovery-head a4526a1d1bbbafaef345f514b7e1c8c0ecb9a4f7 --recovery-merge a647953dcee8fe276595c13cce1136f91cda70ef
+          cmake --preset dev
+          cmake --build --preset dev --parallel 2
+          ctest --preset dev
+          git add database/functions.csv database/history.csv reports
+          git diff --cached --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Promote only 14 batch functions after PR 427 CI success'
+          git push origin HEAD:promote/batch-00408b50-fastpass
+  public-analysis-tool:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Fetch the pinned official analysis tool, never a game binary
+        run: |
+          mkdir -p /tmp/ghidra-official
+          curl --fail --location --retry 2 https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.1.4_build/ghidra_12.1.4_PUBLIC_20260921.zip -o /tmp/ghidra-official/ghidra_12.1.4_PUBLIC_20260921.zip
+          cd /tmp/ghidra-official
+          echo 'ddac49f903da9d5bac833e5cc79395098b9c33cfd3279be5f31bd00387d2d4db  ghidra_12.1.4_PUBLIC_20260921.zip' | sha256sum --check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ghidra-12.1.4-official-local-analysis
+          path: /tmp/ghidra-official/
+          compression-level: 0
+          retention-days: 1
+          if-no-files-found: error
