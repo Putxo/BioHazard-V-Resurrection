@@ -291,3 +291,17 @@ FUN_00408640,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,ed3042e74e05569b8a50fb1115
 FUN_00408620,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,4649170e7bee74ff04a8ee003a2381441e1315bb,coordinator,PR #418 completed 5/5 CI checks
 FUN_004086A0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 18-byte thiscall derived constructor including transitive 0x00A712D0 base state and final vtable 0x0137E458
 FUN_004086A0,2026-09-25,FAST_PASS,FAST_PASS_VALIDATED,78add9e2826b252a59ea87fd2d8d3637c6f58b17,coordinator,PR #416 completed build and all four validators: CI 5/5 PASS on 520d3e4e8fad6fc1e0c009b31ab8e4bdc5220d34
+FUN_00408B50,2026-09-25,UNSEEN,FAST_PASS,,coordinator,Exact local attachment body reconstructed; target-memory adapter and bounded differential validation; no native ABI or dependency verification claim
+FUN_00408B90,2026-09-25,UNSEEN,FAST_PASS,,coordinator,Exact local attachment body reconstructed; target-memory adapter and bounded differential validation; no native ABI or dependency verification claim
+FUN_00408BC0,2026-09-25,UNSEEN,FAST_PASS,,coordinator,Exact local attachment body reconstructed; target-memory adapter and bounded differential validation; no native ABI or dependency verification claim
+FUN_00408BE0,2026-09-25,UNSEEN,FAST_PASS,,coordinator,Exact local attachment body reconstructed; target-memory adapter and bounded differential validation; no native ABI or dependency verification claim
+FUN_00408C10,2026-09-25,UNSEEN,FAST_PASS,,coordinator,Exact local attachment body reconstructed; target-memory adapter and bounded differential validation; no native ABI or dependency verification claim
+FUN_00408C30,2026-09-25,UNSEEN,FAST_PASS,,coordinator,Exact local attachment body reconstructed; target-memory adapter and bounded differential validation; no native ABI or dependency verification claim
+FUN_00408C50,2026-09-25,UNSEEN,FAST_PASS,,coordinator,Exact local attachment body reconstructed; target-memory adapter and bounded differential validation; no native ABI or dependency verification claim
+FUN_00408C70,2026-09-25,UNSEEN,FAST_PASS,,coordinator,Exact local attachment body reconstructed; target-memory adapter and bounded differential validation; no native ABI or dependency verification claim
+FUN_00408CA0,2026-09-25,UNSEEN,FAST_PASS,,coordinator,Exact local attachment body reconstructed; target-memory adapter and bounded differential validation; no native ABI or dependency verification claim
+FUN_00408CD0,2026-09-25,UNSEEN,FAST_PASS,,coordinator,Exact local attachment body reconstructed; target-memory adapter and bounded differential validation; no native ABI or dependency verification claim
+FUN_00408CF0,2026-09-25,UNSEEN,FAST_PASS,,coordinator,Exact local attachment body reconstructed; target-memory adapter and bounded differential validation; no native ABI or dependency verification claim
+FUN_00408DD0,2026-09-25,UNSEEN,FAST_PASS,,coordinator,Exact local attachment body reconstructed; target-memory adapter and bounded differential validation; no native ABI or dependency verification claim
+FUN_00408DE0,2026-09-25,UNSEEN,FAST_PASS,,coordinator,Exact local attachment body reconstructed; target-memory adapter and bounded differential validation; no native ABI or dependency verification claim
+FUN_00408E00,2026-09-25,UNSEEN,FAST_PASS,,coordinator,Exact local attachment body reconstructed; target-memory adapter and bounded differential validation; no native ABI or dependency verification claim
