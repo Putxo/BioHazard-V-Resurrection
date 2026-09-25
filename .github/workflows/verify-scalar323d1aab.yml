@@ -1,0 +1,46 @@
+name: verify-scalar323d1aab
+on:
+  pull_request:
+    branches: [main, integration]
+  push:
+    branches: [main, integration]
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  scalar-source:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang-sanitized]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure GCC
+        if: matrix.compiler == 'gcc'
+        run: cmake -S decomp/scalar323d1aab -B build-scalars -DCMAKE_BUILD_TYPE=Release
+      - name: Configure Clang with sanitizers
+        if: matrix.compiler == 'clang-sanitized'
+        run: >-
+          cmake -S decomp/scalar323d1aab -B build-scalars
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_COMPILER=clang++
+          "-DCMAKE_CXX_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer"
+          "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined"
+      - name: Build and test source with synthetic data
+        run: |
+          cmake --build build-scalars --parallel 2
+          ctest --test-dir build-scalars --output-on-failure
+      - name: Compile all implementation units for Windows x86 (not linked or executed)
+        if: matrix.compiler == 'clang-sanitized'
+        shell: bash
+        run: |
+          mkdir -p build-scalars/coff
+          for source in decomp/scalar323d1aab/generated/src/scalars_*.cpp; do
+            clang++ --target=i686-pc-windows-msvc -std=c++17 -O2 -ffreestanding \
+              -fno-exceptions -fno-rtti -Wall -Wextra -Wpedantic -Werror \
+              -Idecomp/scalar323d1aab/generated/include -c "$source" \
+              -o "build-scalars/coff/$(basename "$source" .cpp).obj"
+          done
+# No original executable, game data or object files are uploaded by this workflow.
