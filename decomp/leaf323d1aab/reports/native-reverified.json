@@ -1,0 +1,16 @@
+{
+  "test": "original_fragment_comparison",
+  "routines": 7171,
+  "checks": 4967895,
+  "guarded_load_routines": 598,
+  "execution_mode": "x86-64 compatible fragments with low32 data",
+  "ia32_process_executed": false,
+  "game_executed": false,
+  "status": "PASS",
+  "input_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "input_size": 19977216,
+  "range_hashes_verified": 7171,
+  "original_pe_launched": false,
+  "full_ia32_abi_verified": false,
+  "proprietary_input_uploaded": false
+}
