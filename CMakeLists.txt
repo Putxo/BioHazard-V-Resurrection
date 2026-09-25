@@ -262,3 +262,5 @@ add_test(NAME smoke COMMAND re5_tests)
 add_custom_target(metadata_tests
     COMMAND ${CMAKE_COMMAND} -E echo "Metadata tests are executed by Python validation tooling"
 )
+
+include(cmake/recovery_batch_00408b50.cmake)

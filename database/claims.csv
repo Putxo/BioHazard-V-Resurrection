@@ -155,3 +155,17 @@ SEQ-00408620,FUN_00408620,coordinator,decomp/00408620-final,sequential decomp of
 SEQ-00408630,FUN_00408630,coordinator,decomp/00408630-next,sequential decomp of fixed-global pointer getter,2026-09-24T19:08:00Z,,,true
 SEQ-00408640,FUN_00408640,coordinator,decomp/00408640-next,sequential decomp of 8-byte object constructor,2026-09-24T19:06:00Z,,,true
 SEQ-004086A0,FUN_004086A0,coordinator,decomp/004086a0-next,sequential decomp of exact 0x1C base-constructor plus derived-vtable wrapper,2026-09-24T19:06:00Z,,,true
+EXACT-BATCH-00408B50,FUN_00408B50,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
+EXACT-BATCH-00408B90,FUN_00408B90,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
+EXACT-BATCH-00408BC0,FUN_00408BC0,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
+EXACT-BATCH-00408BE0,FUN_00408BE0,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
+EXACT-BATCH-00408C10,FUN_00408C10,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
+EXACT-BATCH-00408C30,FUN_00408C30,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
+EXACT-BATCH-00408C50,FUN_00408C50,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
+EXACT-BATCH-00408C70,FUN_00408C70,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
+EXACT-BATCH-00408CA0,FUN_00408CA0,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
+EXACT-BATCH-00408CD0,FUN_00408CD0,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
+EXACT-BATCH-00408CF0,FUN_00408CF0,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
+EXACT-BATCH-00408DD0,FUN_00408DD0,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
+EXACT-BATCH-00408DE0,FUN_00408DE0,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
+EXACT-BATCH-00408E00,FUN_00408E00,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
