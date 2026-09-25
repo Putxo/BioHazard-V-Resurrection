@@ -1,0 +1,35 @@
+name: verify-batch-00408b50
+on:
+  pull_request:
+    branches: [main, integration]
+  push:
+    branches: [main, integration]
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  batch:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang-sanitized]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify source identity and interpreter safety tests
+        run: python tools/verification/test_batch_00408b50_tools.py
+      - name: GCC strict build and tests
+        if: matrix.compiler == 'gcc'
+        run: |
+          g++ -std=c++20 -O2 -Wall -Wextra -Wpedantic -Werror -Iinclude src/recovered/batch_00408b50.cpp tests/unit/test_batch_00408b50.cpp -o /tmp/re5-batch-test
+          /tmp/re5-batch-test
+      - name: Clang ASan/UBSan build and tests
+        if: matrix.compiler == 'clang-sanitized'
+        run: |
+          clang++ -std=c++20 -O1 -Wall -Wextra -Wpedantic -Werror -fsanitize=address,undefined -fno-omit-frame-pointer -Iinclude src/recovered/batch_00408b50.cpp tests/unit/test_batch_00408b50.cpp -o /tmp/re5-batch-test
+          /tmp/re5-batch-test
+      - name: Windows x86 object compilation only
+        if: matrix.compiler == 'clang-sanitized'
+        run: clang++ --target=i686-pc-windows-msvc -std=c++20 -Wall -Wextra -Wpedantic -Werror -Iinclude -c src/recovered/batch_00408b50.cpp -o /tmp/re5-batch.obj
