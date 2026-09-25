@@ -36,8 +36,11 @@ jobs:
           }
           for p,h in expected.items():
             assert hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()==h,p
-          changed=set(out('git','diff','--name-only').splitlines())
-          assert changed<=set(expected) and {'database/functions.csv','database/history.csv','reports/functions.json','reports/progress-treemap.svg','decomp/evidence/canonical_1000_promotion.json'}<=changed,changed
+          tracked=set(filter(None,out('git','diff','--name-only').splitlines()))
+          untracked=set(filter(None,out('git','ls-files','--others','--exclude-standard').splitlines()))
+          changed=tracked|untracked
+          required={'database/functions.csv','database/history.csv','reports/functions.json','reports/progress-treemap.svg','decomp/evidence/canonical_1000_promotion.json'}
+          assert changed<=set(expected) and required<=changed,changed
           run('git','rm','.github/workflows/materialize-canonical-1000-promotion.yml')
           run('git','diff','--check')
           run('git','config','user.name','github-actions[bot]')
