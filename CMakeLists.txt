@@ -286,3 +286,7 @@ add_subdirectory(decomp/mutator323d1aab)
 
 # Exact attached EXE: bit-preserving transfers and captured output pairs.
 add_subdirectory(decomp/transfer323d1aab)
+
+include(cmake/recovery_batch_00408b50.cmake)
+
+include(cmake/canonical_200.cmake)
