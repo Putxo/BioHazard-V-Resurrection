@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+build*/
+*.exe
+*.dll
+*.obj
+*.o
+*.a
+*.lib
+*.pdb
+*.bin

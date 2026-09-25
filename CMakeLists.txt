@@ -264,3 +264,6 @@ add_custom_target(metadata_tests
 )
 
 include(cmake/recovery_batch_00408b50.cmake)
+
+# Exact attached EXE: independently recovered leaf C++ and tests.
+add_subdirectory(decomp/leaf323d1aab)

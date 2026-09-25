@@ -1,0 +1,304 @@
+{
+  "test": "windows_i386_coff_body_comparison",
+  "input_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "compiler": "clang version 17.0.0 (https://github.com/swiftlang/llvm-project.git 10999b6d034fe318f3d56c83bddb6572593a8bb0)",
+  "compile_options": [
+    "--target=i686-pc-windows-msvc",
+    "-std=c++17",
+    "-O2",
+    "-ffreestanding",
+    "-fno-exceptions",
+    "-fno-rtti",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror",
+    "-Igenerated/include"
+  ],
+  "compiled_functions": 7171,
+  "exact_body_matches": 7013,
+  "exact_body_bytes": 42259,
+  "padding_included": false,
+  "game_linked": false,
+  "game_executed": false,
+  "canonical_matched_tier_changed": false,
+  "objects": [
+    {
+      "name": "leaves_000.obj",
+      "sha256": "ce42140a92d5f984c19ef5f8fa45eee97f3e5c6c90360164ba38d251030f7a1a"
+    },
+    {
+      "name": "leaves_001.obj",
+      "sha256": "19d0776d1200a2f4e0cc1964d36f7d29c491e704e16a2160218f9b39d5bced87"
+    },
+    {
+      "name": "leaves_002.obj",
+      "sha256": "1a6f3c76be5caf1c879f584c5c66c51d8bc7810c3c0d17adb49712ba632fb957"
+    },
+    {
+      "name": "leaves_003.obj",
+      "sha256": "15bb4a80ce3b29441e003d4b8cee9728829556cccece0f63359ac462c9cc4f39"
+    },
+    {
+      "name": "leaves_004.obj",
+      "sha256": "e3574bd31b5340ef04ffb0e38c4f2fd6d7423a37b4fdaeebd6a67adf1f446210"
+    },
+    {
+      "name": "leaves_005.obj",
+      "sha256": "eaee1b50c8e87537c411e1381503fce140c11c47afc5ed3faef5883002667e81"
+    },
+    {
+      "name": "leaves_006.obj",
+      "sha256": "7cd803f98db270548163676f0bb1c2b088f97586e611813a3f21162f7b5b83d9"
+    },
+    {
+      "name": "leaves_007.obj",
+      "sha256": "e91664e2417d1bbfd8b7ccfc97e87a4085c612f948ace4e74455b1fe20207f3d"
+    },
+    {
+      "name": "leaves_008.obj",
+      "sha256": "406e66e1ea0e23fb055132e338a9e0aacabe5706810646577b4aef2c20a4da14"
+    },
+    {
+      "name": "leaves_009.obj",
+      "sha256": "1cb04ca5424c27d9adb24833a1fc0f52c889e521ede641246961d77f6d4d078d"
+    },
+    {
+      "name": "leaves_010.obj",
+      "sha256": "63d4e0c5013e686b02f7188cedcd428ceb341952731c4284c9b1389caaaac4eb"
+    },
+    {
+      "name": "leaves_011.obj",
+      "sha256": "a49095930a0f1559394d677ff258dd391ac64158f6e87dd834d445d759896c35"
+    },
+    {
+      "name": "leaves_012.obj",
+      "sha256": "c5597262d2b84f53599500a1dd7049a46835eb158894346c007d9c7ebc42946a"
+    },
+    {
+      "name": "leaves_013.obj",
+      "sha256": "8e58c489ae3062d205f04751968864d72a0677003cf1a132d07a665ff5707a2d"
+    },
+    {
+      "name": "leaves_014.obj",
+      "sha256": "ddd73c2e3cd97863e4fbe7cc7d5f092a462f2412f877acd6c3bd015c511c1ace"
+    },
+    {
+      "name": "leaves_015.obj",
+      "sha256": "9bc0e15f2ad70dc2b5ca5a83789d6cb19083a05c10e8b3aa8bc58116b9202f59"
+    },
+    {
+      "name": "leaves_016.obj",
+      "sha256": "3dc7aaf5991a05d4cb7bf30a93d0421782826d874b816f9f230604287ca1f4f2"
+    },
+    {
+      "name": "leaves_017.obj",
+      "sha256": "fa65857660e9a6f8b4289bf69bf22a52af9a8969c87e9603acb518f8cf5379d3"
+    },
+    {
+      "name": "leaves_018.obj",
+      "sha256": "16a2f1aeace31313f0d05c2059e3ff02bcc6666a8e343346ad8e9e143f776908"
+    },
+    {
+      "name": "leaves_019.obj",
+      "sha256": "ac534f289aa08fae520dc1b25dc083516bdb1ac73477d5116f568d83ec7f5b58"
+    },
+    {
+      "name": "leaves_020.obj",
+      "sha256": "33a7fd8ffcbb8f3f6fd5f9dd3105dc98e04250bcdbd9587a0ab2c307b2a012e2"
+    },
+    {
+      "name": "leaves_021.obj",
+      "sha256": "6eaae6b1d30d1f2205b3feaf35543a53050fd37198aff317391b18e209fde390"
+    },
+    {
+      "name": "leaves_022.obj",
+      "sha256": "c599551144e8115c6018dd3e382de338f13fa91658f75462cdc6d095492ff4ca"
+    },
+    {
+      "name": "leaves_023.obj",
+      "sha256": "52985345f4ae9e156dee06c8b647c5452fa56b293bf9f7ab74bee3e4dda7c0ee"
+    },
+    {
+      "name": "leaves_024.obj",
+      "sha256": "f5ca567caf14fed0aa4620653f9efd9566cf29c0904b989ce7718e3807c28793"
+    },
+    {
+      "name": "leaves_025.obj",
+      "sha256": "f25a14d97e0f680ba2356f7e2713479df4a554448f99bedfa87e68cf8bf87eda"
+    },
+    {
+      "name": "leaves_026.obj",
+      "sha256": "c8cdc89e1dbaf6b10dd6edeabda1d41275413934c0dab9a6cc3f58ca854d9033"
+    },
+    {
+      "name": "leaves_027.obj",
+      "sha256": "a4143b10396bb2ef58f334b41207c8aff9c473be33d9ec44fd8c43a9fbee5f73"
+    },
+    {
+      "name": "leaves_028.obj",
+      "sha256": "530c09dc72b59a6ab06ba2a29af9baa045b00a612ac7b89636283b9824cef0ba"
+    }
+  ],
+  "nonmatching_symbols": [
+    "FUN_004A3FB0",
+    "FUN_004A66A0",
+    "FUN_004C5D50",
+    "FUN_0052FF00",
+    "FUN_0052FFE0",
+    "FUN_00531850",
+    "FUN_00534030",
+    "FUN_005453E0",
+    "FUN_005B6AC0",
+    "FUN_005D6890",
+    "FUN_0061CBB0",
+    "FUN_0061E0A0",
+    "FUN_00634060",
+    "FUN_00634080",
+    "FUN_00648A10",
+    "FUN_00650960",
+    "FUN_00654480",
+    "FUN_00661B70",
+    "FUN_0067BB90",
+    "FUN_0068E760",
+    "FUN_0068F970",
+    "FUN_0069A040",
+    "FUN_006A9860",
+    "FUN_006FF4E0",
+    "FUN_0071DFD0",
+    "FUN_00727750",
+    "FUN_00727A00",
+    "FUN_0072CE40",
+    "FUN_00736CE0",
+    "FUN_00740480",
+    "FUN_00759370",
+    "FUN_00787930",
+    "FUN_00787DE0",
+    "FUN_0078E380",
+    "FUN_007DDC30",
+    "FUN_007FCDF0",
+    "FUN_0081FAE0",
+    "FUN_00820590",
+    "FUN_0082A7C0",
+    "FUN_0085F9C0",
+    "FUN_0086BBB0",
+    "FUN_0087C280",
+    "FUN_008BDA40",
+    "FUN_008BE8F0",
+    "FUN_008C33A0",
+    "FUN_008CC110",
+    "FUN_008CEFD0",
+    "FUN_008D36A0",
+    "FUN_008D4D90",
+    "FUN_008DFBA0",
+    "FUN_008E0AD0",
+    "FUN_008E2D50",
+    "FUN_008E3870",
+    "FUN_008E6080",
+    "FUN_008E67B0",
+    "FUN_008EF1C0",
+    "FUN_008F0EC0",
+    "FUN_008F0F10",
+    "FUN_008F44E0",
+    "FUN_008F6890",
+    "FUN_008F8770",
+    "FUN_008FBEC0",
+    "FUN_008FDD40",
+    "FUN_008FFA20",
+    "FUN_00905BA0",
+    "FUN_00906C10",
+    "FUN_009075E0",
+    "FUN_00907610",
+    "FUN_0090BEB0",
+    "FUN_0090DB50",
+    "FUN_0090DD70",
+    "FUN_009166C0",
+    "FUN_0091D590",
+    "FUN_0091EDB0",
+    "FUN_0091EDD0",
+    "FUN_009248E0",
+    "FUN_00926A80",
+    "FUN_00927FA0",
+    "FUN_00928AA0",
+    "FUN_00929660",
+    "FUN_00929680",
+    "FUN_009296A0",
+    "FUN_009296C0",
+    "FUN_009296E0",
+    "FUN_00932DA0",
+    "FUN_00934CB0",
+    "FUN_009361E0",
+    "FUN_0093A9A0",
+    "FUN_0093CE00",
+    "FUN_0093DA80",
+    "FUN_0093E060",
+    "FUN_0093EA10",
+    "FUN_009405E0",
+    "FUN_009473F0",
+    "FUN_0094F540",
+    "FUN_00950C70",
+    "FUN_009589F0",
+    "FUN_009645D0",
+    "FUN_009647E0",
+    "FUN_009648C0",
+    "FUN_0096B070",
+    "FUN_0096B860",
+    "FUN_00979E70",
+    "FUN_0097D320",
+    "FUN_00986E10",
+    "FUN_0098AFE0",
+    "FUN_0098C4C0",
+    "FUN_0098CD40",
+    "FUN_00997620",
+    "FUN_009985D0",
+    "FUN_009985F0",
+    "FUN_0099F7D0",
+    "FUN_009AC050",
+    "FUN_009B3F20",
+    "FUN_009DFCB0",
+    "FUN_009DFCD0",
+    "FUN_009DFCF0",
+    "FUN_009DFD10",
+    "FUN_009DFD30",
+    "FUN_009DFD50",
+    "FUN_009DFD70",
+    "FUN_009DFD90",
+    "FUN_009F8570",
+    "FUN_009FB670",
+    "FUN_009FB690",
+    "FUN_009FB6B0",
+    "FUN_009FB6D0",
+    "FUN_009FB6F0",
+    "FUN_009FB710",
+    "FUN_009FB730",
+    "FUN_009FB750",
+    "FUN_009FB770",
+    "FUN_009FB790",
+    "FUN_009FB7B0",
+    "FUN_00A26770",
+    "FUN_00A27330",
+    "FUN_00A27450",
+    "FUN_00A50AF0",
+    "FUN_00A54720",
+    "FUN_00A62AA0",
+    "FUN_00A62AB0",
+    "FUN_00A62C10",
+    "FUN_00ABEBB0",
+    "FUN_00ACAB20",
+    "FUN_00ADEEA0",
+    "FUN_00AE3980",
+    "FUN_00AE3B00",
+    "FUN_00B26DF0",
+    "FUN_00B44E00",
+    "FUN_00B79D60",
+    "FUN_00BC0860",
+    "FUN_00BEFEC0",
+    "FUN_00BF6D20",
+    "FUN_00C13750",
+    "FUN_00C3F910",
+    "FUN_00C817D0",
+    "FUN_00CAB880",
+    "FUN_0115D180"
+  ],
+  "complete_local_report_sha256": "cf3bf58ab693d6b415219b0ee32060d2df568ea75112d9fdc856a3afcef53b95"
+}
