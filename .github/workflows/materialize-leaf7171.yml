@@ -1,0 +1,98 @@
+name: materialize-leaf7171
+on:
+  push:
+    branches: [decomp/leaf7171-source-publication]
+    paths: ['.github/leaf7171-transfer/**']
+permissions:
+  contents: write
+concurrency:
+  group: materialize-leaf7171
+  cancel-in-progress: false
+jobs:
+  source-publication:
+    if: github.repository == 'Putxo/BioHazard-V-Resurrection'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Expand hash-verified original-source transfer, never an EXE
+        shell: python
+        run: |
+          import base64, hashlib, json, pathlib, zlib
+          prefix = pathlib.Path('.github/leaf7171-transfer')
+          text = ''.join((prefix / f'part-{i}.b85').read_text(encoding='utf-8') for i in range(5))
+          packed = base64.b85decode(''.join(text.split()))
+          assert hashlib.sha256(packed).hexdigest() == '58ee052af3438832a24a671a3c84f3a1a0cd8c56e171e8aea1747f5b6625572b'
+          raw = zlib.decompress(packed)
+          assert len(raw) == 96628
+          assert hashlib.sha256(raw).hexdigest() == '1f394b850de9642f5236ec265ad0e3feabce5dc2e6a5bd4d176a4379267898d5'
+          files = json.loads(raw)
+          assert isinstance(files, dict) and len(files) == 21
+          workflow = '.github/workflows/verify-leaf323d1aab.yml'
+          forbidden = {'.exe', '.dll', '.obj', '.o', '.a', '.lib', '.so', '.bin', '.pdb', '.arc', '.pak'}
+          for name, content in files.items():
+              p = pathlib.Path(name)
+              assert not p.is_absolute() and '..' not in p.parts
+              assert name.startswith('decomp/leaf323d1aab/') or name == workflow
+              assert p.suffix.lower() not in forbidden
+              assert isinstance(content, str) and '\0' not in content
+              if name == workflow:
+                  assert p.read_text(encoding='utf-8') == content
+              else:
+                  assert not p.exists()
+                  p.parent.mkdir(parents=True, exist_ok=True)
+                  p.write_text(content, encoding='utf-8')
+          print('PASS: 20 text source/tooling files restored; pre-existing read-only CI verified')
+      - name: Restore all 7171 readable C++ definitions and verify source identity
+        run: |
+          python decomp/leaf323d1aab/tools/restore_sources.py
+          python decomp/leaf323d1aab/tools/restore_sources.py --check
+          python decomp/leaf323d1aab/tools/check_package.py
+      - name: Include module without replacing current build or changing registries
+        shell: python
+        run: |
+          import csv, hashlib, json, pathlib, subprocess
+          p = pathlib.Path('CMakeLists.txt')
+          old = p.read_bytes()
+          blob = hashlib.sha1(b'blob ' + str(len(old)).encode() + b'\0' + old).hexdigest()
+          assert blob == '1348a1783dd4cc8564feeaad7128bd9a7494c8ee'
+          addition = b'\n# Exact attached EXE: independently recovered leaf C++ and tests.\nadd_subdirectory(decomp/leaf323d1aab)\n'
+          assert b'add_subdirectory(decomp/leaf323d1aab)' not in old
+          p.write_bytes(old + addition)
+          catalog = json.loads(pathlib.Path('decomp/leaf323d1aab/generated/catalog.json').read_text())
+          recovered = {r['va'] for r in catalog['records']}
+          with open('database/functions.csv', newline='') as f:
+              prior = {int(r['va'], 0) for r in csv.DictReader(f) if r.get('va')}
+          overlap = sorted(recovered & prior)
+          assert not overlap, overlap
+          assert len(recovered) == 7171
+          assert json.loads(pathlib.Path('config/inventory_freeze.json').read_text())['function_candidate_denominator'] == 79782
+          subprocess.run(['git', 'diff', '--exit-code', '--', 'database', 'config'], check=True)
+          print('PASS: zero prior-registry overlaps; all database/config files unchanged; denominator 79782')
+      - name: Compile root project and run all integrated source tests
+        run: |
+          cmake -S . -B build-leaf-publication -DCMAKE_BUILD_TYPE=Debug
+          cmake --build build-leaf-publication --parallel 2
+          ctest --test-dir build-leaf-publication --output-on-failure
+      - name: Commit only source on the reserved development branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git branch --show-current)" = 'decomp/leaf7171-source-publication'
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- decomp/leaf323d1aab CMakeLists.txt
+          git rm -r -- .github/leaf7171-transfer
+          git diff --cached --check
+          python - <<'PY'
+          import pathlib, subprocess
+          changed = subprocess.check_output(['git', 'diff', '--cached', '--name-only'], text=True).splitlines()
+          for path in changed:
+              assert path == 'CMakeLists.txt' or path.startswith(('decomp/leaf323d1aab/', '.github/leaf7171-transfer/')), path
+              assert pathlib.Path(path).suffix.lower() not in {'.exe', '.dll', '.obj', '.o', '.a', '.so', '.lib', '.bin', '.pdb', '.arc', '.pak'}, path
+          assert not any('__pycache__' in path for path in changed)
+          PY
+          git commit -m 'Publish 7171 exact-target leaf C++ definitions and reproducible verification'
+          git push origin HEAD:refs/heads/decomp/leaf7171-source-publication
+# One-time source transport only. The coordinator removes this workflow by API
+# before opening the final PR. No workflow file is modified by GITHUB_TOKEN.
