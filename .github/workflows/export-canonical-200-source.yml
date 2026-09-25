@@ -12,13 +12,17 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Export committed source only
+          fetch-depth: 0
+      - name: Export pinned source snapshots only
         run: |
           git archive --format=tar HEAD > "$RUNNER_TEMP/canonical-200-source.tar"
-          sha256sum "$RUNNER_TEMP/canonical-200-source.tar"
+          git archive --format=tar 29d37854a740c1cc54d4530cf645df8d1b735ff9 > "$RUNNER_TEMP/canonical-200-main.tar"
+          sha256sum "$RUNNER_TEMP/canonical-200-source.tar" "$RUNNER_TEMP/canonical-200-main.tar"
       - uses: actions/upload-artifact@v4
         with:
-          name: canonical-200-source
-          path: ${{ runner.temp }}/canonical-200-source.tar
+          name: canonical-200-snapshots
+          path: |
+            ${{ runner.temp }}/canonical-200-source.tar
+            ${{ runner.temp }}/canonical-200-main.tar
           retention-days: 1
           if-no-files-found: error
