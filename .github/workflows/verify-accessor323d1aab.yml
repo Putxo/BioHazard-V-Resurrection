@@ -1,0 +1,54 @@
+name: verify-accessor323d1aab
+on:
+  pull_request:
+    branches: [main, integration]
+  push:
+    branches: [main, integration]
+permissions:
+  contents: read
+jobs:
+  source-and-guards:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang-sanitized]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify locally tested source hashes
+        shell: python
+        run: |
+          import hashlib,json,pathlib
+          root=pathlib.Path('decomp/accessor323d1aab')
+          report=json.loads((root/'reports/local-validation.json').read_text())
+          for name,expected in report['files_sha256'].items():
+              assert hashlib.sha256((root/name).read_bytes()).hexdigest()==expected,name
+      - name: Configure GCC
+        if: matrix.compiler == 'gcc'
+        run: cmake -S decomp/accessor323d1aab -B build-accessors -DCMAKE_BUILD_TYPE=Release
+      - name: Configure Clang sanitizers
+        if: matrix.compiler == 'clang-sanitized'
+        run: >-
+          cmake -S decomp/accessor323d1aab -B build-accessors
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_COMPILER=clang++
+          "-DCMAKE_CXX_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer"
+          "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined"
+      - name: Build and test
+        run: |
+          cmake --build build-accessors --parallel 2
+          ctest --test-dir build-accessors --output-on-failure
+      - name: Compile Windows i386 source and check all named definitions
+        if: matrix.compiler == 'clang-sanitized'
+        run: |
+          clang++ --target=i686-pc-windows-msvc -std=c++17 -O2 -ffreestanding -fno-exceptions -fno-rtti -Wall -Wextra -Wpedantic -Werror -Idecomp/accessor323d1aab/include -c decomp/accessor323d1aab/src/accessors.cpp -o build-accessors/accessors-i386.obj
+          objdump -t build-accessors/accessors-i386.obj > build-accessors/symbols.txt
+          python - <<'PY'
+          import csv,pathlib,re
+          names=set(re.findall(r'\?((?:FUN_)[0-9A-F]{8})@',pathlib.Path('build-accessors/symbols.txt').read_text()))
+          with open('decomp/accessor323d1aab/records.csv',newline='') as f:
+              expected={r['symbol'] for r in csv.DictReader(f)}
+          assert names==expected and len(names)==127
+          print('PASS: 127 original-address source definitions compile to i386 COFF; not executed')
+          PY

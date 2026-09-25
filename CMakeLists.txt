@@ -52,10 +52,10 @@ add_library(re5_recovered STATIC
     src/recovered/fun_00404f90.cpp
     src/recovered/fun_00405710.cpp
     src/recovered/fun_00405930.cpp
-    src/recovered/fun_00406010.cpp
-    src/recovered/fun_00405a60.cpp
     src/recovered/fun_00405bd0.cpp
     src/recovered/fun_00405df0.cpp
+    src/recovered/fun_00405a60.cpp
+    src/recovered/fun_00406010.cpp
     src/recovered/fun_004061f0.cpp
     src/recovered/fun_004064e0.cpp
     src/recovered/fun_00406510.cpp
@@ -104,8 +104,8 @@ add_library(re5_recovered STATIC
     src/recovered/fun_00407cf0.cpp
     src/recovered/fun_00407d10.cpp
     src/recovered/fun_00407d90.cpp
-    src/recovered/fun_00407e10.cpp
     src/recovered/fun_00407dc0.cpp
+    src/recovered/fun_00407e10.cpp
     src/recovered/fun_00407e70.cpp
     src/recovered/fun_00407fd0.cpp
     src/recovered/fun_00408040.cpp
@@ -178,10 +178,10 @@ add_executable(re5_tests
     tests/unit/test_fun_00404f90.cpp
     tests/unit/test_fun_00405710.cpp
     tests/unit/test_fun_00405930.cpp
-    tests/unit/test_fun_00406010.cpp
-    tests/unit/test_fun_00405a60.cpp
     tests/unit/test_fun_00405bd0.cpp
     tests/unit/test_fun_00405df0.cpp
+    tests/unit/test_fun_00405a60.cpp
+    tests/unit/test_fun_00406010.cpp
     tests/unit/test_fun_004061f0.cpp
     tests/unit/test_fun_004064e0.cpp
     tests/unit/test_fun_00406510.cpp
@@ -230,8 +230,8 @@ add_executable(re5_tests
     tests/unit/test_fun_00407cf0.cpp
     tests/unit/test_fun_00407d10.cpp
     tests/unit/test_fun_00407d90.cpp
-    tests/unit/test_fun_00407e10.cpp
     tests/unit/test_fun_00407dc0.cpp
+    tests/unit/test_fun_00407e10.cpp
     tests/unit/test_fun_00407e70.cpp
     tests/unit/test_fun_00407fd0.cpp
     tests/unit/test_fun_00408040.cpp
@@ -270,3 +270,6 @@ add_subdirectory(decomp/leaf323d1aab)
 
 # Exact attached EXE: recovered scalar bodies and source-only tests.
 add_subdirectory(decomp/scalar323d1aab)
+
+# Exact attached EXE: complete conditional accessors and early-exit tests.
+add_subdirectory(decomp/accessor323d1aab)
