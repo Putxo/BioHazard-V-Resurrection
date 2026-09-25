@@ -1,0 +1,120 @@
+name: Promote FUN_004086A0
+on:
+  push:
+    branches: [promote/004086a0-fastpass-valid]
+    paths: [.github/workflows/promote-004086a0.yml]
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: promote-004086a0
+  cancel-in-progress: false
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Verify actual reconstruction PR checks and synchronize
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: python
+        run: |
+          from pathlib import Path
+          import json, subprocess
+          def git(*args):
+              return subprocess.check_output(['git', *args], text=True).strip()
+          sha = '520d3e4e8fad6fc1e0c009b31ab8e4bdc5220d34'
+          data = json.loads(subprocess.check_output(['gh', 'api', f'repos/Putxo/BioHazard-V-Resurrection/actions/runs?event=pull_request&head_sha={sha}&per_page=100'], text=True))
+          required = {'build', 'validate-binaries', 'validate-claims', 'validate-metadata', 'validate-progress'}
+          latest = {}
+          for run in data['workflow_runs']:
+              if run['head_sha'] == sha and run['name'] in required:
+                  latest.setdefault(run['name'], run)
+          assert set(latest) == required
+          assert all(r['status'] == 'completed' and r['conclusion'] == 'success' for r in latest.values())
+          print('PR #416 exact-head CI 5/5 PASS', {k:v['id'] for k,v in latest.items()})
+          subprocess.run(['git', 'config', 'user.name', 'github-actions[bot]'], check=True)
+          subprocess.run(['git', 'config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com'], check=True)
+          subprocess.run(['git', 'fetch', 'origin', 'main', 'integration'], check=True)
+          base = git('rev-parse', 'origin/integration')
+          subprocess.run(['git', 'merge-base', '--is-ancestor', '78add9e2826b252a59ea87fd2d8d3637c6f58b17', base], check=True)
+          subprocess.run(['git', 'merge', '--no-edit', base], check=True)
+          Path('/tmp/86a0-promotion-base').write_text(base)
+          frozen = json.loads(Path('config/inventory_freeze.json').read_text())
+          assert frozen['function_candidate_denominator'] == 79782
+      - name: Promote only the target metadata and append history
+        shell: python
+        run: |
+          from pathlib import Path
+          import csv, io
+          p = Path('database/functions.csv')
+          lines = p.read_text().splitlines(keepends=True)
+          header = next(csv.reader([lines[0]]))
+          positions = {name:i for i,name in enumerate(header)}
+          indexes = [i for i,line in enumerate(lines[1:], 1) if next(csv.reader([line]))[0] == 'FUN_004086A0']
+          assert len(indexes) == 1
+          index = indexes[0]
+          row = next(csv.reader([lines[index]]))
+          assert row[positions['fast_pass']] == 'true'
+          assert row[positions['fast_pass_validated']] == 'false'
+          assert row[positions['size']] == '18'
+          row[positions['fast_pass_validated']] = 'true'
+          row[positions['pr']] = '#416'
+          row[positions['commit']] = '78add9e2826b252a59ea87fd2d8d3637c6f58b17'
+          row[positions['notes']] += '; PR #416 CI 5/5 PASS'
+          output = io.StringIO()
+          csv.writer(output, lineterminator='\n').writerow(row)
+          lines[index] = output.getvalue()
+          p.write_text(''.join(lines))
+          p = Path('database/history.csv')
+          previous = p.read_text()
+          output = io.StringIO()
+          csv.writer(output, lineterminator='\n').writerow([
+              'FUN_004086A0', '2026-09-25', 'FAST_PASS', 'FAST_PASS_VALIDATED',
+              '78add9e2826b252a59ea87fd2d8d3637c6f58b17', 'coordinator',
+              'PR #416 completed build and all four validators: CI 5/5 PASS on 520d3e4e8fad6fc1e0c009b31ab8e4bdc5220d34'])
+          p.write_text(previous.rstrip('\n') + '\n' + output.getvalue())
+      - name: Regenerate reports, validate and test
+        run: |
+          python tools/reports/report.py
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Remove temporary workflow and verify target-only changes
+        shell: python
+        run: |
+          from pathlib import Path
+          import csv, io, subprocess
+          def git(*args):
+              return subprocess.check_output(['git', *args], text=True).strip()
+          def old(path):
+              return subprocess.check_output(['git', 'show', f'{base}:{path}'], text=True)
+          base = Path('/tmp/86a0-promotion-base').read_text()
+          before = old('database/functions.csv').splitlines()
+          after = Path('database/functions.csv').read_text().splitlines()
+          keep = lambda lines: [line for line in lines if next(csv.reader([line]))[0] != 'FUN_004086A0']
+          assert keep(before) == keep(after)
+          before = old('database/history.csv').splitlines()
+          after = Path('database/history.csv').read_text().splitlines()
+          assert after[:len(before)] == before and len(after) == len(before) + 1
+          Path('.github/workflows/promote-004086a0.yml').unlink()
+          subprocess.run(['git', 'add', '-u'], check=True)
+          subprocess.run(['git', 'diff', '--cached', '--check'], check=True)
+          allowed = {'database/functions.csv', 'database/history.csv', 'reports/functions.json', 'reports/progress.md', 'reports/progress-treemap.svg'}
+          changed = set(git('diff', '--cached', '--name-only', base).splitlines())
+          assert changed <= allowed, changed - allowed
+          assert not any(p.lower().endswith(('.exe', '.dll', '.obj')) for p in git('ls-files').splitlines())
+          subprocess.run(['git', 'fetch', 'origin', 'integration'], check=True)
+          assert git('rev-parse', 'origin/integration') == base, 'Integration advanced: rerun promotion from current state'
+          print('Promotion isolation, parallel-row preservation and binary hygiene PASS')
+      - name: Commit and fast-forward-only push
+        run: |
+          git commit -m 'Promote FUN_004086A0 after reconstruction PR 416 CI 5/5'
+          git push origin HEAD:refs/heads/promote/004086a0-fastpass-valid
