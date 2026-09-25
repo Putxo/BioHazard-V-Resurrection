@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "input_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "input_size": 19977216,
+  "original_discovery_catalog_sha256": "ad8f5e753f0b96e544649201f20c977bdbf36db3732d20b4a553408e4beb6d12",
+  "original_cpp_source_digest": "783468f4a39ede06d931caf72e1e2c8bf0a051a17933039d74e594eaf5220947",
+  "original_package_sha256": "7e7bc0378a9f26fa0ad97454555f8219fbdb742b5eb9e27112ae39d3a450b294",
+  "semantic_stream_sha256": "c589713aa66aff049c364423bf6bd39dfd08233d2f53339ef5cbb2e492be7b72",
+  "calls_stream_sha256": "045f6149871941acaba83b8be7dc42cf1c386b6a4de622632c8b3a902e6a96be",
+  "records": 7171,
+  "instruction_bytes": 42745,
+  "original_metadata_fields_preserved": [
+    "va",
+    "rva",
+    "file_offset",
+    "family",
+    "encoding",
+    "displacement",
+    "immediate",
+    "width",
+    "size",
+    "body_sha256",
+    "symbol",
+    "direct_call_sites"
+  ],
+  "exact_exe_reverified_locally": true,
+  "source_files_byte_identical_to_prior_delivery": true,
+  "canonical_csv_available": false,
+  "canonical_registry_imported": false,
+  "game_linked": false
+}

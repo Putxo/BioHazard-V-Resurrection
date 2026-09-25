@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "target_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "target_size": 19977216,
+  "local_publication_recheck": {
+    "gcc_ctest": {
+      "passed": 6,
+      "total": 6
+    },
+    "clang_asan_ubsan_ctest": {
+      "passed": 6,
+      "total": 6
+    },
+    "source_properties": {
+      "test": "source_properties",
+      "routines": 7171,
+      "checks": 4976267,
+      "status": "PASS"
+    },
+    "source_guard_pages": {
+      "test": "source_guard_pages",
+      "routines": 598,
+      "checks": 2392,
+      "status": "PASS"
+    },
+    "original_fragment_comparison": {
+      "test": "original_fragment_comparison",
+      "routines": 7171,
+      "checks": 4967895,
+      "guarded_load_routines": 598,
+      "execution_mode": "x86-64 compatible fragments with low32 data",
+      "ia32_process_executed": false,
+      "game_executed": false,
+      "status": "PASS",
+      "input_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+      "input_size": 19977216,
+      "range_hashes_verified": 7171,
+      "original_pe_launched": false,
+      "full_ia32_abi_verified": false,
+      "proprietary_input_uploaded": false
+    },
+    "coff_body_summary_file": "coff-summary.json"
+  },
+  "all_generated_cpp_unchanged_from_prior_package": true,
+  "canonical_registry_delta": 0,
+  "canonical_denominator": 79782,
+  "game_compiled": false,
+  "game_executed": false,
+  "github_ci": "Not asserted by this local report; see actual pull-request checks."
+}
