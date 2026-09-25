@@ -287,5 +287,7 @@ FUN_00408630,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 6-byte fix
 FUN_00408630,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,89e0a523cef397408681f05e7c1458fa2cddcb88,coordinator,PR #410 completed 5/5 CI checks
 FUN_00408640,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 18-byte thiscall constructor over base 0x00A67E10 with final vtable 0x0137E440
 FUN_00408640,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,ed3042e74e05569b8a50fb1115b5a3ba418571ea,coordinator,PR #413 completed 5/5 CI checks
+FUN_00408620,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 6-byte fixed-address getter returning address token 0x016F0230
+FUN_00408620,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,4649170e7bee74ff04a8ee003a2381441e1315bb,coordinator,PR #418 completed 5/5 CI checks
 FUN_004086A0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 18-byte thiscall derived constructor including transitive 0x00A712D0 base state and final vtable 0x0137E458
 FUN_004086A0,2026-09-25,FAST_PASS,FAST_PASS_VALIDATED,78add9e2826b252a59ea87fd2d8d3637c6f58b17,coordinator,PR #416 completed build and all four validators: CI 5/5 PASS on 520d3e4e8fad6fc1e0c009b31ab8e4bdc5220d34
