@@ -3,7 +3,7 @@
   "branch": "decomp/canonical-200",
   "base_integration": "7ac328a644524f8fa4255edc7468925f533de8b9",
   "source_patch_sha256": "6832c073ee440facb83531d39545fcb2ffacfe96e4f01d1f2aa38353242747d5",
-  "transport_repairs": [],
+  "transport_repairs": [[2527,"H",""],[3959,"Y",""],[4120,"HF",""],[5155,"J",""],[5264,"S",""],[5323,"E",""],[5863,"d",""],[6004,"H",""],[6072,"Y",""],[7477,"R",""],[10197,"J",""],[15181,"0",""],[15304,"p","q"],[15360,"Bt0","/"],[15520,"4","d"],[15856,"C",""],[15988,"t",""]],
   "files_sha256": {
     "decomp/evidence/canonical_200.json": "7f9cb6c6a7124914bcb830eb3f9b800acddb79893edbaf3c9f65bcaf5cdbf3ba",
     "decomp/evidence/canonical_200.md": "281e320d9102f152f1f67233c2b93b40b7ba30408d1355cf26aa7b7705c3041c",
