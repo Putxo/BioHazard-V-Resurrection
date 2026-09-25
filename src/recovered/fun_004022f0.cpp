@@ -21,7 +21,29 @@ int FUN_004022F0(const FUN_004022F0_Object* object, const char* input) noexcept 
         if (stored == nullptr) {
             return 0;
         }
-        return std::strcmp(stored, input);
+        // Exact attached target, 00402300..0040233E: compare INPUT against
+        // STORED as unsigned bytes; SBB/SBB normalizes to -1, 0 or +1.
+        // Keep both early NUL exits instead of delegating reads to libc.
+        const auto* argument = reinterpret_cast<const unsigned char*>(input);
+        const auto* text = reinterpret_cast<const unsigned char*>(stored);
+        for (;;) {
+            const unsigned char first = argument[0];
+            if (first != text[0]) {
+                return first < text[0] ? -1 : 1;
+            }
+            if (first == 0U) {
+                return 0;
+            }
+            const unsigned char second = argument[1];
+            if (second != text[1]) {
+                return second < text[1] ? -1 : 1;
+            }
+            argument += 2;
+            text += 2;
+            if (second == 0U) {
+                return 0;
+            }
+        }
     }
 
     const auto* services = g_services;

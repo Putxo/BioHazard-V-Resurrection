@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "input_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "input_size": 19977216,
+  "image_base": 4194304,
+  "entry_rva": 15036585,
+  "machine": "I386",
+  "optional_header_magic": "PE32",
+  "ranges": [
+    {
+      "symbol": "FUN_004022A0",
+      "va": 4203168,
+      "va_hex": "0x004022A0",
+      "rva": 8864,
+      "end_exclusive_va": 4203200,
+      "byte_count": 32,
+      "file_offset": 5792,
+      "sha256": "957c1ef7135f39e2118054bc5e6ee9fa908b518b80564d20283bfbbef5c79b0f"
+    },
+    {
+      "symbol": "FUN_004022F0",
+      "va": 4203248,
+      "va_hex": "0x004022F0",
+      "rva": 8944,
+      "end_exclusive_va": 4203329,
+      "byte_count": 81,
+      "file_offset": 5872,
+      "sha256": "873b3d2ce7f69314c8dc32fbe6fd58e34bd86b7e33cb10b03d6f1f227098fb7a"
+    },
+    {
+      "symbol": "FUN_00402350",
+      "va": 4203344,
+      "va_hex": "0x00402350",
+      "rva": 9040,
+      "end_exclusive_va": 4203357,
+      "byte_count": 13,
+      "file_offset": 5968,
+      "sha256": "722e3c8edf5503a22f0311e850d6faa2f3168d6775f09bb7de8c9369c20a3225"
+    },
+    {
+      "symbol": "FUN_00402420",
+      "va": 4203552,
+      "va_hex": "0x00402420",
+      "rva": 9248,
+      "end_exclusive_va": 4203568,
+      "byte_count": 16,
+      "file_offset": 6176,
+      "sha256": "3d712bda9b7b98b462f8b5a244c3a8f58a83f64debbb89c88dd4d7603e98340f"
+    }
+  ],
+  "fallback_va": 20425308,
+  "fallback_first_byte": 0,
+  "new_canonical_functions": 0,
+  "canonical_denominator_changed": false,
+  "full_game_compiles": false
+}
