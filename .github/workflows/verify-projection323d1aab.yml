@@ -1,0 +1,61 @@
+name: verify-projection323d1aab
+on:
+  pull_request:
+    branches: [main, integration]
+  push:
+    branches: [main, integration]
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  host-source-and-guards:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang-sanitized]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify exact locally tested source hashes
+        shell: python
+        run: |
+          import hashlib,json,pathlib
+          root=pathlib.Path('decomp/projection323d1aab')
+          report=json.loads((root/'reports/local-validation.json').read_text())
+          for path,expected in report['files_sha256'].items():
+              assert hashlib.sha256((root/path).read_bytes()).hexdigest()==expected,path
+      - name: Configure GCC
+        if: matrix.compiler == 'gcc'
+        run: cmake -S decomp/projection323d1aab -B build-projections -DCMAKE_BUILD_TYPE=Release
+      - name: Configure Clang with sanitizers
+        if: matrix.compiler == 'clang-sanitized'
+        run: >-
+          cmake -S decomp/projection323d1aab -B build-projections
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_COMPILER=clang++
+          "-DCMAKE_CXX_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer"
+          "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined"
+      - name: Compile and test
+        run: |
+          cmake --build build-projections --parallel 2
+          ctest --test-dir build-projections --output-on-failure
+      - name: Compile and inspect Windows I386 definitions
+        if: matrix.compiler == 'clang-sanitized'
+        run: |
+          clang++ --target=i686-pc-windows-msvc -std=c++17 -O2 -ffreestanding -fno-exceptions -fno-rtti -Wall -Wextra -Wpedantic -Werror -Idecomp/projection323d1aab/include -c decomp/projection323d1aab/src/projections.cpp -o build-projections/projections-i386.obj
+          python decomp/projection323d1aab/tools/check_coff.py build-projections/projections-i386.obj
+  native-i386-source-and-reference:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [g++, clang++]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Execute both C++ and hash-checked instruction fixtures in I386 mode
+        run: python decomp/projection323d1aab/tools/run_i386.py --compiler '${{ matrix.compiler }}' --build-dir build-projection-i386
