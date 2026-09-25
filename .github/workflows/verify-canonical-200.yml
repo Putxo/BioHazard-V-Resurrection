@@ -1,0 +1,65 @@
+name: verify-canonical-200
+on:
+  pull_request:
+    branches: [main, integration]
+  push:
+    branches: [main, integration]
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  source-and-guards:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang-sanitized]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify scoped source hashes and canonical bindings
+        shell: python
+        run: |
+          import hashlib,json,pathlib,subprocess,sys
+          root=pathlib.Path('.')
+          report=json.loads((root/'decomp/evidence/canonical_200_local_validation.json').read_text())
+          for name,expected in report['source_sha256'].items():
+              assert hashlib.sha256((root/name).read_bytes()).hexdigest()==expected,name
+          subprocess.run([sys.executable,'tools/verification/verify_canonical_200.py','--registry'],check=True)
+      - name: Configure GCC Release
+        if: matrix.compiler == 'gcc'
+        run: cmake -S . -B "$RUNNER_TEMP/canonical-200-build" -DCMAKE_BUILD_TYPE=Release
+      - name: Configure Clang with sanitizers
+        if: matrix.compiler == 'clang-sanitized'
+        run: >-
+          cmake -S . -B "$RUNNER_TEMP/canonical-200-build"
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_COMPILER=clang++
+          "-DCMAKE_CXX_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer"
+          "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined"
+      - name: Test all scoped implementations and guards
+        run: |
+          cmake --build "$RUNNER_TEMP/canonical-200-build" --parallel 2 --target re5_canonical_200_tests re5_test_batch_00408b50
+          ctest --test-dir "$RUNNER_TEMP/canonical-200-build" --output-on-failure -R 'canonical_200|batch_00408b50'
+      - name: Full Release suite with legacy assertions active
+        if: matrix.compiler == 'gcc'
+        run: |
+          cmake --build "$RUNNER_TEMP/canonical-200-build" --parallel 2
+          ctest --test-dir "$RUNNER_TEMP/canonical-200-build" --output-on-failure
+      - name: Inspect selected Windows I386 bodies
+        if: matrix.compiler == 'clang-sanitized'
+        run: python tools/verification/verify_canonical_200.py --coff --compiler clang++ --build-dir "$RUNNER_TEMP/canonical-200-coff"
+  native-i386:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [g++, clang++]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Execute the thirty existing leaves and original-hash reference fixtures
+        run: python tools/verification/verify_canonical_200.py --native --compiler '${{ matrix.compiler }}' --build-dir "$RUNNER_TEMP/canonical-200-i386"

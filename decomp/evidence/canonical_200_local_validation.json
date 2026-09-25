@@ -1,0 +1,196 @@
+{
+  "utc": "2026-09-25T21:50:46.659620+00:00",
+  "target_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "main_before": 156,
+  "locally_registered": 200,
+  "new_registry_rows": 30,
+  "pending_main_publication_rows": 14,
+  "denominator": 79782,
+  "all_44_original_ranges_rechecked": true,
+  "full_v6_set_hash_matches_prior_committed_evidence": true,
+  "historical_csv_bytes_read": false,
+  "literal_reproduced_csv_va_column_membership_checked": true,
+  "focused_gcc": {
+    "property_checks": 491521,
+    "guard_checks": 240,
+    "status": "PASS"
+  },
+  "focused_clang_asan_ubsan": {
+    "property_checks": 491521,
+    "guard_checks": 240,
+    "status": "PASS"
+  },
+  "wrapper14_revalidation": {
+    "status": "PASS",
+    "input_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+    "input_size": 19977216,
+    "functions": 14,
+    "instruction_bytes": 632,
+    "differential_scenarios": 2371,
+    "ordered_memory_and_call_events_compared": 9597,
+    "conditional_edges_covered": 26,
+    "conditional_edges_total": 26,
+    "cases_per_entrypoint": {
+      "00408B50": 96,
+      "00408B90": 97,
+      "00408BC0": 97,
+      "00408BE0": 97,
+      "00408C10": 96,
+      "00408C30": 96,
+      "00408C50": 96,
+      "00408C70": 96,
+      "00408CA0": 96,
+      "00408CD0": 1120,
+      "00408CF0": 96,
+      "00408DD0": 96,
+      "00408DE0": 96,
+      "00408E00": 96
+    },
+    "ranges": [
+      {
+        "va": "0x00408B50",
+        "end_exclusive": "0x00408B8D",
+        "size": 61,
+        "sha256": "36ba8dd4a216dc438433a31ac671ec00c39ca54728c9141fd41a5d0cd2031fae"
+      },
+      {
+        "va": "0x00408B90",
+        "end_exclusive": "0x00408BBF",
+        "size": 47,
+        "sha256": "b32abdadd122586fbd5659def11c2f9f98d858e6beb54e31d4ea5cff0f712271"
+      },
+      {
+        "va": "0x00408BC0",
+        "end_exclusive": "0x00408BD5",
+        "size": 21,
+        "sha256": "49cbde92e03b802650c614cad31f97259c993136cd9765d3b057173404f5059d"
+      },
+      {
+        "va": "0x00408BE0",
+        "end_exclusive": "0x00408C10",
+        "size": 48,
+        "sha256": "d30eb0d1eec047fd9c4cfbda31d78f0e867e790e17d2752d821f1bec3d646e89"
+      },
+      {
+        "va": "0x00408C10",
+        "end_exclusive": "0x00408C22",
+        "size": 18,
+        "sha256": "05e4a3217867fe821480643add4df0c5a5bdbd5b85f1803b8dfa66f4f0f39e69"
+      },
+      {
+        "va": "0x00408C30",
+        "end_exclusive": "0x00408C42",
+        "size": 18,
+        "sha256": "0de9d8d8aab5353912b5d51b1f9be4581bf31d802910b15177e59b447777b6c4"
+      },
+      {
+        "va": "0x00408C50",
+        "end_exclusive": "0x00408C62",
+        "size": 18,
+        "sha256": "2fdeca96d0f1b3ea3e45d7a1cfb1694af5dc47fda79b2f5897e3f22c7d5447a5"
+      },
+      {
+        "va": "0x00408C70",
+        "end_exclusive": "0x00408C9E",
+        "size": 46,
+        "sha256": "40bd535bf93abca763c5d449283110bd3ea4c3a19234148fe028699b433623ed"
+      },
+      {
+        "va": "0x00408CA0",
+        "end_exclusive": "0x00408CCE",
+        "size": 46,
+        "sha256": "7256d0e43b3448dd273bbf11643584a0d340b0c71a49288312fd1bc4216d055a"
+      },
+      {
+        "va": "0x00408CD0",
+        "end_exclusive": "0x00408CE9",
+        "size": 25,
+        "sha256": "a3af90b04844ad349befcfb723c108152e328339cfa383dca54c681a2a2340fc"
+      },
+      {
+        "va": "0x00408CF0",
+        "end_exclusive": "0x00408DCF",
+        "size": 223,
+        "sha256": "0f17ef30f83276ffb86a91cc9b6679b8e9b0724384856fe2a503f7b4dc68a75f"
+      },
+      {
+        "va": "0x00408DD0",
+        "end_exclusive": "0x00408DD8",
+        "size": 8,
+        "sha256": "9831a54b80ef86314261f12d21d81e36c27f26c2012aa227e79a7efd133b557b"
+      },
+      {
+        "va": "0x00408DE0",
+        "end_exclusive": "0x00408DFA",
+        "size": 26,
+        "sha256": "975600dec5e828f988d0653e86357bbd2411d1baeb9e393787424c01a2d388e0"
+      },
+      {
+        "va": "0x00408E00",
+        "end_exclusive": "0x00408E1B",
+        "size": 27,
+        "sha256": "de13a469e2b684d3750f38914e4bdcaa1d6bba414f187806fd09b3c64fda0401"
+      }
+    ],
+    "scope": "Bounded integer instruction model versus C++; same explicit external-callee fixture. Not native x86 execution, dependency verification, matching, linking, or whole-game validation."
+  },
+  "coff_selected": {
+    "selected_definitions": 30,
+    "exact_body_matches": 30,
+    "matched": [
+      "FUN_0041D280",
+      "FUN_004790E0",
+      "FUN_00489E30",
+      "FUN_00489E50",
+      "FUN_004AF090",
+      "FUN_004C9CF0",
+      "FUN_004D8E50",
+      "FUN_004E17E0",
+      "FUN_004F2080",
+      "FUN_004F64A0",
+      "FUN_004F66C0",
+      "FUN_004F68F0",
+      "FUN_004F6970",
+      "FUN_004F8D00",
+      "FUN_00536530",
+      "FUN_00536640",
+      "FUN_00537650",
+      "FUN_005384A0",
+      "FUN_00548680",
+      "FUN_0054B1B0",
+      "FUN_00561E00",
+      "FUN_00561E90",
+      "FUN_0056AE50",
+      "FUN_005731E0",
+      "FUN_006577A0",
+      "FUN_008CCCA0",
+      "FUN_0098C790",
+      "FUN_009B5410",
+      "FUN_009B6D00",
+      "FUN_00AC1140"
+    ],
+    "game_linked": false,
+    "canonical_matched_tier_changed": false
+  },
+  "full_gcc_release_ctest": {
+    "passed": 33,
+    "total": 33
+  },
+  "legacy_smoke_release_assertion_fix": {
+    "before": "SIGSEGV with NDEBUG removing legacy fixture setup",
+    "after": "PASS with assertions kept active only for re5_tests"
+  },
+  "native_i386_local_execution": false,
+  "native_i386_local_reason": "GCC ELF32 execution attempted and rejected with ENOEXEC; GCC and Clang harnesses compile. CI must independently execute.",
+  "game_linked": false,
+  "source_sha256": {
+    "decomp/evidence/canonical_200.json": "7f9cb6c6a7124914bcb830eb3f9b800acddb79893edbaf3c9f65bcaf5cdbf3ba",
+    "decomp/evidence/canonical_200.md": "281e320d9102f152f1f67233c2b93b40b7ba30408d1355cf26aa7b7705c3041c",
+    "tests/unit/test_canonical_200_leaves.cpp": "92d32faf029650f80229817a858bda00ff3bd4c659ea3fbb622b107cdcf29a8b",
+    "tests/unit/canonical_200_leaves.inc": "5b0d66b839718ca6695d789ce7f0371b6ef868d862c180e4437b334c51c51714",
+    "cmake/canonical_200.cmake": "8c32d8f0ef690d7c98483dfbf23c2934cb3ccfff93b9f06896cfe9c87e35386d",
+    "tools/maintenance/canonical_200.py": "8a1b42b3a165e322487fcf6d2292b64c0a7eab29bb337670aa3c1cf8b8d11de3",
+    "tools/verification/verify_canonical_200.py": "5b585cda536cae19f278032857eb11617b98d57df8aaa3eb1828df57c8023d15",
+    ".github/workflows/verify-canonical-200.yml": "bc71e139f7f3fb095824b12229de5608bd5fb873672855e8036260cca86ad750"
+  }
+}
