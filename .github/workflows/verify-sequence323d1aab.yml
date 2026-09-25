@@ -1,0 +1,61 @@
+name: verify-sequence323d1aab
+on:
+  pull_request:
+    branches: [main, integration]
+  push:
+    branches: [main, integration]
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  host-source-and-guards:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang-sanitized]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check exact locally tested source hashes
+        shell: python
+        run: |
+          import hashlib,json,pathlib
+          root=pathlib.Path('decomp/sequence323d1aab')
+          report=json.loads((root/'reports/local-validation.json').read_text())
+          for path,expected in report['files_sha256'].items():
+              assert hashlib.sha256((root/path).read_bytes()).hexdigest()==expected,path
+      - name: Configure GCC
+        if: matrix.compiler == 'gcc'
+        run: cmake -S decomp/sequence323d1aab -B build-sequences -DCMAKE_BUILD_TYPE=Release
+      - name: Configure Clang with sanitizers
+        if: matrix.compiler == 'clang-sanitized'
+        run: >-
+          cmake -S decomp/sequence323d1aab -B build-sequences
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_COMPILER=clang++
+          "-DCMAKE_CXX_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer"
+          "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined"
+      - name: Build and test loops and guards
+        run: |
+          cmake --build build-sequences --parallel 2
+          ctest --test-dir build-sequences --output-on-failure
+      - name: Compile and inspect Windows I386 definitions
+        if: matrix.compiler == 'clang-sanitized'
+        run: |
+          clang++ --target=i686-pc-windows-msvc -std=c++17 -O2 -ffreestanding -fno-exceptions -fno-rtti -Wall -Wextra -Wpedantic -Werror -Idecomp/sequence323d1aab/include -c decomp/sequence323d1aab/src/sequences.cpp -o build-sequences/sequences-i386.obj
+          python decomp/sequence323d1aab/tools/check_coff.py build-sequences/sequences-i386.obj
+  native-i386-source-and-reference:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [g++, clang++]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Execute C++ and hash-checked instruction fixtures in I386 mode
+        run: python decomp/sequence323d1aab/tools/run_i386.py --compiler '${{ matrix.compiler }}' --build-dir build-sequence-i386
