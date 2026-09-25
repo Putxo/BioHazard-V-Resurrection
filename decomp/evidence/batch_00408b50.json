@@ -1,0 +1,496 @@
+{
+  "input_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "input_size": 19977216,
+  "entries": [
+    {
+      "stable_id": "FUN_00408B50",
+      "va": "0x00408B50",
+      "end_exclusive": "0x00408B8D",
+      "size": 61,
+      "sha256": "36ba8dd4a216dc438433a31ac671ec00c39ca54728c9141fd41a5d0cd2031fae",
+      "original_calling_convention": "thiscall",
+      "return_type": "uint32_t",
+      "arguments": "",
+      "subsystem": "RequestDispatch",
+      "summary": "conditionally cancels old nonnegative handle; queries mode; stores 0x9D/0x9E and submits",
+      "candidate_evidence": {
+        "stable_id": "FUN_00408B50",
+        "va": 4229968,
+        "rva": 35664,
+        "direct_calls": 0,
+        "direct_call_sites": [],
+        "direct_group_csv_line_with_header": null,
+        "evidence": [
+          "16-byte-aligned start after >=2 INT3/NOP bytes"
+        ]
+      }
+    },
+    {
+      "stable_id": "FUN_00408B90",
+      "va": "0x00408B90",
+      "end_exclusive": "0x00408BBF",
+      "size": 47,
+      "sha256": "b32abdadd122586fbd5659def11c2f9f98d858e6beb54e31d4ea5cff0f712271",
+      "original_calling_convention": "thiscall",
+      "return_type": "bool",
+      "arguments": "",
+      "subsystem": "RequestDispatch",
+      "summary": "negative handle early true; status 2 true; status 0 clears to -1; other statuses false",
+      "candidate_evidence": {
+        "stable_id": "FUN_00408B90",
+        "va": 4230032,
+        "rva": 35728,
+        "direct_calls": 1,
+        "direct_call_sites": [
+          "0x008A0869"
+        ],
+        "direct_group_csv_line_with_header": 145,
+        "evidence": [
+          "direct CALL target",
+          "16-byte-aligned start after >=2 INT3/NOP bytes"
+        ]
+      }
+    },
+    {
+      "stable_id": "FUN_00408BC0",
+      "va": "0x00408BC0",
+      "end_exclusive": "0x00408BD5",
+      "size": 21,
+      "sha256": "49cbde92e03b802650c614cad31f97259c993136cd9765d3b057173404f5059d",
+      "original_calling_convention": "thiscall",
+      "return_type": "void",
+      "arguments": "",
+      "subsystem": "RequestDispatch",
+      "summary": "forwards stop request only for a nonnegative handle",
+      "candidate_evidence": {
+        "stable_id": "FUN_00408BC0",
+        "va": 4230080,
+        "rva": 35776,
+        "direct_calls": 1,
+        "direct_call_sites": [
+          "0x00A7179E"
+        ],
+        "direct_group_csv_line_with_header": 146,
+        "evidence": [
+          "direct CALL target"
+        ]
+      }
+    },
+    {
+      "stable_id": "FUN_00408BE0",
+      "va": "0x00408BE0",
+      "end_exclusive": "0x00408C10",
+      "size": 48,
+      "sha256": "d30eb0d1eec047fd9c4cfbda31d78f0e867e790e17d2752d821f1bec3d646e89",
+      "original_calling_convention": "thiscall",
+      "return_type": "void",
+      "arguments": "",
+      "subsystem": "RequestDispatch",
+      "summary": "stop then cancel with post-callback handle/singleton reload; clears to -1 after cancellation",
+      "candidate_evidence": {
+        "stable_id": "FUN_00408BE0",
+        "va": 4230112,
+        "rva": 35808,
+        "direct_calls": 2,
+        "direct_call_sites": [
+          "0x00A717BB",
+          "0x00A71992"
+        ],
+        "direct_group_csv_line_with_header": 147,
+        "evidence": [
+          "direct CALL target",
+          "16-byte-aligned start after >=2 INT3/NOP bytes"
+        ]
+      }
+    },
+    {
+      "stable_id": "FUN_00408C10",
+      "va": "0x00408C10",
+      "end_exclusive": "0x00408C22",
+      "size": 18,
+      "sha256": "05e4a3217867fe821480643add4df0c5a5bdbd5b85f1803b8dfa66f4f0f39e69",
+      "original_calling_convention": "thiscall",
+      "return_type": "uint32_t",
+      "arguments": "",
+      "subsystem": "RequestDispatch",
+      "summary": "submits selector 0x98 and original receiver",
+      "candidate_evidence": {
+        "stable_id": "FUN_00408C10",
+        "va": 4230160,
+        "rva": 35856,
+        "direct_calls": 11,
+        "direct_call_sites": [
+          "0x00A69759",
+          "0x00A698D9",
+          "0x00A69A07",
+          "0x00A69B79",
+          "0x00A69E30",
+          "0x00A6F5D5",
+          "0x00A6FA83",
+          "0x00A6FC38",
+          "0x00A6FE33",
+          "0x00A701DF",
+          "0x00A703B6"
+        ],
+        "direct_group_csv_line_with_header": 148,
+        "evidence": [
+          "direct CALL target"
+        ]
+      }
+    },
+    {
+      "stable_id": "FUN_00408C30",
+      "va": "0x00408C30",
+      "end_exclusive": "0x00408C42",
+      "size": 18,
+      "sha256": "0de9d8d8aab5353912b5d51b1f9be4581bf31d802910b15177e59b447777b6c4",
+      "original_calling_convention": "thiscall",
+      "return_type": "uint32_t",
+      "arguments": "",
+      "subsystem": "RequestDispatch",
+      "summary": "submits selector 0x99 and original receiver",
+      "candidate_evidence": {
+        "stable_id": "FUN_00408C30",
+        "va": 4230192,
+        "rva": 35888,
+        "direct_calls": 7,
+        "direct_call_sites": [
+          "0x00847262",
+          "0x0087ABE2",
+          "0x00A69699",
+          "0x00A69819",
+          "0x00A69ADA",
+          "0x00A6F4AC",
+          "0x00A70285"
+        ],
+        "direct_group_csv_line_with_header": 149,
+        "evidence": [
+          "direct CALL target",
+          "16-byte-aligned start after >=2 INT3/NOP bytes"
+        ]
+      }
+    },
+    {
+      "stable_id": "FUN_00408C50",
+      "va": "0x00408C50",
+      "end_exclusive": "0x00408C62",
+      "size": 18,
+      "sha256": "2fdeca96d0f1b3ea3e45d7a1cfb1694af5dc47fda79b2f5897e3f22c7d5447a5",
+      "original_calling_convention": "thiscall",
+      "return_type": "uint32_t",
+      "arguments": "",
+      "subsystem": "RequestDispatch",
+      "summary": "submits selector 0xA2 and original receiver",
+      "candidate_evidence": {
+        "stable_id": "FUN_00408C50",
+        "va": 4230224,
+        "rva": 35920,
+        "direct_calls": 2,
+        "direct_call_sites": [
+          "0x0089634F",
+          "0x00A702DC"
+        ],
+        "direct_group_csv_line_with_header": 150,
+        "evidence": [
+          "direct CALL target",
+          "16-byte-aligned start after >=2 INT3/NOP bytes"
+        ]
+      }
+    },
+    {
+      "stable_id": "FUN_00408C70",
+      "va": "0x00408C70",
+      "end_exclusive": "0x00408C9E",
+      "size": 46,
+      "sha256": "40bd535bf93abca763c5d449283110bd3ea4c3a19234148fe028699b433623ed",
+      "original_calling_convention": "thiscall",
+      "return_type": "uint32_t",
+      "arguments": "",
+      "subsystem": "RequestDispatch",
+      "summary": "reads root+0x1E4EC node+0x58; selects 0xA0 for mode 2 or 0xD1",
+      "candidate_evidence": {
+        "stable_id": "FUN_00408C70",
+        "va": 4230256,
+        "rva": 35952,
+        "direct_calls": 3,
+        "direct_call_sites": [
+          "0x00890837",
+          "0x00892F5B",
+          "0x00A70369"
+        ],
+        "direct_group_csv_line_with_header": 151,
+        "evidence": [
+          "direct CALL target",
+          "16-byte-aligned start after >=2 INT3/NOP bytes"
+        ]
+      }
+    },
+    {
+      "stable_id": "FUN_00408CA0",
+      "va": "0x00408CA0",
+      "end_exclusive": "0x00408CCE",
+      "size": 46,
+      "sha256": "7256d0e43b3448dd273bbf11643584a0d340b0c71a49288312fd1bc4216d055a",
+      "original_calling_convention": "thiscall",
+      "return_type": "uint32_t",
+      "arguments": "",
+      "subsystem": "RequestDispatch",
+      "summary": "reads root+0x1E4EC node+0x58; selects 0xCD for mode 3 or 0xCF",
+      "candidate_evidence": {
+        "stable_id": "FUN_00408CA0",
+        "va": 4230304,
+        "rva": 36000,
+        "direct_calls": 2,
+        "direct_call_sites": [
+          "0x00A6FDBD",
+          "0x00A70440"
+        ],
+        "direct_group_csv_line_with_header": 152,
+        "evidence": [
+          "direct CALL target",
+          "16-byte-aligned start after >=2 INT3/NOP bytes"
+        ]
+      }
+    },
+    {
+      "stable_id": "FUN_00408CD0",
+      "va": "0x00408CD0",
+      "end_exclusive": "0x00408CE9",
+      "size": 25,
+      "sha256": "a3af90b04844ad349befcfb723c108152e328339cfa383dca54c681a2a2340fc",
+      "original_calling_convention": "thiscall",
+      "return_type": "uint32_t",
+      "arguments": "uint8_t enabled",
+      "subsystem": "RequestDispatch",
+      "summary": "inverts low argument byte only and submits selector 1 or 0",
+      "candidate_evidence": {
+        "stable_id": "FUN_00408CD0",
+        "va": 4230352,
+        "rva": 36048,
+        "direct_calls": 48,
+        "direct_call_sites": [
+          "0x0084751D",
+          "0x0085AE60",
+          "0x0087ADF2",
+          "0x008813E0",
+          "0x00881402",
+          "0x0088188E",
+          "0x00884E42",
+          "0x00887015",
+          "0x00887036",
+          "0x00887057",
+          "0x0088707B",
+          "0x0088773B",
+          "0x00887DED",
+          "0x0088FC9E",
+          "0x008900E5",
+          "0x00890FAD",
+          "0x00890FCA",
+          "0x008913CA",
+          "0x00891AC5",
+          "0x00891E27",
+          "0x00891E4D",
+          "0x0089229F",
+          "0x008923E4",
+          "0x0089299B",
+          "0x008934B5",
+          "0x00893944",
+          "0x008939BA",
+          "0x00896D30",
+          "0x008971FC",
+          "0x00897B90",
+          "0x00897F68",
+          "0x00897F8E",
+          "0x0089A901",
+          "0x0089AD38",
+          "0x0089B2A2",
+          "0x0089BCA8",
+          "0x0089CE20",
+          "0x0089D4AB",
+          "0x0089D82A",
+          "0x008A39BF",
+          "0x008A400B",
+          "0x008A423C",
+          "0x008A4890",
+          "0x008A901C",
+          "0x008AAAF9",
+          "0x008B91FA",
+          "0x00A681F9",
+          "0x00A704FF"
+        ],
+        "direct_group_csv_line_with_header": 153,
+        "evidence": [
+          "direct CALL target",
+          "16-byte-aligned start after >=2 INT3/NOP bytes"
+        ]
+      }
+    },
+    {
+      "stable_id": "FUN_00408CF0",
+      "va": "0x00408CF0",
+      "end_exclusive": "0x00408DCF",
+      "size": 223,
+      "sha256": "0f17ef30f83276ffb86a91cc9b6679b8e9b0724384856fe2a503f7b4dc68a75f",
+      "original_calling_convention": "stdcall-compatible",
+      "return_type": "void",
+      "arguments": "uint32_t variant",
+      "subsystem": "ResourceDispatch",
+      "summary": "normalizes full argument word; four ordered resource load/deliver/release paths with independent null guards",
+      "candidate_evidence": {
+        "stable_id": "FUN_00408CF0",
+        "va": 4230384,
+        "rva": 36080,
+        "direct_calls": 8,
+        "direct_call_sites": [
+          "0x00408DD2",
+          "0x00409181",
+          "0x00A6967C",
+          "0x00A697FC",
+          "0x00A6FBA6",
+          "0x00A6FDA0",
+          "0x00A7034C",
+          "0x00A70423"
+        ],
+        "direct_group_csv_line_with_header": 154,
+        "evidence": [
+          "direct CALL target",
+          "16-byte-aligned start after >=2 INT3/NOP bytes"
+        ]
+      }
+    },
+    {
+      "stable_id": "FUN_00408DD0",
+      "va": "0x00408DD0",
+      "end_exclusive": "0x00408DD8",
+      "size": 8,
+      "sha256": "9831a54b80ef86314261f12d21d81e36c27f26c2012aa227e79a7efd133b557b",
+      "original_calling_convention": "cdecl-compatible",
+      "return_type": "void",
+      "arguments": "",
+      "subsystem": "ResourceDispatch",
+      "summary": "calls recovered 00408CF0 with zero variant",
+      "candidate_evidence": {
+        "stable_id": "FUN_00408DD0",
+        "va": 4230608,
+        "rva": 36304,
+        "direct_calls": 4,
+        "direct_call_sites": [
+          "0x00A6973C",
+          "0x00A698BC",
+          "0x00A6FC1B",
+          "0x00A6FE16"
+        ],
+        "direct_group_csv_line_with_header": 155,
+        "evidence": [
+          "direct CALL target"
+        ]
+      }
+    },
+    {
+      "stable_id": "FUN_00408DE0",
+      "va": "0x00408DE0",
+      "end_exclusive": "0x00408DFA",
+      "size": 26,
+      "sha256": "975600dec5e828f988d0653e86357bbd2411d1baeb9e393787424c01a2d388e0",
+      "original_calling_convention": "thiscall",
+      "return_type": "uint32_t",
+      "arguments": "",
+      "subsystem": "Objects",
+      "summary": "base constructor first; clears +0x28/+0x30; installs 0x0137E4A8 and returns self",
+      "candidate_evidence": {
+        "stable_id": "FUN_00408DE0",
+        "va": 4230624,
+        "rva": 36320,
+        "direct_calls": 0,
+        "direct_call_sites": [],
+        "direct_group_csv_line_with_header": null,
+        "evidence": [
+          "16-byte-aligned start after >=2 INT3/NOP bytes"
+        ]
+      }
+    },
+    {
+      "stable_id": "FUN_00408E00",
+      "va": "0x00408E00",
+      "end_exclusive": "0x00408E1B",
+      "size": 27,
+      "sha256": "de13a469e2b684d3750f38914e4bdcaa1d6bba414f187806fd09b3c64fda0401",
+      "original_calling_convention": "thiscall",
+      "return_type": "void",
+      "arguments": "",
+      "subsystem": "Threading",
+      "summary": "installs 0x0137A990; DeleteCriticalSection(this+8); installs 0x0137A97C",
+      "candidate_evidence": {
+        "stable_id": "FUN_00408E00",
+        "va": 4230656,
+        "rva": 36352,
+        "direct_calls": 0,
+        "direct_call_sites": [],
+        "direct_group_csv_line_with_header": null,
+        "evidence": [
+          "16-byte-aligned start after >=2 INT3/NOP bytes"
+        ]
+      }
+    }
+  ],
+  "source_sha256": {
+    "include/re5/recovered/batch_00408b50.hpp": "be15a86f0260054662d5ccf3af22b1eaefb3086f8045ad3e18fd530e741f5322",
+    "src/recovered/batch_00408b50.cpp": "f7200891b89eed8f0be53050fd9f68c97bc98fe0035586d0a1338ae108fdd372",
+    "tests/unit/test_batch_00408b50.cpp": "4dcb72ad00938849407ffab09aca04296d1deb95177b3b7afe60392b0ce2de25",
+    "tools/verification/batch_00408b50_bridge.cpp": "08f145c00d4d33d7896fb021b8fe26a8a7d2303b77a8a0b45c8c0e75bd3805a3",
+    "tools/verification/verify_batch_00408b50.py": "14af0223b703b1d809019baf86e110059c4c100edacf6fdb001f7000ff5f0ada",
+    "tools/verification/reproduce_v6_for_batch_00408b50.py": "6a693abddedf34f7cba9a911816ad845a73f201e98128d84d87bdc7b2270d93c"
+  },
+  "local_validation": {
+    "gcc_explicit_checks": 2942,
+    "clang_asan_ubsan_explicit_checks": 2942,
+    "windows_x86": "COFF compilation PASS; not linked or executed",
+    "status": "PASS",
+    "functions": 14,
+    "instruction_bytes": 632,
+    "differential_scenarios": 2371,
+    "ordered_memory_and_call_events_compared": 9597,
+    "conditional_edges_covered": 26,
+    "conditional_edges_total": 26,
+    "cases_per_entrypoint": {
+      "00408B50": 96,
+      "00408B90": 97,
+      "00408BC0": 97,
+      "00408BE0": 97,
+      "00408C10": 96,
+      "00408C30": 96,
+      "00408C50": 96,
+      "00408C70": 96,
+      "00408CA0": 96,
+      "00408CD0": 1120,
+      "00408CF0": 96,
+      "00408DD0": 96,
+      "00408DE0": 96,
+      "00408E00": 96
+    },
+    "scope": "Bounded integer instruction model versus C++; same explicit external-callee fixture. Not native x86 execution, dependency verification, matching, linking, or whole-game validation."
+  },
+  "candidate_reconstruction": {
+    "status": "PASS",
+    "input_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+    "input_size": 19977216,
+    "method": "Independent set reconstruction under frozen V6 criteria; original local CSV unavailable in this session.",
+    "decoded_objdump_rows": 4837234,
+    "actual_direct_call_targets": 19194,
+    "direct_roots_including_PE_entry": 19195,
+    "aligned_pointer_sequence_targets": 40912,
+    "aligned_post_padding_starts": 69076,
+    "candidate_union": 79782,
+    "sorted_union_u32le_sha256": "a7fc3ad913d379f488b8de0a097a6cad290c41fe3cee921f39e3512dee3a4a25",
+    "known_direct_group_row_anchors_match": true,
+    "canonical_denominator_changed": false
+  },
+  "scope": {
+    "native_abi": false,
+    "external_callees_recovered": false,
+    "verified_tier": false,
+    "matched": false,
+    "linked": false,
+    "whole_game_compiles": false
+  }
+}
