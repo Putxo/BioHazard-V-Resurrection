@@ -268,3 +268,6 @@ add_subdirectory(decomp/leaf323d1aab)
 
 # Exact attached EXE: recovered scalar bodies and source-only tests.
 add_subdirectory(decomp/scalar323d1aab)
+
+# Exact attached EXE: complete conditional accessors and early-exit tests.
+add_subdirectory(decomp/accessor323d1aab)

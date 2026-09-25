@@ -1,0 +1,46 @@
+{
+  "target_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "target_size": 19977216,
+  "utc": "2026-09-25T17:14:33.623373+00:00",
+  "bodies": 127,
+  "instruction_bytes": 4222,
+  "families": {
+    "flag": 39,
+    "array": 39,
+    "nested": 49
+  },
+  "local_original_range_verification": "PASS",
+  "local_direct_calls_verified": 145,
+  "starts_with_direct_calls": 29,
+  "independent_llvm_i386_instructions": 1281,
+  "gcc_ctest": {
+    "passed": 3,
+    "total": 3,
+    "properties": 366888,
+    "guards_and_fixtures": 1566
+  },
+  "clang_asan_ubsan_ctest": {
+    "passed": 3,
+    "total": 3,
+    "properties": 366888,
+    "guards_and_fixtures": 1566
+  },
+  "windows_i386_named_functions_compiled": 127,
+  "native_i386_execution": false,
+  "byte_matching_claimed": false,
+  "game_linked": false,
+  "canonical_membership_verified": false,
+  "canonical_denominator": 79782,
+  "files_sha256": {
+    ".gitignore": "66c774bd67178e6c44373aa4e0d76ce5de1712485214638c8dbd3abd04b26b1d",
+    "CMakeLists.txt": "0a6cd8b826bfee2a24043df18b81c8f7185f24f8623b9d7465fec8126708e901",
+    "README.md": "418c23fe0d920880ade42e7931e7bd2ba8513c7a13f08d3be1532bceb465944d",
+    "body-hashes.csv": "229e3d8511c959357d159d8245560d9cbaf2b1b0b1292621c857dbe7734a8dd5",
+    "include/accessors.hpp": "8edea82d1679c28be186c1b2bceb9afe8b525b065833c511e43ef5a857a43110",
+    "include/records.inc": "663ee44c4fde0f9001c8fd8974e6c8245047c88b45ceeeb31362d4e727e474a5",
+    "records.csv": "f11649bdbd13b69163e7486c6ebd7c7c77b219e5d0add754f2f28e11bbd6d3bb",
+    "src/accessors.cpp": "a5334569df13fe9eab7c54698585bc8c921711464f545bdbadacc0029bbd5d9a",
+    "tests/test_accessors.cpp": "27b58a18277bef806f4212d3cc51a9c0e6d19e4d493f1ebb6a975045fe4b53d3",
+    "tools/verify.py": "331bccdcbcc9d5182ff3c74cc7cbc6f1b337ece21bd69dac4fb34fbb2a04062e"
+  }
+}
