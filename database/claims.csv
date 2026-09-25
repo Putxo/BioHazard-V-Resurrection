@@ -169,3 +169,33 @@ EXACT-BATCH-00408CF0,FUN_00408CF0,coordinator,decomp/00408b50-00408e00-exact,exa
 EXACT-BATCH-00408DD0,FUN_00408DD0,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
 EXACT-BATCH-00408DE0,FUN_00408DE0,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
 EXACT-BATCH-00408E00,FUN_00408E00,coordinator,decomp/00408b50-00408e00-exact,exact attachment batch recovery with complete body/guard evidence,2026-09-25T08:28:08Z,,,true
+CANONICAL-200-0041D280,FUN_0041D280,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-004790E0,FUN_004790E0,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-00489E30,FUN_00489E30,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-00489E50,FUN_00489E50,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-004AF090,FUN_004AF090,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-004C9CF0,FUN_004C9CF0,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-004D8E50,FUN_004D8E50,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-004E17E0,FUN_004E17E0,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-004F2080,FUN_004F2080,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-004F64A0,FUN_004F64A0,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-004F66C0,FUN_004F66C0,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-004F68F0,FUN_004F68F0,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-004F6970,FUN_004F6970,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-004F8D00,FUN_004F8D00,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-00536530,FUN_00536530,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-00536640,FUN_00536640,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-00537650,FUN_00537650,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-005384A0,FUN_005384A0,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-00548680,FUN_00548680,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-0054B1B0,FUN_0054B1B0,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-00561E00,FUN_00561E00,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-00561E90,FUN_00561E90,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-0056AE50,FUN_0056AE50,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-005731E0,FUN_005731E0,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-006577A0,FUN_006577A0,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-008CCCA0,FUN_008CCCA0,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-0098C790,FUN_0098C790,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-009B5410,FUN_009B5410,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-009B6D00,FUN_009B6D00,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
+CANONICAL-200-00AC1140,FUN_00AC1140,coordinator,decomp/canonical-200,Verify frozen V6 membership and register existing tested field reader,2026-09-25T21:40:51Z,,,true
