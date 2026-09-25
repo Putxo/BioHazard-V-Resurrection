@@ -1,0 +1,62 @@
+{
+  "target_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "target_size": 19977216,
+  "utc": "2026-09-25T17:45:12.648071+00:00",
+  "bodies": 146,
+  "instruction_bytes": 4061,
+  "families": {
+    "store": 59,
+    "init": 56,
+    "bits": 31
+  },
+  "local_original_range_verification": "PASS",
+  "direct_call_references_found": 0,
+  "gcc_ctest": {
+    "passed": 3,
+    "total": 3,
+    "properties": 1212199,
+    "guards_and_fixtures": 1577
+  },
+  "clang_asan_ubsan_ctest": {
+    "passed": 3,
+    "total": 3,
+    "properties": 1212199,
+    "guards_and_fixtures": 1577
+  },
+  "compiler": "clang version 17.0.0 (https://github.com/swiftlang/llvm-project.git 10999b6d034fe318f3d56c83bddb6572593a8bb0)",
+  "windows_i386_named_functions_compiled": 146,
+  "windows_i386_exact_bodies": 115,
+  "windows_i386_exact_instruction_bytes": 2356,
+  "independent_llvm_i386_instructions": 1158,
+  "negative_controls_rejected": {
+    "unconditional_byte_store": {
+      "returncode": -6,
+      "stderr": "FAIL check 6"
+    },
+    "missing_null_initializer_guard": {
+      "returncode": -11,
+      "stderr": ""
+    },
+    "wrong_early_return_constant": {
+      "returncode": -6,
+      "stderr": "FAIL check 942315"
+    }
+  },
+  "native_i386_execution": false,
+  "game_linked": false,
+  "canonical_membership_verified": false,
+  "canonical_denominator": 79782,
+  "canonical_tiers_changed": false,
+  "files_sha256": {
+    ".gitignore": "66c774bd67178e6c44373aa4e0d76ce5de1712485214638c8dbd3abd04b26b1d",
+    "CMakeLists.txt": "81b02ca9538b0ef54fc4939fc02fb6f59caed65727b94317638e72832079c2ab",
+    "README.md": "5b00441872b8f3a29b26e73e7d6adf88f0416bff96c471ef423fef744296b8b0",
+    "include/guarded.hpp": "e9431778d14cf4455f98770f01f74460a092f014b91c4c4a258f08ba5f32f7f1",
+    "include/records.inc": "eb78cd6a64149ba89cb208b7801919f047082b0aa83ae7503306b09dd901d513",
+    "records.csv": "0f0cbb3c882c9defab441c7bb06958e361d799bd528bc7b1f1c4ebbb840fc75c",
+    "src/guarded.cpp": "1b1c18edbbcb6828f4a8cfd2dab4110550b30471be909645348815a752ba02f4",
+    "tests/test_guarded.cpp": "92f7d4795c917e4267ab426ba9c26873c15b90e93926d622a566eb691dc3be9e",
+    "tools/check_i386.py": "366e6548a67392f01a7c0f5802acaa42198f5679c973e8d18ca7b1c0213e58c9",
+    "tools/verify.py": "1f82fc5eaeff212b5abc9f88f5fe9b5daeeb76a8c4d4dac3e84d73d4f03d4a69"
+  }
+}
