@@ -1,0 +1,47 @@
+name: verify-leaf323d1aab
+on:
+  pull_request:
+    branches: [main, integration]
+  push:
+    branches: [main, integration]
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  leaf-source:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang-sanitized]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure GCC
+        if: matrix.compiler == 'gcc'
+        run: cmake -S decomp/leaf323d1aab -B build-leaves -DCMAKE_BUILD_TYPE=Release
+      - name: Configure Clang with sanitizers
+        if: matrix.compiler == 'clang-sanitized'
+        run: >-
+          cmake -S decomp/leaf323d1aab -B build-leaves
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_COMPILER=clang++
+          "-DCMAKE_CXX_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer"
+          "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined"
+      - name: Build and test source without proprietary input
+        run: |
+          cmake --build build-leaves --parallel 2
+          ctest --test-dir build-leaves --output-on-failure
+      - name: Compile every recovered source unit for Windows x86
+        if: matrix.compiler == 'clang-sanitized'
+        shell: bash
+        run: |
+          mkdir -p build-leaves/coff
+          for source in decomp/leaf323d1aab/generated/src/leaves_*.cpp; do
+            clang++ --target=i686-pc-windows-msvc -std=c++17 -O2 -ffreestanding \
+              -fno-exceptions -fno-rtti -Wall -Wextra -Wpedantic -Werror \
+              -Idecomp/leaf323d1aab/generated/include -c "$source" \
+              -o "build-leaves/coff/$(basename "$source" .cpp).obj"
+          done
+# No original EXE, DLL, game data or object file is uploaded by this workflow.
+# The original-fragment and COFF-to-original comparisons are LOCAL ONLY.

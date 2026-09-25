@@ -262,3 +262,6 @@ add_test(NAME smoke COMMAND re5_tests)
 add_custom_target(metadata_tests
     COMMAND ${CMAKE_COMMAND} -E echo "Metadata tests are executed by Python validation tooling"
 )
+
+# Exact attached EXE: independently recovered leaf C++ and tests.
+add_subdirectory(decomp/leaf323d1aab)
