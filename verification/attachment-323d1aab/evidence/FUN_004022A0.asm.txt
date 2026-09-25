@@ -1,0 +1,21 @@
+; Input SHA-256: 323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815
+; Region: [0x004022a0, 0x004022c0); bytes=32
+; Region SHA-256: 957c1ef7135f39e2118054bc5e6ee9fa908b518b80564d20283bfbbef5c79b0f
+; Static disassembly only. The original EXE was not executed.
+
+9) RE5DX9_1.1.0 Dev (Release 15 des. 2017)(9).exe:     file format pei-i386
+
+
+Disassembly of section .text:
+
+004022a0 <.text+0x12a0>:
+  4022a0:	8a 54 24 08          	mov    dl,BYTE PTR [esp+0x8]
+  4022a4:	8b c1                	mov    eax,ecx
+  4022a6:	8a 4c 24 0c          	mov    cl,BYTE PTR [esp+0xc]
+  4022aa:	88 08                	mov    BYTE PTR [eax],cl
+  4022ac:	8a 4c 24 04          	mov    cl,BYTE PTR [esp+0x4]
+  4022b0:	88 50 01             	mov    BYTE PTR [eax+0x1],dl
+  4022b3:	8a 54 24 10          	mov    dl,BYTE PTR [esp+0x10]
+  4022b7:	88 48 02             	mov    BYTE PTR [eax+0x2],cl
+  4022ba:	88 50 03             	mov    BYTE PTR [eax+0x3],dl
+  4022bd:	c2 10 00             	ret    0x10

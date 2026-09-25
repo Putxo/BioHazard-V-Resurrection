@@ -47,8 +47,8 @@ void test_fun_004022f0() {
 
     FUN_004022F0_Object text_object{nullptr, "Chris"};
     assert(FUN_004022F0(&text_object, "Chris") == 0);
-    assert(FUN_004022F0(&text_object, "Chria") > 0);
-    assert(FUN_004022F0(&text_object, "Zhris") < 0);
+    assert(FUN_004022F0(&text_object, "Chria") == -1);
+    assert(FUN_004022F0(&text_object, "Zhris") == 1);
     assert(FUN_004022F0(nullptr, "Xanything") == 0);
     assert(FUN_004022F0(nullptr, "A") < 0);
     assert(FUN_004022F0(nullptr, "Z") > 0);

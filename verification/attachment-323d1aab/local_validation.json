@@ -1,0 +1,36 @@
+{
+  "validated_utc": "2026-09-25T07:35:52.187983+00:00",
+  "input_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "integration_base_commit": "78add9e2826b252a59ea87fd2d8d3637c6f58b17",
+  "prior_canonical_source_git_blob": "3bfac999046e7e6ed45d06b4f817f6c7f33cdd49",
+  "before_fix_regression": {
+    "exit_code": 1,
+    "failed_after_checks": 4,
+    "message": "canonical comparator must agree with exact-target reference"
+  },
+  "tests": {
+    "gcc_release_ctest": "5/5 PASS",
+    "clang_asan_ubsan_ctest": "5/5 PASS",
+    "semantic_checks_per_run": 213790,
+    "guard_page_checks_per_run": 26,
+    "exact_attachment_and_instruction_range_verification": "PASS",
+    "reference_windows_x86_object_compilation": "PASS (compile only; not linked or executed)"
+  },
+  "source_sha256": {
+    "src/recovered/fun_004022f0.cpp": "3337abac291e8ea1c6beb42b4df946a7d3621556b13810f56e3fd6fb6f9dd01c",
+    "tests/unit/test_fun_004022f0.cpp": "8cdddb59f66d4aa7aa42ab874b176bbc31a831824c471da84c049a819f7952b2",
+    "verification/attachment-323d1aab/include/recovered.hpp": "829d6ca9645d5ebd3a582b1cbc3b0de087cdaac124d809ec48741045bcec38af",
+    "verification/attachment-323d1aab/src/recovered.cpp": "5fa341a979209efd75d07d858ff5d23ed617fdaa131317c0ab3164c9d9960bf8",
+    "verification/attachment-323d1aab/tests/canonical_main.cpp": "00339a75051064aa177191c6e57662c8a094272061e9bfa771ea6d823c9e46c4",
+    "verification/attachment-323d1aab/tests/recovered_tests.cpp": "b1fb3215cefb06e34caf2e89fc54b83a680eb6a3c7018407139625bf513a8135",
+    "verification/attachment-323d1aab/verify_target.py": "e326f9cf3d1f4385299e0a6de9e540396baad33059c5074c71aa2b6979e5ea33",
+    "verification/attachment-323d1aab/CMakeLists.txt": "e8fa8ea802bc3e64abaa47999191ad37630ca509f5cf78620ef87114e587054e",
+    ".github/workflows/verify-attachment-323d1aab.yml": "1f66c4247abb1d961d408a94d081fa0231ca6e7396f6e881199cf26dc9654833"
+  },
+  "new_canonical_functions": 0,
+  "full_game_compiles": false,
+  "game_executed": false,
+  "original_exe_executed": false,
+  "formal_equivalence_proven": false,
+  "github_ci": "not asserted by this local report; use pull-request checks for live status"
+}
