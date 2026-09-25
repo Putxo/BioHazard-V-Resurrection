@@ -5002,7 +5002,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5017,11 +5017,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408B50",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "conditionally cancels old nonnegative handle; queries mode; stores 0x9D/0x9E and submits; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "conditionally cancels old nonnegative handle; queries mode; stores 0x9D/0x9E and submits; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00408B90",
@@ -5034,7 +5034,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5049,11 +5049,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408B90",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "negative handle early true; status 2 true; status 0 clears to -1; other statuses false; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "negative handle early true; status 2 true; status 0 clears to -1; other statuses false; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00408BC0",
@@ -5066,7 +5066,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5081,11 +5081,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408BC0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "forwards stop request only for a nonnegative handle; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "forwards stop request only for a nonnegative handle; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00408BE0",
@@ -5098,7 +5098,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5113,11 +5113,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408BE0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "stop then cancel with post-callback handle/singleton reload; clears to -1 after cancellation; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "stop then cancel with post-callback handle/singleton reload; clears to -1 after cancellation; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00408C10",
@@ -5130,7 +5130,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5145,11 +5145,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408C10",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "submits selector 0x98 and original receiver; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "submits selector 0x98 and original receiver; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00408C30",
@@ -5162,7 +5162,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5177,11 +5177,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408C30",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "submits selector 0x99 and original receiver; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "submits selector 0x99 and original receiver; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00408C50",
@@ -5194,7 +5194,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5209,11 +5209,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408C50",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "submits selector 0xA2 and original receiver; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "submits selector 0xA2 and original receiver; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00408C70",
@@ -5226,7 +5226,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5241,11 +5241,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408C70",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "reads root+0x1E4EC node+0x58; selects 0xA0 for mode 2 or 0xD1; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "reads root+0x1E4EC node+0x58; selects 0xA0 for mode 2 or 0xD1; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00408CA0",
@@ -5258,7 +5258,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5273,11 +5273,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408CA0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "reads root+0x1E4EC node+0x58; selects 0xCD for mode 3 or 0xCF; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "reads root+0x1E4EC node+0x58; selects 0xCD for mode 3 or 0xCF; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00408CD0",
@@ -5290,7 +5290,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5305,11 +5305,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408CD0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "inverts low argument byte only and submits selector 1 or 0; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "inverts low argument byte only and submits selector 1 or 0; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00408CF0",
@@ -5322,7 +5322,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5337,11 +5337,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408CF0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "normalizes full argument word; four ordered resource load/deliver/release paths with independent null guards; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "normalizes full argument word; four ordered resource load/deliver/release paths with independent null guards; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00408DD0",
@@ -5354,7 +5354,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5369,11 +5369,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408DD0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "calls recovered 00408CF0 with zero variant; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "calls recovered 00408CF0 with zero variant; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00408DE0",
@@ -5386,7 +5386,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5401,11 +5401,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408DE0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "base constructor first; clears +0x28/+0x30; installs 0x0137E4A8 and returns self; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "base constructor first; clears +0x28/+0x30; installs 0x0137E4A8 and returns self; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00408E00",
@@ -5418,7 +5418,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5433,11 +5433,11 @@
     "source_file": "src/recovered/batch_00408b50.cpp",
     "owner": "coordinator",
     "claim_id": "EXACT-BATCH-00408E00",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_batch_00408b50.cpp",
     "evidence": "decomp/evidence/batch_00408b50.md",
-    "notes": "installs 0x0137A990; DeleteCriticalSection(this+8); installs 0x0137A97C; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; CI pending"
+    "notes": "installs 0x0137A990; DeleteCriticalSection(this+8); installs 0x0137A97C; exact-attachment target-memory C++ adapter; bounded differential tests PASS; dependencies and native ABI unresolved; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_0041D280",
@@ -5450,7 +5450,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5465,11 +5465,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_000.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-0041D280",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 8-bit read at this+0x7; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 8-bit read at this+0x7; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_004790E0",
@@ -5482,7 +5482,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5497,11 +5497,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_000.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-004790E0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0xD8; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0xD8; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00489E30",
@@ -5514,7 +5514,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5529,11 +5529,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_001.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-00489E30",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x1E8C0; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x1E8C0; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00489E50",
@@ -5546,7 +5546,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5561,11 +5561,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_001.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-00489E50",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x1E8C4; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x1E8C4; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_004AF090",
@@ -5578,7 +5578,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5593,11 +5593,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_001.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-004AF090",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x0; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x0; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_004C9CF0",
@@ -5610,7 +5610,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5625,11 +5625,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_001.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-004C9CF0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x40; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x40; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_004D8E50",
@@ -5642,7 +5642,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5657,11 +5657,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_001.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-004D8E50",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0xA90; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0xA90; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_004E17E0",
@@ -5674,7 +5674,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5689,11 +5689,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_001.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-004E17E0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0xC; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0xC; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_004F2080",
@@ -5706,7 +5706,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5721,11 +5721,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_001.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-004F2080",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x28; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x28; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_004F64A0",
@@ -5738,7 +5738,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5753,11 +5753,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_001.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-004F64A0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x4; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x4; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_004F66C0",
@@ -5770,7 +5770,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5785,11 +5785,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_001.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-004F66C0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x40; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x40; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_004F68F0",
@@ -5802,7 +5802,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5817,11 +5817,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_001.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-004F68F0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x68; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x68; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_004F6970",
@@ -5834,7 +5834,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5849,11 +5849,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_001.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-004F6970",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x7C; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x7C; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_004F8D00",
@@ -5866,7 +5866,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5881,11 +5881,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_001.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-004F8D00",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0xA60; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0xA60; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00536530",
@@ -5898,7 +5898,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5913,11 +5913,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_001.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-00536530",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x10; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x10; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00536640",
@@ -5930,7 +5930,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5945,11 +5945,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_001.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-00536640",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x64; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x64; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00537650",
@@ -5962,7 +5962,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -5977,11 +5977,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_001.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-00537650",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x64; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x64; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_005384A0",
@@ -5994,7 +5994,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -6009,11 +6009,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_001.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-005384A0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x64; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x64; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00548680",
@@ -6026,7 +6026,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -6041,11 +6041,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_002.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-00548680",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x64; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x64; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_0054B1B0",
@@ -6058,7 +6058,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -6073,11 +6073,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_002.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-0054B1B0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x90; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x90; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00561E00",
@@ -6090,7 +6090,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -6105,11 +6105,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_002.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-00561E00",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x4; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x4; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00561E90",
@@ -6122,7 +6122,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -6137,11 +6137,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_002.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-00561E90",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x64; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x64; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_0056AE50",
@@ -6154,7 +6154,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -6169,11 +6169,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_002.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-0056AE50",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 8-bit read at this+0x5; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 8-bit read at this+0x5; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_005731E0",
@@ -6186,7 +6186,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -6201,11 +6201,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_002.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-005731E0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x218; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x218; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_006577A0",
@@ -6218,7 +6218,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -6233,11 +6233,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_004.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-006577A0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0xD0; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0xD0; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_008CCCA0",
@@ -6250,7 +6250,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -6265,11 +6265,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_011.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-008CCCA0",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 8-bit read at this+0x19E6; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 8-bit read at this+0x19E6; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_0098C790",
@@ -6282,7 +6282,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -6297,11 +6297,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_017.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-0098C790",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 8-bit read at this+0x1BF0; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 8-bit read at this+0x1BF0; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_009B5410",
@@ -6314,7 +6314,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -6329,11 +6329,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_018.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-009B5410",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x1EE0; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x1EE0; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_009B6D00",
@@ -6346,7 +6346,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -6361,11 +6361,11 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_018.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-009B6D00",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x2E94; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x2E94; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   },
   {
     "stable_id": "FUN_00AC1140",
@@ -6378,7 +6378,7 @@
     "workflow_status": "ACTIVE",
     "confidence": "HIGH",
     "fast_pass": "true",
-    "fast_pass_validated": "false",
+    "fast_pass_validated": "true",
     "converted": "false",
     "refined": "false",
     "verified": "false",
@@ -6393,10 +6393,10 @@
     "source_file": "decomp/leaf323d1aab/generated/src/leaves_021.cpp",
     "owner": "coordinator",
     "claim_id": "CANONICAL-200-00AC1140",
-    "pr": "",
-    "commit": "",
+    "pr": "#444",
+    "commit": "7a49abed8b72d4b39f47661df63beebf12f388ee",
     "test": "tests/unit/test_canonical_200_leaves.cpp",
     "evidence": "decomp/evidence/canonical_200.md",
-    "notes": "Unsigned 32-bit read at this+0x558; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; CI pending"
+    "notes": "Unsigned 32-bit read at this+0x558; existing leaf C++ registered after exact-body and frozen-V6 membership revalidation; no duplicate implementation; Recovery PR #444 full CI PASS on ef7027eff9565fcc62d54f63e18c5daa5d2c06f6; FAST_PASS_VALIDATED only"
   }
 ]
