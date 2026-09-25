@@ -151,17 +151,17 @@ FUN_00405DF0,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered message-resource
 FUN_00405DF0,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,151ee48c5f3ef44c0d32e0006373e7c0bee98be2,coordinator,PR #164 completed 5/5 CI checks
 FUN_00405A60,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered static six-entry resource registration pass with archive preflight early cancel and loading-state restoration
 FUN_00405A60,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,4ff96307fac4ebb8a4481f79e1cc9f81df22c1e1,coordinator,PR #169 completed 5/5 CI checks
-FUN_00405930,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered three-state node conversion worker with allocation and early-return coverage
 FUN_004064E0,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered 33-byte GameResource forwarding wrapper with exact selector archive literal table tokens and counts
 FUN_004064E0,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,dcbf0ac0fa50d1581f9eb3396910d980fff510d9,coordinator,PR #174 completed 5/5 CI checks
 FUN_00406010,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered recursive convertDir walker with extension-token filtering and suppressor-aware registration
 FUN_00406010,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,5b516c943a6e225d66638905842d332586889ff8,coordinator,PR #176 completed 5/5 CI checks
 FUN_00406510,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered 33-byte ShowGameResource forwarding wrapper with exact selector archive literal table tokens and counts
 FUN_00406510,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,d9a8c5100d3850bd1445b96dea555f0e2aa0327c,coordinator,PR #180 completed 5/5 CI checks
-FUN_004061F0,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered generalized archive resource registration helper with conditional indexed resolution two tables early cleanup and state restoration
+FUN_00405930,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered three-state node conversion worker with allocation and early-return coverage
 FUN_00405930,2026-09-21,FAST_PASS,FAST_PASS_VALIDATED,b4481a234514e9e47f863d2f33072b3a8bf86473,coordinator,PR #172 completed 5/5 CI checks
 FUN_00406540,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered Game2Resource forwarding wrapper with exact archive literal and 2/5 table tokens
 FUN_00406540,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,90444724ef6040379b990c1c6c4116bf910bd0a0,coordinator,PR #184 completed 5/5 CI checks
+FUN_004061F0,2026-09-21,UNSEEN,FAST_PASS,,coordinator,recovered generalized archive resource registration helper with conditional indexed resolution two tables early cleanup and state restoration
 FUN_004061F0,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,0a08af19efbd4c5387706ab5b6178537e73adfdc,coordinator,PR #181 completed 5/5 CI checks
 FUN_00406570,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered TitleResource registration wrapper with marker log and exact 24-entry direct table forwarding contract
 FUN_00406570,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,ee9c21c57dba196b881d2c7df84235ffd826e327,coordinator,PR #190 completed 5/5 CI checks
@@ -173,9 +173,9 @@ FUN_00406600,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered MenuResource fix
 FUN_00406600,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,e621a22d8b0a03c3a07335092353c68d71446ba5,coordinator,PR #199 completed 5/5 CI checks
 FUN_00406620,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered Menu2Resource fixed forwarding wrapper with exact direct-table constants
 FUN_00406620,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,f605689055793132eb06275b0bb942ebd60c6448,coordinator,PR #202 completed 5/5 CI checks
-FUN_004066C0,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered VersusResource fixed -1 forwarding wrapper with exact nine-entry direct table and no resolved entries
 FUN_00406680,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered ShopResource fixed -1 forwarding wrapper with exact three-entry direct table
 FUN_00406680,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,deb873467afe1ac8f226aff7ad064de075b80f72,coordinator,PR #205 completed 5/5 CI checks
+FUN_004066C0,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered VersusResource fixed -1 forwarding wrapper with exact nine-entry direct table and no resolved entries
 FUN_004066C0,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,c80b30865fe79ac232f63b7add9f60e023eb0f04,coordinator,PR #206 completed 5/5 CI checks
 FUN_004066E0,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered MerceResource fixed -1 forwarding wrapper with exact eight-entry direct table and no resolved entries
 FUN_004066E0,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,454d328671f10c83db6468366bcd883f5e36dfc1,coordinator,PR #214 completed 5/5 CI checks
@@ -201,16 +201,16 @@ FUN_004067E0,2026-09-22,UNSEEN,FAST_PASS,,coordinator,recovered FigureResource f
 FUN_004067E0,2026-09-22,FAST_PASS,FAST_PASS_VALIDATED,b5cc90ae5739aceb7736c277ed995c4428b05e9d,coordinator,PR #251 completed 5/5 CI checks
 FUN_00406840,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered indexed ChapterEnd forwarding wrapper from exact executable
 FUN_00406840,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,b0f0b97ba37b698442aa4f633d25d0224ff7e4df,coordinator,PR #254 completed 5/5 CI checks
-FUN_004068A0,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered indexed MerceResult01-08 forwarding wrapper with exact archive and direct-table selection
 FUN_004068D0,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered BenchResource fixed -1 forwarding wrapper with exact two-entry direct table contract
 FUN_004068D0,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,01b3f7d87e7191756b4e5e66d811c0ede6271435,coordinator,PR #259 completed 5/5 CI checks
+FUN_004068A0,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered indexed MerceResult01-08 forwarding wrapper with exact archive and direct-table selection
 FUN_004068A0,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,a0cec16270a4e13adda6a3b5eaae97cf3339e59f,coordinator,PR #257 completed 5/5 CI checks
-FUN_00406870,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered VersusResult01-08 selector wrapper with exact eight-name pointer table and two-entry direct tables
-FUN_00406870,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,863d3bda66c16a0d604d0c018774a995cf367202,coordinator,PR #264 completed 5/5 CI checks
 FUN_00406910,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered guarded Merce-DC stage conversion worker from exact executable
 FUN_00406910,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,53ba2d7dcdecb1a52dfdd681be37be4fc55c1312,coordinator,PR #268 completed 5/5 CI checks
 FUN_00406B20,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered LoadResource batch coordinator with exact 13-entry table and trailing eleven message-group loads
 FUN_00406B20,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,b51a130253c16de340197c07678465cce5949dbf,coordinator,PR #271 completed 5/5 CI checks
+FUN_00406870,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered VersusResult01-08 selector wrapper with exact eight-name pointer table and two-entry direct tables
+FUN_00406870,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,863d3bda66c16a0d604d0c018774a995cf367202,coordinator,PR #264 completed 5/5 CI checks
 FUN_00406CA0,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered Game2Resource eleven-message forwarding loop from exact executable
 FUN_00406CA0,2026-09-23,FAST_PASS,FAST_PASS_VALIDATED,ad914d99e95aa5e4f265a17259963e24f559fe28,coordinator,PR #275 completed 5/5 CI checks
 FUN_00406CD0,2026-09-23,UNSEEN,FAST_PASS,,coordinator,recovered marker-led eight-group resource registration batch from exact executable
@@ -235,9 +235,9 @@ FUN_00407A90,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered 16-byte aligned 
 FUN_00407A90,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,ae0a8ca259c311595242533a6ac8b3f7f0f8fece,coordinator,PR #329 completed 5/5 CI checks
 FUN_00407B70,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact nullable this+0x102C address accessor with fallback token and 32-bit add semantics
 FUN_00407B70,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,822a25a04e055783e7c1e27ef9773f691ced9f3d,coordinator,PR #333 completed 5/5 CI checks
-FUN_00407BC0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact linked-chain boolean membership test over node +0x04/+0x10
 FUN_00407B50,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact nullable this+0x1028 address accessor with +8 payload path and fallback 0x0137AA5C
 FUN_00407B50,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,2d11460a43a57cfa570f68618e42417050d4bc53,coordinator,PR #323 completed 5/5 CI checks
+FUN_00407BC0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact linked-chain boolean membership test over node +0x04/+0x10
 FUN_00407BC0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,cc0da68e7377c334de819831a9fc964eab2c0a3c,coordinator,PR #336 completed 5/5 CI checks
 FUN_00407C40,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 19-byte const-char wrapper constructor over FUN_00402360 returning this
 FUN_00407C40,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,f166f6d6b1f33524b853b381351aa22375c5bb68,coordinator,PR #339 completed 5/5 CI checks
@@ -247,16 +247,16 @@ FUN_00407CD0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 31-byte re
 FUN_00407CD0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,8d6b84d44fcb9ce46dfbcc57f1b747511a8089b0,coordinator,PR #346 completed 5/5 CI checks
 FUN_00407CF0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 25-byte pre-cleared const-char wrapper constructor over FUN_00402360 returning this
 FUN_00407CF0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,33a111bf082b9d94076ef6d041b9693b314793a7,coordinator,PR #349 completed 5/5 CI checks
-FUN_00407D10,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 118-byte refcounted-string append helper with temp construction adopt-or-concatenate and reference cleanup
-FUN_00407D10,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,6c1e871f12c6e1557b631a7bb50986a34a577bee,coordinator,PR #354 completed 5/5 CI checks
 FUN_00407DC0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 75-byte synchronized indexed dword setter with conditional critical-section gate and unconditional 0x5E0-stride store
 FUN_00407DC0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,a45b112e987e1ec7e0b5305b4ceca8c486b205fa,coordinator,PR #357 completed 5/5 CI checks
-FUN_00407D90,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 47-byte refcounted-string copy-then-append wrapper over FUN_00402360 and FUN_00407D10
-FUN_00407D90,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,1d8fe55d4867b73c39bc04f444a0931588d45fac,coordinator,PR #359 completed 5/5 CI checks
 FUN_00407E10,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 74-byte synchronized current-slot dword setter using this+0x20 index and 0x8C74 stride
 FUN_00407E10,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,eee1ef89be4e54b839a3e64ec2a38ce834813280,coordinator,PR #362 completed 5/5 CI checks
+FUN_00407D10,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 118-byte refcounted-string append helper with temp construction adopt-or-concatenate and reference cleanup
+FUN_00407D10,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,6c1e871f12c6e1557b631a7bb50986a34a577bee,coordinator,PR #354 completed 5/5 CI checks
 FUN_00407E70,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 18-byte thiscall allocation wrapper forwarding requested size to FUN_00407A90 with null type tag
 FUN_00407E70,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,5facb7947567c2adf2e14e7efdb0bb48574ffee5,coordinator,PR #366 completed 5/5 CI checks
+FUN_00407D90,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 47-byte refcounted-string copy-then-append wrapper over FUN_00402360 and FUN_00407D10
+FUN_00407D90,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,1d8fe55d4867b73c39bc04f444a0931588d45fac,coordinator,PR #359 completed 5/5 CI checks
 FUN_00407FD0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 108-byte refcounted-string append helper with temporary construction concatenate and balanced releases
 FUN_00407FD0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,959f6e9791f1d5f00ab2a3e6bf0cfd2e7abae09f,coordinator,PR #370 completed 5/5 CI checks
 FUN_00408040,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 34-byte refcounted-string copy-and-append wrapper over recovered FUN_00407FD0
@@ -283,9 +283,9 @@ FUN_004085F0,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 27-byte Fi
 FUN_004085F0,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,db9f4a0113e552739f1d0ba0ced78a4565fe6cfa,coordinator,PR #403 completed 5/5 CI checks
 FUN_00408610,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 5-byte thiscall tail-jump thunk to four-word global PRNG advance routine at 0x0119F610
 FUN_00408610,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,a694562fcc8886fb70781b33c3c8e586d34da4d5,coordinator,PR #406 completed 5/5 CI checks
-FUN_00408620,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 6-byte fixed-address getter returning address token 0x016F0230
 FUN_00408630,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 6-byte fixed-global pointer getter reading 0x016E2EFC
 FUN_00408630,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,89e0a523cef397408681f05e7c1458fa2cddcb88,coordinator,PR #410 completed 5/5 CI checks
 FUN_00408640,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 18-byte thiscall constructor over base 0x00A67E10 with final vtable 0x0137E440
 FUN_00408640,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,ed3042e74e05569b8a50fb1115b5a3ba418571ea,coordinator,PR #413 completed 5/5 CI checks
+FUN_00408620,2026-09-24,UNSEEN,FAST_PASS,,coordinator,recovered exact 6-byte fixed-address getter returning address token 0x016F0230
 FUN_00408620,2026-09-24,FAST_PASS,FAST_PASS_VALIDATED,4649170e7bee74ff04a8ee003a2381441e1315bb,coordinator,PR #418 completed 5/5 CI checks
