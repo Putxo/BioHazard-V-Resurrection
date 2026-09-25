@@ -1,0 +1,120 @@
+{
+  "function": "FUN_00408700",
+  "date": "2026-09-25",
+  "status": "PROVISIONAL_LOCAL_TESTS_ONLY",
+  "canonical_row_as_supplied_by_user": "34560,4228864,1,direct CALL target (linear sweep)",
+  "candidate_va": "0x00408700",
+  "candidate_rva": "0x00008700",
+  "denominator": 79782,
+  "expected_executable_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "expected_executable_size": 19977216,
+  "executable_bytes_accessible": false,
+  "executable_rehashed_this_session": false,
+  "native_body_size": null,
+  "native_body_hash": null,
+  "native_instruction_equivalence_verified": false,
+  "fast_pass": false,
+  "fast_pass_validated": false,
+  "counted_in_canonical_inventory": false,
+  "input_status": "Library/context search returned historical references, not an accessible binary.",
+  "evidence_sources": [
+    {
+      "commit": "184a9d7ea3a858e1fdf364de8a2d1f6ddbc71737",
+      "path": "decomp/evidence/region_00408000_00409800.md",
+      "scope": "wrapper summary only"
+    },
+    {
+      "commit": "53466552e4f87ccaec42d485e5cfaac90210ffde",
+      "path": "decomp/evidence/fun_004086a0.md",
+      "blob": "c49d8324ca012bfaf9d48dd5c6b742f348a7cbc3",
+      "scope": "documented shared-base effects; read only"
+    }
+  ],
+  "compilers": {
+    "gcc": "g++ (Debian 14.2.0-19) 14.2.0",
+    "clang": "clang version 17.0.0 (https://github.com/swiftlang/llvm-project.git 10999b6d034fe318f3d56c83bddb6572593a8bb0)",
+    "cmake": "cmake version 3.31.6"
+  },
+  "test_cases": [
+    "null_guard",
+    "known_writes",
+    "preserved_word",
+    "guard_regions",
+    "repeated_construction",
+    "independent_objects",
+    "byte_patterns"
+  ],
+  "local_configurations": [
+    {
+      "configuration": "gcc-Debug",
+      "passed": 7,
+      "failed": 0,
+      "log_sha256": "b599fd5ad47402ed3acc7c7ec0402ed3629fcda6d6fabe00b9502685d2a2b849"
+    },
+    {
+      "configuration": "gcc-Release",
+      "passed": 7,
+      "failed": 0,
+      "log_sha256": "d3d53a5ec0f7ac624a7b1026fb66b6b54084b6106a404e66605125b56afc3ad6"
+    },
+    {
+      "configuration": "clang-sanitize",
+      "passed": 7,
+      "failed": 0,
+      "log_sha256": "992933da2ebd8f345e5e45c72611fdd6f7e0299cb47af5b689e078997874bdc1"
+    }
+  ],
+  "local_test_executions_passed": 21,
+  "local_test_executions_failed": 0,
+  "mutation_controls": [
+    {
+      "mutation": "wrong_derived_vtable",
+      "test": "known_writes",
+      "expected_exit": 1,
+      "observed_exit": 1,
+      "stderr": "FAIL: wrong final vtable",
+      "rejected": true
+    },
+    {
+      "mutation": "clobbered_preserved_word",
+      "test": "known_writes",
+      "expected_exit": 1,
+      "observed_exit": 1,
+      "stderr": "FAIL: +14 was overwritten",
+      "rejected": true
+    },
+    {
+      "mutation": "skipped_base_initialization",
+      "test": "known_writes",
+      "expected_exit": 1,
+      "observed_exit": 1,
+      "stderr": "FAIL: wrong +04",
+      "rejected": true
+    },
+    {
+      "mutation": "invented_already_constructed_exit",
+      "test": "repeated_construction",
+      "expected_exit": 1,
+      "observed_exit": 1,
+      "stderr": "FAIL: wrong +04",
+      "rejected": true
+    }
+  ],
+  "canonical_repository_build_executed": false,
+  "github_ci_observed_for_this_candidate": false,
+  "recovery_pr": null,
+  "promotion_pr": null,
+  "publication_pr": null,
+  "source_sha256": {
+    ".gitignore": "f7ca076937c44b7a6ef1ca365e3f5945e00b81f949df6133b4d2b2732a48194b",
+    "CMakeLists.txt": "6834c9615199b86517586011bacd2ecedb446cad98c469e21baf6d23e1c5727e",
+    "candidate.cpp": "ebd4fe9700f74211bd2e8166c818d0b78a64b33cada3ca31ede3702f5d10e04a",
+    "candidate.hpp": "c5fba47427cf6efdb2b58775493fe16e5c7c42d9faa2b6d6fc11af8c6a927195",
+    "candidate_test.cpp": "3f9c2e33e90ebd1bcb4431adcd2b7caa6cdb0d8a9fb3714ed26284330d76a2c5"
+  },
+  "prewrite_snapshots": {
+    "main": "9f9af9693fb14baa0a1505b98bbbe731e4b329b7",
+    "integration": "b2a92926745ab1bcf3ffb006dea34a16516189ba",
+    "exclusive_branch": "70349f8f4214ae1e553587908140465c2ee0646b"
+  }
+}
