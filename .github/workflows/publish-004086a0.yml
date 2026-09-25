@@ -1,0 +1,163 @@
+name: Publish FUN_004086A0
+on:
+  push:
+    branches: [publish/004086a0-main]
+    paths: [.github/workflows/publish-004086a0.yml]
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: publish-004086a0
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Verify promotion and prepare exclusively from current main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: python
+        run: |
+          from pathlib import Path
+          import csv, io, json, subprocess
+          repo = 'Putxo/BioHazard-V-Resurrection'
+          target = 'FUN_004086A0'
+          promotion_head = '3bcebf5e3cc0387de1e823fcd9e89f336b0cc96f'
+          promotion_merge = '53466552e4f87ccaec42d485e5cfaac90210ffde'
+          def git(*args):
+              return subprocess.check_output(['git', *args], text=True).strip()
+          def content(ref, path):
+              return subprocess.check_output(['git', 'show', f'{ref}:{path}'], text=True)
+          def api(path):
+              return json.loads(subprocess.check_output(['gh', 'api', f'repos/{repo}/{path}'], text=True))
+          pr = api('pulls/423')
+          assert pr['merged'] and pr['merge_commit_sha'] == promotion_merge
+          assert pr['head']['sha'] == promotion_head
+          runs = api(f'actions/runs?event=pull_request&head_sha={promotion_head}&per_page=100')
+          required = {'build', 'validate-binaries', 'validate-claims', 'validate-metadata', 'validate-progress'}
+          latest = {}
+          for run in runs['workflow_runs']:
+              if run['head_sha'] == promotion_head and run['name'] in required:
+                  latest.setdefault(run['name'], run)
+          assert set(latest) == required
+          assert all(r['status'] == 'completed' and r['conclusion'] == 'success' for r in latest.values())
+          print('Promotion PR #423 exact-head CI 5/5 PASS:', {k:v['id'] for k,v in latest.items()})
+          subprocess.run(['git', 'config', 'user.name', 'github-actions[bot]'], check=True)
+          subprocess.run(['git', 'config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com'], check=True)
+          subprocess.run(['git', 'fetch', 'origin', 'main', 'integration'], check=True)
+          main = git('rev-parse', 'origin/main')
+          source = git('rev-parse', 'origin/integration')
+          subprocess.run(['git', 'merge-base', '--is-ancestor', promotion_merge, source], check=True)
+          # Integrate only current public main; never merge integration into main.
+          subprocess.run(['git', 'merge', '--no-edit', main], check=True)
+          Path('/tmp/86a0-public-main').write_text(main)
+          Path('/tmp/86a0-public-source').write_text(source)
+          for ref in [main, source]:
+              frozen = json.loads(content(ref, 'config/inventory_freeze.json'))
+              assert frozen['function_candidate_denominator'] == 79782
+          for path, key, expected in [
+              ('database/functions.csv', 0, 1),
+              ('database/claims.csv', 1, 1),
+              ('database/history.csv', 0, 2),
+          ]:
+              baseline = content(main, path)
+              existing = [line for line in baseline.splitlines() if next(csv.reader([line]))[key] == target]
+              assert not existing, f'Target already published in {path}; inspect instead of duplicating'
+              additions = [line for line in content(source, path).splitlines() if next(csv.reader([line]))[key] == target]
+              assert len(additions) == expected, (path, additions)
+              if path == 'database/functions.csv':
+                  row = next(csv.DictReader(io.StringIO(content(source, path))))
+                  records = list(csv.DictReader(io.StringIO(content(source, path))))
+                  row = next(r for r in records if r['stable_id'] == target)
+                  assert row['fast_pass'] == row['fast_pass_validated'] == 'true'
+                  assert row['pr'] == '#416' and row['commit'] == '78add9e2826b252a59ea87fd2d8d3637c6f58b17'
+                  assert row['va'] == '0x004086A0' and row['rva'] == '0x000086A0' and row['size'] == '18'
+              Path(path).write_text(baseline.rstrip('\n') + '\n' + '\n'.join(additions) + '\n')
+          files = {
+              'src/recovered/fun_004086a0.cpp': 'cdc55ffb78fe5cd8bf453b557924d9a584f26128',
+              'include/re5/recovered/fun_004086a0.hpp': '131dd268f1adf3a87cc63220ac52f57f3658f2dc',
+              'tests/unit/test_fun_004086a0.cpp': '55013b25c8d96e90944c30f445d54c985b4145e2',
+              'decomp/evidence/fun_004086a0.md': 'c49d8324ca012bfaf9d48dd5c6b742f348a7cbc3',
+          }
+          files['decomp/evidence/fun_004086a0-resumption.md'] = git('rev-parse', f'{source}:decomp/evidence/fun_004086a0-resumption.md')
+          for path, sha in files.items():
+              assert git('rev-parse', f'{source}:{path}') == sha, f'Original work changed: {path}'
+              assert not Path(path).exists(), path
+              Path(path).write_bytes(subprocess.check_output(['git', 'show', f'{source}:{path}']))
+              assert git('hash-object', path) == sha, path
+          p = Path('CMakeLists.txt')
+          text = content(main, str(p))
+          for anchor, added in [
+              ('    src/recovered/fun_00408640.cpp\n', '    src/recovered/fun_004086a0.cpp\n'),
+              ('    tests/unit/test_fun_00408640.cpp\n', '    tests/unit/test_fun_004086a0.cpp\n'),
+          ]:
+              assert text.count(anchor) == 1 and added not in text
+              text = text.replace(anchor, anchor + added)
+          p.write_text(text)
+          p = Path('tests/unit/test_smoke.cpp')
+          text = content(main, str(p))
+          for anchor, added in [
+              ('void test_fun_00408640();\n', 'void test_fun_004086a0();\n'),
+              ('    test_fun_00408640();\n', '    test_fun_004086a0();\n'),
+          ]:
+              assert text.count(anchor) == 1 and added not in text
+              text = text.replace(anchor, anchor + added)
+          p.write_text(text)
+          print('Publication base:', main, 'validated source:', source)
+          print('Only FUN_004086A0 source, tests, evidence and registry rows imported.')
+      - name: Regenerate public dashboard and validate
+        run: |
+          python tools/reports/report.py --publish-readme
+          python tools/progress/treemap.py
+          python tools/validate/validate.py
+          cmake --preset dev
+          cmake --build --preset dev
+          ctest --preset dev
+      - name: Verify incremental publication and parallel preservation
+        shell: python
+        run: |
+          from pathlib import Path
+          import csv, io, json, re, subprocess
+          def git(*args):
+              return subprocess.check_output(['git', *args], text=True).strip()
+          def before(path):
+              return subprocess.check_output(['git', 'show', f'{base}:{path}'], text=True)
+          base = Path('/tmp/86a0-public-main').read_text()
+          for path, count in [('database/functions.csv', 1), ('database/claims.csv', 1), ('database/history.csv', 2)]:
+              old = before(path).splitlines()
+              new = Path(path).read_text().splitlines()
+              assert new[:len(old)] == old and len(new) == len(old) + count, f'Parallel rows changed: {path}'
+          old = list(csv.DictReader(io.StringIO(before('database/functions.csv'))))
+          new = list(csv.DictReader(Path('database/functions.csv').open(newline='')))
+          discovered = lambda rows: [r for r in rows if r['workflow_status'] != 'UNSEEN']
+          old, new = discovered(old), discovered(new)
+          assert len(new) == len(old) + 1
+          size = lambda rows: sum(int(r['size'], 0) for r in rows if r['size'])
+          assert size(new) == size(old) + 18
+          fast = lambda rows: sum(r['fast_pass'] == 'true' for r in rows)
+          assert fast(new) == fast(old) + 1
+          assert before('config/inventory_freeze.json') == Path('config/inventory_freeze.json').read_text()
+          strip = lambda text: re.sub(r'<!-- (progress|tiers):start -->.*?<!-- \1:end -->', '', text, flags=re.S)
+          assert strip(before('README.md')) == strip(Path('README.md').read_text()), 'Unrelated README text changed'
+          Path('.github/workflows/publish-004086a0.yml').unlink()
+          subprocess.run(['git', 'add', '-u'], check=True)
+          subprocess.run(['git', 'add', 'src/recovered/fun_004086a0.cpp', 'include/re5/recovered/fun_004086a0.hpp', 'tests/unit/test_fun_004086a0.cpp', 'decomp/evidence/fun_004086a0.md', 'decomp/evidence/fun_004086a0-resumption.md'], check=True)
+          subprocess.run(['git', 'diff', '--cached', '--check'], check=True)
+          allowed = {'README.md', 'CMakeLists.txt', 'tests/unit/test_smoke.cpp', 'database/functions.csv', 'database/claims.csv', 'database/history.csv', 'reports/functions.json', 'reports/progress.md', 'reports/progress-treemap.svg', 'src/recovered/fun_004086a0.cpp', 'include/re5/recovered/fun_004086a0.hpp', 'tests/unit/test_fun_004086a0.cpp', 'decomp/evidence/fun_004086a0.md', 'decomp/evidence/fun_004086a0-resumption.md'}
+          changed = set(git('diff', '--cached', '--name-only', base).splitlines())
+          assert changed <= allowed, changed - allowed
+          assert not any(p.lower().endswith(('.exe', '.dll', '.obj')) for p in git('ls-files').splitlines())
+          print('Public functions:', len(new), '/ 79782; bytes:', size(new), '/ 15568343; FAST PASS:', fast(new), '/ 79782')
+          print('Incremental +1 function/+18 bytes, unchanged denominator and parallel rows: PASS')
+          subprocess.run(['git', 'fetch', 'origin', 'main'], check=True)
+          assert git('rev-parse', 'origin/main') == base, 'Public main advanced; inspect and resynchronize before publication'
+      - name: Commit incremental publication and fast-forward-only push
+        run: |
+          git commit -m 'Publish validated FUN_004086A0 and incremental public dashboard'
+          git push origin HEAD:refs/heads/publish/004086a0-main
