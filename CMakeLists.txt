@@ -271,3 +271,6 @@ add_subdirectory(decomp/scalar323d1aab)
 
 # Exact attached EXE: complete conditional accessors and early-exit tests.
 add_subdirectory(decomp/accessor323d1aab)
+
+# Exact attached EXE: additional guarded stores, initializers and bitfield readers.
+add_subdirectory(decomp/guarded323d1aab)
