@@ -118,6 +118,7 @@ void test_fun_00408550();
 void test_fun_004085d0();
 void test_fun_004085f0();
 void test_fun_00408610();
+void test_fun_00408620();
 void test_fun_00408630();
 void test_fun_00408640();
 void test_fun_004086a0();
