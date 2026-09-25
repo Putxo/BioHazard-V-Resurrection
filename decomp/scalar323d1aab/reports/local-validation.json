@@ -1,0 +1,26 @@
+{
+  "input_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "input_size": 19977216,
+  "body_hashes_verified": 11146,
+  "padding_verified": 11146,
+  "direct_calls_verified": 2085,
+  "original_pe_executed": false,
+  "independent_llvm_i386": {
+    "instructions": 17789,
+    "trace_sha256": "4a9392265c48e468d6a56ef2d2cb0a8d35c552a78e608ec5bf60b21aa6af3114"
+  },
+  "gcc_ctest": "4/4 PASS",
+  "clang_asan_ubsan_ctest": "4/4 PASS",
+  "properties_per_compiler": 795299,
+  "memory_bodies_guarded": 644,
+  "guarded_checks_per_compiler": 2576,
+  "source_generation_digest": "ebfcb1c5c03dbb302c0c76d73dadea60007f8aa09e3f89eae7834b1de6e406d1",
+  "independent_second_discovery": "PASS",
+  "previous_leaf_overlap": 0,
+  "source_only_union_with_previous_leaf": 18317,
+  "canonical_denominator": 79782,
+  "canonical_membership_verified": false,
+  "canonical_tiers_changed": false,
+  "full_game_linked": false,
+  "original_i386_process_executed": false
+}
