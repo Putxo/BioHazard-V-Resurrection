@@ -1,0 +1,98 @@
+{
+  "target_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "target_size": 19977216,
+  "utc": "2026-09-25T21:08:56.167685+00:00",
+  "bodies": 201,
+  "instruction_bytes": 5470,
+  "families": {
+    "STORE": 58,
+    "DUPLICATE": 2,
+    "STORE_FLAG": 3,
+    "INDIRECT": 10,
+    "DUP_ZERO": 5,
+    "DIRTY": 18,
+    "PAIR32": 12,
+    "SNAPSHOT": 56,
+    "PAIR16": 21,
+    "NEST16": 16
+  },
+  "original_input_and_ranges": "PASS",
+  "fresh_discovery": "PASS",
+  "verified_call_sites": 41,
+  "starts_with_direct_calls": 9,
+  "llvm_i386_instructions": 1206,
+  "gcc_ctest": {
+    "passed": 3,
+    "total": 3,
+    "property_checks": 197870,
+    "guard_and_fixture_checks": 2448
+  },
+  "clang_asan_ubsan_ctest": {
+    "passed": 3,
+    "total": 3,
+    "property_checks": 197870,
+    "guard_and_fixture_checks": 2448
+  },
+  "negative_controls_rejected": {
+    "flush_subnormal_bits": {
+      "returncode": 1,
+      "stdout": "FAIL FUN_00432AF0 check 12",
+      "stderr": ""
+    },
+    "omit_dirty_flags": {
+      "returncode": 1,
+      "stdout": "FAIL FUN_00A319F0 check 59102",
+      "stderr": ""
+    },
+    "late_second_pair_read": {
+      "returncode": 1,
+      "stdout": "FAIL FUN_00CF5A80 check 63906",
+      "stderr": ""
+    },
+    "widen_word_outputs": {
+      "returncode": 1,
+      "stdout": "FAIL FUN_00D3D0B0 check 75279",
+      "stderr": ""
+    },
+    "unsigned_nested_count": {
+      "returncode": 1,
+      "stdout": "FAIL FUN_0102B800 check 161426",
+      "stderr": ""
+    }
+  },
+  "coff": {
+    "machine": "I386",
+    "definitions": 201,
+    "exact_bodies": 0,
+    "exact_instruction_bytes": 0,
+    "object_sha256": "d2ac3e932e16f4e2c7b2e24e4206287da0cfa33d49aca641e0c2d8130043a6fb",
+    "game_linked": false
+  },
+  "elf32_builds": [
+    "GCC",
+    "Clang"
+  ],
+  "native_i386_local_execution": false,
+  "native_i386_local_reason": "GCC ELF32 execution rejected with ENOEXEC; Clang ELF32 build-only. CI native jobs must be checked independently.",
+  "local_full_checkout_overlap_check": false,
+  "canonical_membership_verified": false,
+  "canonical_denominator": 79782,
+  "canonical_tiers_changed": false,
+  "game_linked": false,
+  "files_sha256": {
+    ".gitignore": "2cbf1db2ba01d2079415de224c82287e3022193406d0a258cdbbaf37bb71b552",
+    "CMakeLists.txt": "6d3c551d6109b15b125ff74be68960067a5bc2b23154841a621cfc0937447696",
+    "README.md": "d3adf3e3fdc09f0f5a100454c28a810dc1d73e5a4df5094e513308bb7aad5b34",
+    "call-sites.csv": "c188b8f9509be413dd12c1026fd38de839e9d05e4b7e4c078184768df38b05c5",
+    "include/transfers.hpp": "403b43b826dcfc9cfb536b8de8b0e6b3a8171c99325ce0224a42de15c5bb3236",
+    "records.csv": "c738cc4500ad8b80c2c63834ba66c9542685b274b3d9483fc732b0698df4b77b",
+    "src/transfers.cpp": "fa4bc545a12847d0237cde12a80f55d62d1afbef294a492d4c28b9a9964fb4a9",
+    "tests/test_transfers.cpp": "9a52000498cdbc2c92d40ad9d28ce0f0c093a1a014f976d06bba49211a82ea5e",
+    "tools/check_coff.py": "4a382df10d6c89b4a1c8eedd35d9b91b997e55d021064fdbff60dd9e9e835cb5",
+    "tools/model.py": "2b8252ede5c279f46ffc917ea0e812df7f3b7607957907e301e4f5c9f02110e0",
+    "tools/negative_controls.py": "b3b598890d0785e7b02745fa1cf5316e0511bee127966c835073a0111a461819",
+    "tools/recover.py": "a8a45d26348a2dc91a831bf87c122a858ca6c2952c6fa126e620ba4e00d97c41",
+    "tools/run_i386.py": "32de303796b10f252465ec3302dccf2aacdcb66dacfaff85740afaa67910dabf",
+    "tools/verify.py": "8032099b1d51cea927a45181a1eead9175b56b232884fea0127a55072abd40b8"
+  }
+}
