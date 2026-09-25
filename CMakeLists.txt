@@ -291,3 +291,6 @@ add_subdirectory(decomp/transfer323d1aab)
 
 # Focused tests for the thirty existing leaves entering the 200-entry registry.
 include(cmake/canonical_200.cmake)
+
+# Official 1,000-entry registry validation for existing recovered leaves.
+include(cmake/canonical_1000.cmake)
