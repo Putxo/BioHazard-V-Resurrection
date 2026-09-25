@@ -1,0 +1,60 @@
+name: materialize-canonical-1000-publication
+on:
+  push:
+    branches: [release/canonical-1000]
+    paths: [.github/workflows/materialize-canonical-1000-publication.yml]
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: release/canonical-1000
+          fetch-depth: 0
+      - name: Build the exact incremental 1,000-entry main publication
+        shell: python
+        env:
+          START_SHA: ${{ github.sha }}
+        run: |
+          import csv,os,pathlib,subprocess,sys
+          def run(*a,**k): return subprocess.run(a,check=True,**k)
+          def out(*a): return subprocess.check_output(a,text=True).strip()
+          assert out('git','rev-parse','HEAD')==os.environ['START_SHA']
+          before=list(csv.DictReader(open('database/functions.csv')))
+          assert len(before)==200 and len({r['stable_id'] for r in before})==200
+          run(sys.executable,'tools/maintenance/canonical_1000.py','register')
+          run(sys.executable,'tools/maintenance/canonical_1000.py','promote',
+              '--recovery-pr','447',
+              '--recovery-head','5c516f9355e6a1249c07acd6329295c0ba3515e6',
+              '--recovery-merge','a10e19ddad5b26cff44f90c577df2e29fd03cfe9')
+          run(sys.executable,'tools/reports/report.py','--publish-readme')
+          run(sys.executable,'tools/progress/treemap.py')
+          run(sys.executable,'tools/validate/validate.py')
+          run(sys.executable,'tools/verification/verify_canonical_1000.py','--registry')
+          rows=list(csv.DictReader(open('database/functions.csv')))
+          assert len(rows)==1000 and len({r['stable_id'] for r in rows})==1000
+          ids={r['stable_id'] for r in csv.DictReader(open('decomp/evidence/canonical_1000_selected.csv'))}
+          assert len(ids)==800
+          assert sum(r['stable_id'] in ids and r['fast_pass_validated']=='true' for r in rows)==800
+          readme=pathlib.Path('README.md').read_text()
+          assert '1,000 / 79,782' in readme
+          allowed={
+            'CMakeLists.txt','README.md','database/functions.csv','database/claims.csv','database/history.csv',
+            'reports/functions.json','reports/progress.md','reports/progress-treemap.svg',
+            'decomp/evidence/canonical_1000_promotion.json'
+          }
+          tracked=set(filter(None,out('git','diff','--name-only').splitlines()))
+          untracked=set(filter(None,out('git','ls-files','--others','--exclude-standard').splitlines()))
+          changed=tracked|untracked
+          assert changed<=allowed and {'CMakeLists.txt','README.md','database/functions.csv','database/claims.csv','database/history.csv','reports/functions.json','reports/progress-treemap.svg'}<=changed,changed
+          run('git','rm','.github/workflows/materialize-canonical-1000-publication.yml')
+          run('git','diff','--check')
+          run('git','config','user.name','github-actions[bot]')
+          run('git','config','user.email','41898282+github-actions[bot]@users.noreply.github.com')
+          run('git','add','--',*allowed)
+          run('git','commit','-m','Publish official canonical progress 1000 / 79782')
+          remote=out('git','ls-remote','origin','refs/heads/release/canonical-1000').split()[0]
+          assert remote==os.environ['START_SHA'],'remote branch advanced'
+          run('git','push','origin','HEAD:refs/heads/release/canonical-1000')
