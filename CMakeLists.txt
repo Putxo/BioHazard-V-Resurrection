@@ -265,3 +265,6 @@ add_custom_target(metadata_tests
 
 # Exact attached EXE: independently recovered leaf C++ and tests.
 add_subdirectory(decomp/leaf323d1aab)
+
+# Exact attached EXE: recovered scalar bodies and source-only tests.
+add_subdirectory(decomp/scalar323d1aab)
