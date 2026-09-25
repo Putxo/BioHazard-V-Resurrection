@@ -283,3 +283,6 @@ add_subdirectory(decomp/sequence323d1aab)
 
 # Exact attached EXE: alias-sensitive flag and field mutators.
 add_subdirectory(decomp/mutator323d1aab)
+
+# Exact attached EXE: bit-preserving transfers and captured output pairs.
+add_subdirectory(decomp/transfer323d1aab)

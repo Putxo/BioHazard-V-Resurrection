@@ -1,0 +1,64 @@
+name: verify-transfer323d1aab
+on:
+  pull_request:
+    branches: [main, integration]
+  push:
+    branches: [main, integration]
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  host-source-and-guards:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang-sanitized]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify locally tested source hashes
+        shell: python
+        run: |
+          import hashlib,json,pathlib
+          root=pathlib.Path('decomp/transfer323d1aab')
+          report=json.loads((root/'reports/local-validation.json').read_text())
+          for path,expected in report['files_sha256'].items():
+              assert hashlib.sha256((root/path).read_bytes()).hexdigest()==expected,path
+      - name: Configure GCC
+        if: matrix.compiler == 'gcc'
+        run: cmake -S decomp/transfer323d1aab -B build-transfers -DCMAKE_BUILD_TYPE=Release
+      - name: Configure Clang with sanitizers
+        if: matrix.compiler == 'clang-sanitized'
+        run: >-
+          cmake -S decomp/transfer323d1aab -B build-transfers
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_COMPILER=clang++
+          "-DCMAKE_CXX_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer"
+          "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined"
+      - name: Build and test all transfers
+        run: |
+          cmake --build build-transfers --parallel 2
+          ctest --test-dir build-transfers --output-on-failure
+      - name: Reject incorrect implementations
+        if: matrix.compiler == 'gcc'
+        run: python decomp/transfer323d1aab/tools/negative_controls.py --build-dir build-transfer-negative
+      - name: Compile and inspect Windows I386 definitions
+        if: matrix.compiler == 'clang-sanitized'
+        run: |
+          clang++ --target=i686-pc-windows-msvc -std=c++17 -O2 -ffreestanding -fno-exceptions -fno-rtti -Wall -Wextra -Wpedantic -Werror -Idecomp/transfer323d1aab/include -Ibuild-transfers/generated -c decomp/transfer323d1aab/src/transfers.cpp -o build-transfers/transfers-i386.obj
+          python decomp/transfer323d1aab/tools/check_coff.py build-transfers/transfers-i386.obj
+  native-i386-source-and-reference:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [g++, clang++]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Execute source and hash-checked reference fixtures in I386 mode
+        run: python decomp/transfer323d1aab/tools/run_i386.py --compiler '${{ matrix.compiler }}' --build-dir build-transfer-i386
