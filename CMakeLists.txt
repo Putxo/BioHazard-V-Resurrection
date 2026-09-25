@@ -282,3 +282,6 @@ add_subdirectory(decomp/projection323d1aab)
 
 # Exact attached EXE: sequence and linked-list loops with native I386 fixtures.
 add_subdirectory(decomp/sequence323d1aab)
+
+# Exact attached EXE: alias-sensitive flag and field mutators.
+add_subdirectory(decomp/mutator323d1aab)
