@@ -1,0 +1,82 @@
+{
+  "target_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "target_size": 19977216,
+  "utc": "2026-09-25T19:03:03.450448+00:00",
+  "bodies": 196,
+  "instruction_bytes": 5507,
+  "families": {
+    "STORE": 15,
+    "ARRAY_GET": 14,
+    "LOAD": 40,
+    "SENTINEL": 22,
+    "ARRAY_SET": 21,
+    "ADD": 26,
+    "NEST": 58
+  },
+  "original_input_and_ranges": "PASS",
+  "verified_call_sites": 251,
+  "starts_with_direct_calls": 44,
+  "llvm_i386_instruction_count": 1792,
+  "negative_controls_rejected": {
+    "swapped_setter_argument_order": {
+      "returncode": 1,
+      "stdout": "FAIL FUN_00539500 check 34587"
+    },
+    "removed_load_null_guard": {
+      "returncode": -11,
+      "stdout": ""
+    },
+    "unsigned_nested_negative_count": {
+      "returncode": 1,
+      "stdout": "FAIL FUN_0102B2A0 check 109441"
+    },
+    "inverted_sentinel": {
+      "returncode": 1,
+      "stdout": "FAIL FUN_004E74D0 check 6862"
+    }
+  },
+  "gcc_ctest": {
+    "passed": 3,
+    "total": 3,
+    "property_checks": 177205,
+    "guard_and_fixture_checks": 3012
+  },
+  "clang_asan_ubsan_ctest": {
+    "passed": 3,
+    "total": 3,
+    "property_checks": 177205,
+    "guard_and_fixture_checks": 3012
+  },
+  "coff": {
+    "machine": "I386",
+    "named_definitions": 196,
+    "exact_bodies": 6,
+    "exact_instruction_bytes": 132,
+    "object_sha256": "2fffa8f85e1a9ca382c0ff70eb3deb33c12f65a9d5a52c39944fab7af753c93e",
+    "not_a_linked_game": true
+  },
+  "elf32_builds": [
+    "GCC",
+    "Clang"
+  ],
+  "native_i386_local_execution": false,
+  "native_i386_local_reason": "Kernel rejected ELF32 execution with ENOEXEC. Native CI jobs must be independently checked.",
+  "game_linked": false,
+  "canonical_membership_verified": false,
+  "canonical_denominator": 79782,
+  "canonical_tiers_changed": false,
+  "files_sha256": {
+    ".gitignore": "2cbf1db2ba01d2079415de224c82287e3022193406d0a258cdbbaf37bb71b552",
+    "CMakeLists.txt": "4baf2acf2d3322acd9548fb698964821ee45f075c1039dbacaf82ca1f5724e2f",
+    "README.md": "508187a220a0262b7f8a5eccb02a6e3bd7b69ea43faef91e8538f03182e74562",
+    "call-sites.csv": "1b4d46a08303be516ea28c0ea85c546c7d39749ee3cbc8a7cc70daad72e88a6e",
+    "include/projections.hpp": "32fc4c407e11b8198f2d02d953938390cd63e4c688abb4607c654a14617aa036",
+    "include/records.inc": "6afd6e236d52006440d5e4ccb46519bed3dd1f18a45abc43d6ce7bb589b9238f",
+    "records.csv": "617105394246dbb47aadc7f3eacc3922ddec80dd8f6c8a5e10d240f26b8c5a31",
+    "src/projections.cpp": "915a353342f95fd693f37ce67eff160b2ffe762aac027d5786541a8ffc1c50b3",
+    "tests/test_projections.cpp": "574c00f6b885ed54ec8c2f004910e90df6244c0a616abad8b741367a608a5364",
+    "tools/check_coff.py": "a59e1a66e09ecda3ed3e5884e6bab41f5122964e45b192b7f370466242ba7ff0",
+    "tools/run_i386.py": "2565e45d0b3903a7619013e5ad6bfd04d05a6e880a845aac982561d41fe6b268",
+    "tools/verify.py": "b9dd8fb78ee7d132ba00a24bd780f6a5f9f1abe93fe52aefe2f944ee8b184dbb"
+  }
+}
