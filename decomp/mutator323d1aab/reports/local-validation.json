@@ -1,0 +1,100 @@
+{
+  "target_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "target_size": 19977216,
+  "utc": "2026-09-25T20:41:09.154377+00:00",
+  "bodies": 422,
+  "instruction_bytes": 12874,
+  "families": {
+    "S32": 55,
+    "PAIR": 111,
+    "S8": 68,
+    "SHIFT": 33,
+    "COPY": 17,
+    "S16": 24,
+    "DUAL": 33,
+    "MASK": 3,
+    "D32": 33,
+    "D16": 4,
+    "D8": 41
+  },
+  "original_input_and_ranges": "PASS",
+  "fresh_discovery": "PASS",
+  "original_hash_manifest_sha256": "446fd5da6588942fe5ef40166b85ee392ce2c308ec7af22a2595e362e767a004",
+  "verified_call_sites": 1,
+  "starts_with_direct_calls": 1,
+  "llvm_i386_instructions": 3161,
+  "gcc_ctest": {
+    "passed": 3,
+    "total": 3,
+    "property_checks": 602566,
+    "guard_and_fixture_checks": 2532
+  },
+  "clang_asan_ubsan_ctest": {
+    "passed": 3,
+    "total": 3,
+    "property_checks": 602566,
+    "guard_and_fixture_checks": 2532
+  },
+  "negative_controls_rejected": {
+    "missing_dirty_flags": {
+      "returncode": 1,
+      "stdout": "FAIL FUN_00D2D2C0 check 4",
+      "stderr": ""
+    },
+    "widened_byte_word_store": {
+      "returncode": 1,
+      "stdout": "FAIL FUN_00D3CB70 check 12044",
+      "stderr": ""
+    },
+    "pair_read_ahead": {
+      "returncode": 1,
+      "stdout": "FAIL FUN_00D2D2E0 check 2051",
+      "stderr": ""
+    },
+    "dual_cached_pair": {
+      "returncode": 1,
+      "stdout": "FAIL FUN_00D3DEF0 check 73437",
+      "stderr": ""
+    },
+    "shift_lost_mask": {
+      "returncode": 1,
+      "stdout": "FAIL FUN_00D3CDD0 check 17169",
+      "stderr": ""
+    }
+  },
+  "coff": {
+    "machine": "I386",
+    "definitions": 422,
+    "exact_bodies": 1,
+    "exact_bytes": 23,
+    "object_sha256": "a105fe8a1215e761adda4da051196779588f6440c86634c7c0f8d9f515fc5a77",
+    "game_linked": false
+  },
+  "elf32_builds": [
+    "GCC",
+    "Clang"
+  ],
+  "native_i386_local_execution": false,
+  "native_i386_local_reason": "ELF32 execution rejected with ENOEXEC; native CI must be checked independently.",
+  "game_linked": false,
+  "canonical_membership_verified": false,
+  "canonical_denominator": 79782,
+  "canonical_tiers_changed": false,
+  "files_sha256": {
+    ".gitignore": "adf2ef5769c588eea2e5b0a9e46cdfd54bddf811e68ad608193713523d133548",
+    "CMakeLists.txt": "4bbe0de95cb9ec785d49388f1d8e115bace670a67e1728de5f6c35d73947d4a6",
+    "README.md": "029cf32ead2720912e0cfc12002f6dc8d9a0ce7ece60eacaacc21a6d660ea943",
+    "call-sites.csv": "289a247448674fb37465cc30f161cc1eca828d68deaaf8517e52ef7a3a58b68a",
+    "include/mutations.hpp": "f9f4828a0388d32e57d09596890fdf24093840ee808a9ca3d272fe7ec73f0829",
+    "original-body-manifest.sha256": "e54f50d1671a84cb8453374773214a7c3d502d950fc01b1277c05b64ea7fb3ce",
+    "records.csv": "ce4c7f20c741bd86d17813880c54ce7a47700e3a1ad388deaeaea71c189888b4",
+    "src/mutations.cpp": "2969f47499d0db9a8d9d31859ed155cfad61b62e533e965c98d314ac1b9d0542",
+    "tests/test_mutations.cpp": "dbdbac8f130bcb7ce671fab3bfee127b3b4d8b61a40df45628db05ac58d9afae",
+    "tools/check_coff.py": "39f5b4dda6c80a88f6be6f0b979b7735fc631b337b1fe0bfe8764e53f0c8e281",
+    "tools/model.py": "4761b483b07821ecc1e701f4b21605abd09f04874439ef896b5d8a597e561b19",
+    "tools/negative_controls.py": "c26f18d62f4c6726952be95fdab736730e0303c75fdfdbc8b9602ca67d64e151",
+    "tools/recover.py": "9cbb5cf3a44b311e5e7da6cfe77942bfee291b758903084ae2328646fa379dfb",
+    "tools/run_i386.py": "8492308112a723304dda76ab21a0b570d7caedad893c3d916fd1eb168160ac1a",
+    "tools/verify.py": "e48fae151ba2888bab800224123d91efeda3fc1ab7a1cdc9131105240cfa1dba"
+  }
+}
