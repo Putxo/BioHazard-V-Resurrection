@@ -288,3 +288,6 @@ add_subdirectory(decomp/mutator323d1aab)
 
 # Exact attached EXE: bit-preserving transfers and captured output pairs.
 add_subdirectory(decomp/transfer323d1aab)
+
+# Focused tests for the thirty existing leaves entering the 200-entry registry.
+include(cmake/canonical_200.cmake)
