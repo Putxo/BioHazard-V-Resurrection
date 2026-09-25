@@ -1,0 +1,46 @@
+name: verify-guarded323d1aab
+on:
+  pull_request:
+    branches: [main, integration]
+  push:
+    branches: [main, integration]
+permissions:
+  contents: read
+jobs:
+  source-and-guards:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang-sanitized]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify locally tested source hashes
+        shell: python
+        run: |
+          import hashlib,json,pathlib
+          root=pathlib.Path('decomp/guarded323d1aab')
+          report=json.loads((root/'reports/local-validation.json').read_text())
+          for name,expected in report['files_sha256'].items():
+              assert hashlib.sha256((root/name).read_bytes()).hexdigest()==expected,name
+      - name: Configure GCC
+        if: matrix.compiler == 'gcc'
+        run: cmake -S decomp/guarded323d1aab -B build-guarded -DCMAKE_BUILD_TYPE=Release
+      - name: Configure Clang with sanitizers
+        if: matrix.compiler == 'clang-sanitized'
+        run: >-
+          cmake -S decomp/guarded323d1aab -B build-guarded
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_COMPILER=clang++
+          "-DCMAKE_CXX_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer"
+          "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined"
+      - name: Build and test
+        run: |
+          cmake --build build-guarded --parallel 2
+          ctest --test-dir build-guarded --output-on-failure
+      - name: Compile and inspect actual I386 COFF definitions
+        if: matrix.compiler == 'clang-sanitized'
+        run: |
+          clang++ --target=i686-pc-windows-msvc -std=c++17 -O2 -ffreestanding -fno-exceptions -fno-rtti -Wall -Wextra -Wpedantic -Werror -Idecomp/guarded323d1aab/include -c decomp/guarded323d1aab/src/guarded.cpp -o build-guarded/guarded-i386.obj
+          python decomp/guarded323d1aab/tools/check_i386.py build-guarded/guarded-i386.obj
