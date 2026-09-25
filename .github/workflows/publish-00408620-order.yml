@@ -34,13 +34,17 @@ jobs:
           def rows(text):
               return list(csv.DictReader(io.StringIO(text, newline='')))
           assert git('rev-parse', 'origin/main').strip() == BASE, 'main advanced: refuse stale publication'
-          assert git('rev-parse', 'origin/integration').strip() == VALIDATED, 'integration advanced: repeat preflight'
+          subprocess.run(['git', 'merge-base', '--is-ancestor', VALIDATED, 'origin/integration'], check=True)
+          print('Integration snapshot:', git('rev-parse', 'origin/integration').strip())
           for path in ['src/recovered/fun_00408620.cpp', 'include/re5/recovered/fun_00408620.hpp', 'tests/unit/test_fun_00408620.cpp', 'decomp/evidence/fun_00408620.md']:
               assert git('rev-parse', f'HEAD:{path}') == git('rev-parse', f'{VALIDATED}:{path}'), path
+              assert git('rev-parse', f'origin/integration:{path}') == git('rev-parse', f'{VALIDATED}:{path}'), ('target changed', path)
           for path in ['database/functions.csv', 'database/claims.csv', 'database/history.csv']:
               before = original(path)
               assert TARGET not in before, (path, 'already published')
               additions = [line for line in validated(path).splitlines(keepends=True) if TARGET in line]
+              current_target = [line for line in git('show', f'origin/integration:{path}').splitlines(keepends=True) if TARGET in line]
+              assert current_target == additions, ('target metadata changed', path)
               assert len(additions) == (2 if path.endswith('history.csv') else 1), (path, len(additions))
               if path.endswith('history.csv'):
                   after = before + ''.join(additions)
