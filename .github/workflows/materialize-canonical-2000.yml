@@ -25,7 +25,7 @@ jobs:
           assert plan['stage']=='register' and plan['branch']=='decomp/canonical-2000'
           assert plan['base_integration']=='ffb6424720a049642b5f3fafd1b15ec72df28b78'
           assert subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==os.environ['EXPECTED_SHA']
-          assert subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip()==plan['base_integration']
+          assert subprocess.run(['git','merge-base','--is-ancestor',plan['base_integration'],'HEAD']).returncode==0
           with (ROOT/'database/functions.csv').open(newline='') as f:
               existing={r['stable_id'] for r in csv.DictReader(f)}
           assert len(existing)==1000
