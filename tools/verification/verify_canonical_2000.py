@@ -11,10 +11,10 @@ def load():
         e=dict(cat[row['stable_id']]);req(int(row['va'])==e['va'],'selection VA mismatch');e['source_file']='decomp/leaf323d1aab/generated/src/leaves_%03d.cpp'%(idx[e['symbol']]//256);req((ROOT/e['source_file']).is_file(),'missing leaf source');out.append(e)
     return out
 def registry(sel):
-    rows=list(csv.DictReader((ROOT/'database/functions.csv').open()));by={r['stable_id']:r for r in rows};claims=list(csv.DictReader((ROOT/'database/claims.csv').open()));req(len(rows)==2000 and len(by)==2000,'registry must be exactly 2000 unique rows')
+    rows=list(csv.DictReader((ROOT/'database/functions.csv').open()));by={r['stable_id']:r for r in rows};claims=list(csv.DictReader((ROOT/'database/claims.csv').open()));req(len(rows)>=2000 and len(by)==len(rows),'registry must contain at least 2000 unique rows')
     for e in sel:
         r=by.get(e['symbol']);req(r and int(r['va'],0)==e['va'] and int(r['size'])==e['size'],'registry mismatch '+e['symbol']);req(r['source_file']==e['source_file'] and r['fast_pass']=='true','source/tier mismatch '+e['symbol']);req(sum(c['stable_id']==e['symbol'] for c in claims)==1,'claim mismatch '+e['symbol'])
-    print('PASS registry: 2000 / 79782; 1000 existing leaf implementations bound once each')
+    print(f'PASS canonical-2000 compatibility: registry has {len(rows)} / 79782 unique rows; original 1000 selected leaf implementations remain bound once each')
 def verify_exe(exe,candidates,sel):
     data=pathlib.Path(exe).read_bytes();req(len(data)==19977216 and hashlib.sha256(data).hexdigest()==TARGET,'wrong EXE');rs=list(csv.DictReader(open(candidates)));req(len(rs)==79782 and len({int(r['va']) for r in rs})==79782,'wrong candidate universe');vas=[int(r['va']) for r in rs];req(hashlib.sha256(b''.join(struct.pack('<I',v) for v in vas)).hexdigest()==UNION,'frozen union changed');lines={v:i+2 for i,v in enumerate(vas)}
     calls={e['va']:[] for e in sel};targets=set(calls);p=subprocess.Popen(['objdump','-d','-j','.text','-Mintel',exe],stdout=subprocess.PIPE,text=True)
