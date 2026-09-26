@@ -86,7 +86,8 @@ jobs:
           allowed=set(plan['files_sha256'])|{'.canonical-2000-plan.json','.github/workflows/materialize-canonical-2000.yml'}
           assert changed<=allowed,(changed-allowed)
           subprocess.run(['git','rm','.canonical-2000-plan.json','.github/workflows/materialize-canonical-2000.yml'],check=True)
-          subprocess.run(['git','add','--',*plan['files_sha256'].keys()],check=True)
+          stage=[n for n in plan['files_sha256'] if n!='.github/workflows/verify-canonical-2000.yml']
+          subprocess.run(['git','add','--',*stage],check=True)
           subprocess.run(['git','diff','--cached','--check'],check=True)
           subprocess.run(['git','config','user.name','github-actions[bot]'],check=True)
           subprocess.run(['git','config','user.email','41898282+github-actions[bot]@users.noreply.github.com'],check=True)
