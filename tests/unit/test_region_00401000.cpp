@@ -19,6 +19,63 @@ void record_callback(void* ptr) noexcept {
     }
 }
 
+
+struct FUN004010F0Probe {
+    std::uint32_t construct_count{};
+    std::uint32_t query_count{};
+    std::uint32_t prepare_count{};
+    std::uint32_t finish_count{};
+    std::uint32_t destroy_count{};
+    std::uint32_t args[4]{};
+    std::uintptr_t global_a{};
+    std::uintptr_t global_b{};
+    std::uintptr_t global_success{};
+    std::u16string title{};
+    bool query_result{};
+    std::uint32_t finish_result{};
+};
+
+void fun004010f0_construct(void* context) noexcept {
+    ++static_cast<FUN004010F0Probe*>(context)->construct_count;
+}
+
+bool fun004010f0_query(
+    void* context,
+    const char16_t* title,
+    std::uint32_t arg1,
+    std::uint32_t arg2,
+    std::uint32_t arg3,
+    std::uint32_t arg4,
+    std::uintptr_t global_a,
+    std::uintptr_t global_b) noexcept {
+    auto& probe = *static_cast<FUN004010F0Probe*>(context);
+    ++probe.query_count;
+    probe.args[0] = arg1;
+    probe.args[1] = arg2;
+    probe.args[2] = arg3;
+    probe.args[3] = arg4;
+    probe.global_a = global_a;
+    probe.global_b = global_b;
+    probe.title = title;
+    return probe.query_result;
+}
+
+void fun004010f0_prepare(void* context, std::uintptr_t global_success) noexcept {
+    auto& probe = *static_cast<FUN004010F0Probe*>(context);
+    ++probe.prepare_count;
+    probe.global_success = global_success;
+}
+
+std::uint32_t fun004010f0_finish(void* context) noexcept {
+    auto& probe = *static_cast<FUN004010F0Probe*>(context);
+    ++probe.finish_count;
+    return probe.finish_result;
+}
+
+void fun004010f0_destroy(void* context) noexcept {
+    ++static_cast<FUN004010F0Probe*>(context)->destroy_count;
+}
+
 struct AchievementProbe {
     std::uint32_t prepare_count{};
     std::uint32_t signin_result{};
@@ -199,6 +256,58 @@ void test_region_00401000() {
     FUN_00401010(title.data(), "Resident Evil 5", false);
     assert(std::u16string_view(title.data()) ==
            u"Resident Evil 5 <Build:3170> [ RELEASE ] Thu Apr 16, 2015 06:51:32 PM (CHEATS)");
+
+
+    FUN004010F0Probe failed_init{};
+    failed_init.query_result = false;
+    const FUN_004010F0_Services failed_init_services{
+        &failed_init,
+        "Resident Evil 5",
+        &fun004010f0_construct,
+        &fun004010f0_query,
+        &fun004010f0_prepare,
+        &fun004010f0_finish,
+        &fun004010f0_destroy,
+    };
+    FUN_004010F0_SetServices(&failed_init_services);
+    assert(FUN_004010F0(1U, 2U, 3U, 4U) == 1U);
+    FUN_004010F0_SetServices(nullptr);
+    assert(failed_init.construct_count == 1U);
+    assert(failed_init.query_count == 1U);
+    assert(failed_init.prepare_count == 0U);
+    assert(failed_init.finish_count == 0U);
+    assert(failed_init.destroy_count == 1U);
+    assert(failed_init.args[0] == 1U && failed_init.args[1] == 2U);
+    assert(failed_init.args[2] == 3U && failed_init.args[3] == 4U);
+    assert(failed_init.global_a == 0x01567000U);
+    assert(failed_init.global_b == 0x0165A090U);
+    assert(failed_init.title ==
+           u"Resident Evil 5 <Build:3170> [ RELEASE ] Thu Apr 16, 2015 06:51:32 PM (CHEATS)");
+
+    FUN004010F0Probe successful_init{};
+    successful_init.query_result = true;
+    successful_init.finish_result = 0xA5A5A5A5U;
+    const FUN_004010F0_Services successful_init_services{
+        &successful_init,
+        "Resident Evil 5",
+        &fun004010f0_construct,
+        &fun004010f0_query,
+        &fun004010f0_prepare,
+        &fun004010f0_finish,
+        &fun004010f0_destroy,
+    };
+    FUN_004010F0_SetServices(&successful_init_services);
+    assert(FUN_004010F0(10U, 20U, 30U, 40U) == 0xA5A5A5A5U);
+    FUN_004010F0_SetServices(nullptr);
+    assert(successful_init.construct_count == 1U);
+    assert(successful_init.query_count == 1U);
+    assert(successful_init.prepare_count == 1U);
+    assert(successful_init.finish_count == 1U);
+    assert(successful_init.destroy_count == 1U);
+    assert(successful_init.global_success == 0x0165B9B0U);
+
+    FUN_004010F0_SetServices(nullptr);
+    assert(FUN_004010F0(0U, 0U, 0U, 0U) == 1U);
 
     std::array<char16_t, 0x104> null_product{};
     FUN_00401010(null_product.data(), nullptr, false);
