@@ -1,0 +1,25 @@
+name: export-canonical-2000-main-source
+on:
+  push:
+    branches: [prep/canonical-2000-main-source]
+    paths: [.github/workflows/export-canonical-2000-main-source.yml]
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Export pinned main source
+        run: |
+          git archive --format=tar 0feaf3c6b065b62996a3ed4a87f9a23cea8a5a20 > "$RUNNER_TEMP/canonical-2000-main.tar"
+          sha256sum "$RUNNER_TEMP/canonical-2000-main.tar"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: canonical-2000-main-source
+          path: ${{ runner.temp }}/canonical-2000-main.tar
+          retention-days: 1
+          if-no-files-found: error
