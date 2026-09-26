@@ -1,0 +1,5 @@
+{
+  "stage": "register",
+  "branch": "decomp/canonical-3000",
+  "base_integration": "9eb1c46f8f856b654cf227729e5755d732d89070"
+}
