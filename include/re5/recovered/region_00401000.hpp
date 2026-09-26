@@ -10,6 +10,30 @@ using FUN_004011B0_Callback = void (*)(void*) noexcept;
 void FUN_00401000(void* ptr) noexcept;
 void FUN_00401010(char16_t* title_buffer, const char* product_name, bool apply_to_window) noexcept;
 
+struct FUN_004010F0_Services {
+    void* context;
+    void (*construct_local)(void* context) noexcept;
+    bool (*query)(
+        void* context,
+        const char16_t* build_title,
+        std::uint32_t arg1,
+        std::uint32_t arg2,
+        std::uint32_t arg3,
+        std::uint32_t arg4,
+        std::uintptr_t global_01567000,
+        std::uintptr_t global_0165A090) noexcept;
+    void (*prepare_success)(void* context, std::uintptr_t global_0165B9B0) noexcept;
+    std::uint32_t (*finish_success)(void* context) noexcept;
+    void (*destroy_local)(void* context) noexcept;
+};
+
+void FUN_004010F0_SetServices(const FUN_004010F0_Services* services) noexcept;
+[[nodiscard]] std::uint32_t FUN_004010F0(
+    std::uint32_t arg1,
+    std::uint32_t arg2,
+    std::uint32_t arg3,
+    std::uint32_t arg4) noexcept;
+
 void FUN_004011B0(
     void* first,
     std::uint32_t stride,
