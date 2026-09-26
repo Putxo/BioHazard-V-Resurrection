@@ -1,0 +1,22 @@
+name: verify-canonical-2000
+on:
+  pull_request:
+    branches: [main, integration]
+  push:
+    branches: [main, integration]
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  registry-and-i386:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify exact official registry binding
+        run: python tools/verification/verify_canonical_2000.py --registry
+      - name: Recompile the selected 1000 definitions for Windows I386 and compare original hashes
+        run: python tools/verification/verify_canonical_2000.py --coff --compiler clang++ --build-dir "$RUNNER_TEMP/canonical-2000-coff"
