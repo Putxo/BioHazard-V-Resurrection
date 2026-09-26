@@ -12,6 +12,7 @@ void FUN_00401010(char16_t* title_buffer, const char* product_name, bool apply_t
 
 struct FUN_004010F0_Services {
     void* context;
+    const char* product_name;
     void (*construct_local)(void* context) noexcept;
     bool (*query)(
         void* context,
