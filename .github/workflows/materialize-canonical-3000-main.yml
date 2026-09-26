@@ -1,0 +1,64 @@
+name: materialize-canonical-3000-main
+on:
+  push:
+    branches: [release/canonical-3000]
+    paths:
+      - .github/workflows/materialize-canonical-3000-main.yml
+      - .canonical-3000-main-plan.json
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - name: Materialize official canonical progress 3,000 / 79,782
+        shell: python
+        env:
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          import csv,json,os,pathlib,subprocess,sys
+          root=pathlib.Path('.')
+          p=json.loads((root/'.canonical-3000-main-plan.json').read_text())
+          assert p['stage']=='publish' and p['branch']=='release/canonical-3000'
+          assert subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==os.environ['EXPECTED_SHA']
+          subprocess.run([sys.executable,'tools/maintenance/canonical_3000.py','register'],check=True)
+          subprocess.run([
+            sys.executable,'tools/maintenance/canonical_3000.py','promote',
+            '--recovery-pr',str(p['recovery_pr']),
+            '--recovery-head',p['recovery_head'],
+            '--recovery-merge',p['recovery_merge']
+          ],check=True)
+          subprocess.run([sys.executable,'tools/reports/report.py','--publish-readme'],check=True)
+          subprocess.run([sys.executable,'tools/progress/treemap.py'],check=True)
+          subprocess.run([sys.executable,'tools/validate/validate.py'],check=True)
+          for n in (1000,2000,3000):
+            subprocess.run([sys.executable,f'tools/verification/verify_canonical_{n}.py','--registry'],check=True)
+          rows=list(csv.DictReader((root/'database/functions.csv').open()))
+          assert len(rows)==3000 and len({r['stable_id'] for r in rows})==3000
+          assert sum(r['fast_pass']=='true' for r in rows)==2999
+          assert sum(r['fast_pass_validated']=='true' for r in rows)==2987
+          selected={r['stable_id'] for r in csv.DictReader((root/'decomp/evidence/canonical_3000_selected.csv').open())}
+          assert len(selected)==1000
+          by={r['stable_id']:r for r in rows}
+          assert all(by[s]['fast_pass']=='true' and by[s]['fast_pass_validated']=='true' for s in selected)
+          readme=(root/'README.md').read_text()
+          assert '3,000 / 79,782' in readme and '42,238 / 15,568,343' in readme
+          allowed={
+            'CMakeLists.txt','README.md',
+            'database/functions.csv','database/claims.csv','database/history.csv',
+            'reports/functions.json','reports/progress.md','reports/progress-treemap.svg'
+          }
+          changed=set(subprocess.check_output(['git','diff','--name-only'],text=True).splitlines())
+          assert changed and changed<=allowed,(changed-allowed)
+          subprocess.run(['git','diff','--check'],check=True)
+          subprocess.run(['git','add','--',*sorted(changed)],check=True)
+          subprocess.run(['git','config','user.name','github-actions[bot]'],check=True)
+          subprocess.run(['git','config','user.email','41898282+github-actions[bot]@users.noreply.github.com'],check=True)
+          subprocess.run(['git','commit','-m','Materialize official canonical progress 3,000 / 79,782'],check=True)
+          remote=subprocess.check_output(['git','ls-remote','origin','refs/heads/release/canonical-3000'],text=True).split()[0]
+          assert remote==os.environ['EXPECTED_SHA'],'release branch advanced unexpectedly'
+          subprocess.run(['git','push','origin','HEAD:refs/heads/release/canonical-3000'],check=True)
