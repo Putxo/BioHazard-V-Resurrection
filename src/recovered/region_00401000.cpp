@@ -20,6 +20,7 @@ constexpr std::uintptr_t kFUN_00401410Key = 0x0137A6ACU;
 constexpr std::uint32_t kFUN_00401410Threshold = 0x64U;
 constexpr std::uint32_t kFUN_00401470SuccessCode = 2U;
 
+const FUN_004010F0_Services* g_FUN_004010F0_services = nullptr;
 const FUN_00401270_Services* g_FUN_00401270_services = nullptr;
 const FUN_004012F0_Services* g_FUN_004012F0_services = nullptr;
 const FUN_00401410_Services* g_FUN_00401410_services = nullptr;
@@ -46,6 +47,51 @@ void append_wide_literal(char16_t* out, std::size_t& pos, const char16_t* text) 
 
 void FUN_00401000(void* ptr) noexcept {
     re5::runtime::aligned_release(ptr);
+}
+
+
+void FUN_004010F0_SetServices(const FUN_004010F0_Services* services) noexcept {
+    g_FUN_004010F0_services = services;
+}
+
+std::uint32_t FUN_004010F0(
+    std::uint32_t arg1,
+    std::uint32_t arg2,
+    std::uint32_t arg3,
+    std::uint32_t arg4) noexcept {
+    const auto* services = g_FUN_004010F0_services;
+    if (services == nullptr || services->construct_local == nullptr ||
+        services->query == nullptr || services->prepare_success == nullptr ||
+        services->finish_success == nullptr || services->destroy_local == nullptr) {
+        return 1U;
+    }
+
+    services->construct_local(services->context);
+
+    char16_t build_title[kBuildTitleCapacity]{};
+    FUN_00401010(build_title, services->product_name, false);
+
+    constexpr std::uintptr_t kGlobal01567000 = 0x01567000U;
+    constexpr std::uintptr_t kGlobal0165A090 = 0x0165A090U;
+    constexpr std::uintptr_t kGlobal0165B9B0 = 0x0165B9B0U;
+
+    if (!services->query(
+            services->context,
+            build_title,
+            arg1,
+            arg2,
+            arg3,
+            arg4,
+            kGlobal01567000,
+            kGlobal0165A090)) {
+        services->destroy_local(services->context);
+        return 1U;
+    }
+
+    services->prepare_success(services->context, kGlobal0165B9B0);
+    const std::uint32_t result = services->finish_success(services->context);
+    services->destroy_local(services->context);
+    return result;
 }
 
 void FUN_00401010(char16_t* title_buffer, const char* product_name, bool apply_to_window) noexcept {
