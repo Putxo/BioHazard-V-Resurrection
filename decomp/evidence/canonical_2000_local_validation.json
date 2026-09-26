@@ -1,0 +1,26 @@
+{
+  "target_sha256": "323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815",
+  "target_size": 19977216,
+  "canonical_denominator": 79782,
+  "reproduced_union_sorted_u32le_sha256": "a7fc3ad913d379f488b8de0a097a6cad290c41fe3cee921f39e3512dee3a4a25",
+  "selection_sha256": "d31241c08458474a23accf9d8f113858382c44116bae3e0f317c1887bb9ce7e7",
+  "selected_existing_leaf_bodies": 1000,
+  "selected_original_instruction_bytes": 6005,
+  "selected_windows_i386_exact_body_matches": 1000,
+  "selected_family_counts": {
+    "constant": 968,
+    "load32": 29,
+    "load16": 2,
+    "load8": 1
+  },
+  "selected_direct_call_sites": 0,
+  "full_leaf_bodies_revalidated": 7171,
+  "full_leaf_instruction_bytes_revalidated": 42745,
+  "full_leaf_windows_i386_exact_body_matches": 7013,
+  "full_leaf_windows_i386_exact_bytes": 42259,
+  "leaf_gcc_ctest": "6/6 PASS",
+  "leaf_clang_asan_ubsan_ctest": "6/6 PASS",
+  "exact_exe_membership_body_boundary_call_recheck": "PASS",
+  "historical_candidate_csv_bytes_available": false,
+  "game_linked": false
+}

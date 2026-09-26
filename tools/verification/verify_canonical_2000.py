@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 import argparse,csv,hashlib,json,pathlib,re,struct,subprocess
-ROOT=pathlib.Path(__file__).resolve().parents[2];LEAF=ROOT/'decomp/leaf323d1aab';SEL=ROOT/'decomp/evidence/canonical_1000_selected.csv'
+ROOT=pathlib.Path(__file__).resolve().parents[2];LEAF=ROOT/'decomp/leaf323d1aab';SEL=ROOT/'decomp/evidence/canonical_2000_selected.csv'
 TARGET='323d1aabccc74505745588097e2b298b14e114393bfc24f6830e98b658e67815';UNION='a7fc3ad913d379f488b8de0a097a6cad290c41fe3cee921f39e3512dee3a4a25'
 def req(x,m):
     if not x:raise ValueError(m)
 def load():
-    s=list(csv.DictReader(SEL.open()));req(len(s)==800 and len({r['stable_id'] for r in s})==800,'need 800 unique selections');catalog_list=json.loads((LEAF/'generated/catalog.json').read_text())['records'];cat={r['symbol']:r for r in catalog_list};idx={r['symbol']:i for i,r in enumerate(catalog_list)};out=[]
+    s=list(csv.DictReader(SEL.open()));req(len(s)==1000 and len({r['stable_id'] for r in s})==1000,'need 1000 unique selections');catalog_list=json.loads((LEAF/'generated/catalog.json').read_text())['records'];cat={r['symbol']:r for r in catalog_list};idx={r['symbol']:i for i,r in enumerate(catalog_list)};out=[]
     for row in s:
-        e=dict(cat[row['stable_id']]);e['union_csv_line']=int(row['union_csv_line']);e['source_file']='decomp/leaf323d1aab/generated/src/leaves_%03d.cpp'%(idx[e['symbol']]//256);req((ROOT/e['source_file']).is_file(),'missing leaf source');out.append(e)
+        e=dict(cat[row['stable_id']]);req(int(row['va'])==e['va'],'selection VA mismatch');e['source_file']='decomp/leaf323d1aab/generated/src/leaves_%03d.cpp'%(idx[e['symbol']]//256);req((ROOT/e['source_file']).is_file(),'missing leaf source');out.append(e)
     return out
 def registry(sel):
-    rows=list(csv.DictReader((ROOT/'database/functions.csv').open()));by={r['stable_id']:r for r in rows};claims=list(csv.DictReader((ROOT/'database/claims.csv').open()));req(len(rows)>=1000 and len(by)==len(rows),'registry must retain at least 1000 unique rows')
+    rows=list(csv.DictReader((ROOT/'database/functions.csv').open()));by={r['stable_id']:r for r in rows};claims=list(csv.DictReader((ROOT/'database/claims.csv').open()));req(len(rows)==2000 and len(by)==2000,'registry must be exactly 2000 unique rows')
     for e in sel:
         r=by.get(e['symbol']);req(r and int(r['va'],0)==e['va'] and int(r['size'])==e['size'],'registry mismatch '+e['symbol']);req(r['source_file']==e['source_file'] and r['fast_pass']=='true','source/tier mismatch '+e['symbol']);req(sum(c['stable_id']==e['symbol'] for c in claims)==1,'claim mismatch '+e['symbol'])
-    print(f'PASS canonical-1000 milestone retained inside {len(rows)} / 79782 current rows; original 800 existing leaf implementations bound once each')
+    print('PASS registry: 2000 / 79782; 1000 existing leaf implementations bound once each')
 def verify_exe(exe,candidates,sel):
     data=pathlib.Path(exe).read_bytes();req(len(data)==19977216 and hashlib.sha256(data).hexdigest()==TARGET,'wrong EXE');rs=list(csv.DictReader(open(candidates)));req(len(rs)==79782 and len({int(r['va']) for r in rs})==79782,'wrong candidate universe');vas=[int(r['va']) for r in rs];req(hashlib.sha256(b''.join(struct.pack('<I',v) for v in vas)).hexdigest()==UNION,'frozen union changed');lines={v:i+2 for i,v in enumerate(vas)}
     calls={e['va']:[] for e in sel};targets=set(calls);p=subprocess.Popen(['objdump','-d','-j','.text','-Mintel',exe],stdout=subprocess.PIPE,text=True)
@@ -30,8 +30,8 @@ def verify_exe(exe,candidates,sel):
             if t in targets:calls[t].append(va)
     req(p.wait()==0,'objdump failed')
     for e in sel:
-        req(lines.get(e['va'])==e['union_csv_line'],'membership line changed');off=e['va']-0x400c00;body=data[off:off+e['size']];req(hashlib.sha256(body).hexdigest()==e['body_sha256'],'body mismatch');req(data[off-2:off]==b'\xcc\xcc' and data[off+e['size']:off+e['size']+2]==b'\xcc\xcc','boundary mismatch');req(calls[e['va']]==e['direct_call_sites'],'CALL mismatch')
-    print('PASS exact local EXE: 800 bodies /',sum(e['size'] for e in sel),'bytes / reproduced 79,782-address membership')
+        req(e['va'] in lines,'membership changed');off=e['va']-0x400c00;body=data[off:off+e['size']];req(hashlib.sha256(body).hexdigest()==e['body_sha256'],'body mismatch');req(data[off-2:off]==b'\xcc\xcc' and data[off+e['size']:off+e['size']+2]==b'\xcc\xcc','boundary mismatch');req(calls[e['va']]==e['direct_call_sites'],'CALL mismatch')
+    print('PASS exact local EXE: 1000 bodies /',sum(e['size'] for e in sel),'bytes / reproduced 79,782-address membership')
 def coff_symbols(path):
     d=path.read_bytes();machine,ns,_,ptr,count,opt,_=struct.unpack_from('<HHIIIHH',d);req(machine==0x14c and opt==0,'not I386 COFF');secs={}
     for i in range(ns):
@@ -53,11 +53,11 @@ def coff(sel,compiler,build):
     exact=0;byt=0
     for e in sel:
         code,rels=defs[e['va']];n=e['size'];ok=not any(0<=x<n for x in rels) and hashlib.sha256(code[:n]).hexdigest()==e['body_sha256'];exact+=ok;byt+=n if ok else 0
-    print(json.dumps({'selected_definitions':800,'exact_body_matches':exact,'exact_instruction_bytes':byt,'game_linked':False}));req(exact==800,'not all selected I386 bodies are byte-identical')
+    print(json.dumps({'selected_definitions':1000,'exact_body_matches':exact,'exact_instruction_bytes':byt,'game_linked':False}));req(exact==1000,'not all selected I386 bodies are byte-identical')
 def main():
     p=argparse.ArgumentParser();p.add_argument('--registry',action='store_true');p.add_argument('--exe');p.add_argument('--candidates');p.add_argument('--coff',action='store_true');p.add_argument('--compiler',default='clang++');p.add_argument('--build-dir');a=p.parse_args();sel=load()
     if a.registry:registry(sel)
     if a.exe:req(a.candidates,'--candidates required');verify_exe(a.exe,a.candidates,sel)
     if a.coff:req(a.build_dir,'--build-dir required');coff(sel,a.compiler,a.build_dir)
-    print('PASS canonical-1000 checks; no historical-CSV-byte or whole-game claim')
+    print('PASS canonical-2000 checks; no historical-CSV-byte or whole-game claim')
 if __name__=='__main__':main()
