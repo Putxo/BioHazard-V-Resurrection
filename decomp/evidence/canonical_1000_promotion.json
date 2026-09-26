@@ -1,0 +1,9 @@
+{
+  "recovery_pr": 447,
+  "recovery_head": "5c516f9355e6a1249c07acd6329295c0ba3515e6",
+  "recovery_merge": "a10e19ddad5b26cff44f90c577df2e29fd03cfe9",
+  "validated_count": 800,
+  "tier": "FAST_PASS_VALIDATED",
+  "denominator": 79782,
+  "game_linked": false
+}

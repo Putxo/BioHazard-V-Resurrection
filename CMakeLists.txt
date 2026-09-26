@@ -290,3 +290,6 @@ add_subdirectory(decomp/transfer323d1aab)
 include(cmake/recovery_batch_00408b50.cmake)
 
 include(cmake/canonical_200.cmake)
+
+# Official 1,000-entry registry validation for existing recovered leaves.
+include(cmake/canonical_1000.cmake)
