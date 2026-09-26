@@ -1,7 +1,0 @@
-{
-  "stage": "promote",
-  "branch": "promote/canonical-3000",
-  "recovery_pr": 453,
-  "recovery_head": "362f77915b910c6ca5edb893fa78a6f3984a9b39",
-  "recovery_merge": "f82cd5c314b8aae1265a14d58a5052857582bae8"
-}
