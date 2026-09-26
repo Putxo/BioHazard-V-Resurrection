@@ -297,3 +297,6 @@ include(cmake/canonical_1000.cmake)
 
 # Official 2,000-entry registry validation for existing recovered leaves.
 include(cmake/canonical_2000.cmake)
+
+# Official 3,000-entry registry validation for existing recovered leaves.
+include(cmake/canonical_3000.cmake)
