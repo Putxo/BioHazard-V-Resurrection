@@ -1,0 +1,10 @@
+{
+  "stage": "publish",
+  "branch": "release/canonical-2000",
+  "recovery_pr": 450,
+  "recovery_head": "7818ee23c9fbece2cfa62708a366ea07f4bb1436",
+  "recovery_merge": "e2b09de1150c258080153d29e01be63b166baaed",
+  "promotion_pr": 451,
+  "promotion_merge": "9eb1c46f8f856b654cf227729e5755d732d89070",
+  "expected_base_main": "0feaf3c6b065b62996a3ed4a87f9a23cea8a5a20"
+}
