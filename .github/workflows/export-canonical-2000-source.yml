@@ -1,0 +1,25 @@
+name: export-canonical-2000-source
+on:
+  push:
+    branches: [prep/canonical-2000-source]
+    paths: [.github/workflows/export-canonical-2000-source.yml]
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Export pinned integration source
+        run: |
+          git archive --format=tar ffb6424720a049642b5f3fafd1b15ec72df28b78 > "$RUNNER_TEMP/canonical-2000-integration.tar"
+          sha256sum "$RUNNER_TEMP/canonical-2000-integration.tar"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: canonical-2000-integration-source
+          path: ${{ runner.temp }}/canonical-2000-integration.tar
+          retention-days: 1
+          if-no-files-found: error
